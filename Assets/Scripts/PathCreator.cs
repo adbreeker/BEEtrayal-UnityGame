@@ -1,43 +1,92 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class PathCreator : MonoBehaviour
 {
-    public bool createPath = false;
-    LineRenderer pathVisualizator;
+    [Header("Beginning and end of path")]
+    public Transform spawnerPosition;
+    public Transform hivePosition;
 
-    void Start()
+    [Header("LineRenderer for path visualisation")]
+    public LineRenderer pathVisualisator;
+
+    [Header("Path holder")]
+    public Transform pathHolder;
+
+    public void UpdateVisualization()
     {
-        pathVisualizator = GetComponent<LineRenderer>();
+        List<Vector3> path = new List<Vector3>();
+        path.Add(spawnerPosition.position);
+        foreach(Transform pathPoint in pathHolder.transform)
+        {
+            path.Add(pathPoint.position);
+        }
+        path.Add(hivePosition.position);
+
+        pathVisualisator.positionCount = path.Count;
+        pathVisualisator.SetPositions(path.ToArray());
     }
 
-    void Update()
+    public void DeletePath()
     {
-        if (createPath)
+        while(pathHolder.childCount > 0)
         {
-            if(Input.GetKey(KeyCode.Mouse0))
+            foreach(GameObject pathPoint in pathHolder.transform)
             {
-                Debug.Log("Rysuje");
-                Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                mousePos.z = 0;
-                List<Vector3> positions = new List<Vector3>();
-                for (int i = 0; i < pathVisualizator.positionCount; i++)
-                {
-                    positions.Add(pathVisualizator.GetPosition(i));
-                }
-                positions.Add(mousePos);
-                Debug.Log(positions.Count);
-                pathVisualizator.positionCount = positions.Count;
-                pathVisualizator.SetPositions(positions.ToArray());
-                //pathVisualizator.Simplify(0.01f);
+                DestroyImmediate(pathPoint);
+            }
+        }
+
+        UpdateVisualization();
+    }
+}
+
+#if UNITY_EDITOR
+[CustomEditor(typeof(PathCreator))]
+public class PathCreatorEditor : Editor
+{
+    bool creatingPath = false;
+    PathCreator script;
+
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector();
+
+        script = (PathCreator)target;
+
+        GUILayout.Space(20.0f);
+        if(GUILayout.Button(!creatingPath? "Create Path" : "Stop Creating"))
+        {
+            creatingPath = !creatingPath;
+        }
+
+        GUILayout.Space(20.0f);
+        if (GUILayout.Button("Delete Path"))
+        {
+            script.DeletePath();
+        }
+    }
+
+    private void OnSceneGUI()
+    {
+        if(creatingPath && !Application.isPlaying)
+        {
+            Event e = Event.current;
+            if (e.type == EventType.MouseDown && e.button == 1)
+            {
+                GameObject pathPoint = new GameObject("PathPoint" + (script.pathHolder.childCount + 1));
+                pathPoint.transform.parent = script.pathHolder.transform;
+
+                Ray ray = HandleUtility.GUIPointToWorldRay(e.mousePosition);
+                Vector2 worldPosition = ray.origin;
+                pathPoint.transform.position = worldPosition;
+
+                script.UpdateVisualization();
             }
         }
     }
 
-    private void OnValidate()
-    {
-        
-    }
-
 }
+#endif
