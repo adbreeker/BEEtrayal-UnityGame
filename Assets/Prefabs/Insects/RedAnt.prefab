@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6807964602899366900}
   - component: {fileID: 2735960036002219145}
+  - component: {fileID: 7693997679975017293}
   m_Layer: 0
   m_Name: RedAnt
   m_TagString: Untagged
@@ -82,3 +83,15 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7693997679975017293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1186771374055496228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edf6b2d0de1780f4094acffdd7e18c4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
