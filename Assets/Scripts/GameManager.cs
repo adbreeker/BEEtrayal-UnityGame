@@ -10,7 +10,7 @@ static class GameParams
 
 public class GameManager : MonoBehaviour
 {
-    void Start()
+    void Awake()
     {
         GameParams.gameManager = this;
     }

@@ -15,7 +15,12 @@ public class PathCreator : MonoBehaviour
     [Header("Path holder")]
     public Transform pathHolder;
 
-    public void UpdateVisualization()
+    private void Awake()
+    {
+        pathVisualisator.enabled = false;
+    }
+
+    public void UpdateVisualization(bool withEndpoint)
     {
         List<Vector3> path = new List<Vector3>();
         path.Add(spawnerPosition.position);
@@ -23,8 +28,12 @@ public class PathCreator : MonoBehaviour
         {
             path.Add(pathPoint.position);
         }
-        path.Add(hivePosition.position);
 
+        if (withEndpoint)
+        {
+            path.Add(hivePosition.position);
+        }
+        
         pathVisualisator.positionCount = path.Count;
         pathVisualisator.SetPositions(path.ToArray());
     }
@@ -33,13 +42,13 @@ public class PathCreator : MonoBehaviour
     {
         while(pathHolder.childCount > 0)
         {
-            foreach(GameObject pathPoint in pathHolder.transform)
+            foreach(Transform pathPoint in pathHolder.transform)
             {
-                DestroyImmediate(pathPoint);
+                DestroyImmediate(pathPoint.gameObject);
             }
         }
 
-        UpdateVisualization();
+        UpdateVisualization(true);
     }
 }
 
@@ -60,6 +69,23 @@ public class PathCreatorEditor : Editor
         if(GUILayout.Button(!creatingPath? "Create Path" : "Stop Creating"))
         {
             creatingPath = !creatingPath;
+            if(!creatingPath)
+            {
+                script.UpdateVisualization(true);
+            }
+        }
+
+        GUILayout.Space(20.0f);
+        if (GUILayout.Button("Update Path"))
+        {
+            if(script.pathHolder.transform.childCount + 2 == script.pathVisualisator.positionCount)
+            {
+                script.UpdateVisualization(true);
+            }
+            else
+            {
+                script.UpdateVisualization(false);
+            }
         }
 
         GUILayout.Space(20.0f);
@@ -83,7 +109,7 @@ public class PathCreatorEditor : Editor
                 Vector2 worldPosition = ray.origin;
                 pathPoint.transform.position = worldPosition;
 
-                script.UpdateVisualization();
+                script.UpdateVisualization(false);
             }
         }
     }
