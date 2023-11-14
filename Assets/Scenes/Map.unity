@@ -2206,7 +2206,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   insectsSpawnerPosition: {fileID: 2122095624}
   hivePosition: {fileID: 1056972312}
-  pathHolder: {fileID: 807797563}
+  _pathHolder: {fileID: 807797563}
   insectsPath: []
   insectsPrefabs:
   - {fileID: 1186771374055496228, guid: 2a987d9e3b532bc4baf8ed7d227ab29e, type: 3}

@@ -15,7 +15,7 @@ public class PathCreator : MonoBehaviour
     [Header("Path holder")]
     public Transform pathHolder;
 
-    private void Awake()
+    void Awake()
     {
         pathVisualisator.enabled = false;
     }

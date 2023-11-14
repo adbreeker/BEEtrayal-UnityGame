@@ -15,19 +15,24 @@ public class MissileController : MonoBehaviour
         this.target = target;
         isReady = true;
     }
+
+    private void Update()
+    {
+        if(target == null)
+        {
+            Destroy(gameObject);
+        }
+    }
+
     private void FixedUpdate()
     {
-        if(isReady)
+        if(isReady && target != null)
         {
-            if(target == null)
-            {
-                Destroy(gameObject);
-            }
             transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
-            if(Vector3.Distance(transform.position, target.transform.position) < 0.1f)
+            if (Vector3.Distance(transform.position, target.transform.position) < 0.1f)
             {
-                Destroy(gameObject);
                 Destroy(target);
+                Destroy(gameObject);
             }
         }
     }

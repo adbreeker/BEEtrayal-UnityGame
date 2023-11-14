@@ -45,7 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6df6023b0b20f5499d3ac1d3014a214, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackSpeed: 10
+  attackRange: 6
   missilePrefab: {fileID: 6667915596733058763, guid: 66f3ca3bb67edd94eb1cddd5096a2402, type: 3}
+  _missileSpawnPoint: {fileID: 3210004039233152286}
 --- !u!1 &5803413799327048753
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,7 +11,7 @@ public class InsectsManager : MonoBehaviour
     public Transform hivePosition;
 
     [Header("Path points holder")]
-    [SerializeField] Transform pathHolder;
+    [SerializeField] Transform _pathHolder;
 
     [Header("Path points list")]
     public List<Vector3> insectsPath = new List<Vector3>();
@@ -38,7 +38,7 @@ public class InsectsManager : MonoBehaviour
     List<Vector3> GetInsectsPath()
     {
         List<Vector3> path = new List<Vector3>();
-        foreach(Transform pathPoint in pathHolder.transform)
+        foreach(Transform pathPoint in _pathHolder.transform)
         {
             path.Add(pathPoint.position);
         }
