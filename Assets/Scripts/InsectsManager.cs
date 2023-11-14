@@ -5,7 +5,7 @@ using UnityEngine;
 public class InsectsManager : MonoBehaviour
 {
     [Header("Point to spawn insects")]
-    public Transform insectSpawnerPosition;
+    public Transform insectsSpawnerPosition;
 
     [Header("Hive insects want to reach")]
     public Transform hivePosition;
@@ -16,10 +16,18 @@ public class InsectsManager : MonoBehaviour
     [Header("Path points list")]
     public List<Vector3> insectsPath = new List<Vector3>();
 
+    [Header("Insects prefabs")]
+    public List<GameObject> insectsPrefabs = new List<GameObject>();
+
     void Awake()
     {
         GameParams.insectsManager = this;
         insectsPath = GetInsectsPath();
+    }
+
+    void Start()
+    {
+        StartCoroutine(SpawnInsects());
     }
 
     void Update()
@@ -36,5 +44,14 @@ public class InsectsManager : MonoBehaviour
         }
 
         return path;
+    }
+
+    IEnumerator SpawnInsects()
+    {
+        while (true)
+        {
+            Instantiate(insectsPrefabs[Random.Range(0, insectsPrefabs.Count)], insectsSpawnerPosition.position, Quaternion.identity);
+            yield return new WaitForSecondsRealtime(0.2f);
+        }
     }
 }
