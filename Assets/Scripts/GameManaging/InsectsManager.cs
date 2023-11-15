@@ -7,8 +7,8 @@ public class InsectsManager : MonoBehaviour
     [Header("Point to spawn insects")]
     public Transform insectsSpawnerPosition;
 
-    [Header("Hive insects want to reach")]
-    public Transform hivePosition;
+    [Header("Beehive insects want to reach")]
+    public Transform beehivePosition;
 
     [Header("Path points holder")]
     [SerializeField] Transform _pathHolder;
