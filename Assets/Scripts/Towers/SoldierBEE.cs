@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SoldierBEE : TowerController
 {
+    public float damage = 25f;
+
     [Header("Missile prefab")]
     public GameObject missilePrefab;
 
@@ -17,12 +19,12 @@ public class SoldierBEE : TowerController
 
     protected override void AttackExecution()
     {
-        Collider2D nearestInsect = Physics2D.OverlapCircle(transform.position, attackRange);
-        if (nearestInsect != null)
+        GameObject firstInsect = GameParams.insectsManager.FirstInsect(gameObject.transform.position, attackRange);
+        if (firstInsect != null)
         {
-            LookAt2D(nearestInsect.gameObject.transform.position);
+            LookAt2D(firstInsect.transform.position);
             GameObject missile = Instantiate(missilePrefab, _missileSpawnPoint.position, Quaternion.identity, transform);
-            missile.AddComponent<MissileController>().SetUpMissile(true, 10.0f, nearestInsect.gameObject);
+            missile.AddComponent<BulletController>().SetUpMissile(40.0f, damage, firstInsect);
         }
     }
 }

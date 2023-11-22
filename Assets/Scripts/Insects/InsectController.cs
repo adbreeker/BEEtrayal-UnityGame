@@ -4,13 +4,38 @@ using UnityEngine;
 
 public class InsectController : MonoBehaviour
 {
+    [Header("Insect statistics:")]
     public float movementSpeed = 3.0f;
+    public float health = 100.0f;
+    public float armor = 0.0f;
 
+    float _startingMovementSpeed;
+    float _startingHealth;
+    float _startingArmor;
+
+    //movement speed reduction
+    bool _isMsReduced = false;
+    float _msReductionTime = 0.0f;
+    float _msReductionPercent = 0.0f;
+
+    //path following
+    Vector3 _previousPoint;
     Vector3 _currentDestination;
     int _pathPointIndex = 0;
 
+    [Header("Distance traveled")]
+    public float distanceTraveled = 0.0f;
+
+    private void Awake()
+    {
+        _startingMovementSpeed = movementSpeed;
+        _startingHealth = health;
+        _startingArmor = armor;
+    }
+
     void Start()
     {
+        _previousPoint = transform.position;
         _currentDestination = GameParams.insectsManager.insectsPath[0];
         RotateTowardsPoint(true);
     }
@@ -19,6 +44,7 @@ public class InsectController : MonoBehaviour
     {
         RotateTowardsPoint(false);
         MoveAlongPath();
+        CalculateDistanceTraveled();
     }
 
     void MoveAlongPath()
@@ -32,10 +58,12 @@ public class InsectController : MonoBehaviour
             _pathPointIndex++;
             if(_pathPointIndex == GameParams.insectsManager.insectsPath.Count)
             {
+                GameParams.insectsManager.KilledInsect(gameObject);
                 Destroy(gameObject);
             }
             else
             {
+                _previousPoint = _currentDestination;
                 _currentDestination = GameParams.insectsManager.insectsPath[_pathPointIndex];
             }
         }
@@ -58,4 +86,72 @@ public class InsectController : MonoBehaviour
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, speed * Time.deltaTime);
         }
     }
+
+    void CalculateDistanceTraveled()
+    {
+        distanceTraveled = _pathPointIndex * 10.0f + Vector3.Distance(_previousPoint, transform.position);
+    }
+
+    public void DealDamage(float damage)
+    {
+        float damageReduction = 100 / (100 + armor);
+        health -= damage * damageReduction;
+        if(health <= 0)
+        {
+            GameParams.insectsManager.KilledInsect(gameObject);
+            Destroy(gameObject);
+        }
+    }
+
+    public void ReduceArmor(float armorReduction)
+    {
+        if(armor > 0.0f)
+        {
+            armor -= armorReduction;
+            if(armor < 0.0f)
+            {
+                armor = 0.0f;
+            }
+        }
+        else
+        {
+            armor -= Mathf.Sqrt(armorReduction);
+        }
+    }
+
+    public void ReduceMovementSpeed(float time, float percent)
+    {
+        if(time > _msReductionTime)
+        {
+            _msReductionTime = time;
+        }
+
+        if(percent > _msReductionPercent)
+        {
+            _msReductionPercent = percent;
+            movementSpeed = _startingMovementSpeed * (1.0f - percent);
+        }
+
+        if(!_isMsReduced)
+        {
+            _isMsReduced = true;
+            StartCoroutine(MovementSpeedReductionCounter());
+        }
+    }
+
+    IEnumerator MovementSpeedReductionCounter()
+    {
+        while(_msReductionTime > 0.0f)
+        {
+            yield return new WaitForSeconds(0.01f);
+            _msReductionTime -= 0.01f;
+        }
+        _msReductionTime = 0.0f;
+        _msReductionPercent = 0.0f;
+        _isMsReduced = false;
+
+        movementSpeed = _startingMovementSpeed;
+    }
+
+    
 }

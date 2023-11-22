@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class InsectsManager : MonoBehaviour
@@ -19,6 +20,9 @@ public class InsectsManager : MonoBehaviour
     [Header("Insects prefabs")]
     public List<GameObject> insectsPrefabs = new List<GameObject>();
 
+    List<InsectController> _livingInsectsOrder = new List<InsectController>();
+
+
     void Awake()
     {
         GameParams.insectsManager = this;
@@ -32,7 +36,7 @@ public class InsectsManager : MonoBehaviour
 
     void Update()
     {
-        
+        _livingInsectsOrder = _livingInsectsOrder.OrderByDescending(x => x.distanceTraveled).ToList();
     }
 
     List<Vector3> GetInsectsPath()
@@ -50,8 +54,27 @@ public class InsectsManager : MonoBehaviour
     {
         while (true)
         {
-            Instantiate(insectsPrefabs[Random.Range(0, insectsPrefabs.Count)], insectsSpawnerPosition.position, Quaternion.identity);
+            _livingInsectsOrder.Add(
+                Instantiate(insectsPrefabs[Random.Range(0, insectsPrefabs.Count)], insectsSpawnerPosition.position, Quaternion.identity)
+                .GetComponent<InsectController>());
             yield return new WaitForSecondsRealtime(0.2f);
         }
+    }
+
+    public void KilledInsect(GameObject insect)
+    {
+        _livingInsectsOrder.Remove(insect.GetComponent<InsectController>());
+    }
+
+    public GameObject FirstInsect(Vector3 towerPosition, float towerRange)
+    {
+        foreach(InsectController insect in _livingInsectsOrder)
+        {
+            if(Vector3.Distance(towerPosition, insect.transform.position) <= towerRange)
+            {
+                return insect.gameObject;
+            }
+        }
+        return null;
     }
 }
