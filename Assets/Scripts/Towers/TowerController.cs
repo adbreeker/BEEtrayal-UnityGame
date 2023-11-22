@@ -23,13 +23,4 @@ public class TowerController : MonoBehaviour
     }
 
     protected virtual void AttackExecution() { }
-
-    protected void LookAt2D(Vector3 targetPosition)
-    {
-        Vector2 direction = targetPosition - transform.position;
-        float angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
-        Quaternion targetRotation = Quaternion.Euler(0f, 0f, -angle);
-
-        transform.rotation = targetRotation;
-    }
 }

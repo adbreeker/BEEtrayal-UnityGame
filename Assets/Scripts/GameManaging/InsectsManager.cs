@@ -61,20 +61,13 @@ public class InsectsManager : MonoBehaviour
         }
     }
 
-    public void KilledInsect(GameObject insect)
+    public void RemoveInsect(GameObject insect)
     {
         _livingInsectsOrder.Remove(insect.GetComponent<InsectController>());
     }
 
-    public GameObject FirstInsect(Vector3 towerPosition, float towerRange)
+    public List<InsectController> GetInsectsOrder()
     {
-        foreach(InsectController insect in _livingInsectsOrder)
-        {
-            if(Vector3.Distance(towerPosition, insect.transform.position) <= towerRange)
-            {
-                return insect.gameObject;
-            }
-        }
-        return null;
+        return _livingInsectsOrder;
     }
 }
