@@ -339,7 +339,7 @@ GameObject:
   - component: {fileID: 3939316796866370911}
   - component: {fileID: -7811948359647836585}
   m_Layer: 0
-  m_Name: Tower_SniperBEE
+  m_Name: (Tower)Sniper_BEE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

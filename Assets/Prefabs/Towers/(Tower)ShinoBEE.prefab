@@ -339,7 +339,7 @@ GameObject:
   - component: {fileID: 4308019136258184453}
   - component: {fileID: 8924697378884652659}
   m_Layer: 0
-  m_Name: Tower_ShinoBEE
+  m_Name: (Tower)ShinoBEE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
