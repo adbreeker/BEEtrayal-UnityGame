@@ -29,7 +29,7 @@ public class BaBEE : TowerController
         {
             transform.rotation = GameParams.LookAt2D(transform.position, strongestInsect.transform.position);
             GameObject missile = Instantiate(missilePrefab, _missileSpawnPoint.position, Quaternion.identity, transform);
-            missile.AddComponent<DartController>().SetUpMissile(15.0f, damage, strongestInsect, _missileSpecialEffects);
+            missile.GetComponent<MissileController>().SetUpMissile(15.0f, damage, strongestInsect, _missileSpecialEffects);
         }
     }
 

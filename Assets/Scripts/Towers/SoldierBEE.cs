@@ -24,7 +24,7 @@ public class SoldierBEE : TowerController
         {
             transform.rotation = GameParams.LookAt2D(transform.position, firstInsect.transform.position);
             GameObject missile = Instantiate(missilePrefab, _missileSpawnPoint.position, Quaternion.identity, transform);
-            missile.AddComponent<BulletController>().SetUpMissile(40.0f, damage, firstInsect);
+            missile.GetComponent<MissileController>().SetUpMissile(40.0f, damage, firstInsect);
         }
     }
 

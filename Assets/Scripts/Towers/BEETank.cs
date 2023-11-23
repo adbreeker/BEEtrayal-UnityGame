@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArcherBEE : TowerController
+public class BEETank : TowerController
 {
-    public float damage = 75f;
+    public float damage = 100f;
+    public float explosionSize = 1.0f;
 
     [Header("Missile prefab")]
     public GameObject missilePrefab;
@@ -24,7 +25,8 @@ public class ArcherBEE : TowerController
         {
             transform.rotation = GameParams.LookAt2D(transform.position, firstInsect.transform.position);
             GameObject missile = Instantiate(missilePrefab, _missileSpawnPoint.position, Quaternion.identity, transform);
-            missile.GetComponent<MissileController>().SetUpMissile(30.0f, damage, CalculateArrowPoint(firstInsect.transform.position));
+            missile.GetComponent<MissileController>().SetUpMissile(30.0f, damage, firstInsect.transform.position);
+            missile.GetComponent<RocketController>().explosionSize = explosionSize;
         }
     }
 
@@ -39,12 +41,5 @@ public class ArcherBEE : TowerController
             }
         }
         return null;
-    }
-
-    Vector3 CalculateArrowPoint(Vector3 insectPos)
-    {
-        Vector3 direction = (insectPos - transform.position).normalized;
-        Vector3 arrowPoint = insectPos + (direction * 10.0f);
-        return arrowPoint;
     }
 }

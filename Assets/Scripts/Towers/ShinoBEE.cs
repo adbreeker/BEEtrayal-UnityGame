@@ -24,7 +24,7 @@ public class ShinoBEE : TowerController
         {
             transform.rotation = GameParams.LookAt2D(transform.position, randomInsect.transform.position);
             GameObject missile = Instantiate(missilePrefab, _missileSpawnPoint[Random.Range(0,_missileSpawnPoint.Length)].position, Quaternion.identity, transform);
-            missile.AddComponent<ShurikenController>().SetUpMissile(20.0f, damage, randomInsect);
+            missile.GetComponent<MissileController>().SetUpMissile(20.0f, damage, randomInsect);
         }
     }
 

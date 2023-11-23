@@ -24,7 +24,7 @@ public class SniperBEE : TowerController
         {
             transform.rotation = GameParams.LookAt2D(transform.position, strongestInsect.transform.position);
             GameObject missile = Instantiate(missilePrefab, _missileSpawnPoint.position, Quaternion.identity, transform);
-            missile.AddComponent<BoltController>().SetUpMissile(75.0f, damage, strongestInsect);
+            missile.GetComponent<MissileController>().SetUpMissile(75.0f, damage, strongestInsect);
         }
     }
 

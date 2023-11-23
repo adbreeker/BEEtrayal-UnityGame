@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8679307985899883413}
   - component: {fileID: 5409709150393591333}
+  - component: {fileID: -1929360012372117868}
   m_Layer: 0
   m_Name: Dart
   m_TagString: Missile
@@ -82,3 +83,15 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-1929360012372117868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2686293118654674446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61d58f9cdd3befe40a96e2e06f500fa8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -92,6 +92,7 @@ public class MissileController : MonoBehaviour
                     if (Vector3.Distance(transform.position, _target.transform.position) < 0.1f)
                     {
                         OnHit();
+                        _isReady = false;
                     }
                 }
             }
@@ -105,6 +106,7 @@ public class MissileController : MonoBehaviour
                 else
                 {
                     OnHit();
+                    _isReady = false;
                 }
             }
         }
