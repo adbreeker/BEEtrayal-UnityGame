@@ -91,6 +91,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8840434541499098880}
+  - component: {fileID: -7120240522317241418}
   m_Layer: 0
   m_Name: (Tower)Archer_BEE
   m_TagString: Untagged
@@ -114,6 +115,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-7120240522317241418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1812152506706132839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3f31c4ee54d35242b58b0b37811bcc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackSpeed: 1
+  attackRange: 10
+  damage: 80
+  missilePrefab: {fileID: 1474452625732465224, guid: e68d66337a9433e4e9d1e317ebe24171, type: 3}
+  _missileSpawnPoint: {fileID: 2972409742906757532}
 --- !u!1 &6289472517202316554
 GameObject:
   m_ObjectHideFlags: 0

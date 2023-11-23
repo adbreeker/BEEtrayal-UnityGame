@@ -153,5 +153,13 @@ public class InsectController : MonoBehaviour
         movementSpeed = _startingMovementSpeed;
     }
 
-    
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "Missile")
+        {
+            collision.GetComponent<MissileController>().OnInsectPierce(this);
+        }
+    }
+
+
 }

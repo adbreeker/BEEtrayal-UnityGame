@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class MissileController : MonoBehaviour
 {
@@ -10,7 +9,8 @@ public class MissileController : MonoBehaviour
     protected GameObject _target;
     protected Vector3 _destination;
 
-    protected MissileSpecialEffects _specialEffects = null;
+    protected List<SpecialEffect> _specialEffects = new List<SpecialEffect>();
+
 
     FlyMode _flyMode;
     bool _isReady = false;
@@ -21,12 +21,6 @@ public class MissileController : MonoBehaviour
     {
         Target,
         Destination
-    }
-    public class MissileSpecialEffects
-    {
-        public float slowPercent = 0.0f;
-        public float slowTime = 0.0f;
-        public float armorReduction = 0.0f;
     }
 
     //setting up spawned missile ---------------------------------------------------------------------------------------- setting up spawned missile
@@ -53,7 +47,7 @@ public class MissileController : MonoBehaviour
         _isReady = true;
     }
 
-    public void SetUpMissile(float speed, float damage, GameObject target, MissileSpecialEffects specialEffects)
+    public void SetUpMissile(float speed, float damage, GameObject target, List<SpecialEffect> specialEffects)
     {
         _speed = speed;
         _damage = damage;
@@ -66,7 +60,7 @@ public class MissileController : MonoBehaviour
         _isReady = true;
     }
 
-    public void SetUpMissile(float speed, float damage, Vector3 targetPosition, MissileSpecialEffects specialEffects)
+    public void SetUpMissile(float speed, float damage, Vector3 targetPosition, List<SpecialEffect> specialEffects)
     {
         _speed = speed;
         _damage = damage;
@@ -78,6 +72,7 @@ public class MissileController : MonoBehaviour
 
         _isReady = true;
     }
+
 
     //missile behavior ------------------------------------------------------------------------------------------------- missile behavior
 
@@ -117,26 +112,23 @@ public class MissileController : MonoBehaviour
 
     protected virtual void OnHit()
     {
-        _target.GetComponent<InsectController>().DealDamage(_damage);
+        InsectController insect = _target.GetComponent<InsectController>();
+        insect.DealDamage(_damage);
 
-        if (_specialEffects != null)
+        foreach (SpecialEffect specialEffect in _specialEffects)
         {
-            ApplySpecialEffects();
+            specialEffect.ApplyEffect(insect);
         }
 
         Destroy(gameObject);
     }
 
-    protected virtual void ApplySpecialEffects()
+    public virtual void OnInsectPierce(InsectController insect)
     {
-        InsectController insectController = _target.GetComponent<InsectController>();
-        if (_specialEffects.armorReduction != 0.0f)
+        insect.DealDamage(_damage);
+        foreach (SpecialEffect specialEffect in _specialEffects)
         {
-            insectController.ReduceArmor(_specialEffects.armorReduction);
-        }
-        if (_specialEffects.slowPercent != 0.0f)
-        {
-            insectController.ReduceMovementSpeed(_specialEffects.slowTime, _specialEffects.slowPercent);
+            specialEffect.ApplyEffect(insect);
         }
     }
 }

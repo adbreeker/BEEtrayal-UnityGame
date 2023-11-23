@@ -13,15 +13,13 @@ public class BaBEE : TowerController
     [Header("Missile spawn point")]
     [SerializeField] Transform _missileSpawnPoint;
 
-    MissileSpecialEffects _missileSpecialEffects;
+    List<SpecialEffect> _missileSpecialEffects = new List<SpecialEffect>();
 
     protected override void Start()
     {
         base.Start();
 
-        _missileSpecialEffects = new MissileSpecialEffects();
-        _missileSpecialEffects.slowPercent = 0.5f;
-        _missileSpecialEffects.slowTime = 2.0f;
+        _missileSpecialEffects.Add(new SpecialEffects.Slow(2.0f, 0.5f));
     }
 
     protected override void AttackExecution()
