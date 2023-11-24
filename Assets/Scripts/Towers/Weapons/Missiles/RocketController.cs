@@ -18,7 +18,7 @@ public class RocketController : MissileController
     {
         Instantiate(_explosionPrefab, transform.position, Quaternion.Euler(0f, 0f, Random.Range(0f,360f))).GetComponent<ExplosionEffect>().explosionSize = explosionSize;
 
-        Collider2D[] insectsInArea = Physics2D.OverlapCircleAll(transform.position, explosionSize);
+        Collider2D[] insectsInArea = Physics2D.OverlapCircleAll(transform.position, explosionSize, LayerMask.GetMask("Insect"));
 
         foreach (Collider2D otherCollider in insectsInArea)
         {
