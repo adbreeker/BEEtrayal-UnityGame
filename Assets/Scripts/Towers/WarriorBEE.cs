@@ -7,9 +7,18 @@ public class WarriorBEE : TowerController
     public float damage;
     public float msReduction;
 
+    [Header("Weapon")]
+    [SerializeField] GameObject _weapon;
+
+    List<SpecialEffect> _weaponSpecialEffects = new List<SpecialEffect>();
+
     protected override void Start()
     {
         base.Start();
+
+        _weaponSpecialEffects.Add(new SpecialEffects.Slow(0.5f, msReduction));
+
+        _weapon.GetComponent<MeleeController>().SetUpWeapon(damage, _weaponSpecialEffects);
     }
 
     protected override void Update()
@@ -24,21 +33,6 @@ public class WarriorBEE : TowerController
 
     protected override void AttackExecution()
     {
-        if (IsAnyInsectInRange())
-        {
-            _canAttack = false;
-        }
-        else
-        {
-            return;
-        }
-
-        Collider2D[] insectsInRange = Physics2D.OverlapCircleAll(transform.position, attackRange);
-        foreach(Collider2D insect in insectsInRange)
-        {
-            InsectController insectController = insect.GetComponent<InsectController>();
-            insectController.DealDamage(damage);
-            insectController.ReduceMovementSpeed(0.5f, msReduction);
-        }
+        
     }
 }

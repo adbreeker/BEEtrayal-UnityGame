@@ -155,9 +155,16 @@ public class InsectController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Missile")
+        if(collision.gameObject.layer == LayerMask.NameToLayer("Weapon"))
         {
-            collision.GetComponent<MissileController>().OnInsectPierce(this);
+            if(collision.tag == "Missile")
+            {
+                collision.GetComponent<MissileController>().OnInsectPierce(this);
+            }
+            if(collision.tag == "Melee")
+            {
+                collision.GetComponent<MeleeController>().OnInsectPierce(this);
+            }
         }
     }
 

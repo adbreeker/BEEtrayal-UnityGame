@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2735960036002219145}
   - component: {fileID: 7693997679975017293}
   - component: {fileID: -3781128658829593593}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GreenAnt
   m_TagString: Untagged
   m_Icon: {fileID: 0}

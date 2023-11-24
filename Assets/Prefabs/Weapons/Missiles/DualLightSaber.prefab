@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3802108808422135992}
   - component: {fileID: 7628354964899480034}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LightSaber2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +91,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1714242140903797439}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DualLightSaber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5813617413106206748}
   - component: {fileID: 4590195370870681020}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LightSaber1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
