@@ -48,8 +48,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackSpeed: 1
-  attackRange: 10
+  attackRange: 8
   damage: 75
+  missileSpeed: 30
+  explosionSize: 1.5
   missilePrefab: {fileID: 3107379393988431453, guid: ba39d73f6ac3be44db8be8c8a19bbf7b, type: 3}
   _missileSpawnPoint: {fileID: 326328975192058517}
 --- !u!1 &3188486104834341352

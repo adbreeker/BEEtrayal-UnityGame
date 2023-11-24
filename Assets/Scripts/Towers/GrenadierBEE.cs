@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class GrenadierBEE : TowerController
 {
-    public float damage = 50f;
+    public float damage;
+    public float missileSpeed;
+    public float explosionSize;
 
     [Header("Missile prefab")]
     public GameObject missilePrefab;
@@ -17,8 +19,22 @@ public class GrenadierBEE : TowerController
         base.Start();
     }
 
+    protected override void Update()
+    {
+        base.Update();
+    }
+
     protected override void AttackExecution()
     {
+        if (IsAnyInsectInRange())
+        {
+            _canAttack = false;
+        }
+        else
+        {
+            return;
+        }
+
         StartCoroutine(ThrowThreeGranades());
     }
 
@@ -30,8 +46,9 @@ public class GrenadierBEE : TowerController
             if (randomInsect != null)
             {
                 transform.rotation = GameParams.LookAt2D(transform.position, randomInsect.transform.position);
-                GameObject missile = Instantiate(missilePrefab, _missileSpawnPoint[i].position, Quaternion.identity, transform);
-                missile.GetComponent<MissileController>().SetUpMissile(15.0f, damage, randomInsect.transform.position);
+                GameObject missile = Instantiate(missilePrefab, _missileSpawnPoint[i].position, Quaternion.identity);
+                missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, randomInsect.transform.position);
+                missile.GetComponent<GrenadeController>().explosionSize = explosionSize;
             }
             yield return new WaitForSeconds(0.1f / attackSpeed);
         }

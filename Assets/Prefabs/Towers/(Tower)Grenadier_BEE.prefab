@@ -91,6 +91,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5939284458812005784}
+  - component: {fileID: -8505368465711207708}
   m_Layer: 0
   m_Name: (Tower)Grenadier_BEE
   m_TagString: Untagged
@@ -116,6 +117,28 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-8505368465711207708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3595302716287747583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7839ec7de78d72345b8fba62ebf4e077, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackSpeed: 0.25
+  attackRange: 3
+  damage: 150
+  missileSpeed: 10
+  explosionSize: 2
+  missilePrefab: {fileID: 8508124576648701141, guid: 37e47c4f0407a524cabc9833776518a1, type: 3}
+  _missileSpawnPoint:
+  - {fileID: 1252305965257196636}
+  - {fileID: 7669713650557505992}
+  - {fileID: 8063635200164186732}
 --- !u!1 &3945399071842744076
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,7 +5,8 @@ using static MissileController;
 
 public class BaBEE : TowerController
 {
-    public float damage = 75f;
+    public float damage;
+    public float missileSpeed;
 
     [Header("Missile prefab")]
     public GameObject missilePrefab;
@@ -22,14 +23,28 @@ public class BaBEE : TowerController
         _missileSpecialEffects.Add(new SpecialEffects.Slow(2.0f, 0.5f));
     }
 
+    protected override void Update()
+    {
+        base.Update();
+    }
+
     protected override void AttackExecution()
     {
+        if (IsAnyInsectInRange())
+        {
+            _canAttack = false;
+        }
+        else
+        {
+            return;
+        }
+
         GameObject strongestInsect = GetStrongestInsect();
         if (strongestInsect != null)
         {
             transform.rotation = GameParams.LookAt2D(transform.position, strongestInsect.transform.position);
-            GameObject missile = Instantiate(missilePrefab, _missileSpawnPoint.position, Quaternion.identity, transform);
-            missile.GetComponent<MissileController>().SetUpMissile(15.0f, damage, strongestInsect, _missileSpecialEffects);
+            GameObject missile = Instantiate(missilePrefab, _missileSpawnPoint.position, Quaternion.identity);
+            missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, strongestInsect, _missileSpecialEffects);
         }
     }
 

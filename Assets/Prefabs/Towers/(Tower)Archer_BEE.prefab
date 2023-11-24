@@ -130,6 +130,7 @@ MonoBehaviour:
   attackSpeed: 1
   attackRange: 10
   damage: 80
+  missileSpeed: 30
   missilePrefab: {fileID: 1474452625732465224, guid: e68d66337a9433e4e9d1e317ebe24171, type: 3}
   _missileSpawnPoint: {fileID: 2972409742906757532}
 --- !u!1 &6289472517202316554

@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class WarriorBEE : TowerController
 {
-    public float damage = 10f;
-    public float msReduction = 0.2f;
+    public float damage;
+    public float msReduction;
 
     protected override void Start()
     {
         base.Start();
+    }
+
+    protected override void Update()
+    {
+        base.Update();
     }
 
     private void FixedUpdate()
@@ -19,6 +24,15 @@ public class WarriorBEE : TowerController
 
     protected override void AttackExecution()
     {
+        if (IsAnyInsectInRange())
+        {
+            _canAttack = false;
+        }
+        else
+        {
+            return;
+        }
+
         Collider2D[] insectsInRange = Physics2D.OverlapCircleAll(transform.position, attackRange);
         foreach(Collider2D insect in insectsInRange)
         {
