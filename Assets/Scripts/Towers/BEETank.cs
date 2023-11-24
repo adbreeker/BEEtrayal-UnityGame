@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BEETank : TowerController
 {
-    public float damage = 100f;
+    public float damage = 75f;
     public float explosionSize = 1.0f;
 
     [Header("Missile prefab")]
