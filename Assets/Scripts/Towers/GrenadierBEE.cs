@@ -56,18 +56,10 @@ public class GrenadierBEE : TowerController
 
     GameObject GetRandomInsect()
     {
-        List<InsectController> insectsOrder = GameParams.insectsManager.GetInsectsOrder();
-        List<GameObject> insectsInRange = new List<GameObject>();
-        foreach (InsectController insect in insectsOrder)
+        List<InsectController> insectsOrder = GameParams.insectsManager.GetInsectsOrderInRange(transform.position, attackRange);
+        if (insectsOrder.Count > 0)
         {
-            if (Vector3.Distance(transform.position, insect.transform.position) <= attackRange)
-            {
-                insectsInRange.Add(insect.gameObject);
-            }
-        }
-        if (insectsInRange.Count > 0)
-        {
-            return insectsInRange[Random.Range(0, insectsInRange.Count)];
+            return insectsOrder[Random.Range(0, insectsOrder.Count)].gameObject;
         }
         return null;
     }

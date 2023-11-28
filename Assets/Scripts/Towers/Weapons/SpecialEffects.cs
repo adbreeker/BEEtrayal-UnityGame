@@ -28,6 +28,21 @@ namespace SpecialEffects
             target.ReduceMovementSpeed(_slowTime, _slowPercent);
         }
     }
+
+    public class ArmorReduction : SpecialEffect
+    {
+        float _armorReduction;
+
+        public ArmorReduction(float armorReduction)
+        {
+            _armorReduction = armorReduction;
+        }
+
+        public override void ApplyEffect(InsectController target)
+        {
+            target.ReduceArmor(_armorReduction);
+        }
+    }
 }
 
 

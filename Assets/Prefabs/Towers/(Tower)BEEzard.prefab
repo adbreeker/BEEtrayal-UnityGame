@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7057513676577901654}
+  - component: {fileID: 8903802887232060675}
   m_Layer: 0
   m_Name: (Tower)BEEzard
   m_TagString: Untagged
@@ -33,6 +34,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8903802887232060675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 178125492649186353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c46575323f2b0042a248dbf0005cddd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackSpeed: 1
+  attackRange: 5
+  damage: 40
+  missileSpeed: 10
+  missilePrefab: {fileID: 4706714175347289679, guid: 8b6555a7ee0e0e342ab4e1e0e380e018, type: 3}
+  _missileSpawnPoint: {fileID: 1971137926310282348}
 --- !u!1 &2017837216069092074
 GameObject:
   m_ObjectHideFlags: 0

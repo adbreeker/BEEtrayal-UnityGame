@@ -42,15 +42,14 @@ public class TowerController : MonoBehaviour
 
     protected bool IsAnyInsectInRange()
     {
-        List<InsectController> insects = GameParams.insectsManager.GetInsectsOrder();
-        foreach(InsectController insect in insects)
+        if(GameParams.insectsManager.GetInsectsOrderInRange(transform.position, attackRange).Count > 0)
         {
-            if(Vector3.Distance(transform.position, insect.transform.position) <= attackRange)
-            {
-                return true;
-            }
+            return true;
         }
-        return false;
+        else
+        {
+            return false;
+        }
     }
 
     protected virtual void AttackExecution() { }

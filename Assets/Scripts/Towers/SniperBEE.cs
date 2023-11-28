@@ -45,7 +45,7 @@ public class SniperBEE : TowerController
 
     GameObject GetStrongestInsect()
     {
-        List<InsectController> insectsOrder = GameParams.insectsManager.GetInsectsOrder();
+        List<InsectController> insectsOrder = GameParams.insectsManager.GetInsectsOrderInRange(transform.position, attackRange);
         if(insectsOrder.Count == 0)
         {
             return null;

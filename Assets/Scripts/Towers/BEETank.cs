@@ -47,13 +47,10 @@ public class BEETank : TowerController
 
     GameObject GetFirstInsect()
     {
-        List<InsectController> insectsOrder = GameParams.insectsManager.GetInsectsOrder();
-        foreach (InsectController insect in insectsOrder)
+        List<InsectController> insectsOrder = GameParams.insectsManager.GetInsectsOrderInRange(transform.position, attackRange);
+        if (insectsOrder.Count > 0)
         {
-            if (Vector3.Distance(transform.position, insect.transform.position) <= attackRange)
-            {
-                return insect.gameObject;
-            }
+            return insectsOrder[0].gameObject;
         }
         return null;
     }
