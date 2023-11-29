@@ -56,11 +56,12 @@ public class OBEE_Wan : TowerController
             float rotationStep = 40 * attackSpeed;
             float currentRotationAngle = 0f;
             float targetRotationAngle = 360f;
+            float startingRotationAngle = transform.rotation.eulerAngles.z;
             while (currentRotationAngle < targetRotationAngle)
             {
                 currentRotationAngle += rotationStep;
                 currentRotationAngle = Mathf.Clamp(currentRotationAngle, 0f, targetRotationAngle);
-                Quaternion targetRotation = Quaternion.Euler(0, 0, -currentRotationAngle);
+                Quaternion targetRotation = Quaternion.Euler(0, 0,startingRotationAngle - currentRotationAngle);
                 transform.rotation = targetRotation;
                 yield return new WaitForFixedUpdate();
             }
