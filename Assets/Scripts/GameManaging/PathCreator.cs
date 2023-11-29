@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -15,8 +16,9 @@ public class PathCreator : MonoBehaviour
     [Header("Path holder")]
     public Transform pathHolder;
 
-    void Awake()
+    void Start()
     {
+        UpdateVisualization(true);
         pathVisualisator.enabled = false;
     }
 
