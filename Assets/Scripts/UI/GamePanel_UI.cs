@@ -27,6 +27,11 @@ public class GamePanel_UI : MonoBehaviour
     Coroutine _movePanelCoroutine = null;
     Vector3 _panelStartingPosition;
     Vector3 _panelDestination;
+
+    //3 small buttons
+    bool _isGamePaused = false;
+    float _gameSpeed = 1.0f;
+    bool _isSoundOn = true;
     
 
 
@@ -90,6 +95,44 @@ public class GamePanel_UI : MonoBehaviour
         {
             transform.position = Vector3.MoveTowards(transform.position, destination, 10.0f);
             yield return new WaitForFixedUpdate();
+        }
+    }
+
+    public void Button_Pause()
+    {
+        if(_isGamePaused)
+        {
+            _isGamePaused = false;
+            Time.timeScale = _gameSpeed;
+        }
+        else
+        {
+            _isGamePaused = true;
+            Time.timeScale = 0;
+        }
+    }
+
+    public void Button_Speed()
+    {
+        if (_gameSpeed == 1.0f) { _gameSpeed = 2.0f; }
+        else if (_gameSpeed == 2.0f) { _gameSpeed = 4.0f; }
+        else if (_gameSpeed == 4.0f) { _gameSpeed = 1.0f; }
+
+        if(!_isGamePaused)
+        {
+            Time.timeScale = _gameSpeed;
+        }
+    }
+
+    public void Button_Sound()
+    {
+        if(_isSoundOn)
+        {
+            _isSoundOn = false;
+        }
+        else
+        {
+            _isSoundOn = true;
         }
     }
 }
