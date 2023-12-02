@@ -46,7 +46,6 @@ public class OBEE_Wan : TowerController
             transform.rotation = GameParams.LookAt2D(transform.position, closestInsect.transform.position);
 
             Vector3 jumpPos = closestInsect.transform.position;
-            Debug.Log(jumpPos);
             while(transform.position != jumpPos)
             {
                 transform.position = Vector3.MoveTowards(transform.position, jumpPos, 0.4f * attackSpeed);

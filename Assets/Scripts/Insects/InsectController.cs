@@ -58,7 +58,7 @@ public class InsectController : MonoBehaviour
             _pathPointIndex++;
             if(_pathPointIndex == GameParams.insectsManager.insectsPath.Count)
             {
-                GameParams.insectsManager.RemoveInsect(gameObject);
+                GameParams.insectsManager.RemoveInsect(gameObject, false);
                 Destroy(gameObject);
             }
             else
@@ -98,7 +98,7 @@ public class InsectController : MonoBehaviour
         health -= damage * damageReduction;
         if(health <= 0)
         {
-            GameParams.insectsManager.RemoveInsect(gameObject);
+            GameParams.insectsManager.RemoveInsect(gameObject, true);
             Destroy(gameObject);
         }
     }

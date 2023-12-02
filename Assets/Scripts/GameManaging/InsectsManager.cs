@@ -5,16 +5,13 @@ using UnityEngine;
 
 public class InsectsManager : MonoBehaviour
 {
-    [Header("Point to spawn insects")]
+    [Header("Insects statistics:")]
+    public int deadInsects = 0;
+
+    [Header("Insects path:")]
     public Transform insectsSpawnerPosition;
-
-    [Header("Beehive insects want to reach")]
     public Transform beehivePosition;
-
-    [Header("Path points holder")]
     [SerializeField] Transform _pathHolder;
-
-    [Header("Path points list")]
     public List<Vector3> insectsPath = new List<Vector3>();
 
     [Header("Insects prefabs")]
@@ -61,9 +58,13 @@ public class InsectsManager : MonoBehaviour
         }
     }
 
-    public void RemoveInsect(GameObject insect)
+    public void RemoveInsect(GameObject insect, bool killed)
     {
         _livingInsectsOrder.Remove(insect.GetComponent<InsectController>());
+        if(killed) 
+        {
+            deadInsects++;
+        }
     }
 
     public List<InsectController> GetInsectsOrderInRange(Vector3 towerPosition, float towerAttackRange)

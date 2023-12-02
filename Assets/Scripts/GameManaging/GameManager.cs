@@ -19,6 +19,10 @@ static class GameParams
 
 public class GameManager : MonoBehaviour
 {
+    [Header("Game statistics")]
+    public int lives = 100;
+    public int honey = 100;
+
     void Awake()
     {
         GameParams.gameManager = this;
