@@ -54,7 +54,7 @@ public class InsectsManager : MonoBehaviour
             _livingInsectsOrder.Add(
                 Instantiate(insectsPrefabs[Random.Range(0, insectsPrefabs.Count)], insectsSpawnerPosition.position, Quaternion.identity)
                 .GetComponent<InsectController>());
-            yield return new WaitForSecondsRealtime(0.2f);
+            yield return new WaitForSeconds(0.2f);
         }
     }
 

@@ -251,7 +251,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &149676392824070824
 RectTransform:
   m_ObjectHideFlags: 0
@@ -353,7 +353,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6133869491965286116}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: -8669996418333732472}
+        m_TargetAssemblyTypeName: TowerFoundationController, Assembly-CSharp
+        m_MethodName: Button_AddTower
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7752001289706317967
 GameObject:
   m_ObjectHideFlags: 0
@@ -497,6 +509,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7212809360785538898}
+  - component: {fileID: -8669996418333732472}
   m_Layer: 0
   m_Name: TowerFoundation
   m_TagString: Untagged
@@ -520,6 +533,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-8669996418333732472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8408532792568524852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d75fdaa8cf37114da49b77877f03a2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tower: {fileID: 0}
+  _buttonAddTower: {fileID: 5055386549043189205}
+  _buttonTowerInfo: {fileID: 1260705341932824369}
 --- !u!1 &8797362679313127769
 GameObject:
   m_ObjectHideFlags: 0

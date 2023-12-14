@@ -30,7 +30,6 @@ public class GamePanel_UI : MonoBehaviour
 
     //3 small buttons
     bool _isGamePaused = false;
-    float _gameSpeed = 1.0f;
     bool _isSoundOn = true;
     
 
@@ -103,7 +102,7 @@ public class GamePanel_UI : MonoBehaviour
         if(_isGamePaused)
         {
             _isGamePaused = false;
-            Time.timeScale = _gameSpeed;
+            Time.timeScale = GameParams.currentGameSpeed;
         }
         else
         {
@@ -114,13 +113,13 @@ public class GamePanel_UI : MonoBehaviour
 
     public void Button_Speed()
     {
-        if (_gameSpeed == 1.0f) { _gameSpeed = 2.0f; }
-        else if (_gameSpeed == 2.0f) { _gameSpeed = 4.0f; }
-        else if (_gameSpeed == 4.0f) { _gameSpeed = 1.0f; }
+        if (GameParams.currentGameSpeed == 1.0f) { GameParams.currentGameSpeed = 2.0f; }
+        else if (GameParams.currentGameSpeed == 2.0f) { GameParams.currentGameSpeed = 4.0f; }
+        else if (GameParams.currentGameSpeed == 4.0f) { GameParams.currentGameSpeed = 1.0f; }
 
         if(!_isGamePaused)
         {
-            Time.timeScale = _gameSpeed;
+            Time.timeScale = GameParams.currentGameSpeed;
         }
     }
 
