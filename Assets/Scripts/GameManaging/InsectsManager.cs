@@ -60,10 +60,16 @@ public class InsectsManager : MonoBehaviour
 
     public void RemoveInsect(GameObject insect, bool killed)
     {
-        _livingInsectsOrder.Remove(insect.GetComponent<InsectController>());
+        InsectController iC = insect.GetComponent<InsectController>();
+        _livingInsectsOrder.Remove(iC);
         if(killed) 
         {
+            GameParams.gameManager.honey += iC.value;
             deadInsects++;
+        }
+        else
+        {
+            GameParams.gameManager.lives -= iC.value;
         }
     }
 

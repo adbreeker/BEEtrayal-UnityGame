@@ -99,6 +99,7 @@ MonoBehaviour:
   movementSpeed: 3
   health: 100
   armor: 0
+  value: 2
   distanceTraveled: 0
 --- !u!70 &7818680758364139692
 CapsuleCollider2D:

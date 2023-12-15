@@ -13,6 +13,9 @@ public class InsectController : MonoBehaviour
     float _startingHealth;
     float _startingArmor;
 
+    [Header("Insect value")]
+    public int value = 1;
+
     //movement speed reduction
     bool _isMsReduced = false;
     float _msReductionTime = 0.0f;
