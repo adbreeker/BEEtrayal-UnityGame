@@ -14,8 +14,8 @@ public class InsectsManager : MonoBehaviour
     [SerializeField] Transform _pathHolder;
     public List<Vector3> insectsPath = new List<Vector3>();
 
-    [Header("Insects prefabs")]
-    public List<GameObject> insectsPrefabs = new List<GameObject>();
+    [Header("Insects Waves")]
+    public List<InsectsWave> insectsWaves = new List<InsectsWave>();
 
     List<InsectController> _livingInsectsOrder = new List<InsectController>();
 
@@ -49,12 +49,17 @@ public class InsectsManager : MonoBehaviour
 
     IEnumerator SpawnInsects()
     {
-        while (true)
+        foreach(InsectsWave wave in insectsWaves)
         {
-            _livingInsectsOrder.Add(
-                Instantiate(insectsPrefabs[Random.Range(0, insectsPrefabs.Count)], insectsSpawnerPosition.position, Quaternion.identity)
+            foreach(GameObject insect in wave.insectsInWave)
+            {
+                _livingInsectsOrder.Add(
+                Instantiate(insect, insectsSpawnerPosition.position, Quaternion.identity)
                 .GetComponent<InsectController>());
-            yield return new WaitForSeconds(0.2f);
+
+                yield return new WaitForSeconds(0.5f);
+            }
+            yield return new WaitForSeconds(5.0f);
         }
     }
 
