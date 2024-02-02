@@ -5824,6 +5824,7 @@ MonoBehaviour:
   _pathHolder: {fileID: 807797563}
   insectsPath: []
   insectsWaves:
+  - {fileID: 11400000, guid: 867a4b405173eef47a6157022bac46da, type: 2}
   - {fileID: 11400000, guid: 1bb3107f513a74b428cceb81cf3c446b, type: 2}
   - {fileID: 11400000, guid: 499b46598a3884c46b2205b8bb4f3f58, type: 2}
   - {fileID: 11400000, guid: 9ec6f88d67f84b84e95f18c1a0f49201, type: 2}
@@ -5847,6 +5848,29 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f97fb7f0fa049b0418884096c5db5c1c, type: 2}
   - {fileID: 11400000, guid: e923936fa68a6ac4f9252b96c310ad18, type: 2}
   - {fileID: 11400000, guid: 11b775f154a114d4da01683a589417e3, type: 2}
+  - {fileID: 11400000, guid: fa64145f4b814904895b8276326403b1, type: 2}
+  - {fileID: 11400000, guid: fae0f296725925e4994ce7e7f8f20a77, type: 2}
+  - {fileID: 11400000, guid: 52665a751d1d4dc4a8b04b63589a509a, type: 2}
+  - {fileID: 11400000, guid: d1d60ae91468f154b862edd7e2a84591, type: 2}
+  - {fileID: 11400000, guid: f66c7dba61a2c314fb3733944773315e, type: 2}
+  - {fileID: 11400000, guid: d756ab3eaf919b74087b84b4e40f74d4, type: 2}
+  - {fileID: 11400000, guid: 1becdcc221746d64fab76a42a99f5aa3, type: 2}
+  - {fileID: 11400000, guid: 35b1b7c4651bf20499fff59fce0b517b, type: 2}
+  - {fileID: 11400000, guid: 3a9141ef2f1cae04abfcd69c38234a01, type: 2}
+  - {fileID: 11400000, guid: b811ef6c1763f3a47ad67561e4cca224, type: 2}
+  - {fileID: 11400000, guid: 1951f416694f2ef4c8e6c6f0db3b20a0, type: 2}
+  - {fileID: 11400000, guid: e1af6fed03122d54ba6ae928ebc4a2a2, type: 2}
+  - {fileID: 11400000, guid: 8117c505d0e54304eb527b5a386bbbb3, type: 2}
+  - {fileID: 11400000, guid: 9426d2bed857a1540a8673315b8871ac, type: 2}
+  - {fileID: 11400000, guid: 1c58377a17cb6494fb78c62db462add6, type: 2}
+  - {fileID: 11400000, guid: 5141c2e70aadf24469bc936316d029f7, type: 2}
+  - {fileID: 11400000, guid: 5c106f9123b6efd4ab46cef7241bb484, type: 2}
+  - {fileID: 11400000, guid: 136d93bdeb9a31c4487ba3e21c19ba56, type: 2}
+  - {fileID: 11400000, guid: d910447ad4359004a911dcb4ad7ac840, type: 2}
+  - {fileID: 11400000, guid: dff2866c435eb2140a51c1c90dca3fc7, type: 2}
+  - {fileID: 11400000, guid: 1f42f44bc9f973440b4b0a31637e8621, type: 2}
+  - {fileID: 11400000, guid: 471c7567b6b98fd41ace0e010153d4b3, type: 2}
+  - {fileID: 11400000, guid: 4e9431fde0d34944b93b2a50b86b6208, type: 2}
 --- !u!4 &1680145250
 Transform:
   m_ObjectHideFlags: 0
