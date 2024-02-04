@@ -8,6 +8,7 @@ static class GameParams
     public static InsectsManager insectsManager;
 
     public static float currentGameSpeed = 1.0f;
+    public static bool isGamePaused = false;
 
     public static Quaternion LookAt2D(Vector3 myPosition, Vector3 targetPosition)
     {

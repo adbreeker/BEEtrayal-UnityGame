@@ -97,7 +97,16 @@ public class InsectController : MonoBehaviour
 
     public void DealDamage(float damage)
     {
-        float damageReduction = 100 / (100 + armor);
+        float damageReduction;
+        if(armor >= 0)
+        {
+            damageReduction = 100 / (100 + armor);
+        }
+        else
+        {
+            damageReduction = 2 - (100 / (100 - armor));
+        }
+            
         health -= damage * damageReduction;
         if(health <= 0)
         {

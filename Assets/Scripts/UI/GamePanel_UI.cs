@@ -29,7 +29,6 @@ public class GamePanel_UI : MonoBehaviour
     Vector3 _panelDestination;
 
     //3 small buttons
-    bool _isGamePaused = false;
     bool _isSoundOn = true;
     
 
@@ -93,20 +92,20 @@ public class GamePanel_UI : MonoBehaviour
         while(transform.position != destination) 
         {
             transform.position = Vector3.MoveTowards(transform.position, destination, 10.0f);
-            yield return new WaitForFixedUpdate();
+            yield return new WaitForSecondsRealtime(0.02f);
         }
     }
 
     public void Button_Pause()
     {
-        if(_isGamePaused)
+        if(GameParams.isGamePaused)
         {
-            _isGamePaused = false;
+            GameParams.isGamePaused = false;
             Time.timeScale = GameParams.currentGameSpeed;
         }
         else
         {
-            _isGamePaused = true;
+            GameParams.isGamePaused = true;
             Time.timeScale = 0;
         }
     }
@@ -117,7 +116,7 @@ public class GamePanel_UI : MonoBehaviour
         else if (GameParams.currentGameSpeed == 2.0f) { GameParams.currentGameSpeed = 4.0f; }
         else if (GameParams.currentGameSpeed == 4.0f) { GameParams.currentGameSpeed = 1.0f; }
 
-        if(!_isGamePaused)
+        if(!GameParams.isGamePaused)
         {
             Time.timeScale = GameParams.currentGameSpeed;
         }
