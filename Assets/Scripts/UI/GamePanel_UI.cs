@@ -37,9 +37,9 @@ public class GamePanel_UI : MonoBehaviour
     void Start()
     {
         StartCoroutine(CountTime());
-        _panelStartingPosition = transform.position;
+        _panelStartingPosition = transform.localPosition;
         _panelDestination = _panelStartingPosition;
-        _panelDestination.y -= GetComponent<RectTransform>().rect.height/2;
+        _panelDestination.y -= (GetComponent<RectTransform>().rect.height/2 + 20);
     }
 
     // Update is called once per frame
@@ -89,9 +89,9 @@ public class GamePanel_UI : MonoBehaviour
 
     IEnumerator MovePanel(Vector3 destination)
     {
-        while(transform.position != destination) 
+        while(transform.localPosition != destination) 
         {
-            transform.position = Vector3.MoveTowards(transform.position, destination, 10.0f);
+            transform.localPosition = Vector3.MoveTowards(transform.localPosition, destination, 10.0f);
             yield return new WaitForSecondsRealtime(0.02f);
         }
     }

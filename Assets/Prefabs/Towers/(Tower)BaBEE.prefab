@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54180605ad8d3fd4a9aeb03a5bb90369, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  price: 95
   attackSpeed: 1.5
   attackRange: 4
   damage: 75

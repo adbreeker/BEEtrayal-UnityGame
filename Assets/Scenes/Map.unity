@@ -2532,6 +2532,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   linkedTowerFoundation: {fileID: 0}
+  _buttonsGrid: {fileID: 0}
 --- !u!1 &759760090
 GameObject:
   m_ObjectHideFlags: 0
@@ -5824,7 +5825,6 @@ MonoBehaviour:
   _pathHolder: {fileID: 807797563}
   insectsPath: []
   insectsWaves:
-  - {fileID: 11400000, guid: 867a4b405173eef47a6157022bac46da, type: 2}
   - {fileID: 11400000, guid: 1bb3107f513a74b428cceb81cf3c446b, type: 2}
   - {fileID: 11400000, guid: 499b46598a3884c46b2205b8bb4f3f58, type: 2}
   - {fileID: 11400000, guid: 9ec6f88d67f84b84e95f18c1a0f49201, type: 2}
@@ -5871,6 +5871,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1f42f44bc9f973440b4b0a31637e8621, type: 2}
   - {fileID: 11400000, guid: 471c7567b6b98fd41ace0e010153d4b3, type: 2}
   - {fileID: 11400000, guid: 4e9431fde0d34944b93b2a50b86b6208, type: 2}
+  - {fileID: 11400000, guid: 867a4b405173eef47a6157022bac46da, type: 2}
 --- !u!4 &1680145250
 Transform:
   m_ObjectHideFlags: 0
