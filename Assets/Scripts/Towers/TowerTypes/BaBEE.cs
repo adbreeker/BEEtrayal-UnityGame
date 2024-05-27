@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static MissileController;
 
 public class BaBEE : TowerController
 {
@@ -43,7 +42,7 @@ public class BaBEE : TowerController
         if (strongestInsect != null)
         {
             transform.rotation = GameParams.LookAt2D(transform.position, strongestInsect.transform.position);
-            GameObject missile = Instantiate(missilePrefab, _missileSpawnPoint.position, Quaternion.identity);
+            GameObject missile = Instantiate(missilePrefab, _missileSpawnPoint.position, GameParams.LookAt2D(transform.position, strongestInsect.transform.position) * Quaternion.Euler(0f, 0f, 180f));
             missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, strongestInsect, _missileSpecialEffects);
         }
     }

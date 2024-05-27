@@ -148,7 +148,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _towerPrefab: {fileID: 0}
+  _towerIcon: {fileID: 4421693457503054459}
   _priceText: {fileID: 3117667400026442147}
+  linkedTower: {fileID: 0}
 --- !u!1 &2701504791759955159
 GameObject:
   m_ObjectHideFlags: 0

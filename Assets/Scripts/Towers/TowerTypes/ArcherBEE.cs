@@ -38,8 +38,9 @@ public class ArcherBEE : TowerController
         if (firstInsect != null)
         {
             transform.rotation = GameParams.LookAt2D(transform.position, firstInsect.transform.position);
-            GameObject missile = Instantiate(missilePrefab, _missileSpawnPoint.position, Quaternion.identity);
-            missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, CalculateArrowPoint(firstInsect.transform.position));
+            Vector3 arrowPoint = CalculateArrowPoint(firstInsect.transform.position);
+            GameObject missile = Instantiate(missilePrefab, _missileSpawnPoint.position, GameParams.LookAt2D(transform.position, arrowPoint) * Quaternion.Euler(0f, 0f, 180f));
+            missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, arrowPoint);
         }
     }
 

@@ -39,7 +39,7 @@ public class BEETank : TowerController
         if (firstInsect != null)
         {
             transform.rotation = GameParams.LookAt2D(transform.position, firstInsect.transform.position);
-            GameObject missile = Instantiate(missilePrefab, _missileSpawnPoint.position, Quaternion.identity);
+            GameObject missile = Instantiate(missilePrefab, _missileSpawnPoint.position, GameParams.LookAt2D(transform.position, firstInsect.transform.position));
             missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, firstInsect.transform.position);
             missile.GetComponent<RocketController>().explosionSize = explosionSize;
         }

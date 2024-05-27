@@ -22,6 +22,13 @@ public class TowerFoundationController : MonoBehaviour
         _gameManager.OpenChooseTowerPanel(this);
     }
 
+    public void Button_TowerInfo()
+    {
+        Destroy(tower);
+        _buttonAddTower.SetActive(true);
+        _buttonTowerInfo.SetActive(false);
+    }
+
     public void BuildTowerOnFoundation(GameObject towerPrefab)
     {
         _buttonAddTower.SetActive(false); 

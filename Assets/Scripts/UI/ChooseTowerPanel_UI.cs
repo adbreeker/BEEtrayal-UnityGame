@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ChooseTowerPanel_UI : MonoBehaviour
@@ -9,7 +10,7 @@ public class ChooseTowerPanel_UI : MonoBehaviour
 
     private void Start()
     {
-        SortButtons();
+        SortButtons(true);
     }
     public void ClosePanel()
     {
@@ -25,7 +26,7 @@ public class ChooseTowerPanel_UI : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    void SortButtons()
+    void SortButtons(bool byPrice)
     {
         List<Transform> buttons = new List<Transform>();
         foreach(Transform button in _buttonsGrid)
@@ -33,6 +34,18 @@ public class ChooseTowerPanel_UI : MonoBehaviour
             buttons.Add(button);
         }
 
+        if(byPrice)
+        {
+            buttons = buttons.OrderBy(button => button.GetComponent<ChooseTowerButton_UI>().linkedTower.price).ToList();
+        }
+        else
+        {
+            buttons = buttons.OrderBy(button => button.GetComponent<ChooseTowerButton_UI>().linkedTower.name).ToList();
+        }
 
+        for(int i = 0; i<buttons.Count; i++)
+        {
+            buttons[i].SetSiblingIndex(i);
+        }
     }
 }
