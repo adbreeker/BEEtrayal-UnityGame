@@ -27,8 +27,9 @@ public class GameManager : MonoBehaviour
     public int lives = 100;
     public int honey = 100;
 
-    [Header("TowerFoundation prefab")]
+    [Header("Towers:")]
     public GameObject tfPrefab;
+    public Transform towersHolder;
 
     [Header("UI:")]
     [SerializeField] GamePanel_UI _gamePanel;
@@ -85,7 +86,7 @@ public class GameManager : MonoBehaviour
         }
 
         TowerFoundationController tfc = Instantiate(
-            tfPrefab, (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition), Quaternion.identity).
+            tfPrefab, (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition), Quaternion.identity, towersHolder).
             GetComponent<TowerFoundationController>(); ;
         bool ableToBuild = true;
 
