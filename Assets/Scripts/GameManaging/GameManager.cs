@@ -9,6 +9,7 @@ static class GameParams
 
     public static float currentGameSpeed = 1.0f;
     public static bool isGamePaused = false;
+    public static bool isChooseTowerPanelOpen = false;
 
     public static Quaternion LookAt2D(Vector3 myPosition, Vector3 targetPosition)
     {
@@ -26,9 +27,14 @@ public class GameManager : MonoBehaviour
     public int lives = 100;
     public int honey = 100;
 
+    [Header("TowerFoundation prefab")]
+    public GameObject tfPrefab;
+
     [Header("UI:")]
     [SerializeField] GamePanel_UI _gamePanel;
     [SerializeField] ChooseTowerPanel_UI _chooseTowerPanel;
+
+    public Coroutine buildingTowerCoroutine;
 
     void Awake()
     {
@@ -42,14 +48,78 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 0;
             Application.Quit();
         }
+
+        if (buildingTowerCoroutine == null && Input.GetKeyDown(KeyCode.Mouse0) && !GameParams.isChooseTowerPanelOpen)
+        {
+            buildingTowerCoroutine = StartCoroutine(BuildTower());
+        }
     }
 
     //UI -------------------------------------------------------------------------------------------------------- UI
 
     public void OpenChooseTowerPanel(TowerFoundationController towerFoundation)
     {
+        GameParams.isChooseTowerPanelOpen = true;
         _chooseTowerPanel.gameObject.SetActive(true);
         _chooseTowerPanel.linkedTowerFoundation = towerFoundation;
         Time.timeScale = 0.0f;
+    }
+
+    IEnumerator BuildTower()
+    {
+        float timeElapsed = 0;
+        while(true)
+        {
+            if(timeElapsed > 1) 
+            {
+                buildingTowerCoroutine = null;
+                yield break; 
+            }
+            timeElapsed += Time.deltaTime;
+            yield return null;
+
+            if(Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                break;
+            }
+        }
+
+        TowerFoundationController tfc = Instantiate(
+            tfPrefab, (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition), Quaternion.identity).
+            GetComponent<TowerFoundationController>(); ;
+        bool ableToBuild = true;
+
+        while (true)
+        {
+            tfc.transform.position = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+            if (tfc.GetBuildingObstacle() == null)
+            {
+                ableToBuild = true;
+                tfc.ChangeColor(Color.white);
+            }
+            else
+            {
+                ableToBuild = false;
+                tfc.ChangeColor(Color.red);
+            }
+
+            if(Input.GetKeyUp(KeyCode.Mouse0))
+            {
+                break;
+            }
+
+            yield return null;
+        }
+
+        if(ableToBuild)
+        {
+            OpenChooseTowerPanel(tfc);
+        }
+        else
+        {
+            Destroy(tfc.gameObject);
+        }
+        buildingTowerCoroutine = null;
     }
 }

@@ -24,6 +24,12 @@ public class ChooseTowerPanel_UI : MonoBehaviour
         }
         
         gameObject.SetActive(false);
+
+        if(linkedTowerFoundation.tower == null) { Destroy(linkedTowerFoundation.gameObject); }
+        if(GameParams.gameManager.buildingTowerCoroutine != null) { GameParams.gameManager.StopCoroutine(GameParams.gameManager.buildingTowerCoroutine); };
+        GameParams.gameManager.buildingTowerCoroutine = null;
+
+        GameParams.isChooseTowerPanelOpen = false;
     }
 
     void SortButtons(bool byPrice)

@@ -13,12 +13,17 @@ public class PathCreator : MonoBehaviour
     [Header("LineRenderer for path visualisation")]
     public LineRenderer pathVisualisator;
 
+    [Header("Path collider")]
+    public EdgeCollider2D pathCollider;
+    public float colliderRadius;
+
     [Header("Path holder")]
     public Transform pathHolder;
 
     void Start()
     {
         UpdateVisualization(true);
+        CreateCollider();
         pathVisualisator.enabled = false;
     }
 
@@ -38,6 +43,17 @@ public class PathCreator : MonoBehaviour
         
         pathVisualisator.positionCount = path.Count;
         pathVisualisator.SetPositions(path.ToArray());
+    }
+
+    public void CreateCollider()
+    {
+        List<Vector2> colliderPoints = new List<Vector2>();
+        for(int i = 0; i<pathVisualisator.positionCount; i++)
+        {
+            colliderPoints.Add(pathVisualisator.GetPosition(i));
+        }
+        pathCollider.SetPoints(colliderPoints);
+        pathCollider.edgeRadius = colliderRadius;
     }
 
     public void DeletePath()
