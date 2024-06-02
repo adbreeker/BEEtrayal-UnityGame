@@ -1,5 +1,3 @@
-using JetBrains.Annotations;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -47,12 +45,15 @@ public class PathCreator : MonoBehaviour
 
     public void CreateCollider()
     {
-        List<Vector2> colliderPoints = new List<Vector2>();
-        for(int i = 0; i<pathVisualisator.positionCount; i++)
+        List<Vector2> path = new List<Vector2>();
+        path.Add(spawnerPosition.localPosition);
+        foreach (Transform pathPoint in pathHolder.transform)
         {
-            colliderPoints.Add(pathVisualisator.GetPosition(i));
+            path.Add(pathPoint.localPosition);
         }
-        pathCollider.SetPoints(colliderPoints);
+        path.Add(hivePosition.localPosition);
+
+        pathCollider.SetPoints(path);
         pathCollider.edgeRadius = colliderRadius;
     }
 

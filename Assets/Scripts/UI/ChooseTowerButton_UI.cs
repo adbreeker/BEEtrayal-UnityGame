@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
@@ -9,6 +7,7 @@ public class ChooseTowerButton_UI : MonoBehaviour
     [SerializeField] GameObject _towerPrefab;
 
     [Header("Button elements")]
+    [SerializeField] Button _button;
     [SerializeField] Image _towerIcon;
     [SerializeField] TextMeshProUGUI _priceText;
 
@@ -29,7 +28,7 @@ public class ChooseTowerButton_UI : MonoBehaviour
         {
             _priceText.color = Color.green;
 
-            GetComponent<Button>().interactable = true;
+            _button.interactable = true;
             Color newAlpha = _towerIcon.color;
             newAlpha.a = 1;
             _towerIcon.color = newAlpha;
@@ -38,7 +37,7 @@ public class ChooseTowerButton_UI : MonoBehaviour
         {
             _priceText.color = Color.red;
 
-            GetComponent<Button>().interactable = false;
+            _button.interactable = false;
             Color newAlpha = _towerIcon.color;
             newAlpha.a = 0.6f;
             _towerIcon.color = newAlpha;

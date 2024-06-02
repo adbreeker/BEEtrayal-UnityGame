@@ -27,7 +27,7 @@ public class TowerFoundationController : MonoBehaviour
 
     public void Button_TowerInfo()
     {
-        Destroy(tower);
+        Destroy(gameObject);
     }
 
     public void BuildTowerOnFoundation(GameObject towerPrefab)
