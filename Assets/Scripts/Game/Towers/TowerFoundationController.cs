@@ -16,6 +16,7 @@ public class TowerFoundationController : MonoBehaviour
 
     public void Button_TowerInfo()
     {
+        GameParams.gameManager.honey += (int)(tower.GetComponent<TowerController>().price * 0.3f);
         Destroy(gameObject);
     }
 

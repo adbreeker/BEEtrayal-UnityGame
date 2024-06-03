@@ -51,6 +51,8 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         GameParams.gameManager = this;
+        Time.timeScale = 1.0f;
+        GameParams.currentGameSpeed = 1.0f;
     }
 
     void Update()
