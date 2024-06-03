@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class TowerFoundationController : MonoBehaviour
 {
@@ -12,18 +13,6 @@ public class TowerFoundationController : MonoBehaviour
 
     [Header("Tower foundation sprite")]
     [SerializeField] SpriteRenderer _spriteRenderer;
-
-    GameManager _gameManager;
-
-    void Start()
-    {
-        _gameManager = FindObjectOfType<GameManager>();
-    }
-
-    public void Button_AddTower()
-    {
-        _gameManager.OpenChooseTowerPanel(this);
-    }
 
     public void Button_TowerInfo()
     {
