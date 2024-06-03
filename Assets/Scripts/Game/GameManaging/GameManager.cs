@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 static class GameParams
 {
@@ -18,6 +19,15 @@ static class GameParams
         Quaternion targetRotation = Quaternion.Euler(0f, 0f, -angle);
 
         return targetRotation;
+    }
+
+    public static  bool IsPointerOverUIObject()
+    {
+        PointerEventData eventData = new PointerEventData(EventSystem.current);
+        eventData.position = Input.mousePosition;
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventData, results);
+        return results.Count > 0;
     }
 }
 
@@ -37,6 +47,7 @@ public class GameManager : MonoBehaviour
 
     public Coroutine buildingTowerCoroutine;
 
+
     void Awake()
     {
         GameParams.gameManager = this;
@@ -47,10 +58,9 @@ public class GameManager : MonoBehaviour
         if(lives <= 0)
         {
             Time.timeScale = 0;
-            Application.Quit();
         }
 
-        if (buildingTowerCoroutine == null && Input.GetKeyDown(KeyCode.Mouse0) && !GameParams.isChooseTowerPanelOpen)
+        if (buildingTowerCoroutine == null && Input.GetKeyDown(KeyCode.Mouse0) && !GameParams.isChooseTowerPanelOpen && !GameParams.IsPointerOverUIObject())
         {
             buildingTowerCoroutine = StartCoroutine(BuildTower());
         }
@@ -79,7 +89,7 @@ public class GameManager : MonoBehaviour
             timeElapsed += Time.deltaTime;
             yield return null;
 
-            if(Input.GetKeyDown(KeyCode.Mouse0))
+            if(Input.GetKeyDown(KeyCode.Mouse0) && !GameParams.IsPointerOverUIObject())
             {
                 break;
             }

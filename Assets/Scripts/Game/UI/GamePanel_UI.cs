@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GamePanel_UI : MonoBehaviour
@@ -94,6 +95,11 @@ public class GamePanel_UI : MonoBehaviour
             transform.localPosition = Vector3.MoveTowards(transform.localPosition, destination, 10.0f);
             yield return new WaitForSecondsRealtime(0.02f);
         }
+    }
+
+    public void Button_Menu()
+    {
+        SceneManager.LoadScene("Menu");
     }
 
     public void Button_Pause()
