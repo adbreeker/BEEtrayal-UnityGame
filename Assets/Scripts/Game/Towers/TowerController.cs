@@ -8,6 +8,9 @@ public class TowerController : MonoBehaviour
     [Header("Tower price")]
     public int price;
 
+    [Header("Tower info panel")]
+    public GameObject infoPanel;
+
     [Header("Tower statistics:")]
     public float attackSpeed;
     public float attackRange;

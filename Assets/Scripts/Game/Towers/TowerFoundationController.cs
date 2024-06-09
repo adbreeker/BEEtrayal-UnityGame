@@ -14,7 +14,12 @@ public class TowerFoundationController : MonoBehaviour
     [Header("Tower foundation sprite")]
     [SerializeField] SpriteRenderer _spriteRenderer;
 
-    public void Button_TowerInfo()
+    public void ShowTowerInfo()
+    {
+
+    }
+
+    public void DestroyTower()
     {
         GameParams.gameManager.honey += (int)(tower.GetComponent<TowerController>().price * 0.3f);
         Destroy(gameObject);
