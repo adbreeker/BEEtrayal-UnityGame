@@ -54,4 +54,17 @@ public class GunBEEnger : TowerController
         }
         return null;
     }
+
+    public override List<string> GetTowerInfo()
+    {
+        List<string> towerInfos = new List<string>();
+
+        towerInfos.Add(damage.ToString());
+        towerInfos.Add(attackRange.ToString());
+        towerInfos.Add(attackSpeed.ToString());
+        towerInfos.Add(missileSpeed.ToString());
+        towerInfos.Add(price.ToString());
+
+        return towerInfos;
+    }
 }

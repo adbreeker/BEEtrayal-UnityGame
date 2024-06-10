@@ -25,6 +25,7 @@ public class ButtonExtension : MonoBehaviour, IPointerDownHandler, IPointerUpHan
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        Debug.Log("Pointer down");
         if(OnHold.GetPersistentEventCount() > 0)
         {
             if (_buttonHoldCoroutine == null)
@@ -36,6 +37,7 @@ public class ButtonExtension : MonoBehaviour, IPointerDownHandler, IPointerUpHan
 
     public void OnPointerUp(PointerEventData eventData)
     {
+        Debug.Log("pointer up");
         if (_buttonHoldCoroutine != null)
         {
             StopCoroutine(_buttonHoldCoroutine);

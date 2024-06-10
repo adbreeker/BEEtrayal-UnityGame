@@ -6838,6 +6838,7 @@ MonoBehaviour:
   towersHolder: {fileID: 877518102}
   _gamePanel: {fileID: 589464375}
   _chooseTowerPanel: {fileID: 740812707}
+  _mainCanvas: {fileID: 1645429158}
 --- !u!4 &2038435163
 Transform:
   m_ObjectHideFlags: 0

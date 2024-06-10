@@ -59,4 +59,10 @@ public class TowerController : MonoBehaviour
     }
 
     protected virtual void AttackExecution() { }
+
+    public virtual List<string> GetTowerInfo()
+    {
+        List<string> towerInfos = new List<string>();
+        return towerInfos;
+    }
 }

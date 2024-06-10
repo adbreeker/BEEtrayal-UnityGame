@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 public class TowerFoundationController : MonoBehaviour
 {
     [Header("Tower:")]
-    public GameObject tower = null;
+    public TowerController tower = null;
 
     [Header("Buttons")]
     [SerializeField] GameObject _buttonTowerInfo;
@@ -14,21 +14,56 @@ public class TowerFoundationController : MonoBehaviour
     [Header("Tower foundation sprite")]
     [SerializeField] SpriteRenderer _spriteRenderer;
 
+    //tower info
+    Coroutine _towerInfoTimerCoroutine;
+    TowerInfoPanel_UI _towerInfoPanel;
+
     public void ShowTowerInfo()
     {
+        if(_towerInfoTimerCoroutine != null)
+        {
+            _towerInfoPanel.UpdatePanelInfo(tower.GetTowerInfo());
+            StopCoroutine(_towerInfoTimerCoroutine);
+            _towerInfoTimerCoroutine = StartCoroutine(TowerInfoTimer());
+        }
+        else
+        {
+            Vector3 towerScreenPos = Camera.main.WorldToScreenPoint(gameObject.transform.position);
+            //Vector3 panelScreenPos = towerScreenPos + (Camera.main.WorldToScreenPoint(Vector3.zero) - towerScreenPos).normalized * 75.0f;
+            
+            Vector2 canvasPos;
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                GameParams.mainCanvas.transform as RectTransform,
+                towerScreenPos,
+                GameParams.mainCanvas.worldCamera,
+                out canvasPos);
 
+            _towerInfoPanel = Instantiate(tower.infoPanel, GameParams.mainCanvas.transform).GetComponent<TowerInfoPanel_UI>();
+            ((RectTransform)_towerInfoPanel.gameObject.transform).anchoredPosition = canvasPos + (((RectTransform)GameParams.mainCanvas.transform).rect.center - canvasPos).normalized * 400.0f;
+            _towerInfoPanel.UpdatePanelInfo(tower.GetTowerInfo());
+
+            _towerInfoTimerCoroutine = StartCoroutine(TowerInfoTimer());
+        }
+    }
+
+    IEnumerator TowerInfoTimer()
+    {
+        yield return null;
+        yield return null;
+        Destroy(_towerInfoPanel.gameObject);
+        _towerInfoTimerCoroutine = null;
     }
 
     public void DestroyTower()
     {
-        GameParams.gameManager.honey += (int)(tower.GetComponent<TowerController>().price * 0.3f);
+        GameParams.gameManager.honey += (int)(tower.price * 0.3f);
         Destroy(gameObject);
     }
 
     public void BuildTowerOnFoundation(GameObject towerPrefab)
     {
         _buttonTowerInfo.SetActive(true);
-        tower = Instantiate(towerPrefab, gameObject.transform);
+        tower = Instantiate(towerPrefab, gameObject.transform).GetComponent<TowerController>();
     }
     public GameObject GetBuildingObstacle()
     {

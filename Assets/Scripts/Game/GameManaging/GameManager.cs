@@ -7,6 +7,7 @@ static class GameParams
 {
     public static GameManager gameManager;
     public static InsectsManager insectsManager;
+    public static Canvas mainCanvas;
 
     public static float currentGameSpeed = 1.0f;
     public static bool isGamePaused = false;
@@ -44,6 +45,7 @@ public class GameManager : MonoBehaviour
     [Header("UI:")]
     [SerializeField] GamePanel_UI _gamePanel;
     [SerializeField] ChooseTowerPanel_UI _chooseTowerPanel;
+    [SerializeField] Canvas _mainCanvas;
 
     public Coroutine buildingTowerCoroutine;
 
@@ -51,6 +53,7 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         GameParams.gameManager = this;
+        GameParams.mainCanvas = _mainCanvas;
         Time.timeScale = 1.0f;
         GameParams.currentGameSpeed = 1.0f;
     }

@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   price: 50
+  infoPanel: {fileID: 7048296568798938931, guid: c526e28988930af42b568955e1ced459, type: 3}
   attackSpeed: 2
   attackRange: 3
   damage: 25
