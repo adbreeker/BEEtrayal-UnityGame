@@ -73,12 +73,17 @@ public class ButtonExtension : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         float timeElapsed = 0;
         while(timeElapsed < _holdTime)
         {
-            timeElapsed += Time.deltaTime;
+            if(!GameParams.IsPointerOverUIObject(gameObject)) { OnPointerUp(null); }
+
+            if(Time.timeScale == 0) { timeElapsed += Time.fixedDeltaTime; }
+            else { timeElapsed += Time.deltaTime; }
+
             yield return null;
         }
         _buttonHolding = true;
         while(_buttonHolding)
         {
+            if (!GameParams.IsPointerOverUIObject(gameObject)) { OnPointerUp(null); }
             yield return null;
             OnHold.Invoke();
         }
@@ -89,8 +94,10 @@ public class ButtonExtension : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         float timeElapsed = 0;
         while(timeElapsed < _multiclickTime)
         {
-            timeElapsed += Time.deltaTime;
-            if(_currentClicks >= _multiclickCount)
+            if (Time.timeScale == 0) { timeElapsed += Time.fixedDeltaTime; }
+            else { timeElapsed += Time.deltaTime; }
+
+            if (_currentClicks >= _multiclickCount)
             {
                 _currentClicks = 0;
                 OnMulticlick.Invoke();

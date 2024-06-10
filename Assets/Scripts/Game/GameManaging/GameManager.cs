@@ -30,6 +30,20 @@ static class GameParams
         EventSystem.current.RaycastAll(eventData, results);
         return results.Count > 0;
     }
+
+    public static bool IsPointerOverUIObject(GameObject uiObject)
+    {
+        PointerEventData eventData = new PointerEventData(EventSystem.current);
+        eventData.position = Input.mousePosition;
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventData, results);
+        
+        foreach(RaycastResult result in results)
+        {
+            if(result.gameObject == uiObject) { return true; }
+        }
+        return false;
+    }
 }
 
 public class GameManager : MonoBehaviour

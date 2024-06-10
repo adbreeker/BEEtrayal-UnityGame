@@ -31,12 +31,11 @@ public class TowerFoundationController : MonoBehaviour
             Vector3 towerScreenPos = Camera.main.WorldToScreenPoint(gameObject.transform.position);
             //Vector3 panelScreenPos = towerScreenPos + (Camera.main.WorldToScreenPoint(Vector3.zero) - towerScreenPos).normalized * 75.0f;
             
-            Vector2 canvasPos;
             RectTransformUtility.ScreenPointToLocalPointInRectangle(
                 GameParams.mainCanvas.transform as RectTransform,
                 towerScreenPos,
                 GameParams.mainCanvas.worldCamera,
-                out canvasPos);
+                out Vector2 canvasPos);
 
             _towerInfoPanel = Instantiate(tower.infoPanel, GameParams.mainCanvas.transform).GetComponent<TowerInfoPanel_UI>();
             ((RectTransform)_towerInfoPanel.gameObject.transform).anchoredPosition = canvasPos + (((RectTransform)GameParams.mainCanvas.transform).rect.center - canvasPos).normalized * 400.0f;

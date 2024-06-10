@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
@@ -13,6 +15,10 @@ public class ChooseTowerButton_UI : MonoBehaviour
 
     ChooseTowerPanel_UI _panel;
     [HideInInspector] public TowerController linkedTower;
+
+    //tower info
+    Coroutine _towerInfoTimerCoroutine;
+    TowerInfoPanel_UI _towerInfoPanel;
 
     private void Awake()
     {
@@ -48,6 +54,38 @@ public class ChooseTowerButton_UI : MonoBehaviour
     {
         _panel.linkedTowerFoundation.BuildTowerOnFoundation(_towerPrefab);
         GameParams.gameManager.honey -= linkedTower.price;
+
+        if (_towerInfoTimerCoroutine != null)
+        {
+            StopCoroutine(_towerInfoTimerCoroutine);
+            Destroy(_towerInfoPanel.gameObject);
+            _towerInfoTimerCoroutine = null;
+        }
+
         _panel.ClosePanel();
+    }
+
+    public void ShowTowerInfo()
+    {
+        if (_towerInfoTimerCoroutine != null)
+        {
+            StopCoroutine(_towerInfoTimerCoroutine);
+            _towerInfoTimerCoroutine = StartCoroutine(TowerInfoTimer());
+        }
+        else
+        {
+            _towerInfoPanel = Instantiate(_towerPrefab.GetComponent<TowerController>().infoPanel, GameParams.mainCanvas.transform).GetComponent<TowerInfoPanel_UI>();
+            _towerInfoPanel.UpdatePanelInfo(_towerPrefab.GetComponent<TowerController>().GetTowerInfo());
+
+            _towerInfoTimerCoroutine = StartCoroutine(TowerInfoTimer());
+        }
+    }
+
+    IEnumerator TowerInfoTimer()
+    {
+        yield return null;
+        yield return null;
+        Destroy(_towerInfoPanel.gameObject);
+        _towerInfoTimerCoroutine = null;
     }
 }

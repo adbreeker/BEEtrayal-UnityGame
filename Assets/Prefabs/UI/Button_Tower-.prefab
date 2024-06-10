@@ -484,7 +484,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c870818dbb7607145a9583ae69d7be99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _onHold:
+  _holdTime: 0.3
+  OnHold:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -1610142452671088898}
+        m_TargetAssemblyTypeName: ChooseTowerButton_UI, Assembly-CSharp
+        m_MethodName: ShowTowerInfo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnUnhold:
+    m_PersistentCalls:
+      m_Calls: []
+  _multiclickTime: 0.5
+  _multiclickCount: 2
+  OnMulticlick:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &5365844873138684086
