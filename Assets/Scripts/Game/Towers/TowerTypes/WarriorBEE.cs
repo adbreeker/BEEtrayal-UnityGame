@@ -5,7 +5,8 @@ using UnityEngine;
 public class WarriorBEE : TowerController
 {
     public float damage;
-    public float msReduction;
+    public float slowTime;
+    public float slowStrenght;
 
     [Header("Weapon")]
     [SerializeField] GameObject _weapon;
@@ -16,7 +17,7 @@ public class WarriorBEE : TowerController
     {
         base.Start();
 
-        _weaponSpecialEffects.Add(new SpecialEffects.Slow(0.5f, msReduction));
+        _weaponSpecialEffects.Add(new SpecialEffects.Slow(slowTime, slowStrenght));
 
         _weapon.GetComponent<MeleeController>().SetUpWeapon(damage, _weaponSpecialEffects);
     }
@@ -34,5 +35,19 @@ public class WarriorBEE : TowerController
     protected override void AttackExecution()
     {
         
+    }
+
+    public override List<string> GetTowerInfo()
+    {
+        List<string> towerInfos = new List<string>();
+
+        towerInfos.Add(damage.ToString());
+        towerInfos.Add(attackRange.ToString());
+        towerInfos.Add(attackSpeed.ToString());
+        towerInfos.Add(slowTime.ToString());
+        towerInfos.Add(slowStrenght.ToString());
+        towerInfos.Add(price.ToString());
+
+        return towerInfos;
     }
 }

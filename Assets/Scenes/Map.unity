@@ -750,7 +750,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 775877094727279915, guid: 870fefc56ebfdf346be29eb03200ce3f, type: 3}
       propertyPath: m_Name
-      value: Button_Tower-Grenadier
+      value: Button_Tower-GrenadierBEE
       objectReference: {fileID: 0}
     - target: {fileID: 2877385392290885786, guid: 870fefc56ebfdf346be29eb03200ce3f, type: 3}
       propertyPath: m_SizeDelta.x
@@ -1035,7 +1035,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 775877094727279915, guid: 870fefc56ebfdf346be29eb03200ce3f, type: 3}
       propertyPath: m_Name
-      value: Button_Tower-Soldier
+      value: Button_Tower-SoldierBEE
       objectReference: {fileID: 0}
     - target: {fileID: 3503442740697469270, guid: 870fefc56ebfdf346be29eb03200ce3f, type: 3}
       propertyPath: m_Sprite
@@ -1149,7 +1149,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 775877094727279915, guid: 870fefc56ebfdf346be29eb03200ce3f, type: 3}
       propertyPath: m_Name
-      value: Button_Tower-Warrior
+      value: Button_Tower-WarriorBEE
       objectReference: {fileID: 0}
     - target: {fileID: 2877385392290885786, guid: 870fefc56ebfdf346be29eb03200ce3f, type: 3}
       propertyPath: m_SizeDelta.y
@@ -1503,7 +1503,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 775877094727279915, guid: 870fefc56ebfdf346be29eb03200ce3f, type: 3}
       propertyPath: m_Name
-      value: Button_Tower-ObiWan
+      value: Button_Tower-OBEE-Wan
       objectReference: {fileID: 0}
     - target: {fileID: 2877385392290885786, guid: 870fefc56ebfdf346be29eb03200ce3f, type: 3}
       propertyPath: m_SizeDelta.y
@@ -1735,7 +1735,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 775877094727279915, guid: 870fefc56ebfdf346be29eb03200ce3f, type: 3}
       propertyPath: m_Name
-      value: Button_Tower-Wizard
+      value: Button_Tower-BEEzard
       objectReference: {fileID: 0}
     - target: {fileID: 2877385392290885786, guid: 870fefc56ebfdf346be29eb03200ce3f, type: 3}
       propertyPath: m_SizeDelta.x
@@ -3417,7 +3417,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 775877094727279915, guid: 870fefc56ebfdf346be29eb03200ce3f, type: 3}
       propertyPath: m_Name
-      value: Button_Tower-Gunslinger
+      value: Button_Tower-GunBEEnger
       objectReference: {fileID: 0}
     - target: {fileID: 3503442740697469270, guid: 870fefc56ebfdf346be29eb03200ce3f, type: 3}
       propertyPath: m_Sprite
@@ -3561,7 +3561,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 775877094727279915, guid: 870fefc56ebfdf346be29eb03200ce3f, type: 3}
       propertyPath: m_Name
-      value: Button_Tower-Tank
+      value: Button_Tower-BEETank
       objectReference: {fileID: 0}
     - target: {fileID: 3503442740697469270, guid: 870fefc56ebfdf346be29eb03200ce3f, type: 3}
       propertyPath: m_Sprite
@@ -4511,7 +4511,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 775877094727279915, guid: 870fefc56ebfdf346be29eb03200ce3f, type: 3}
       propertyPath: m_Name
-      value: Button_Tower-Factory
+      value: Button_Tower-HoneyFactory
       objectReference: {fileID: 0}
     - target: {fileID: 2877385392290885786, guid: 870fefc56ebfdf346be29eb03200ce3f, type: 3}
       propertyPath: m_SizeDelta.x
@@ -4898,7 +4898,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 775877094727279915, guid: 870fefc56ebfdf346be29eb03200ce3f, type: 3}
       propertyPath: m_Name
-      value: Button_Tower-Shinobi
+      value: Button_Tower-ShinoBEE
       objectReference: {fileID: 0}
     - target: {fileID: 2877385392290885786, guid: 870fefc56ebfdf346be29eb03200ce3f, type: 3}
       propertyPath: m_SizeDelta.x
@@ -6439,7 +6439,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 775877094727279915, guid: 870fefc56ebfdf346be29eb03200ce3f, type: 3}
       propertyPath: m_Name
-      value: Button_Tower-Sniper
+      value: Button_Tower-SniperBEE
       objectReference: {fileID: 0}
     - target: {fileID: 2877385392290885786, guid: 870fefc56ebfdf346be29eb03200ce3f, type: 3}
       propertyPath: m_SizeDelta.y
@@ -6762,7 +6762,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 775877094727279915, guid: 870fefc56ebfdf346be29eb03200ce3f, type: 3}
       propertyPath: m_Name
-      value: Button_Tower-Baby
+      value: Button_Tower-BaBEE
       objectReference: {fileID: 0}
     - target: {fileID: 2877385392290885786, guid: 870fefc56ebfdf346be29eb03200ce3f, type: 3}
       propertyPath: m_SizeDelta.x
@@ -7208,7 +7208,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 775877094727279915, guid: 870fefc56ebfdf346be29eb03200ce3f, type: 3}
       propertyPath: m_Name
-      value: Button_Tower-Archer
+      value: Button_Tower-ArcherBEE
       objectReference: {fileID: 0}
     - target: {fileID: 3503442740697469270, guid: 870fefc56ebfdf346be29eb03200ce3f, type: 3}
       propertyPath: m_Sprite

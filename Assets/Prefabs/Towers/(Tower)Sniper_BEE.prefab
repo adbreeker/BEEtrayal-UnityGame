@@ -376,6 +376,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   price: 230
+  infoPanel: {fileID: 7048296568798938931, guid: 8a2c89598a0d27344889aef32264d47a, type: 3}
   attackSpeed: 0.5
   attackRange: Infinity
   damage: 300

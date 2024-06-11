@@ -46,10 +46,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   price: 320
+  infoPanel: {fileID: 7048296568798938931, guid: b6b48126467718246b650b6d8149b369, type: 3}
   attackSpeed: 1
   attackRange: 2.5
   damage: 10
-  msReduction: 0.3
+  slowTime: 0.5
+  slowStrenght: 0.25
   _weapon: {fileID: 5706969968607682699}
 --- !u!1 &8753307426013898252
 GameObject:

@@ -51,6 +51,8 @@ MonoBehaviour:
   attackRange: 4
   damage: 75
   missileSpeed: 15
+  slowTime: 2
+  slowStrenght: 0.5
   missilePrefab: {fileID: 2686293118654674446, guid: cf5846e49831a284a8260abd1b7684e7, type: 3}
   _missileSpawnPoint: {fileID: 4633489211857930119}
 --- !u!1 &1900564164957582835

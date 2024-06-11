@@ -67,4 +67,17 @@ public class SniperBEE : TowerController
             return strongestInsect.gameObject;
         }
     }
+
+    public override List<string> GetTowerInfo()
+    {
+        List<string> towerInfos = new List<string>();
+
+        towerInfos.Add(damage.ToString());
+        towerInfos.Add("inf"); //towerInfos.Add(attackRange.ToString());
+        towerInfos.Add(attackSpeed.ToString());
+        towerInfos.Add(missileSpeed.ToString());
+        towerInfos.Add(price.ToString());
+
+        return towerInfos;
+    }
 }

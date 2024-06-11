@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5383377188989879764}
-  - component: {fileID: 5328595809276185508}
+  - component: {fileID: -6475266474490195148}
   m_Layer: 0
   m_Name: (Tower)Honey_Factory
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5328595809276185508
+--- !u!114 &-6475266474490195148
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,12 +41,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 2971283376419773875}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df860496c3da6a742a58125c068c16ad, type: 3}
+  m_Script: {fileID: 11500000, guid: dd71ecfa974a9e64d849f0ab968d4ef3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   price: 625
-  attackSpeed: 0
-  attackRange: 0
+  infoPanel: {fileID: 7048296568798938931, guid: b20749068d161cf4487c327e0dcbfd71, type: 3}
+  attackSpeed: 0.2
+  attackRange: 4
+  dropChance: 0.25
+  dropValue: 25
+  missileSpeed: 15
+  missilePrefab: {fileID: 766999501600105451, guid: cec59ef884c83df4fab3941f09b0ff8e, type: 3}
 --- !u!1 &8734350810157186094
 GameObject:
   m_ObjectHideFlags: 0

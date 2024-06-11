@@ -6,6 +6,7 @@ public class BEEzard : TowerController
 {
     public float damage;
     public float missileSpeed;
+    public float armorReduction;
 
     [Header("Missile prefab")]
     public GameObject missilePrefab;
@@ -19,7 +20,7 @@ public class BEEzard : TowerController
     {
         base.Start();
 
-        _missileSpecialEffects.Add(new SpecialEffects.ArmorReduction(10.0f));
+        _missileSpecialEffects.Add(new SpecialEffects.ArmorReduction(armorReduction));
     }
 
     protected override void Update()
@@ -79,5 +80,19 @@ public class BEEzard : TowerController
             }
             return strongestInsect.gameObject;
         }
+    }
+
+    public override List<string> GetTowerInfo()
+    {
+        List<string> towerInfos = new List<string>();
+
+        towerInfos.Add(damage.ToString());
+        towerInfos.Add(attackRange.ToString());
+        towerInfos.Add(attackSpeed.ToString());
+        towerInfos.Add(missileSpeed.ToString());
+        towerInfos.Add(armorReduction.ToString());
+        towerInfos.Add(price.ToString());
+
+        return towerInfos;
     }
 }

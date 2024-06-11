@@ -6,6 +6,8 @@ public class BaBEE : TowerController
 {
     public float damage;
     public float missileSpeed;
+    public float slowTime;
+    public float slowStrenght;
 
     [Header("Missile prefab")]
     public GameObject missilePrefab;
@@ -19,7 +21,7 @@ public class BaBEE : TowerController
     {
         base.Start();
 
-        _missileSpecialEffects.Add(new SpecialEffects.Slow(2.0f, 0.5f));
+        _missileSpecialEffects.Add(new SpecialEffects.Slow(slowTime, slowStrenght));
     }
 
     protected override void Update()
@@ -70,5 +72,20 @@ public class BaBEE : TowerController
             }
             return strongestInsect.gameObject;
         }
+    }
+
+    public override List<string> GetTowerInfo()
+    {
+        List<string> towerInfos = new List<string>();
+
+        towerInfos.Add(damage.ToString());
+        towerInfos.Add(attackRange.ToString());
+        towerInfos.Add(attackSpeed.ToString());
+        towerInfos.Add(missileSpeed.ToString());
+        towerInfos.Add(slowTime.ToString());
+        towerInfos.Add(slowStrenght.ToString());
+        towerInfos.Add(price.ToString());
+
+        return towerInfos;
     }
 }
