@@ -75,8 +75,7 @@ public class ButtonExtension : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         {
             if(!GameParams.IsPointerOverUIObject(gameObject)) { OnPointerUp(null); }
 
-            if(Time.timeScale == 0) { timeElapsed += Time.fixedDeltaTime; }
-            else { timeElapsed += Time.deltaTime; }
+            timeElapsed += Time.unscaledDeltaTime;
 
             yield return null;
         }
@@ -94,8 +93,7 @@ public class ButtonExtension : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         float timeElapsed = 0;
         while(timeElapsed < _multiclickTime)
         {
-            if (Time.timeScale == 0) { timeElapsed += Time.fixedDeltaTime; }
-            else { timeElapsed += Time.deltaTime; }
+            timeElapsed += Time.unscaledDeltaTime;
 
             if (_currentClicks >= _multiclickCount)
             {
