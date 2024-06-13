@@ -129,12 +129,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7839ec7de78d72345b8fba62ebf4e077, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 580
-  infoPanel: {fileID: 7048296568798938931, guid: 1f4a19d432ddbec42b712584b71c7623, type: 3}
-  attackSpeed: 0.25
-  attackRange: 3
+  infoPanel: {fileID: 7048296568798938931, guid: cfdcce573ef926f4c8c800f4c7d34cd3, type: 3}
+  towerImage: {fileID: 5882540367708870162, guid: c5e937410e2186849b6510f50d383f24, type: 3}
+  towerName: Grenadier BEE
+  towerDescription: Throws at 3 grenades that explode dealing damage in {explosionSize}
+    radius
   damage: 150
+  range: 3
+  speed: 0.25
   missileSpeed: 10
+  price: 580
   explosionSize: 2
   missilePrefab: {fileID: 8508124576648701141, guid: 37e47c4f0407a524cabc9833776518a1, type: 3}
   _missileSpawnPoint:

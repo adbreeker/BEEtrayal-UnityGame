@@ -1,11 +1,10 @@
+using SpecialEffects;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GrenadierBEE : TowerController
 {
-    public float damage;
-    public float missileSpeed;
     public float explosionSize;
 
     [Header("Missile prefab")]
@@ -50,13 +49,13 @@ public class GrenadierBEE : TowerController
                 missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, randomInsect.transform.position);
                 missile.GetComponent<GrenadeController>().explosionSize = explosionSize;
             }
-            yield return new WaitForSeconds(0.1f / attackSpeed);
+            yield return new WaitForSeconds(0.1f / speed);
         }
     }
 
     GameObject GetRandomInsect()
     {
-        List<InsectController> insectsOrder = GameParams.insectsManager.GetInsectsOrderInRange(transform.position, attackRange);
+        List<InsectController> insectsOrder = GameParams.insectsManager.GetInsectsOrderInRange(transform.position, range);
         if (insectsOrder.Count > 0)
         {
             return insectsOrder[Random.Range(0, insectsOrder.Count)].gameObject;
@@ -64,17 +63,28 @@ public class GrenadierBEE : TowerController
         return null;
     }
 
-    public override List<string> GetTowerInfo()
+    public override TowerInfo GetTowerInfo()
     {
-        List<string> towerInfos = new List<string>();
+        TowerInfo info = new TowerInfo();
 
-        towerInfos.Add(damage.ToString());
-        towerInfos.Add(attackRange.ToString());
-        towerInfos.Add(attackSpeed.ToString());
-        towerInfos.Add(missileSpeed.ToString());
-        towerInfos.Add(explosionSize.ToString());
-        towerInfos.Add(price.ToString());
+        info.icon = towerImage;
+        info.name = towerName;
 
-        return towerInfos;
+        info.stats = new List<string>()
+        {
+            damage.ToString(),
+            range.ToString(),
+            speed.ToString(),
+            missileSpeed.ToString(),
+            price.ToString()
+        };
+
+        info.description = new List<string>()
+        {
+            towerDescription
+            .Replace("{explosionSize}", explosionSize.ToString())
+        };
+
+        return info;
     }
 }

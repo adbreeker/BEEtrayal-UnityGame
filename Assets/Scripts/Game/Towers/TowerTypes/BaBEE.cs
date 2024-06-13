@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class BaBEE : TowerController
 {
-    public float damage;
-    public float missileSpeed;
     public float slowTime;
-    public float slowStrenght;
+    public float slowStrength;
 
     [Header("Missile prefab")]
     public GameObject missilePrefab;
@@ -21,7 +19,7 @@ public class BaBEE : TowerController
     {
         base.Start();
 
-        _missileSpecialEffects.Add(new SpecialEffects.Slow(slowTime, slowStrenght));
+        _missileSpecialEffects.Add(new SpecialEffects.Slow(slowTime, slowStrength));
     }
 
     protected override void Update()
@@ -51,7 +49,7 @@ public class BaBEE : TowerController
 
     GameObject GetStrongestInsect()
     {
-        List<InsectController> insectsOrder = GameParams.insectsManager.GetInsectsOrderInRange(transform.position, attackRange);
+        List<InsectController> insectsOrder = GameParams.insectsManager.GetInsectsOrderInRange(transform.position, range);
         if (insectsOrder.Count == 0)
         {
             return null;
@@ -74,18 +72,29 @@ public class BaBEE : TowerController
         }
     }
 
-    public override List<string> GetTowerInfo()
+    public override TowerInfo GetTowerInfo()
     {
-        List<string> towerInfos = new List<string>();
+        TowerInfo info = new TowerInfo();
 
-        towerInfos.Add(damage.ToString());
-        towerInfos.Add(attackRange.ToString());
-        towerInfos.Add(attackSpeed.ToString());
-        towerInfos.Add(missileSpeed.ToString());
-        towerInfos.Add(slowTime.ToString());
-        towerInfos.Add(slowStrenght.ToString());
-        towerInfos.Add(price.ToString());
+        info.icon = towerImage;
+        info.name = towerName;
 
-        return towerInfos;
+        info.stats = new List<string>()
+        {
+            damage.ToString(),
+            range.ToString(),
+            speed.ToString(),
+            missileSpeed.ToString(),
+            price.ToString()
+        };
+
+        info.description = new List<string>() 
+        { 
+            towerDescription
+            .Replace("{slowStrength}", slowStrength.ToString())
+            .Replace("{slowTime}", slowTime.ToString())
+        };
+
+        return info;
     }
 }

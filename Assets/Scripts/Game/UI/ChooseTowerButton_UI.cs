@@ -10,7 +10,8 @@ public class ChooseTowerButton_UI : MonoBehaviour
 
     [Header("Button elements")]
     [SerializeField] Button _button;
-    [SerializeField] Image _towerIcon;
+    [SerializeField] Transform _towerIconHolder;
+    Image _towerIcon;
     [SerializeField] TextMeshProUGUI _priceText;
 
     ChooseTowerPanel_UI _panel;
@@ -22,6 +23,8 @@ public class ChooseTowerButton_UI : MonoBehaviour
 
     private void Awake()
     {
+        _towerIcon = _towerIconHolder.GetChild(0).GetComponent<Image>();
+
         _panel = GetComponentInParent<ChooseTowerPanel_UI>();
         linkedTower = _towerPrefab.GetComponent<TowerController>();
 
@@ -75,7 +78,8 @@ public class ChooseTowerButton_UI : MonoBehaviour
         else
         {
             _towerInfoPanel = Instantiate(_towerPrefab.GetComponent<TowerController>().infoPanel, GameParams.mainCanvas.transform).GetComponent<TowerInfoPanel_UI>();
-            _towerInfoPanel.UpdatePanelInfo(_towerPrefab.GetComponent<TowerController>().GetTowerInfo());
+            TowerInfo towerInfo = _towerPrefab.GetComponent<TowerController>().GetTowerInfo();
+            _towerInfoPanel.UpdatePanelInfo(towerInfo.icon, towerInfo.name, towerInfo.stats, towerInfo.description);
 
             _towerInfoTimerCoroutine = StartCoroutine(TowerInfoTimer());
         }

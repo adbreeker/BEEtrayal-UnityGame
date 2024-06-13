@@ -375,11 +375,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aadb0913b07dae646b9b208c53b01196, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 230
-  infoPanel: {fileID: 7048296568798938931, guid: 8a2c89598a0d27344889aef32264d47a, type: 3}
-  attackSpeed: 0.5
-  attackRange: Infinity
+  infoPanel: {fileID: 7048296568798938931, guid: cfdcce573ef926f4c8c800f4c7d34cd3, type: 3}
+  towerImage: {fileID: 980522068997160447, guid: 0e310d6dd8d723e4f8b493d434b56b66, type: 3}
+  towerName: Sniper BEE
+  towerDescription: Fires powerful bullets at the strongest insect
   damage: 300
+  range: Infinity
+  speed: 0.5
   missileSpeed: 75
+  price: 230
   missilePrefab: {fileID: 2534528428079058134, guid: 38fa877e2142ef54bb156ec392a87a88, type: 3}
   _missileSpawnPoint: {fileID: 6784004427844665962}

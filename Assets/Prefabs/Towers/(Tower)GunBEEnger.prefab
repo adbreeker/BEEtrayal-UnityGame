@@ -46,12 +46,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23f0e3210142e324c915411620873b7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 50
-  infoPanel: {fileID: 7048296568798938931, guid: c526e28988930af42b568955e1ced459, type: 3}
-  attackSpeed: 2
-  attackRange: 3
+  infoPanel: {fileID: 7048296568798938931, guid: cfdcce573ef926f4c8c800f4c7d34cd3, type: 3}
+  towerImage: {fileID: 1404465738590952019, guid: e2099efbf610fdd45b3785bf3a3450ae, type: 3}
+  towerName: GunBEEnger
+  towerDescription: The most common unit in the army of the bees kingdom
   damage: 25
+  range: 3
+  speed: 2
   missileSpeed: 40
+  price: 50
   missilePrefab: {fileID: 6667915596733058763, guid: 66f3ca3bb67edd94eb1cddd5096a2402, type: 3}
   _missileSpawnPoint:
   - {fileID: 7685386973081125536}

@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class ShinoBEE : TowerController
 {
-    public float damage;
-    public float missileSpeed;
-
     [Header("Missile prefab")]
     public GameObject missilePrefab;
 
@@ -45,7 +42,7 @@ public class ShinoBEE : TowerController
 
     GameObject GetRandomInsect()
     {
-        List<InsectController> insectsOrder = GameParams.insectsManager.GetInsectsOrderInRange(transform.position, attackRange);
+        List<InsectController> insectsOrder = GameParams.insectsManager.GetInsectsOrderInRange(transform.position, range);
         if(insectsOrder.Count > 0)
         {
             return insectsOrder[Random.Range(0, insectsOrder.Count)].gameObject;
@@ -53,16 +50,5 @@ public class ShinoBEE : TowerController
         return null;
     }
 
-    public override List<string> GetTowerInfo()
-    {
-        List<string> towerInfos = new List<string>();
 
-        towerInfos.Add(damage.ToString());
-        towerInfos.Add(attackRange.ToString());
-        towerInfos.Add(attackSpeed.ToString());
-        towerInfos.Add(missileSpeed.ToString());
-        towerInfos.Add(price.ToString());
-
-        return towerInfos;
-    }
 }

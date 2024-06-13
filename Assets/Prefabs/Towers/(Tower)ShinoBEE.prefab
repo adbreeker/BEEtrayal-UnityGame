@@ -376,12 +376,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 098882516afa0414b8e9dd924dd985ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 200
-  infoPanel: {fileID: 7048296568798938931, guid: 42285fc23c6f14542a5a2f4ce9543649, type: 3}
-  attackSpeed: 5
-  attackRange: 4
+  infoPanel: {fileID: 7048296568798938931, guid: cfdcce573ef926f4c8c800f4c7d34cd3, type: 3}
+  towerImage: {fileID: 8087787229704487663, guid: 4060a3e45517e5144977feb1d70e40cd, type: 3}
+  towerName: ShinoBEE
+  towerDescription: Throws shurikens at random enemies
   damage: 50
+  range: 4
+  speed: 5
   missileSpeed: 20
+  price: 200
   missilePrefab: {fileID: 8500108494238482904, guid: 0cde67d43b478ef4da5bf54265b08830, type: 3}
   _missileSpawnPoint:
   - {fileID: 329186055516574718}

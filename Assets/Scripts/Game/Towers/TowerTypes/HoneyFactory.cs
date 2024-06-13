@@ -6,7 +6,6 @@ public class HoneyFactory : TowerController
 {
     public float dropChance;
     public int dropValue;
-    public float missileSpeed;
 
     [Header("Honey prefab")]
     public GameObject missilePrefab;
@@ -26,24 +25,36 @@ public class HoneyFactory : TowerController
         _canAttack = false;
         if (Random.Range(0.0f, 1.0f) >= dropChance)
         {
-            Vector3 honeyDestination = Random.insideUnitCircle * attackRange;
+            Vector3 honeyDestination = Random.insideUnitCircle * range;
             GameObject droppedHoney = Instantiate(missilePrefab, transform.position, Quaternion.identity);
             droppedHoney.GetComponent<MissileController>().SetUpMissile(missileSpeed, 0, honeyDestination);
             droppedHoney.GetComponent<HoneyDropController>().honeyValue = dropValue;
         }
     }
 
-    public override List<string> GetTowerInfo()
+    public override TowerInfo GetTowerInfo()
     {
-        List<string> towerInfos = new List<string>();
+        TowerInfo info = new TowerInfo();
 
-        towerInfos.Add(attackSpeed.ToString());
-        towerInfos.Add(attackRange.ToString());
-        towerInfos.Add(dropChance.ToString());
-        towerInfos.Add(dropValue.ToString());
-        towerInfos.Add(missileSpeed.ToString());
-        towerInfos.Add(price.ToString());
+        info.icon = towerImage;
+        info.name = towerName;
 
-        return towerInfos;
+        info.stats = new List<string>()
+        {
+            "-",
+            range.ToString(),
+            speed.ToString(),
+            missileSpeed.ToString(),
+            price.ToString()
+        };
+
+        info.description = new List<string>()
+        {
+            towerDescription
+            .Replace("{dropChance}", dropChance.ToString())
+            .Replace("{dropValue}", dropValue.ToString())
+        };
+
+        return info;
     }
 }

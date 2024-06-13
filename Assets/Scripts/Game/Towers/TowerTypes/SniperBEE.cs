@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class SniperBEE : TowerController
 {
-    public float damage;
-    public float missileSpeed;
-
     [Header("Missile prefab")]
     public GameObject missilePrefab;
 
@@ -45,7 +42,7 @@ public class SniperBEE : TowerController
 
     GameObject GetStrongestInsect()
     {
-        List<InsectController> insectsOrder = GameParams.insectsManager.GetInsectsOrderInRange(transform.position, attackRange);
+        List<InsectController> insectsOrder = GameParams.insectsManager.GetInsectsOrderInRange(transform.position, range);
         if(insectsOrder.Count == 0)
         {
             return null;
@@ -68,16 +65,27 @@ public class SniperBEE : TowerController
         }
     }
 
-    public override List<string> GetTowerInfo()
+    public override TowerInfo GetTowerInfo()
     {
-        List<string> towerInfos = new List<string>();
+        TowerInfo info = new TowerInfo();
 
-        towerInfos.Add(damage.ToString());
-        towerInfos.Add("inf"); //towerInfos.Add(attackRange.ToString());
-        towerInfos.Add(attackSpeed.ToString());
-        towerInfos.Add(missileSpeed.ToString());
-        towerInfos.Add(price.ToString());
+        info.icon = towerImage;
+        info.name = towerName;
 
-        return towerInfos;
+        info.stats = new List<string>()
+        {
+            damage.ToString(),
+            "inf",
+            speed.ToString(),
+            missileSpeed.ToString(),
+            price.ToString()
+        };
+
+        info.description = new List<string>()
+        {
+            towerDescription
+        };
+
+        return info;
     }
 }

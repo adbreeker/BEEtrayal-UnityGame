@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class BEETank : TowerController
 {
-    public float damage;
-    public float missileSpeed;
     public float explosionSize;
 
     [Header("Missile prefab")]
@@ -47,7 +45,7 @@ public class BEETank : TowerController
 
     GameObject GetFirstInsect()
     {
-        List<InsectController> insectsOrder = GameParams.insectsManager.GetInsectsOrderInRange(transform.position, attackRange);
+        List<InsectController> insectsOrder = GameParams.insectsManager.GetInsectsOrderInRange(transform.position, range);
         if (insectsOrder.Count > 0)
         {
             return insectsOrder[0].gameObject;
@@ -55,17 +53,28 @@ public class BEETank : TowerController
         return null;
     }
 
-    public override List<string> GetTowerInfo()
+    public override TowerInfo GetTowerInfo()
     {
-        List<string> towerInfos = new List<string>();
+        TowerInfo info = new TowerInfo();
 
-        towerInfos.Add(damage.ToString());
-        towerInfos.Add(attackRange.ToString());
-        towerInfos.Add(attackSpeed.ToString());
-        towerInfos.Add(missileSpeed.ToString());
-        towerInfos.Add(explosionSize.ToString());
-        towerInfos.Add(price.ToString());
+        info.icon = towerImage;
+        info.name = towerName;
 
-        return towerInfos;
+        info.stats = new List<string>()
+        {
+            damage.ToString(),
+            range.ToString(),
+            speed.ToString(),
+            missileSpeed.ToString(),
+            price.ToString()
+        };
+
+        info.description = new List<string>()
+        {
+            towerDescription
+            .Replace("{explosionSize}", explosionSize.ToString())
+        };
+
+        return info;
     }
 }

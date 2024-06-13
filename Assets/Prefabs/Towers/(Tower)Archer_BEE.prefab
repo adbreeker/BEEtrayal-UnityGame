@@ -127,12 +127,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3f31c4ee54d35242b58b0b37811bcc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 415
-  infoPanel: {fileID: 7048296568798938931, guid: 11aad8b68787d8f48bcb664f079b9850, type: 3}
-  attackSpeed: 1
-  attackRange: 10
+  infoPanel: {fileID: 7048296568798938931, guid: cfdcce573ef926f4c8c800f4c7d34cd3, type: 3}
+  towerImage: {fileID: 8580810169474512024, guid: aa2b5fb01b1ea2f4e8d9a67bb1ba4aa6, type: 3}
+  towerName: Archer BEE
+  towerDescription: 'Shoots arrows that damage all insects they pass through
+
+
+
+'
   damage: 80
+  range: 10
+  speed: 1
   missileSpeed: 30
+  price: 415
   missilePrefab: {fileID: 1474452625732465224, guid: e68d66337a9433e4e9d1e317ebe24171, type: 3}
   _missileSpawnPoint: {fileID: 2972409742906757532}
 --- !u!1 &6289472517202316554

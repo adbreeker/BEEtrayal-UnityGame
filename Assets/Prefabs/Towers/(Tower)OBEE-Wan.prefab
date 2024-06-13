@@ -128,11 +128,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd6826ebf02d5f145adf23122fc712d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 290
-  infoPanel: {fileID: 7048296568798938931, guid: 61f49b675a2b8974493a4a51d597d042, type: 3}
-  attackSpeed: 0.5
-  attackRange: 3
+  infoPanel: {fileID: 7048296568798938931, guid: cfdcce573ef926f4c8c800f4c7d34cd3, type: 3}
+  towerImage: {fileID: 3781643089349612918, guid: 18148812dfcb4534f817d930d1253912, type: 3}
+  towerName: OBEE-Wan
+  towerDescription: Jumps forwards and then spins dealing damage with his sword
   damage: 100
+  range: 3
+  speed: 0.5
+  missileSpeed: 0
+  price: 290
   _weapon: {fileID: 8559819344536744050}
 --- !u!1 &9096906043532873537
 GameObject:

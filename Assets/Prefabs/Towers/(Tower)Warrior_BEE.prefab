@@ -45,11 +45,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad3b0ad1c972e83449e3944f77f4c5e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 320
-  infoPanel: {fileID: 7048296568798938931, guid: b6b48126467718246b650b6d8149b369, type: 3}
-  attackSpeed: 1
-  attackRange: 2.5
+  infoPanel: {fileID: 7048296568798938931, guid: cfdcce573ef926f4c8c800f4c7d34cd3, type: 3}
+  towerImage: {fileID: 9173793530920313637, guid: 9a27f4652fec6d442934bc3a9639e0e1, type: 3}
+  towerName: Warrior BEE
+  towerDescription: Constantly spins dealing damage with his great sword
   damage: 10
+  range: 2.5
+  speed: 1
+  missileSpeed: 0
+  price: 320
   slowTime: 0.5
   slowStrenght: 0.25
   _weapon: {fileID: 5706969968607682699}

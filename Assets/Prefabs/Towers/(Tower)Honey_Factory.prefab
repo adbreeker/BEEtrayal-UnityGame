@@ -44,13 +44,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd71ecfa974a9e64d849f0ab968d4ef3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  infoPanel: {fileID: 7048296568798938931, guid: cfdcce573ef926f4c8c800f4c7d34cd3, type: 3}
+  towerImage: {fileID: 4658078521917961448, guid: eccb357cf0f05b64a98e7c3b9795f4d5, type: 3}
+  towerName: Honey Factory
+  towerDescription: Have a {dropChance} chance to drop jar worth {dropValue} honey
+  damage: 0
+  range: 4
+  speed: 0.2
+  missileSpeed: 15
   price: 625
-  infoPanel: {fileID: 7048296568798938931, guid: b20749068d161cf4487c327e0dcbfd71, type: 3}
-  attackSpeed: 0.2
-  attackRange: 4
   dropChance: 0.25
   dropValue: 25
-  missileSpeed: 15
   missilePrefab: {fileID: 766999501600105451, guid: cec59ef884c83df4fab3941f09b0ff8e, type: 3}
 --- !u!1 &8734350810157186094
 GameObject:

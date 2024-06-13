@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class BEEzard : TowerController
 {
-    public float damage;
-    public float missileSpeed;
     public float armorReduction;
 
     [Header("Missile prefab")]
@@ -53,13 +51,13 @@ public class BEEzard : TowerController
                 GameObject missile = Instantiate(missilePrefab, _missileSpawnPoint.position, Quaternion.identity);
                 missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, strongestInsect, _missileSpecialEffects);
             }
-            yield return new WaitForSeconds(0.1f / attackSpeed);
+            yield return new WaitForSeconds(0.1f / speed);
         }
     }
 
     GameObject GetStrongestInsect()
     {
-        List<InsectController> insectsOrder = GameParams.insectsManager.GetInsectsOrderInRange(transform.position, attackRange);
+        List<InsectController> insectsOrder = GameParams.insectsManager.GetInsectsOrderInRange(transform.position, range);
         if (insectsOrder.Count == 0)
         {
             return null;
@@ -82,17 +80,28 @@ public class BEEzard : TowerController
         }
     }
 
-    public override List<string> GetTowerInfo()
+    public override TowerInfo GetTowerInfo()
     {
-        List<string> towerInfos = new List<string>();
+        TowerInfo info = new TowerInfo();
 
-        towerInfos.Add(damage.ToString());
-        towerInfos.Add(attackRange.ToString());
-        towerInfos.Add(attackSpeed.ToString());
-        towerInfos.Add(missileSpeed.ToString());
-        towerInfos.Add(armorReduction.ToString());
-        towerInfos.Add(price.ToString());
+        info.icon = towerImage;
+        info.name = towerName;
 
-        return towerInfos;
+        info.stats = new List<string>()
+        {
+            damage.ToString(),
+            range.ToString(),
+            speed.ToString(),
+            missileSpeed.ToString(),
+            price.ToString()
+        };
+
+        info.description = new List<string>()
+        {
+            towerDescription
+            .Replace("{armorReduction}", armorReduction.ToString())
+        };
+
+        return info;
     }
 }

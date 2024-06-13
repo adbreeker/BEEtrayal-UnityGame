@@ -47,12 +47,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 942a36b165b5cd04db2dec90f947616f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 730
-  infoPanel: {fileID: 7048296568798938931, guid: 3adc070fb197d114da5687fc983dd7d6, type: 3}
-  attackSpeed: 1
-  attackRange: 8
+  infoPanel: {fileID: 7048296568798938931, guid: cfdcce573ef926f4c8c800f4c7d34cd3, type: 3}
+  towerImage: {fileID: 3060052163891958383, guid: c4e868ae445c867408aba4dbcfe08ec7, type: 3}
+  towerName: BEE Tank
+  towerDescription: Shoots rockets that explode dealing damage in {explosionSize}
+    radius
   damage: 75
+  range: 8
+  speed: 1
   missileSpeed: 30
+  price: 730
   explosionSize: 1.5
   missilePrefab: {fileID: 3107379393988431453, guid: ba39d73f6ac3be44db8be8c8a19bbf7b, type: 3}
   _missileSpawnPoint: {fileID: 326328975192058517}

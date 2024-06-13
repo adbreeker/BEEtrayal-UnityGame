@@ -3,17 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations;
 
+public struct TowerInfo
+{
+    public GameObject icon;
+    public string name;
+    public List<string> stats;
+    public List<string> description;
+}
+
 public class TowerController : MonoBehaviour
 {
-    [Header("Tower price")]
-    public int price;
-
-    [Header("Tower info panel")]
+    [Header("Tower info:")]
     public GameObject infoPanel;
+    public GameObject towerImage;
+    public string towerName;
+    [TextArea] public string towerDescription;
 
     [Header("Tower statistics:")]
-    public float attackSpeed;
-    public float attackRange;
+    public float damage;
+    public float range;
+    public float speed;
+    public float missileSpeed;
+
+    [Header("Tower price")]
+    public int price;
 
     protected bool _canAttack = true;
     private bool _attackCooldownOngoing = false;
@@ -41,14 +54,14 @@ public class TowerController : MonoBehaviour
 
     IEnumerator AttackCooldown()
     {
-        yield return new WaitForSeconds(1 / attackSpeed);
+        yield return new WaitForSeconds(1 / speed);
         _canAttack = true;
         _attackCooldownOngoing = false;
     }
 
     protected bool IsAnyInsectInRange()
     {
-        if(GameParams.insectsManager.GetInsectsOrderInRange(transform.position, attackRange).Count > 0)
+        if(GameParams.insectsManager.GetInsectsOrderInRange(transform.position, range).Count > 0)
         {
             return true;
         }
@@ -60,9 +73,24 @@ public class TowerController : MonoBehaviour
 
     protected virtual void AttackExecution() { }
 
-    public virtual List<string> GetTowerInfo()
+    public virtual TowerInfo GetTowerInfo()
     {
-        List<string> towerInfos = new List<string>();
-        return towerInfos;
+        TowerInfo info = new TowerInfo();
+
+        info.icon = towerImage;
+        info.name = towerName;
+
+        info.stats = new List<string>()
+        {
+            damage.ToString(),
+            range.ToString(),
+            speed.ToString(),
+            missileSpeed.ToString(),
+            price.ToString()
+        };
+
+        info.description = new List<string>() { towerDescription };
+
+        return info;
     }
 }

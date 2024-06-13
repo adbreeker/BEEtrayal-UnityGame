@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class OBEE_Wan : TowerController
 {
-    public float damage;
-
     [Header("Weapon")]
     [SerializeField] GameObject _weapon;
 
@@ -48,11 +46,11 @@ public class OBEE_Wan : TowerController
             Vector3 jumpPos = closestInsect.transform.position;
             while(transform.position != jumpPos)
             {
-                transform.position = Vector3.MoveTowards(transform.position, jumpPos, 0.4f * attackSpeed);
+                transform.position = Vector3.MoveTowards(transform.position, jumpPos, 0.4f * speed);
                 yield return new WaitForFixedUpdate();
             }
 
-            float rotationStep = 40 * attackSpeed;
+            float rotationStep = 40 * speed;
             float currentRotationAngle = 0f;
             float targetRotationAngle = 360f;
             float startingRotationAngle = transform.rotation.eulerAngles.z;
@@ -67,7 +65,7 @@ public class OBEE_Wan : TowerController
 
             while(transform.localPosition != Vector3.zero)
             {
-                transform.localPosition = Vector3.MoveTowards(transform.localPosition, Vector3.zero, 0.4f * attackSpeed);
+                transform.localPosition = Vector3.MoveTowards(transform.localPosition, Vector3.zero, 0.4f * speed);
                 yield return new WaitForFixedUpdate();
             }
 
@@ -78,7 +76,7 @@ public class OBEE_Wan : TowerController
 
     GameObject GetClosestInsect()
     {
-        List<InsectController> insectsOrder = GameParams.insectsManager.GetInsectsOrderInRange(transform.position, attackRange);
+        List<InsectController> insectsOrder = GameParams.insectsManager.GetInsectsOrderInRange(transform.position, range);
         GameObject closestInsect = null;
         foreach (InsectController insect in insectsOrder)
         {
@@ -95,15 +93,27 @@ public class OBEE_Wan : TowerController
         return closestInsect;
     }
 
-    public override List<string> GetTowerInfo()
+    public override TowerInfo GetTowerInfo()
     {
-        List<string> towerInfos = new List<string>();
+        TowerInfo info = new TowerInfo();
 
-        towerInfos.Add(damage.ToString());
-        towerInfos.Add(attackRange.ToString());
-        towerInfos.Add(attackSpeed.ToString());
-        towerInfos.Add(price.ToString());
+        info.icon = towerImage;
+        info.name = towerName;
 
-        return towerInfos;
+        info.stats = new List<string>()
+        {
+            damage.ToString(),
+            range.ToString(),
+            speed.ToString(),
+            "-",
+            price.ToString()
+        };
+
+        info.description = new List<string>()
+        {
+            towerDescription
+        };
+
+        return info;
     }
 }

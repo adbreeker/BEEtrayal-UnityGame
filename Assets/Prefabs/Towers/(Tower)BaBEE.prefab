@@ -45,14 +45,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54180605ad8d3fd4a9aeb03a5bb90369, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 95
-  infoPanel: {fileID: 7048296568798938931, guid: 9af5ff153f7495b459ad87a3c5a3b686, type: 3}
-  attackSpeed: 1.5
-  attackRange: 4
+  infoPanel: {fileID: 7048296568798938931, guid: cfdcce573ef926f4c8c800f4c7d34cd3, type: 3}
+  towerImage: {fileID: 5989000083705846107, guid: cb8be314d1b1d494ea1f9c71d5a8a847, type: 3}
+  towerName: BaBEE
+  towerDescription: Shoots darts that slow down insects by {slowStrength} for {slowTime}s
   damage: 75
+  range: 4
+  speed: 1.5
   missileSpeed: 15
+  price: 95
   slowTime: 2
-  slowStrenght: 0.5
+  slowStrength: 0.5
   missilePrefab: {fileID: 2686293118654674446, guid: cf5846e49831a284a8260abd1b7684e7, type: 3}
   _missileSpawnPoint: {fileID: 4633489211857930119}
 --- !u!1 &1900564164957582835

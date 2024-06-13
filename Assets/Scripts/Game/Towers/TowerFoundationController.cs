@@ -22,7 +22,8 @@ public class TowerFoundationController : MonoBehaviour
     {
         if(_towerInfoTimerCoroutine != null)
         {
-            _towerInfoPanel.UpdatePanelInfo(tower.GetTowerInfo());
+            TowerInfo towerInfo = tower.GetTowerInfo();
+            _towerInfoPanel.UpdatePanelInfo(towerInfo.icon, towerInfo.name, towerInfo.stats, towerInfo.description);
             StopCoroutine(_towerInfoTimerCoroutine);
             _towerInfoTimerCoroutine = StartCoroutine(TowerInfoTimer());
         }
@@ -39,7 +40,9 @@ public class TowerFoundationController : MonoBehaviour
 
             _towerInfoPanel = Instantiate(tower.infoPanel, GameParams.mainCanvas.transform).GetComponent<TowerInfoPanel_UI>();
             ((RectTransform)_towerInfoPanel.gameObject.transform).anchoredPosition = canvasPos + (((RectTransform)GameParams.mainCanvas.transform).rect.center - canvasPos).normalized * 400.0f;
-            _towerInfoPanel.UpdatePanelInfo(tower.GetTowerInfo());
+
+            TowerInfo towerInfo = tower.GetTowerInfo();
+            _towerInfoPanel.UpdatePanelInfo(towerInfo.icon, towerInfo.name, towerInfo.stats, towerInfo.description);
 
             _towerInfoTimerCoroutine = StartCoroutine(TowerInfoTimer());
         }

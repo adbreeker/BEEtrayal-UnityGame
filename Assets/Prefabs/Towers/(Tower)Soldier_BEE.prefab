@@ -46,12 +46,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6df6023b0b20f5499d3ac1d3014a214, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 1100
-  infoPanel: {fileID: 7048296568798938931, guid: 8130dff4090d2ec4abaa76f5e8af5880, type: 3}
-  attackSpeed: 10
-  attackRange: 7
+  infoPanel: {fileID: 7048296568798938931, guid: cfdcce573ef926f4c8c800f4c7d34cd3, type: 3}
+  towerImage: {fileID: 1439945337704253863, guid: ebcebcaf599718e4c8a4d572d9e56d36, type: 3}
+  towerName: Soldier BEE
+  towerDescription: Shoots at breakneck speed
   damage: 25
+  range: 7
+  speed: 10
   missileSpeed: 40
+  price: 1100
   missilePrefab: {fileID: 6667915596733058763, guid: 66f3ca3bb67edd94eb1cddd5096a2402, type: 3}
   _missileSpawnPoint: {fileID: 3210004039233152286}
 --- !u!1 &5803413799327048753

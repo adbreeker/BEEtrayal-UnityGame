@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class WarriorBEE : TowerController
 {
-    public float damage;
     public float slowTime;
     public float slowStrenght;
 
@@ -29,7 +28,7 @@ public class WarriorBEE : TowerController
 
     private void FixedUpdate()
     {
-        transform.rotation *= Quaternion.Euler(0, 0, attackSpeed*(360*Time.deltaTime));
+        transform.rotation *= Quaternion.Euler(0, 0, speed*(360*Time.deltaTime));
     }
 
     protected override void AttackExecution()
@@ -37,17 +36,27 @@ public class WarriorBEE : TowerController
         
     }
 
-    public override List<string> GetTowerInfo()
+    public override TowerInfo GetTowerInfo()
     {
-        List<string> towerInfos = new List<string>();
+        TowerInfo info = new TowerInfo();
 
-        towerInfos.Add(damage.ToString());
-        towerInfos.Add(attackRange.ToString());
-        towerInfos.Add(attackSpeed.ToString());
-        towerInfos.Add(slowTime.ToString());
-        towerInfos.Add(slowStrenght.ToString());
-        towerInfos.Add(price.ToString());
+        info.icon = towerImage;
+        info.name = towerName;
 
-        return towerInfos;
+        info.stats = new List<string>()
+        {
+            damage.ToString(),
+            range.ToString(),
+            speed.ToString(),
+            "-",
+            price.ToString()
+        };
+
+        info.description = new List<string>()
+        {
+            towerDescription
+        };
+
+        return info;
     }
 }

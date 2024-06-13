@@ -46,12 +46,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c46575323f2b0042a248dbf0005cddd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 850
-  infoPanel: {fileID: 7048296568798938931, guid: 055d67509bc7b90408d59c0b12bb00d5, type: 3}
-  attackSpeed: 1
-  attackRange: 5
+  infoPanel: {fileID: 7048296568798938931, guid: cfdcce573ef926f4c8c800f4c7d34cd3, type: 3}
+  towerImage: {fileID: 5668120289333722338, guid: 83df6f0295b9b314394554b5d400bc3e, type: 3}
+  towerName: BEEzard
+  towerDescription: Shoots triple magic missiles that reduces armor by {armorReduction}
   damage: 40
+  range: 5
+  speed: 1
   missileSpeed: 10
+  price: 850
   armorReduction: 7.5
   missilePrefab: {fileID: 4706714175347289679, guid: 8b6555a7ee0e0e342ab4e1e0e380e018, type: 3}
   _missileSpawnPoint: {fileID: 1971137926310282348}
