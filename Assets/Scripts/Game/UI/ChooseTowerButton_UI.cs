@@ -77,7 +77,15 @@ public class ChooseTowerButton_UI : MonoBehaviour
         }
         else
         {
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                GameParams.mainCanvas.transform as RectTransform,
+                Input.mousePosition,
+                GameParams.mainCanvas.worldCamera,
+                out Vector2 canvasPos);
+
             _towerInfoPanel = Instantiate(_towerPrefab.GetComponent<TowerController>().infoPanel, GameParams.mainCanvas.transform).GetComponent<TowerInfoPanel_UI>();
+            ((RectTransform)_towerInfoPanel.gameObject.transform).anchoredPosition = canvasPos + (((RectTransform)GameParams.mainCanvas.transform).rect.center - canvasPos).normalized * 400.0f;
+
             TowerInfo towerInfo = _towerPrefab.GetComponent<TowerController>().GetTowerInfo();
             _towerInfoPanel.UpdatePanelInfo(towerInfo.icon, towerInfo.name, towerInfo.stats, towerInfo.description);
 
