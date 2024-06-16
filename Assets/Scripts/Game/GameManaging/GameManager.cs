@@ -53,8 +53,10 @@ public class GameManager : MonoBehaviour
     public int honey = 100;
 
     [Header("Towers:")]
+    public float towerSellModifier = 0.3f;
     public GameObject tfPrefab;
     public Transform towersHolder;
+    public List<TowerController> towerTypes = new List<TowerController>();
 
     [Header("UI:")]
     [SerializeField] GamePanel_UI _gamePanel;
@@ -70,6 +72,11 @@ public class GameManager : MonoBehaviour
         GameParams.mainCanvas = _mainCanvas;
         Time.timeScale = 1.0f;
         GameParams.currentGameSpeed = 1.0f;
+
+        foreach(TowerController controller in towerTypes)
+        {
+            controller.SetInstancesCount(0);
+        }
     }
 
     void Update()

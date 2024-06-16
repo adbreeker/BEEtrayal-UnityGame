@@ -7,11 +7,13 @@ public struct TowerInfo
 {
     public GameObject icon;
     public string name;
+    public int instancesCount;
     public List<string> stats;
+    public int price;
     public List<string> description;
 }
 
-public class TowerController : MonoBehaviour
+public abstract class TowerController : MonoBehaviour
 {
     [Header("Tower info:")]
     public GameObject infoPanel;
@@ -26,7 +28,7 @@ public class TowerController : MonoBehaviour
     public float missileSpeed;
 
     [Header("Tower price")]
-    public int price;
+    [SerializeField] protected int _price;
 
     protected bool _canAttack = true;
     private bool _attackCooldownOngoing = false;
@@ -73,24 +75,12 @@ public class TowerController : MonoBehaviour
 
     protected virtual void AttackExecution() { }
 
-    public virtual TowerInfo GetTowerInfo()
-    {
-        TowerInfo info = new TowerInfo();
+    //Tower meta data --------------------------------------------------------------------------------------------------------- Tower meta data
 
-        info.icon = towerImage;
-        info.name = towerName;
+    public abstract int GetInstancesCount();
+    public abstract void SetInstancesCount(int setValue);
+    public abstract void ChangeInstancesCount(int valueToAdd);
+    public abstract int GetCurrentTowerPrice();
 
-        info.stats = new List<string>()
-        {
-            damage.ToString(),
-            range.ToString(),
-            speed.ToString(),
-            missileSpeed.ToString(),
-            price.ToString()
-        };
-
-        info.description = new List<string>() { towerDescription };
-
-        return info;
-    }
+    public abstract TowerInfo GetTowerInfo();
 }

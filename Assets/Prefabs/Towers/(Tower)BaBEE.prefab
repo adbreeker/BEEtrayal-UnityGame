@@ -53,7 +53,7 @@ MonoBehaviour:
   range: 4
   speed: 1.5
   missileSpeed: 15
-  price: 95
+  _price: 90
   slowTime: 2
   slowStrength: 0.5
   missilePrefab: {fileID: 2686293118654674446, guid: cf5846e49831a284a8260abd1b7684e7, type: 3}

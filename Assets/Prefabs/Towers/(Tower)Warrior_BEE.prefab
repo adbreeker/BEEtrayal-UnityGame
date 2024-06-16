@@ -53,7 +53,7 @@ MonoBehaviour:
   range: 2.5
   speed: 1
   missileSpeed: 0
-  price: 320
+  _price: 320
   slowTime: 0.5
   slowStrenght: 0.25
   _weapon: {fileID: 5706969968607682699}

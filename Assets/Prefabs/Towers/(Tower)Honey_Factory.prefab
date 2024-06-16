@@ -52,7 +52,7 @@ MonoBehaviour:
   range: 4
   speed: 0.2
   missileSpeed: 15
-  price: 625
+  _price: 625
   dropChance: 0.25
   dropValue: 25
   missilePrefab: {fileID: 766999501600105451, guid: cec59ef884c83df4fab3941f09b0ff8e, type: 3}

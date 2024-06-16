@@ -54,7 +54,7 @@ MonoBehaviour:
   range: 7
   speed: 10
   missileSpeed: 40
-  price: 1100
+  _price: 1100
   missilePrefab: {fileID: 6667915596733058763, guid: 66f3ca3bb67edd94eb1cddd5096a2402, type: 3}
   _missileSpawnPoint: {fileID: 3210004039233152286}
 --- !u!1 &5803413799327048753

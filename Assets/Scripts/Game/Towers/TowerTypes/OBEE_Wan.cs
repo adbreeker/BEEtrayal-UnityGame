@@ -9,6 +9,8 @@ public class OBEE_Wan : TowerController
 
     bool _isJumpAttacking = false;
 
+    static int _instancesCount = 0;
+
     protected override void Start()
     {
         base.Start();
@@ -93,6 +95,33 @@ public class OBEE_Wan : TowerController
         return closestInsect;
     }
 
+    //Tower meta data --------------------------------------------------------------------------------------------------------- Tower meta data
+
+    public override int GetInstancesCount()
+    {
+        return _instancesCount;
+    }
+
+    public override void SetInstancesCount(int setValue)
+    {
+        _instancesCount = setValue;
+    }
+
+    public override void ChangeInstancesCount(int valueToAdd)
+    {
+        _instancesCount += valueToAdd;
+    }
+
+    public override int GetCurrentTowerPrice()
+    {
+        int currentPrice = _price;
+        for (int i = 0; i < _instancesCount; i++)
+        {
+            currentPrice += (int)(currentPrice * 0.5f);
+        }
+        return currentPrice;
+    }
+
     public override TowerInfo GetTowerInfo()
     {
         TowerInfo info = new TowerInfo();
@@ -106,8 +135,9 @@ public class OBEE_Wan : TowerController
             range.ToString(),
             speed.ToString(),
             "-",
-            price.ToString()
         };
+
+        info.price = GetCurrentTowerPrice();
 
         info.description = new List<string>()
         {

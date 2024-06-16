@@ -7956,8 +7956,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lives: 100
   honey: 100
+  towerSellModifier: 0.3
   tfPrefab: {fileID: 8408532792568524852, guid: 9ea353a276b06ea4a834dd93e26929c2, type: 3}
   towersHolder: {fileID: 877518102}
+  towerTypes: []
   _gamePanel: {fileID: 589464375}
   _chooseTowerPanel: {fileID: 740812707}
   _mainCanvas: {fileID: 1645429158}

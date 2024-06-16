@@ -28,12 +28,14 @@ public class ChooseTowerButton_UI : MonoBehaviour
         _panel = GetComponentInParent<ChooseTowerPanel_UI>();
         linkedTower = _towerPrefab.GetComponent<TowerController>();
 
-        _priceText.text = linkedTower.price.ToString();
+        _priceText.text = linkedTower.GetCurrentTowerPrice().ToString();
     }
 
     void Update()
     {
-        if(GameParams.gameManager.honey >= linkedTower.price)
+        _priceText.text = linkedTower.GetCurrentTowerPrice().ToString();
+
+        if (GameParams.gameManager.honey >= linkedTower.GetCurrentTowerPrice())
         {
             _priceText.color = Color.green;
 
@@ -55,8 +57,8 @@ public class ChooseTowerButton_UI : MonoBehaviour
 
     public void BuildTower()
     {
+        GameParams.gameManager.honey -= linkedTower.GetCurrentTowerPrice();
         _panel.linkedTowerFoundation.BuildTowerOnFoundation(_towerPrefab);
-        GameParams.gameManager.honey -= linkedTower.price;
 
         if (_towerInfoTimerCoroutine != null)
         {
@@ -87,7 +89,7 @@ public class ChooseTowerButton_UI : MonoBehaviour
             ((RectTransform)_towerInfoPanel.gameObject.transform).anchoredPosition = canvasPos + (((RectTransform)GameParams.mainCanvas.transform).rect.center - canvasPos).normalized * 400.0f;
 
             TowerInfo towerInfo = _towerPrefab.GetComponent<TowerController>().GetTowerInfo();
-            _towerInfoPanel.UpdatePanelInfo(towerInfo.icon, towerInfo.name, towerInfo.stats, towerInfo.description);
+            _towerInfoPanel.UpdatePanelInfo(towerInfo.icon, towerInfo.name, towerInfo.stats, towerInfo.price, towerInfo.description);
 
             _towerInfoTimerCoroutine = StartCoroutine(TowerInfoTimer());
         }

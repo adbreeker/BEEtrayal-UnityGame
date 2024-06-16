@@ -10,6 +10,8 @@ public class ShinoBEE : TowerController
     [Header("Missile spawn point")]
     [SerializeField] Transform[] _missileSpawnPoint = new Transform[4];
 
+    static int _instancesCount = 0;
+
     protected override void Start()
     {
         base.Start();
@@ -43,12 +45,59 @@ public class ShinoBEE : TowerController
     GameObject GetRandomInsect()
     {
         List<InsectController> insectsOrder = GameParams.insectsManager.GetInsectsOrderInRange(transform.position, range);
-        if(insectsOrder.Count > 0)
+        if (insectsOrder.Count > 0)
         {
             return insectsOrder[Random.Range(0, insectsOrder.Count)].gameObject;
         }
         return null;
     }
 
+    //Tower meta data --------------------------------------------------------------------------------------------------------- Tower meta data
 
+    public override int GetInstancesCount()
+    {
+        return _instancesCount;
+    }
+
+    public override void SetInstancesCount(int setValue)
+    {
+        _instancesCount = setValue;
+    }
+
+    public override void ChangeInstancesCount(int valueToAdd)
+    {
+        _instancesCount += valueToAdd;
+    }
+
+    public override int GetCurrentTowerPrice()
+    {
+        int currentPrice = _price;
+        for (int i = 0; i < _instancesCount; i++)
+        {
+            currentPrice += (int)(currentPrice * 0.5f);
+        }
+        return currentPrice;
+    }
+
+    public override TowerInfo GetTowerInfo()
+    {
+        TowerInfo info = new TowerInfo();
+
+        info.icon = towerImage;
+        info.name = towerName;
+
+        info.stats = new List<string>()
+        {
+            damage.ToString(),
+            range.ToString(),
+            speed.ToString(),
+            missileSpeed.ToString(),
+        };
+
+        info.price = GetCurrentTowerPrice();
+
+        info.description = new List<string>() { towerDescription };
+
+        return info;
+    }
 }

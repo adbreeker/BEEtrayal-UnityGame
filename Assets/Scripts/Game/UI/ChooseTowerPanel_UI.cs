@@ -42,7 +42,7 @@ public class ChooseTowerPanel_UI : MonoBehaviour
 
         if(byPrice)
         {
-            buttons = buttons.OrderBy(button => button.GetComponent<ChooseTowerButton_UI>().linkedTower.price).ToList();
+            buttons = buttons.OrderBy(button => button.GetComponent<ChooseTowerButton_UI>().linkedTower.GetCurrentTowerPrice()).ToList();
         }
         else
         {

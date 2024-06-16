@@ -13,6 +13,8 @@ public class GrenadierBEE : TowerController
     [Header("Missile spawn point")]
     [SerializeField] Transform[] _missileSpawnPoint = new Transform[3];
 
+    static int _instancesCount = 0;
+
     protected override void Start()
     {
         base.Start();
@@ -63,6 +65,33 @@ public class GrenadierBEE : TowerController
         return null;
     }
 
+    //Tower meta data --------------------------------------------------------------------------------------------------------- Tower meta data
+
+    public override int GetInstancesCount()
+    {
+        return _instancesCount;
+    }
+
+    public override void SetInstancesCount(int setValue)
+    {
+        _instancesCount = setValue;
+    }
+
+    public override void ChangeInstancesCount(int valueToAdd)
+    {
+        _instancesCount += valueToAdd;
+    }
+
+    public override int GetCurrentTowerPrice()
+    {
+        int currentPrice = _price;
+        for (int i = 0; i < _instancesCount; i++)
+        {
+            currentPrice += (int)(currentPrice * 0.5f);
+        }
+        return currentPrice;
+    }
+
     public override TowerInfo GetTowerInfo()
     {
         TowerInfo info = new TowerInfo();
@@ -76,8 +105,9 @@ public class GrenadierBEE : TowerController
             range.ToString(),
             speed.ToString(),
             missileSpeed.ToString(),
-            price.ToString()
         };
+
+        info.price = GetCurrentTowerPrice();
 
         info.description = new List<string>()
         {

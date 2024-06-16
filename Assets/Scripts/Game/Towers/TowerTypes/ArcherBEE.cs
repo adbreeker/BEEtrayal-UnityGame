@@ -10,6 +10,8 @@ public class ArcherBEE : TowerController
     [Header("Missile spawn point")]
     [SerializeField] Transform _missileSpawnPoint;
 
+    static int _instancesCount = 0;
+
     protected override void Start()
     {
         base.Start();
@@ -56,5 +58,54 @@ public class ArcherBEE : TowerController
         Vector3 direction = (insectPos - transform.position).normalized;
         Vector3 arrowPoint = insectPos + (direction * 10.0f);
         return arrowPoint;
+    }
+
+    //Tower meta data --------------------------------------------------------------------------------------------------------- Tower meta data
+
+    public override int GetInstancesCount()
+    {
+        return _instancesCount;
+    }
+
+    public override void SetInstancesCount(int setValue)
+    {
+        _instancesCount = setValue;
+    }
+
+    public override void ChangeInstancesCount(int valueToAdd)
+    {
+        _instancesCount += valueToAdd;
+    }
+
+    public override int GetCurrentTowerPrice()
+    {
+        int currentPrice = _price;
+        for(int i = 0; i < _instancesCount; i++) 
+        {
+            _price +=(int)(_price * 0.5f);
+        }
+        return currentPrice;
+    }
+
+    public override TowerInfo GetTowerInfo()
+    {
+        TowerInfo info = new TowerInfo();
+
+        info.icon = towerImage;
+        info.name = towerName;
+
+        info.stats = new List<string>()
+        {
+            damage.ToString(),
+            range.ToString(),
+            speed.ToString(),
+            missileSpeed.ToString(),
+        };
+
+        info.price = GetCurrentTowerPrice();
+
+        info.description = new List<string>() { towerDescription };
+
+        return info;
     }
 }

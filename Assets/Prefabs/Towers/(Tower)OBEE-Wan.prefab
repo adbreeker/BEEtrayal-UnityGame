@@ -136,7 +136,7 @@ MonoBehaviour:
   range: 3
   speed: 0.5
   missileSpeed: 0
-  price: 290
+  _price: 290
   _weapon: {fileID: 8559819344536744050}
 --- !u!1 &9096906043532873537
 GameObject:

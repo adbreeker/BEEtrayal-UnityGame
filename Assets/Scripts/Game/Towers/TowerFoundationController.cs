@@ -23,7 +23,7 @@ public class TowerFoundationController : MonoBehaviour
         if(_towerInfoTimerCoroutine != null)
         {
             TowerInfo towerInfo = tower.GetTowerInfo();
-            _towerInfoPanel.UpdatePanelInfo(towerInfo.icon, towerInfo.name, towerInfo.stats, towerInfo.description);
+            _towerInfoPanel.UpdatePanelInfo(towerInfo.icon, towerInfo.name, towerInfo.stats,(int)(towerInfo.price * GameParams.gameManager.towerSellModifier), towerInfo.description);
             StopCoroutine(_towerInfoTimerCoroutine);
             _towerInfoTimerCoroutine = StartCoroutine(TowerInfoTimer());
         }
@@ -42,7 +42,7 @@ public class TowerFoundationController : MonoBehaviour
             ((RectTransform)_towerInfoPanel.gameObject.transform).anchoredPosition = canvasPos + (((RectTransform)GameParams.mainCanvas.transform).rect.center - canvasPos).normalized * 400.0f;
 
             TowerInfo towerInfo = tower.GetTowerInfo();
-            _towerInfoPanel.UpdatePanelInfo(towerInfo.icon, towerInfo.name, towerInfo.stats, towerInfo.description);
+            _towerInfoPanel.UpdatePanelInfo(towerInfo.icon, towerInfo.name, towerInfo.stats, (int)(towerInfo.price * GameParams.gameManager.towerSellModifier), towerInfo.description);
 
             _towerInfoTimerCoroutine = StartCoroutine(TowerInfoTimer());
         }
@@ -58,7 +58,8 @@ public class TowerFoundationController : MonoBehaviour
 
     public void DestroyTower()
     {
-        GameParams.gameManager.honey += (int)(tower.price * 0.3f);
+        GameParams.gameManager.honey += (int)(tower.GetCurrentTowerPrice() * 0.3f);
+        tower.ChangeInstancesCount(-1);
         Destroy(gameObject);
     }
 
@@ -66,7 +67,9 @@ public class TowerFoundationController : MonoBehaviour
     {
         _buttonTowerInfo.SetActive(true);
         tower = Instantiate(towerPrefab, gameObject.transform).GetComponent<TowerController>();
+        tower.ChangeInstancesCount(1);
     }
+
     public GameObject GetBuildingObstacle()
     {
         ContactFilter2D contactFillter = new ContactFilter2D();
