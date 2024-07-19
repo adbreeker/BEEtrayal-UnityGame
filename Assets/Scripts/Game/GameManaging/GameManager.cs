@@ -61,6 +61,7 @@ public class GameManager : MonoBehaviour
     [Header("UI:")]
     [SerializeField] GamePanel_UI _gamePanel;
     [SerializeField] ChooseTowerPanel_UI _chooseTowerPanel;
+    [SerializeField] FinishPanel_UI _finishPanel;
     [SerializeField] Canvas _mainCanvas;
 
     public Coroutine buildingTowerCoroutine;
@@ -84,6 +85,7 @@ public class GameManager : MonoBehaviour
         if(lives <= 0)
         {
             Time.timeScale = 0;
+            OpenFinishPanel(false);
         }
 
         if (buildingTowerCoroutine == null && Input.GetKeyDown(KeyCode.Mouse0) && !GameParams.isChooseTowerPanelOpen && !GameParams.IsPointerOverUIObject())
@@ -158,5 +160,16 @@ public class GameManager : MonoBehaviour
             Destroy(tfc.gameObject);
         }
         buildingTowerCoroutine = null;
+    }
+
+    public void OpenFinishPanel(bool win)
+    {
+        _finishPanel.gameObject.SetActive(true);
+
+        int harvestedHoney = GameParams.insectsManager.deadInsects;
+        harvestedHoney += (int)(0.2f * (honey - 100));
+        if(win) { harvestedHoney += 500; }
+
+        _finishPanel.InitializePanel(win);
     }
 }

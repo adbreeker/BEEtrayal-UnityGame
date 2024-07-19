@@ -17,7 +17,7 @@ public class MenuManager : MonoBehaviour
 
     public void Button_Start()
     {
-        SceneManager.LoadScene("Map");
+        SceneManager.LoadScene("Map1");
     }
 
     public void Button_Exit()

@@ -19,6 +19,8 @@ public class InsectsManager : MonoBehaviour
 
     List<InsectController> _livingInsectsOrder = new List<InsectController>();
 
+    bool _isSpawning = false;
+
 
     void Awake()
     {
@@ -49,9 +51,12 @@ public class InsectsManager : MonoBehaviour
 
     IEnumerator SpawnInsects()
     {
+        _isSpawning = true;
+
         foreach(InsectsWave wave in insectsWaves)
         {
-            foreach(GameObject insect in wave.insectsInWave)
+            yield return new WaitForSeconds(5.0f);
+            foreach (GameObject insect in wave.insectsInWave)
             {
                 _livingInsectsOrder.Add(
                 Instantiate(insect, insectsSpawnerPosition.position, Quaternion.identity)
@@ -59,8 +64,9 @@ public class InsectsManager : MonoBehaviour
 
                 yield return new WaitForSeconds(0.5f);
             }
-            yield return new WaitForSeconds(5.0f);
         }
+
+        _isSpawning = false;
     }
 
     public void RemoveInsect(GameObject insect, bool killed)
@@ -75,6 +81,11 @@ public class InsectsManager : MonoBehaviour
         else
         {
             GameParams.gameManager.lives -= iC.value;
+        }
+
+        if(!_isSpawning && _livingInsectsOrder.Count == 0 && GameParams.gameManager.lives > 0)
+        {
+            GameParams.gameManager.OpenFinishPanel(true);
         }
     }
 
