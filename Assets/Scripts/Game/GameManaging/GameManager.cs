@@ -51,6 +51,7 @@ public class GameManager : MonoBehaviour
     [Header("Game statistics")]
     public int lives = 100;
     public int honey = 100;
+    public int honeyDrops = 0;
 
     [Header("Towers:")]
     public float towerSellModifier = 0.3f;

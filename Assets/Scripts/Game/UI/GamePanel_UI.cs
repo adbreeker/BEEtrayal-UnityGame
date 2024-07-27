@@ -99,7 +99,8 @@ public class GamePanel_UI : MonoBehaviour
 
     public void Button_Menu()
     {
-        SceneManager.LoadScene("Menu");
+        Time.timeScale = 0;
+        GameParams.gameManager.OpenFinishPanel(false);
     }
 
     public void Button_Pause()

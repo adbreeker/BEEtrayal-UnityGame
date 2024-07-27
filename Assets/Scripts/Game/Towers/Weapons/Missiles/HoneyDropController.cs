@@ -27,6 +27,7 @@ public class HoneyDropController : MissileController
     public void Button_CollectHoney()
     {
         GameParams.gameManager.honey += honeyValue;
+        GameParams.gameManager.honeyDrops += honeyValue;
         Destroy(gameObject);
     }
 }
