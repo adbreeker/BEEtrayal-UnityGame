@@ -82,7 +82,7 @@ public class ArcherBEE : TowerController
         int currentPrice = _price;
         for(int i = 0; i < _instancesCount; i++) 
         {
-            _price +=(int)(_price * 0.5f);
+            currentPrice +=(int)(currentPrice * 0.5f);
         }
         return currentPrice;
     }
