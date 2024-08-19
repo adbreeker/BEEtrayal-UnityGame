@@ -83,12 +83,6 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if(lives <= 0)
-        {
-            Time.timeScale = 0;
-            OpenFinishPanel(false);
-        }
-
         if (buildingTowerCoroutine == null && Input.GetKeyDown(KeyCode.Mouse0) && !GameParams.isChooseTowerPanelOpen && !GameParams.IsPointerOverUIObject())
         {
             buildingTowerCoroutine = StartCoroutine(BuildTower());

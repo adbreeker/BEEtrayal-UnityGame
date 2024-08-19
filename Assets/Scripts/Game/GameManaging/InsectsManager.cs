@@ -83,7 +83,12 @@ public class InsectsManager : MonoBehaviour
             GameParams.gameManager.lives -= iC.value;
         }
 
-        if(!_isSpawning && _livingInsectsOrder.Count == 0 && GameParams.gameManager.lives > 0)
+        if(GameParams.gameManager.lives <= 0)
+        {
+            Time.timeScale = 0;
+            GameParams.gameManager.OpenFinishPanel(false);
+        }
+        else if(!_isSpawning && _livingInsectsOrder.Count == 0)
         {
             GameParams.gameManager.OpenFinishPanel(true);
         }
