@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class WorkshopPanel_UI : MonoBehaviour
 {
-    void Start()
+    [Header("Linked tower")]
+    public TowerController linkedTower;
+
+    private void Awake()
     {
-        
+        UpdateTowerInfoPanel();
     }
 
-    void Update()
+    public void UpdateTowerInfoPanel()
     {
-        
+
     }
 }

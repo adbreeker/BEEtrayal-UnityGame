@@ -27,6 +27,10 @@ public abstract class TowerController : MonoBehaviour
     public float speed;
     public float missileSpeed;
 
+    [Header("Tower upgrades:")]
+    public bool[] isUpgradeActive = { false, false, false, false };
+    public int[] upgradePrices = { 100, 200, 300, 400 };
+
     [Header("Tower price")]
     [SerializeField] protected int _price;
 
@@ -74,6 +78,33 @@ public abstract class TowerController : MonoBehaviour
     }
 
     protected virtual void AttackExecution() { }
+
+
+    //Tower upgrades ---------------------------------------------------------------------------------------------------------- Tower upgrades
+    public void SetTowerUpgrade(int upgradeIndex, bool status)
+    {
+        switch (upgradeIndex)
+        {
+            case 1:
+                SetUpgrade1(status);
+                break;
+            case 2:
+                SetUpgrade2(status);
+                break;
+            case 3:
+                SetUpgrade3(status);
+                break;
+            case 4:
+                SetUpgrade4(status);
+                break;
+        }
+
+    }
+
+    protected virtual void SetUpgrade1(bool status) { }
+    protected virtual void SetUpgrade2(bool status) { }
+    protected virtual void SetUpgrade3(bool status) { }
+    protected virtual void SetUpgrade4(bool status) { }
 
     //Tower meta data --------------------------------------------------------------------------------------------------------- Tower meta data
 
