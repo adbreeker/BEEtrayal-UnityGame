@@ -2673,6 +2673,7 @@ MonoBehaviour:
   _livesCounter: {fileID: 443456187}
   _honeyCounter: {fileID: 1301283008}
   _harvestedHoneyCounter: {fileID: 967271354}
+  _menuButton: {fileID: 1689140376}
   _mainClockCounter: {fileID: 373375187}
   _gamePanel: {fileID: 589464371}
 --- !u!114 &470504566
@@ -9843,7 +9844,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lives: 100
-  honey: 100
+  startHoney: 100
+  honey: 0
   honeyDrops: 0
   towerSellModifier: 0.3
   tfPrefab: {fileID: 8408532792568524852, guid: 9ea353a276b06ea4a834dd93e26929c2, type: 3}
@@ -9861,6 +9863,8 @@ MonoBehaviour:
   - {fileID: -7811948359647836585, guid: 56af1f7eb770eae46b2b49a8287a2249, type: 3}
   - {fileID: -3193271492069151571, guid: d9bb4522484ae5b459037d6e792cd78b, type: 3}
   - {fileID: -3015530203976270874, guid: 36fee8b35c857304cb1adfe49b954286, type: 3}
+  winBonus: 500
+  harvestModifier: 0.1
   _gamePanel: {fileID: 589464375}
   _chooseTowerPanel: {fileID: 740812707}
   _finishPanel: {fileID: 470504565}

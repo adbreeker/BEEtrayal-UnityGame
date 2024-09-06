@@ -14,16 +14,22 @@ public class FinishPanel_UI : MonoBehaviour
     [SerializeField] TextMeshProUGUI _livesCounter;
     [SerializeField] TextMeshProUGUI _honeyCounter;
     [SerializeField] TextMeshProUGUI _harvestedHoneyCounter;
+    [SerializeField] Button _menuButton;
 
     [Header("Clock to get time text")]
     [SerializeField] TextMeshProUGUI _mainClockCounter;
 
     [Header("Game panel to deactivate")]
     [SerializeField] GameObject _gamePanel;
+
+    bool _isGameWon = false;
  
     public void InitializePanel(bool win)
     {
-        if(win)
+        _isGameWon = win;
+        PlayerPrefs.SetInt("Honey", PlayerPrefs.GetInt("Honey") + CountHarvestedHoney());
+
+        if(_isGameWon)
         {
             _finishStatusText.text = "YOU WON";
             _finishStatusText.color = Color.green;
@@ -43,15 +49,28 @@ public class FinishPanel_UI : MonoBehaviour
 
         _gamePanel.SetActive(false);
 
-        StartCoroutine(CountHarvestedHoney(win));
+        StartCoroutine(CountHarvestedHoneyAnimation());
     }
 
     public void Button_Menu()
     {
+        _menuButton.interactable = false;
+        _harvestedHoneyCounter.text = CountHarvestedHoney().ToString();
         SceneManager.LoadScene("Menu");
     }
 
-    IEnumerator CountHarvestedHoney(bool win)
+    int CountHarvestedHoney()
+    {
+        int honey = GameParams.gameManager.honey;
+        honey -= GameParams.gameManager.startHoney;
+        honey = (int)((float)honey * GameParams.gameManager.harvestModifier);
+        honey += GameParams.gameManager.honeyDrops;
+        if (_isGameWon) { honey += GameParams.gameManager.winBonus; }
+
+        return honey;
+    }
+
+    IEnumerator CountHarvestedHoneyAnimation()
     {
         int currentHoney = GameParams.gameManager.honey;
         int newHoney = currentHoney;
@@ -59,8 +78,8 @@ public class FinishPanel_UI : MonoBehaviour
         float modifyDeltaTime = 0.01f;
 
         yield return new WaitForSecondsRealtime(pauseTime);
-        _harvestedHoneyCounter.text = currentHoney.ToString() + " - 100";
-        newHoney = currentHoney - 100;
+        _harvestedHoneyCounter.text = currentHoney.ToString() + " - " + GameParams.gameManager.startHoney.ToString();
+        newHoney = currentHoney - GameParams.gameManager.startHoney;
         yield return new WaitForSecondsRealtime(pauseTime);
         int step = GetModifyStep(currentHoney, newHoney, modifyDeltaTime);
         do
@@ -70,9 +89,9 @@ public class FinishPanel_UI : MonoBehaviour
             _harvestedHoneyCounter.text = currentHoney.ToString();
         } while (currentHoney != newHoney);
 
-        yield return new WaitForSecondsRealtime(pauseTime);
-        _harvestedHoneyCounter.text = currentHoney.ToString() + " * 10%";
-        newHoney = (int)((float)currentHoney * 0.1f);
+        yield return new WaitForSecondsRealtime(pauseTime); 
+        _harvestedHoneyCounter.text = currentHoney.ToString() + " * " + ((int)(GameParams.gameManager.harvestModifier * 100)).ToString() + "%";
+        newHoney = (int)((float)currentHoney * GameParams.gameManager.harvestModifier);
         yield return new WaitForSecondsRealtime(pauseTime);
         step = GetModifyStep(currentHoney, newHoney, modifyDeltaTime);
         do
@@ -84,7 +103,7 @@ public class FinishPanel_UI : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(pauseTime);
         int bonuses = GameParams.gameManager.honeyDrops;
-        if(win) { bonuses += 500; }
+        if(_isGameWon) { bonuses += GameParams.gameManager.winBonus; }
         _harvestedHoneyCounter.text = currentHoney.ToString() + " + " + bonuses.ToString();
         newHoney = currentHoney + bonuses;
         yield return new WaitForSecondsRealtime(pauseTime);

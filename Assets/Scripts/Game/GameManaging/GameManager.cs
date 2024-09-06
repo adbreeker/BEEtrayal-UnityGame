@@ -50,7 +50,8 @@ public class GameManager : MonoBehaviour
 {
     [Header("Game statistics")]
     public int lives = 100;
-    public int honey = 100;
+    public int startHoney = 100;
+    public int honey;
     public int honeyDrops = 0;
 
     [Header("Towers:")]
@@ -58,6 +59,10 @@ public class GameManager : MonoBehaviour
     public GameObject tfPrefab;
     public Transform towersHolder;
     public List<TowerController> towerTypes = new List<TowerController>();
+
+    [Header("Game finish:")]
+    public int winBonus = 500;
+    public float harvestModifier = 0.1f;
 
     [Header("UI:")]
     [SerializeField] GamePanel_UI _gamePanel;
@@ -74,6 +79,9 @@ public class GameManager : MonoBehaviour
         GameParams.mainCanvas = _mainCanvas;
         Time.timeScale = 1.0f;
         GameParams.currentGameSpeed = 1.0f;
+
+        startHoney += PlayerPrefs.GetInt("Honey") / 1000;
+        honey = startHoney;
 
         foreach(TowerController controller in towerTypes)
         {
