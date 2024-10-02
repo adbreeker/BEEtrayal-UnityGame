@@ -14,6 +14,12 @@ public class WorkshopPanel_UI : MonoBehaviour
 
     public void UpdateTowerInfoPanel()
     {
-
+        TowerInfo info = linkedTower.GetTowerInfo();
+        GetComponentInChildren<TowerInfoPanel_UI>().UpdatePanelInfo(
+            info.icon,
+            info.name,
+            info.stats,
+            info.price,
+            info.description);
     }
 }
