@@ -54,6 +54,69 @@ public class GunBEEnger : TowerController
         return null;
     }
 
+    //Tower upgrades --------------------------------------------------------------------------------------------- Tower Upgrades
+
+    protected override void SetUpgrade1(bool status)
+    {
+        if(status != isUpgradeActive[0])
+        {
+            if(status)
+            {
+                damage += 100.0f;
+            }
+            else
+            {
+                damage -= 100.0f;
+            }
+            isUpgradeActive[0] = status;
+        }
+    }
+    protected override void SetUpgrade2(bool status)
+    {
+        if (status != isUpgradeActive[1])
+        {
+            if (status)
+            {
+                range += 5.0f;
+            }
+            else
+            {
+                range -= 5.0f;
+            }
+            isUpgradeActive[1] = status;
+        }
+    }
+    protected override void SetUpgrade3(bool status)
+    {
+        if (status != isUpgradeActive[2])
+        {
+            if (status)
+            {
+                speed += 10.0f;
+            }
+            else
+            {
+                speed -= 10.0f;
+            }
+            isUpgradeActive[2] = status;
+        }
+    }
+    protected override void SetUpgrade4(bool status)
+    {
+        if (status != isUpgradeActive[3])
+        {
+            if (status)
+            {
+                missileSpeed += 50.0f;
+            }
+            else
+            {
+                missileSpeed -= 50.0f;
+            }
+            isUpgradeActive[3] = status;
+        }
+    }
+
     //Tower meta data --------------------------------------------------------------------------------------------------------- Tower meta data
 
     public override int GetInstancesCount()

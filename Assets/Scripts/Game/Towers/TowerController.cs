@@ -33,6 +33,7 @@ public abstract class TowerController : MonoBehaviour
 
     [Header("Tower price")]
     [SerializeField] protected int _price;
+    public int GetPrice() { return _price; }
 
     protected bool _canAttack = true;
     private bool _attackCooldownOngoing = false;

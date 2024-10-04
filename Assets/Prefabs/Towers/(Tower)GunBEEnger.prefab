@@ -54,6 +54,8 @@ MonoBehaviour:
   range: 3
   speed: 2
   missileSpeed: 40
+  isUpgradeActive: 00000000
+  upgradePrices: 64000000c80000002c01000090010000
   _price: 40
   missilePrefab: {fileID: 6667915596733058763, guid: 66f3ca3bb67edd94eb1cddd5096a2402, type: 3}
   _missileSpawnPoint:
