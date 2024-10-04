@@ -101,10 +101,10 @@ public abstract class TowerController : MonoBehaviour
 
     }
 
-    protected virtual void SetUpgrade1(bool status) { }
-    protected virtual void SetUpgrade2(bool status) { }
-    protected virtual void SetUpgrade3(bool status) { }
-    protected virtual void SetUpgrade4(bool status) { }
+    protected virtual void SetUpgrade1(bool status) { isUpgradeActive[0] = status; }
+    protected virtual void SetUpgrade2(bool status) { isUpgradeActive[1] = status; }
+    protected virtual void SetUpgrade3(bool status) { isUpgradeActive[2] = status; }
+    protected virtual void SetUpgrade4(bool status) { isUpgradeActive[3] = status; }
 
     //Tower meta data --------------------------------------------------------------------------------------------------------- Tower meta data
 

@@ -64,13 +64,11 @@ public class PanelHolderLayoutGroup : MonoBehaviour
 
     IEnumerator MovePanelsAnimation(int newMainPanelIndex)
     {
-        Debug.Log("animation started");
         Vector2 destination = new Vector2(newMainPanelIndex * -_spacing, 0);
         float speed = Mathf.Abs(((RectTransform)transform).anchoredPosition.x - destination.x) / 10.0f;
 
         while (((RectTransform)transform).anchoredPosition != destination)
         {
-            Debug.Log("animation going");
             ((RectTransform)transform).anchoredPosition = Vector2.MoveTowards(((RectTransform)transform).anchoredPosition, destination, speed);
             yield return new WaitForFixedUpdate();
         }

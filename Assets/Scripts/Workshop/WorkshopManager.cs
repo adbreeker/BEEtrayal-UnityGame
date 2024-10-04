@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class WorkshopManager : MonoBehaviour
 {
@@ -11,6 +12,11 @@ public class WorkshopManager : MonoBehaviour
     [SerializeField] GameObject _buttonRight;
 
     [SerializeField]int _currentPanelIndex;
+
+    private void Awake()
+    {
+        Time.timeScale = 1.0f;
+    }
 
     void Start()
     {
@@ -28,6 +34,11 @@ public class WorkshopManager : MonoBehaviour
     public void UpdateHoney()
     {
         _honeyCounter.text = PlayerPrefs.GetInt("Honey").ToString();
+    }
+
+    public void Button_Exit()
+    {
+        SceneManager.LoadScene("Menu");
     }
 
     public void Button_NextPanel()
