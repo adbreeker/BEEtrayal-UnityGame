@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 static class GameParams
 {
@@ -83,10 +84,7 @@ public class GameManager : MonoBehaviour
         startHoney += PlayerPrefs.GetInt("Honey") / 1000;
         honey = startHoney;
 
-        foreach(TowerController controller in towerTypes)
-        {
-            controller.SetInstancesCount(0);
-        }
+        ResetTowerInstancesCounts();
     }
 
     void Update()
@@ -94,6 +92,14 @@ public class GameManager : MonoBehaviour
         if (buildingTowerCoroutine == null && Input.GetKeyDown(KeyCode.Mouse0) && !GameParams.isChooseTowerPanelOpen && !GameParams.IsPointerOverUIObject())
         {
             buildingTowerCoroutine = StartCoroutine(BuildTower());
+        }
+    }
+
+    public void ResetTowerInstancesCounts()
+    {
+        foreach (TowerController controller in towerTypes)
+        {
+            controller.SetInstancesCount(0);
         }
     }
 

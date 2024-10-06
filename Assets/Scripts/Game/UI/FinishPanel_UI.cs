@@ -55,6 +55,7 @@ public class FinishPanel_UI : MonoBehaviour
     public void Button_Menu()
     {
         _menuButton.interactable = false;
+        GameParams.gameManager.ResetTowerInstancesCounts();
         _harvestedHoneyCounter.text = CountHarvestedHoney().ToString();
         SceneManager.LoadScene("Menu");
     }
@@ -66,7 +67,7 @@ public class FinishPanel_UI : MonoBehaviour
         honey = (int)((float)honey * GameParams.gameManager.harvestModifier);
         honey += GameParams.gameManager.honeyDrops;
         if (_isGameWon) { honey += GameParams.gameManager.winBonus; }
-
+        if (honey < 0) { honey = 0; }
         return honey;
     }
 
@@ -114,6 +115,8 @@ public class FinishPanel_UI : MonoBehaviour
             LerpInt(ref currentHoney, newHoney, step);
             _harvestedHoneyCounter.text = currentHoney.ToString();
         } while (currentHoney != newHoney);
+        yield return new WaitForSecondsRealtime(pauseTime);
+        if(currentHoney < 0) { _harvestedHoneyCounter.text = "0"; }
     }
 
     int GetModifyStep(int value, int destinedValue, float deltaTime)

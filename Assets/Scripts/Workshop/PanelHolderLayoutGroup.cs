@@ -80,7 +80,7 @@ public class PanelHolderLayoutGroup : MonoBehaviour
     {
         if (byPrice)
         {
-            workshopPanels = workshopPanels.OrderBy(panel => panel.GetComponent<WorkshopPanel_UI>().linkedTower.GetPrice()).ToList();
+            workshopPanels = workshopPanels.OrderBy(panel => panel.GetComponent<WorkshopPanel_UI>().linkedTower.GetCurrentTowerPrice()).ToList();
         }
         else
         {

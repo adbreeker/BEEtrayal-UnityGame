@@ -24,11 +24,19 @@ public class DataInitialization : MonoBehaviour
                 if(!PlayerPrefs.HasKey(key))
                 {
                     PlayerPrefs.SetInt(key, 0);
+                    if (tc.isUpgradeActive[i - 1])
+                    {
+                        tc.SetTowerUpgrade(i, false);
+                    }
                 }
                 else
                 {
                     int upgradeStatus = PlayerPrefs.GetInt(key);
-                    if(upgradeStatus == 1 && tc.isUpgradeActive[i-1])
+                    if (upgradeStatus == 0 && tc.isUpgradeActive[i - 1])
+                    {
+                        tc.SetTowerUpgrade(i, false);
+                    }
+                    if (upgradeStatus == 1 && tc.isUpgradeActive[i - 1])
                     {
                         tc.SetTowerUpgrade(i, false);
                     }
