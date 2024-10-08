@@ -1,11 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class WorkshopManager : MonoBehaviour
 {
+    public static WorkshopManager workshopManager;
+
     [SerializeField] TextMeshProUGUI _honeyCounter;
     [SerializeField] PanelHolderLayoutGroup _towerPanelHolder;
     [SerializeField] GameObject _buttonLeft;
@@ -16,6 +16,7 @@ public class WorkshopManager : MonoBehaviour
     private void Awake()
     {
         Time.timeScale = 1.0f;
+        workshopManager = this;
     }
 
     void Start()
@@ -26,9 +27,12 @@ public class WorkshopManager : MonoBehaviour
         _currentPanelIndex = 0;
     }
 
-    void Update()
-    {
-        
+    public void UpdateUpgradeSlotsCosts()
+    { 
+        foreach(Transform t in _towerPanelHolder.workshopPanels)
+        {
+            t.GetComponent<WorkshopPanel_UI>().UpdateUpgradeSlotsCosts();
+        }
     }
 
     public void UpdateHoney()

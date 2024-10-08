@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UpgradeSlot_UI : MonoBehaviour
 {
@@ -11,19 +12,24 @@ public class UpgradeSlot_UI : MonoBehaviour
 
     [Header("Additional elements:")]
     [SerializeField] GameObject _buyButton;
+    [SerializeField] TextMeshProUGUI _upgradeCostText;
     [SerializeField] GameObject _stateButton;
     [SerializeField] TextMeshProUGUI _description;
 
     WorkshopPanel_UI _workshopPanel;
-    string upgradeKey;
+    string _upgradeKey;
+    int _upgradeCost;
+    bool _isUpgradeBought = false;
 
     private void Awake()
     {
         _workshopPanel = GetComponentInParent<WorkshopPanel_UI>();
+        _upgradeCost = _workshopPanel.linkedTower.upgradePrices[upgradeIndex - 1];
+        _upgradeCostText.text = _upgradeCost.ToString();
 
         //managing if upgrade is purchased
-        upgradeKey = _workshopPanel.linkedTower.GetTowerInfo().name + "_Upgrade" + upgradeIndex.ToString();
-        int upgradeStatus = PlayerPrefs.GetInt(upgradeKey);
+        _upgradeKey = _workshopPanel.linkedTower.GetTowerInfo().name + "_Upgrade" + upgradeIndex.ToString();
+        int upgradeStatus = PlayerPrefs.GetInt(_upgradeKey);
         if (upgradeStatus == 0)
         {
             _buyButton.SetActive(true);
@@ -33,6 +39,7 @@ public class UpgradeSlot_UI : MonoBehaviour
         {
             Debug.Log("upgrade is OFF");
             _buyButton.SetActive(false);
+            _isUpgradeBought = true;
             _stateButton.SetActive(true);
             _stateButton.GetComponent<SwitchIcon>().Switch();
         }
@@ -40,18 +47,46 @@ public class UpgradeSlot_UI : MonoBehaviour
         {
             Debug.Log("upgrade is ON");
             _buyButton.SetActive(false);
+            _isUpgradeBought = true;
             _stateButton.SetActive(true);
+        }
+
+        UpdateUpgradeSlotCost();
+    }
+
+    public void UpdateUpgradeSlotCost()
+    {
+        if (!_isUpgradeBought)
+        {
+            if (PlayerPrefs.GetInt("Honey") >= _upgradeCost)
+            {
+                foreach(Selectable s in _buyButton.GetComponentsInChildren<Selectable>())
+                {
+                    s.interactable = true;
+                }
+            }
+            else
+            {
+                foreach (Selectable s in _buyButton.GetComponentsInChildren<Selectable>())
+                {
+                    s.interactable = false;
+                }
+            }
         }
     }
 
     public void Button_BuyUpgrade()
     {
         //get money
+        PlayerPrefs.SetInt("Honey", PlayerPrefs.GetInt("Honey") - _upgradeCost);
+        WorkshopManager.workshopManager.UpdateHoney();
+        WorkshopManager.workshopManager.UpdateUpgradeSlotsCosts();
 
         _buyButton.SetActive(false);
+        _isUpgradeBought = true;
         _stateButton.SetActive(true);
 
-        PlayerPrefs.SetInt(upgradeKey, 2);
+        PlayerPrefs.SetInt(_upgradeKey, 2);
         _workshopPanel.linkedTower.SetTowerUpgrade(upgradeIndex, true);
 
         _workshopPanel.UpdateTowerInfoPanel();
@@ -61,13 +96,13 @@ public class UpgradeSlot_UI : MonoBehaviour
     {
         if(_workshopPanel.linkedTower.isUpgradeActive[upgradeIndex-1])
         {
-            PlayerPrefs.SetInt(upgradeKey, 1);
+            PlayerPrefs.SetInt(_upgradeKey, 1);
             _workshopPanel.linkedTower.SetTowerUpgrade(upgradeIndex, false);
             Debug.Log("turning upgrade OFF");
         }
         else
         {
-            PlayerPrefs.SetInt(upgradeKey, 2);
+            PlayerPrefs.SetInt(_upgradeKey, 2);
             _workshopPanel.linkedTower.SetTowerUpgrade(upgradeIndex, true);
             Debug.Log("turning upgrade ON");
         }

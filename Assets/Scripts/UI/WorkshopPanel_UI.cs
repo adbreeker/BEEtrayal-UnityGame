@@ -7,6 +7,9 @@ public class WorkshopPanel_UI : MonoBehaviour
     [Header("Linked tower")]
     public TowerController linkedTower;
 
+    [Header("Upgrade slots:")]
+    public List<UpgradeSlot_UI> upgradeSlots;
+
     private void Awake()
     {
         UpdateTowerInfoPanel();
@@ -21,5 +24,13 @@ public class WorkshopPanel_UI : MonoBehaviour
             info.stats,
             info.price,
             info.description);
+    }
+
+    public void UpdateUpgradeSlotsCosts()
+    {
+        foreach(UpgradeSlot_UI us in upgradeSlots)
+        {
+            us.UpdateUpgradeSlotCost();
+        }
     }
 }
