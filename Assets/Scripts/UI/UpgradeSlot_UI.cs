@@ -26,6 +26,7 @@ public class UpgradeSlot_UI : MonoBehaviour
         _workshopPanel = GetComponentInParent<WorkshopPanel_UI>();
         _upgradeCost = _workshopPanel.linkedTower.upgradePrices[upgradeIndex - 1];
         _upgradeCostText.text = _upgradeCost.ToString();
+        _description.text = _workshopPanel.linkedTower.GetUpgradeDescription(upgradeIndex);
 
         //managing if upgrade is purchased
         _upgradeKey = _workshopPanel.linkedTower.GetTowerInfo().name + "_Upgrade" + upgradeIndex.ToString();

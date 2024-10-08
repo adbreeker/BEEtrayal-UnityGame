@@ -97,9 +97,9 @@ public abstract class TowerController : MonoBehaviour
                 SetUpgrade4(status);
                 break;
         }
-
     }
 
+    public virtual string GetUpgradeDescription(int upgradeIndex) { return ""; }
     protected virtual void SetUpgrade1(bool status) { isUpgradeActive[0] = status; }
     protected virtual void SetUpgrade2(bool status) { isUpgradeActive[1] = status; }
     protected virtual void SetUpgrade3(bool status) { isUpgradeActive[2] = status; }

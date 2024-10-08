@@ -42,6 +42,18 @@ public class GunBEEnger : TowerController
             missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, firstInsect);
             _spawnPointIndex = (_spawnPointIndex + 1) % 2;
         }
+
+        if(isUpgradeActive[2])
+        {
+            firstInsect = GetSecondInsect();
+            if (firstInsect != null)
+            {
+                transform.rotation = GameParams.LookAt2D(transform.position, firstInsect.transform.position);
+                GameObject missile = Instantiate(missilePrefab, _missileSpawnPoint[_spawnPointIndex].position, Quaternion.identity);
+                missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, firstInsect);
+                _spawnPointIndex = (_spawnPointIndex + 1) % 2;
+            }
+        }
     }
 
     GameObject GetFirstInsect()
@@ -54,19 +66,46 @@ public class GunBEEnger : TowerController
         return null;
     }
 
+    GameObject GetSecondInsect()
+    {
+        List<InsectController> insectsOrder = GameParams.insectsManager.GetInsectsOrderInRange(transform.position, range);
+        if (insectsOrder.Count > 1)
+        {
+            return insectsOrder[1].gameObject;
+        }
+        return null;
+    }
+
     //Tower upgrades --------------------------------------------------------------------------------------------- Tower Upgrades
+    public override string GetUpgradeDescription(int upgradeIndex)
+    {
+        switch (upgradeIndex)
+        {
+            case 1:
+                return "Increase range by 1.5";
+            case 2:
+                return "Change multiple instances cost penalty to 25%";
+            case 3:
+                return "Shoot two insects at once";
+            case 4:
+                return "Decrease speed by 1 and increase damage by 100";
+        }
+
+        return "";
+    }
 
     protected override void SetUpgrade1(bool status)
     {
         if(status != isUpgradeActive[0])
         {
-            if(status)
+            if (status)
             {
-                damage += 100.0f;
+                range += 1.5f;
+
             }
             else
             {
-                damage -= 100.0f;
+                range -= 1.5f;
             }
             isUpgradeActive[0] = status;
         }
@@ -75,14 +114,6 @@ public class GunBEEnger : TowerController
     {
         if (status != isUpgradeActive[1])
         {
-            if (status)
-            {
-                range += 5.0f;
-            }
-            else
-            {
-                range -= 5.0f;
-            }
             isUpgradeActive[1] = status;
         }
     }
@@ -90,14 +121,6 @@ public class GunBEEnger : TowerController
     {
         if (status != isUpgradeActive[2])
         {
-            if (status)
-            {
-                speed += 10.0f;
-            }
-            else
-            {
-                speed -= 10.0f;
-            }
             isUpgradeActive[2] = status;
         }
     }
@@ -107,11 +130,14 @@ public class GunBEEnger : TowerController
         {
             if (status)
             {
-                missileSpeed += 50.0f;
+                speed -= 1.5f;
+                damage += 100;
+
             }
             else
             {
-                missileSpeed -= 50.0f;
+                speed += 1.5f;
+                damage -= 100;
             }
             isUpgradeActive[3] = status;
         }
@@ -137,9 +163,12 @@ public class GunBEEnger : TowerController
     public override int GetCurrentTowerPrice()
     {
         int currentPrice = _price;
+        float costPenalty = 0.5f;
+        if(isUpgradeActive[1]) { costPenalty = 0.25f; }
+
         for (int i = 0; i < _instancesCount; i++)
         {
-            currentPrice += (int)(currentPrice * 0.5f);
+            currentPrice += (int)(currentPrice * costPenalty);
         }
         return currentPrice;
     }
@@ -162,6 +191,14 @@ public class GunBEEnger : TowerController
         info.price = GetCurrentTowerPrice();
 
         info.description = new List<string>() { towerDescription };
+        for(int i=0; i<4; i++)
+        {
+            if(isUpgradeActive[i]) 
+            {
+                info.description.Add(GetUpgradeDescription(i + 1));
+            }
+        }
+        
 
         return info;
     }
