@@ -14,6 +14,9 @@ public class TowerFoundationController : MonoBehaviour
     [Header("Tower foundation sprite")]
     [SerializeField] SpriteRenderer _spriteRenderer;
 
+    [Header("Tower range object")]
+    [SerializeField] GameObject _rangeObject;
+
     //tower info
     Coroutine _towerInfoTimerCoroutine;
     TowerInfoPanel_UI _towerInfoPanel;
@@ -25,6 +28,9 @@ public class TowerFoundationController : MonoBehaviour
             TowerInfo towerInfo = tower.GetTowerInfo();
             _towerInfoPanel.UpdatePanelInfo(towerInfo.icon, towerInfo.name, towerInfo.stats,(int)(towerInfo.price * GameParams.gameManager.towerSellModifier), towerInfo.description);
             StopCoroutine(_towerInfoTimerCoroutine);
+
+            SetTowerRangeIndicator(true);
+
             _towerInfoTimerCoroutine = StartCoroutine(TowerInfoTimer());
         }
         else
@@ -44,7 +50,24 @@ public class TowerFoundationController : MonoBehaviour
             TowerInfo towerInfo = tower.GetTowerInfo();
             _towerInfoPanel.UpdatePanelInfo(towerInfo.icon, towerInfo.name, towerInfo.stats, (int)(towerInfo.price * GameParams.gameManager.towerSellModifier), towerInfo.description);
 
+            SetTowerRangeIndicator(true);
+
             _towerInfoTimerCoroutine = StartCoroutine(TowerInfoTimer());
+        }
+    }
+
+    void SetTowerRangeIndicator(bool active)
+    {
+        if(active)
+        {
+            _rangeObject.SetActive(true);
+            _rangeObject.transform.localScale = new Vector2(
+                tower.range * 2f / _rangeObject.transform.parent.lossyScale.x,
+                tower.range * 2f / _rangeObject.transform.parent.lossyScale.y);
+        }
+        else
+        {
+            _rangeObject.SetActive(false);
         }
     }
 
@@ -53,6 +76,7 @@ public class TowerFoundationController : MonoBehaviour
         yield return null;
         yield return null;
         Destroy(_towerInfoPanel.gameObject);
+        SetTowerRangeIndicator(false);
         _towerInfoTimerCoroutine = null;
     }
 
