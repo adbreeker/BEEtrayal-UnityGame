@@ -25,6 +25,7 @@ public abstract class TowerController : MonoBehaviour
     public float range;
     public float speed;
     public float missileSpeed;
+    protected List<SpecialEffect> _attackSpecialEffects = new List<SpecialEffect>();
 
     [Header("Tower upgrades:")]
     public bool[] isUpgradeActive = { false, false, false, false };
@@ -32,6 +33,7 @@ public abstract class TowerController : MonoBehaviour
 
     [Header("Tower price")]
     [SerializeField] protected int _price;
+    public int GetPrice() { return _price; }
 
     protected bool _canAttack = true;
     private bool _attackCooldownOngoing = false;

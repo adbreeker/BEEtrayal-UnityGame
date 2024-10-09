@@ -38,7 +38,6 @@ public class UpgradeSlot_UI : MonoBehaviour
         }
         else if(upgradeStatus == 1)
         {
-            Debug.Log("upgrade is OFF");
             _buyButton.SetActive(false);
             _isUpgradeBought = true;
             _stateButton.SetActive(true);
@@ -46,7 +45,6 @@ public class UpgradeSlot_UI : MonoBehaviour
         }
         else if(upgradeStatus == 2)
         {
-            Debug.Log("upgrade is ON");
             _buyButton.SetActive(false);
             _isUpgradeBought = true;
             _stateButton.SetActive(true);

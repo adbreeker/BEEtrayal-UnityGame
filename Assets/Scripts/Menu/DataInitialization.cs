@@ -11,6 +11,8 @@ public class DataInitialization : MonoBehaviour
         if(!PlayerPrefs.HasKey("Honey"))
         {
             PlayerPrefs.SetInt("Honey", 0);
+            //set honey to 10000
+            PlayerPrefs.SetInt("Honey", 10000);
         }
 
         //towers

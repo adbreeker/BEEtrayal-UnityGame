@@ -39,7 +39,7 @@ public class GunBEEnger : TowerController
         {
             transform.rotation = GameParams.LookAt2D(transform.position, firstInsect.transform.position);
             GameObject missile = Instantiate(missilePrefab, _missileSpawnPoint[_spawnPointIndex].position, Quaternion.identity);
-            missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, firstInsect);
+            missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, firstInsect, _attackSpecialEffects);
             _spawnPointIndex = (_spawnPointIndex + 1) % 2;
         }
 
@@ -50,7 +50,7 @@ public class GunBEEnger : TowerController
             {
                 transform.rotation = GameParams.LookAt2D(transform.position, firstInsect.transform.position);
                 GameObject missile = Instantiate(missilePrefab, _missileSpawnPoint[_spawnPointIndex].position, Quaternion.identity);
-                missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, firstInsect);
+                missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, firstInsect, _attackSpecialEffects);
                 _spawnPointIndex = (_spawnPointIndex + 1) % 2;
             }
         }

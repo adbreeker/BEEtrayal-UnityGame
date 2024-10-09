@@ -25,28 +25,6 @@ public class MissileController : MonoBehaviour
 
     //setting up spawned missile ---------------------------------------------------------------------------------------- setting up spawned missile
 
-    public void SetUpMissile(float speed, float damage, GameObject target)
-    {
-        _speed = speed;
-        _damage = damage;
-        _target = target;
-
-        _flyMode = FlyMode.Target;
-
-        _isReady = true;
-    }
-
-    public void SetUpMissile(float speed, float damage, Vector3 targetPosition)
-    {
-        _speed = speed;
-        _damage = damage;
-        _destination = targetPosition;
-
-        _flyMode = FlyMode.Destination;
-
-        _isReady = true;
-    }
-
     public void SetUpMissile(float speed, float damage, GameObject target, List<SpecialEffect> specialEffects)
     {
         _speed = speed;

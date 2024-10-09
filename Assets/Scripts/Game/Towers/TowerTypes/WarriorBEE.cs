@@ -5,12 +5,10 @@ using UnityEngine;
 public class WarriorBEE : TowerController
 {
     public float slowTime;
-    public float slowStrenght;
+    public float slowStrength;
 
     [Header("Weapon")]
     [SerializeField] GameObject _weapon;
-
-    List<SpecialEffect> _weaponSpecialEffects = new List<SpecialEffect>();
 
     static int _instancesCount = 0;
 
@@ -18,9 +16,9 @@ public class WarriorBEE : TowerController
     {
         base.Start();
 
-        _weaponSpecialEffects.Add(new SpecialEffects.Slow(slowTime, slowStrenght));
+        _attackSpecialEffects.Add(new SpecialEffects.Slow(slowTime, slowStrength));
 
-        _weapon.GetComponent<MeleeController>().SetUpWeapon(damage, _weaponSpecialEffects);
+        _weapon.GetComponent<MeleeController>().SetUpWeapon(damage, _attackSpecialEffects);
     }
 
     protected override void Update()
@@ -36,6 +34,62 @@ public class WarriorBEE : TowerController
     protected override void AttackExecution()
     {
         
+    }
+
+    //Tower upgrades --------------------------------------------------------------------------------------------- Tower Upgrades
+    public override string GetUpgradeDescription(int upgradeIndex)
+    {
+        switch (upgradeIndex)
+        {
+            case 1:
+                return "Increase range by 1.5";
+            case 2:
+                return "";
+            case 3:
+                return "";
+            case 4:
+                return "";
+        }
+
+        return "";
+    }
+
+    protected override void SetUpgrade1(bool status)
+    {
+        if (status != isUpgradeActive[0])
+        {
+            if (status)
+            {
+                range += 1.5f;
+
+            }
+            else
+            {
+                range -= 1.5f;
+            }
+            isUpgradeActive[0] = status;
+        }
+    }
+    protected override void SetUpgrade2(bool status)
+    {
+        if (status != isUpgradeActive[1])
+        {
+            isUpgradeActive[1] = status;
+        }
+    }
+    protected override void SetUpgrade3(bool status)
+    {
+        if (status != isUpgradeActive[2])
+        {
+            isUpgradeActive[2] = status;
+        }
+    }
+    protected override void SetUpgrade4(bool status)
+    {
+        if (status != isUpgradeActive[3])
+        {
+            isUpgradeActive[3] = status;
+        }
     }
 
     //Tower meta data --------------------------------------------------------------------------------------------------------- Tower meta data
@@ -85,6 +139,8 @@ public class WarriorBEE : TowerController
         info.description = new List<string>()
         {
             towerDescription
+            .Replace("{slowStrength}", ((slowStrength*100).ToString() + "%"))
+            .Replace("{slowTime}", slowTime.ToString())
         };
 
         return info;

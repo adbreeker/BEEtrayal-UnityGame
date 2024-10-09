@@ -38,7 +38,7 @@ public class SoldierBEE : TowerController
         {
             transform.rotation = GameParams.LookAt2D(transform.position, firstInsect.transform.position);
             GameObject missile = Instantiate(missilePrefab, _missileSpawnPoint.position, Quaternion.identity);
-            missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, firstInsect);
+            missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, firstInsect, _attackSpecialEffects);
         }
     }
 
@@ -50,6 +50,62 @@ public class SoldierBEE : TowerController
             return insectsOrder[0].gameObject;
         }
         return null;
+    }
+
+    //Tower upgrades --------------------------------------------------------------------------------------------- Tower Upgrades
+    public override string GetUpgradeDescription(int upgradeIndex)
+    {
+        switch (upgradeIndex)
+        {
+            case 1:
+                return "Increase range by 1.5";
+            case 2:
+                return "";
+            case 3:
+                return "";
+            case 4:
+                return "";
+        }
+
+        return "";
+    }
+
+    protected override void SetUpgrade1(bool status)
+    {
+        if (status != isUpgradeActive[0])
+        {
+            if (status)
+            {
+                range += 1.5f;
+
+            }
+            else
+            {
+                range -= 1.5f;
+            }
+            isUpgradeActive[0] = status;
+        }
+    }
+    protected override void SetUpgrade2(bool status)
+    {
+        if (status != isUpgradeActive[1])
+        {
+            isUpgradeActive[1] = status;
+        }
+    }
+    protected override void SetUpgrade3(bool status)
+    {
+        if (status != isUpgradeActive[2])
+        {
+            isUpgradeActive[2] = status;
+        }
+    }
+    protected override void SetUpgrade4(bool status)
+    {
+        if (status != isUpgradeActive[3])
+        {
+            isUpgradeActive[3] = status;
+        }
     }
 
     //Tower meta data --------------------------------------------------------------------------------------------------------- Tower meta data

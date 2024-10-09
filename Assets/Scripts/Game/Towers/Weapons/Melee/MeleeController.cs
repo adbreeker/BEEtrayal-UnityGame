@@ -9,11 +9,6 @@ public class MeleeController : MonoBehaviour
 
     protected bool _isReady = false;
 
-    public void SetUpWeapon(float damage)
-    {
-        _damage = damage;
-    }
-
     public void SetUpWeapon(float damage, List<SpecialEffect> specialEffects) 
     {
         _damage = damage;

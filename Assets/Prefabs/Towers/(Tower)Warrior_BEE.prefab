@@ -48,14 +48,17 @@ MonoBehaviour:
   infoPanel: {fileID: 7048296568798938931, guid: cfdcce573ef926f4c8c800f4c7d34cd3, type: 3}
   towerImage: {fileID: 9173793530920313637, guid: 9a27f4652fec6d442934bc3a9639e0e1, type: 3}
   towerName: Warrior BEE
-  towerDescription: Constantly spins dealing damage with his great sword
+  towerDescription: Constantly spins dealing damage and slowing insects by {slowStrength}
+    for {slowTime}s
   damage: 10
   range: 2.5
   speed: 1
   missileSpeed: 0
+  isUpgradeActive: 00000000
+  upgradePrices: 64000000c80000002c01000090010000
   _price: 320
   slowTime: 0.5
-  slowStrenght: 0.25
+  slowStrength: 0.25
   _weapon: {fileID: 5706969968607682699}
 --- !u!1 &8753307426013898252
 GameObject:

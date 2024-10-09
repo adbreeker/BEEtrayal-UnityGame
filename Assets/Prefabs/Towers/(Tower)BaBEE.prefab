@@ -53,6 +53,8 @@ MonoBehaviour:
   range: 4
   speed: 1.5
   missileSpeed: 15
+  isUpgradeActive: 00000000
+  upgradePrices: 64000000c80000002c01000090010000
   _price: 90
   slowTime: 2
   slowStrength: 0.5

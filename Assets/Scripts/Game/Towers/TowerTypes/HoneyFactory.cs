@@ -29,8 +29,64 @@ public class HoneyFactory : TowerController
         {
             Vector3 honeyDestination = Random.insideUnitCircle * range;
             GameObject droppedHoney = Instantiate(missilePrefab, transform.position, Quaternion.identity);
-            droppedHoney.GetComponent<MissileController>().SetUpMissile(missileSpeed, 0, honeyDestination);
+            droppedHoney.GetComponent<MissileController>().SetUpMissile(missileSpeed, 0, honeyDestination, _attackSpecialEffects);
             droppedHoney.GetComponent<HoneyDropController>().honeyValue = dropValue;
+        }
+    }
+
+    //Tower upgrades --------------------------------------------------------------------------------------------- Tower Upgrades
+    public override string GetUpgradeDescription(int upgradeIndex)
+    {
+        switch (upgradeIndex)
+        {
+            case 1:
+                return "Increase range by 1.5";
+            case 2:
+                return "";
+            case 3:
+                return "";
+            case 4:
+                return "";
+        }
+
+        return "";
+    }
+
+    protected override void SetUpgrade1(bool status)
+    {
+        if (status != isUpgradeActive[0])
+        {
+            if (status)
+            {
+                range += 1.5f;
+
+            }
+            else
+            {
+                range -= 1.5f;
+            }
+            isUpgradeActive[0] = status;
+        }
+    }
+    protected override void SetUpgrade2(bool status)
+    {
+        if (status != isUpgradeActive[1])
+        {
+            isUpgradeActive[1] = status;
+        }
+    }
+    protected override void SetUpgrade3(bool status)
+    {
+        if (status != isUpgradeActive[2])
+        {
+            isUpgradeActive[2] = status;
+        }
+    }
+    protected override void SetUpgrade4(bool status)
+    {
+        if (status != isUpgradeActive[3])
+        {
+            isUpgradeActive[3] = status;
         }
     }
 
@@ -81,7 +137,7 @@ public class HoneyFactory : TowerController
         info.description = new List<string>()
         {
             towerDescription
-            .Replace("{dropChance}", dropChance.ToString())
+            .Replace("{dropChance}", ((dropChance*100).ToString() + "%"))
             .Replace("{dropValue}", dropValue.ToString())
         };
 
