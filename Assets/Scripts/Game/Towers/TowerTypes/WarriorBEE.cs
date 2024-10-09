@@ -42,13 +42,13 @@ public class WarriorBEE : TowerController
         switch (upgradeIndex)
         {
             case 1:
-                return "Increase range by 1.5";
+                return "Holds 1 more sword";
             case 2:
-                return "";
+                return "Increase slow strength to 35%";
             case 3:
-                return "";
+                return "Holds 2 more swords";
             case 4:
-                return "";
+                return "Attacks also poison insects dealing 5 damage per second";
         }
 
         return "";

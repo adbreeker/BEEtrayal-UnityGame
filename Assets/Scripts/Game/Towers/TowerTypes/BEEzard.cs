@@ -86,13 +86,13 @@ public class BEEzard : TowerController
         switch (upgradeIndex)
         {
             case 1:
-                return "Increase range by 1.5";
+                return "Increase speed by 5 but decrease damage by 30";
             case 2:
-                return "";
+                return "Increase speed by 1";
             case 3:
-                return "";
+                return "Every magic missile have 10% chance of being powerful fireball";
             case 4:
-                return "";
+                return "Attacks apply additional random effects";
         }
 
         return "";

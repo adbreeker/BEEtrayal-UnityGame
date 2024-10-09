@@ -58,13 +58,13 @@ public class ShinoBEE : TowerController
         switch (upgradeIndex)
         {
             case 1:
-                return "Increase range by 1.5";
+                return "Attacks decrease struck insects armor by 1";
             case 2:
-                return "";
+                return "Big shuriken orbit around dealing 50 damage and applying effects";
             case 3:
-                return "";
+                return "Thrown shurikens pierces through insects";
             case 4:
-                return "";
+                return "Increase speed by 10 but deacrease damage by 10";
         }
 
         return "";

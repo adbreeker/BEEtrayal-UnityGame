@@ -78,13 +78,13 @@ public class BaBEE : TowerController
         switch (upgradeIndex)
         {
             case 1:
-                return "Increase range by 1.5";
+                return "First one is free but multiple instances cost penalty is increased to 75%";
             case 2:
-                return "";
+                return "Attacks also poison insects dealing 10 damage per second";
             case 3:
-                return "";
+                return "Increase speed by 2";
             case 4:
-                return "";
+                return "Attacks have 15% chance to stop insects for 1s";
         }
 
         return "";

@@ -66,13 +66,13 @@ public class ArcherBEE : TowerController
         switch (upgradeIndex)
         {
             case 1:
-                return "Increase range by 1.5";
+                return "Increase range by 10";
             case 2:
-                return "";
+                return "Increase damage by 20";
             case 3:
-                return "";
+                return "Shoots 3 arrows at once";
             case 4:
-                return "";
+                return "Attacks reduce armor by 100 for 0,5s";
         }
 
         return "";

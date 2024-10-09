@@ -101,13 +101,13 @@ public class OBEE_Wan : TowerController
         switch (upgradeIndex)
         {
             case 1:
-                return "Increase range by 1.5";
+                return "Increase damage by 10";
             case 2:
-                return "";
+                return "Increase damage by 25 and range by 1";
             case 3:
-                return "";
+                return "Holds 1 more sword";
             case 4:
-                return "";
+                return "While jumping throws up to 3 daggers that reduce armor by 50";
         }
 
         return "";

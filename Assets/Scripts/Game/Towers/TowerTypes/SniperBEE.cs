@@ -73,13 +73,13 @@ public class SniperBEE : TowerController
         switch (upgradeIndex)
         {
             case 1:
-                return "Increase range by 1.5";
+                return "Attacks slow insects by 75% for 0,5s";
             case 2:
-                return "";
+                return "Increase speed by 0,25";
             case 3:
-                return "";
+                return "Attacks have 5% chance to deal 500 more damage but multiple intances cost penalty is increased to 300%";
             case 4:
-                return "";
+                return "Increase speed by 2,5 but decreas damage by 100";
         }
 
         return "";

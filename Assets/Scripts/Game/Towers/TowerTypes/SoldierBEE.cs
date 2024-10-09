@@ -58,13 +58,13 @@ public class SoldierBEE : TowerController
         switch (upgradeIndex)
         {
             case 1:
-                return "Increase range by 1.5";
+                return "Increase speed by 5 but decrease range by 3";
             case 2:
-                return "";
+                return "Decrease multiple instances cost penalty to 0%";
             case 3:
-                return "";
+                return "Every attack have 0,01% to kill insect instantly";
             case 4:
-                return "";
+                return "Decrease damage by 15 but attacks reduce armor by 5";
         }
 
         return "";

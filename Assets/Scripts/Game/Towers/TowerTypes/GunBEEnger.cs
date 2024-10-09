@@ -84,7 +84,7 @@ public class GunBEEnger : TowerController
             case 1:
                 return "Increase range by 1.5";
             case 2:
-                return "Change multiple instances cost penalty to 25%";
+                return "Multiple instances cost penalty is decreased to 25%";
             case 3:
                 return "Shoot two insects at once";
             case 4:

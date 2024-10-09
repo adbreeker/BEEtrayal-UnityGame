@@ -71,13 +71,13 @@ public class GrenadierBEE : TowerController
         switch (upgradeIndex)
         {
             case 1:
-                return "Increase range by 1.5";
+                return "Increase missile speed by 30";
             case 2:
-                return "";
+                return "Increase explosion size by 1";
             case 3:
-                return "";
+                return "Thrown grenades sticks to insects";
             case 4:
-                return "";
+                return "Increase damage by 150";
         }
 
         return "";

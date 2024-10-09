@@ -40,13 +40,13 @@ public class HoneyFactory : TowerController
         switch (upgradeIndex)
         {
             case 1:
-                return "Increase range by 1.5";
+                return "Increase honey drop value by 10";
             case 2:
-                return "";
+                return "Increase speed and range by 3";
             case 3:
-                return "";
+                return "Increase honey drop chance to 40%";
             case 4:
-                return "";
+                return "Causes nearby honey drops to explode dealing 100 damage and then collecting them every 10 seconds";
         }
 
         return "";

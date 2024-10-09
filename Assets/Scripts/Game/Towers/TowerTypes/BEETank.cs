@@ -61,13 +61,13 @@ public class BEETank : TowerController
         switch (upgradeIndex)
         {
             case 1:
-                return "Increase range by 1.5";
+                return "Increase range by 4";
             case 2:
-                return "";
+                return "Increase speed by 2";
             case 3:
-                return "";
+                return "Decrease damage by 30 but damage is increased by 1 every shoot";
             case 4:
-                return "";
+                return "Attacks poison insects dealing 15 damage per second but decrease damage by 40";
         }
 
         return "";
