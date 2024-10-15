@@ -32,15 +32,47 @@ namespace SpecialEffects
     public class ArmorReduction : SpecialEffect
     {
         float _armorReduction;
+        float _duration;
 
-        public ArmorReduction(float armorReduction)
+        public ArmorReduction(float armorReduction, float duration = float.PositiveInfinity)
         {
             _armorReduction = armorReduction;
+            _duration = duration;
         }
 
         public override void ApplyEffect(InsectController target)
         {
-            target.ReduceArmor(_armorReduction);
+            target.ReduceArmor(_duration, _armorReduction);
+        }
+    }
+
+    public class Poison : SpecialEffect
+    {
+        float _damagePerSecond;
+
+        public Poison(float damagePerSecond)
+        {
+            _damagePerSecond = damagePerSecond;
+        }
+
+        public override void ApplyEffect(InsectController target)
+        {
+            target.PoisonInsect(_damagePerSecond);
+        }
+    }
+
+    public class Stun : SpecialEffect
+    {
+        float _duration;
+
+        public Stun(float duration)
+        {
+            _duration = duration;
+        }
+
+        public override void ApplyEffect(InsectController target)
+        {
+            target.StunInsect(_duration);
         }
     }
 }

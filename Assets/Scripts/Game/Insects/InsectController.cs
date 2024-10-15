@@ -16,10 +16,13 @@ public class InsectController : MonoBehaviour
     [Header("Insect value")]
     public int value = 1;
 
-    //movement speed reduction
+    //movement speed interfere
     bool _isMsReduced = false;
     float _msReductionTime = 0.0f;
     float _msReductionPercent = 0.0f;
+    bool _isStuned = false;
+    float _stunTime = 0.0f;
+
 
     //path following
     Vector3 _previousPoint;
@@ -45,9 +48,12 @@ public class InsectController : MonoBehaviour
 
     void FixedUpdate()
     {
-        RotateTowardsPoint(false);
-        MoveAlongPath();
-        CalculateDistanceTraveled();
+        if(!_isStuned)
+        {
+            RotateTowardsPoint(false);
+            MoveAlongPath();
+            CalculateDistanceTraveled();
+        }
     }
 
     void MoveAlongPath()
@@ -115,21 +121,45 @@ public class InsectController : MonoBehaviour
         }
     }
 
-    public void ReduceArmor(float armorReduction)
+    public float ReduceArmor(float armorReduction)
     {
-        if(armor > 0.0f)
+        float armorReduced;
+
+        if (armor > 0.0f)
         {
+            armorReduced = armorReduction;
             armor -= armorReduction;
-            if(armor < 0.0f)
+            if (armor < 0.0f)
             {
+                armorReduced += armor;
                 armor = 0.0f;
             }
         }
         else
         {
-            armor -= Mathf.Sqrt(armorReduction);
+            armorReduced = Mathf.Sqrt(armorReduction);
+            armor -= armorReduced;
+        }
+
+        return armorReduced;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Weapon"))
+        {
+            if (collision.tag == "Missile")
+            {
+                collision.GetComponent<MissileController>().OnInsectPierce(this);
+            }
+            if (collision.tag == "Melee")
+            {
+                collision.GetComponent<MeleeController>().OnInsectPierce(this);
+            }
         }
     }
+
+    //Special Effects ------------------------------------------------------------------------------------ Special Effects
 
     public void ReduceMovementSpeed(float time, float percent)
     {
@@ -147,11 +177,11 @@ public class InsectController : MonoBehaviour
         if(!_isMsReduced)
         {
             _isMsReduced = true;
-            StartCoroutine(MovementSpeedReductionCounter());
+            StartCoroutine(MovementSpeedReductionTimer());
         }
     }
 
-    IEnumerator MovementSpeedReductionCounter()
+    IEnumerator MovementSpeedReductionTimer()
     {
         while(_msReductionTime > 0.0f)
         {
@@ -165,20 +195,63 @@ public class InsectController : MonoBehaviour
         movementSpeed = _startingMovementSpeed;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void ReduceArmor(float time, float armorReduction)
     {
-        if(collision.gameObject.layer == LayerMask.NameToLayer("Weapon"))
+        if(float.IsInfinity(time))
         {
-            if(collision.tag == "Missile")
-            {
-                collision.GetComponent<MissileController>().OnInsectPierce(this);
-            }
-            if(collision.tag == "Melee")
-            {
-                collision.GetComponent<MeleeController>().OnInsectPierce(this);
-            }
+            ReduceArmor(armorReduction);
+        }
+        else
+        {
+            StartCoroutine(ArmorReductionTimer(time, armorReduction));
         }
     }
 
+    IEnumerator ArmorReductionTimer(float time, float armorReduction)
+    {
+        float armorReduced = ReduceArmor(armorReduction);
+        yield return new WaitForSeconds(time);
+        armor += armorReduced;
+    }
 
+    public void PoisonInsect(float damagePerSecond)
+    {
+        StartCoroutine(PoisonTimer(damagePerSecond));
+    }
+
+    IEnumerator PoisonTimer(float damagePerSecond)
+    {
+        while(true)
+        {
+            yield return new WaitForSeconds(1f);
+            DealDamage(damagePerSecond);
+        }
+    }
+
+    public void StunInsect(float time)
+    {
+        if (time > _stunTime)
+        {
+            _stunTime = time;
+        }
+
+        if (!_isStuned)
+        {
+            _isStuned = true;
+            StartCoroutine(StunTimer());
+        }
+    }
+
+    IEnumerator StunTimer()
+    {
+        while (_stunTime > 0.0f)
+        {
+            Debug.Log(gameObject.name + "stuned for: " + _stunTime);
+            yield return new WaitForFixedUpdate();
+            _stunTime -= Time.fixedDeltaTime;
+        }
+        _stunTime = 0.0f;
+        Debug.Log(gameObject.name + "unstuned");
+        _isStuned = false;
+    }
 }

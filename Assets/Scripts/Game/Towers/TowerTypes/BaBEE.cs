@@ -20,6 +20,7 @@ public class BaBEE : TowerController
         base.Start();
 
         _attackSpecialEffects.Add(new SpecialEffects.Slow(slowTime, slowStrength));
+        if(isUpgradeActive[1]) { _attackSpecialEffects.Add(new SpecialEffects.Poison(1)); }
     }
 
     protected override void Update()
@@ -41,9 +42,15 @@ public class BaBEE : TowerController
         GameObject strongestInsect = GetStrongestInsect();
         if (strongestInsect != null)
         {
+            List<SpecialEffect> specialEffects = new List<SpecialEffect>(_attackSpecialEffects);
+            if(isUpgradeActive[3] && Random.Range(0,100) < 15)
+            {
+                specialEffects.Add(new SpecialEffects.Stun(0.75f));
+            }
+
             transform.rotation = GameParams.LookAt2D(transform.position, strongestInsect.transform.position);
             GameObject missile = Instantiate(missilePrefab, _missileSpawnPoint.position, GameParams.LookAt2D(transform.position, strongestInsect.transform.position) * Quaternion.Euler(0f, 0f, 180f));
-            missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, strongestInsect, _attackSpecialEffects);
+            missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, strongestInsect, specialEffects);
         }
     }
 
@@ -80,11 +87,11 @@ public class BaBEE : TowerController
             case 1:
                 return "First one is free but multiple instances cost penalty is increased to 75%";
             case 2:
-                return "Attacks also poison insects dealing 10 damage per second";
+                return "Attacks also poison insects dealing 1 damage per second";
             case 3:
-                return "Increase speed by 2";
+                return "Increase speed by 1";
             case 4:
-                return "Attacks have 15% chance to stop insects for 1s";
+                return "Attacks have 15% chance to stop insect for 0.75s";
         }
 
         return "";
@@ -94,15 +101,6 @@ public class BaBEE : TowerController
     {
         if (status != isUpgradeActive[0])
         {
-            if (status)
-            {
-                range += 1.5f;
-
-            }
-            else
-            {
-                range -= 1.5f;
-            }
             isUpgradeActive[0] = status;
         }
     }
@@ -117,6 +115,15 @@ public class BaBEE : TowerController
     {
         if (status != isUpgradeActive[2])
         {
+            if (status)
+            {
+                speed += 1f;
+
+            }
+            else
+            {
+                speed -= 1f;
+            }
             isUpgradeActive[2] = status;
         }
     }
@@ -148,9 +155,17 @@ public class BaBEE : TowerController
     public override int GetCurrentTowerPrice()
     {
         int currentPrice = _price;
+        float costPenalty = 0.5f;
+
+        if (isUpgradeActive[0]) 
+        {
+            if (_instancesCount == 0){ return 0; }
+            costPenalty = 0.75f; 
+        }
+
         for (int i = 0; i < _instancesCount; i++)
         {
-            currentPrice += (int)(currentPrice * 0.5f);
+            currentPrice += (int)(currentPrice * costPenalty);
         }
         return currentPrice;
     }
@@ -178,6 +193,13 @@ public class BaBEE : TowerController
             .Replace("{slowStrength}", ((slowStrength*100).ToString() + "%"))
             .Replace("{slowTime}", slowTime.ToString())
         };
+        for (int i = 0; i < 4; i++)
+        {
+            if (isUpgradeActive[i])
+            {
+                info.description.Add(GetUpgradeDescription(i + 1));
+            }
+        }
 
         return info;
     }

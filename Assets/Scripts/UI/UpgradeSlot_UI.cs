@@ -97,13 +97,11 @@ public class UpgradeSlot_UI : MonoBehaviour
         {
             PlayerPrefs.SetInt(_upgradeKey, 1);
             _workshopPanel.linkedTower.SetTowerUpgrade(upgradeIndex, false);
-            Debug.Log("turning upgrade OFF");
         }
         else
         {
             PlayerPrefs.SetInt(_upgradeKey, 2);
             _workshopPanel.linkedTower.SetTowerUpgrade(upgradeIndex, true);
-            Debug.Log("turning upgrade ON");
         }
 
         _workshopPanel.UpdateTowerInfoPanel();

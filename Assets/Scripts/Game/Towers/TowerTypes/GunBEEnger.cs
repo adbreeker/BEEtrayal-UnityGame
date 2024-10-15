@@ -198,7 +198,6 @@ public class GunBEEnger : TowerController
                 info.description.Add(GetUpgradeDescription(i + 1));
             }
         }
-        
 
         return info;
     }
