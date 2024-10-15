@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class ShinoBEE : TowerController
 {
-    [Header("Missile prefab")]
+    [Header("Weapon prefab")]
     public GameObject missilePrefab;
+    public GameObject bigShuriken;
 
     [Header("Missile spawn point")]
     [SerializeField] Transform[] _missileSpawnPoint = new Transform[4];
@@ -15,6 +16,9 @@ public class ShinoBEE : TowerController
     protected override void Start()
     {
         base.Start();
+
+        if(isUpgradeActive[0]) { _attackSpecialEffects.Add(new SpecialEffects.ArmorReduction(1)); }
+        if(isUpgradeActive[1]) { Instantiate(bigShuriken, transform.parent).GetComponent<MeleeController>().SetUpWeapon(50f, _attackSpecialEffects); }
     }
 
     protected override void Update()
@@ -38,7 +42,8 @@ public class ShinoBEE : TowerController
         {
             transform.rotation = GameParams.LookAt2D(transform.position, randomInsect.transform.position);
             GameObject missile = Instantiate(missilePrefab, _missileSpawnPoint[Random.Range(0,_missileSpawnPoint.Length)].position, Quaternion.identity);
-            missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, randomInsect, _attackSpecialEffects);
+            if(isUpgradeActive[2]) { missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, randomInsect.transform.position, range, _attackSpecialEffects); }
+            else { missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, randomInsect, _attackSpecialEffects); }
         }
     }
 
@@ -74,15 +79,6 @@ public class ShinoBEE : TowerController
     {
         if (status != isUpgradeActive[0])
         {
-            if (status)
-            {
-                range += 1.5f;
-
-            }
-            else
-            {
-                range -= 1.5f;
-            }
             isUpgradeActive[0] = status;
         }
     }
@@ -104,6 +100,16 @@ public class ShinoBEE : TowerController
     {
         if (status != isUpgradeActive[3])
         {
+            if (status)
+            {
+                speed += 10f;
+                damage -= 10f;
+            }
+            else
+            {
+                speed -= 10f;
+                damage += 10f;
+            }
             isUpgradeActive[3] = status;
         }
     }
@@ -153,6 +159,13 @@ public class ShinoBEE : TowerController
         info.price = GetCurrentTowerPrice();
 
         info.description = new List<string>() { towerDescription };
+        for (int i = 0; i < 4; i++)
+        {
+            if (isUpgradeActive[i])
+            {
+                info.description.Add(GetUpgradeDescription(i + 1));
+            }
+        }
 
         return info;
     }

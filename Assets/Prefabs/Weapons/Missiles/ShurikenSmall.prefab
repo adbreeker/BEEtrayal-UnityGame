@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7486939304470799604}
   - component: {fileID: 525069581977480816}
   - component: {fileID: -460154545316545793}
+  - component: {fileID: -7207612760608993539}
   m_Layer: 8
   m_Name: ShurikenSmall
   m_TagString: Missile
@@ -95,3 +96,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a92b5a886b78c240bc534edb55af6f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _collider: {fileID: -7207612760608993539}
+  _rigidbody: {fileID: 0}
+--- !u!58 &-7207612760608993539
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8500108494238482904}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.2

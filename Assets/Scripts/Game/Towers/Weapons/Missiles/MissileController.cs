@@ -12,12 +12,12 @@ public class MissileController : MonoBehaviour
     protected List<SpecialEffect> _specialEffects = new List<SpecialEffect>();
 
 
-    FlyMode _flyMode;
+    protected FlyMode _flyMode;
     bool _isReady = false;
 
 
     //aditional variable types to set up missile
-    enum FlyMode
+    protected enum FlyMode
     {
         Target,
         Destination
@@ -38,11 +38,13 @@ public class MissileController : MonoBehaviour
         _isReady = true;
     }
 
-    public void SetUpMissile(float speed, float damage, Vector3 targetPosition, List<SpecialEffect> specialEffects)
+    public void SetUpMissile(float speed, float damage, Vector3 targetPosition, float range, List<SpecialEffect> specialEffects)
     {
         _speed = speed;
         _damage = damage;
-        _destination = targetPosition;
+
+        Vector3 direction = (targetPosition - transform.position).normalized;
+        _destination = targetPosition + (direction * range);
 
         _specialEffects = specialEffects;
 

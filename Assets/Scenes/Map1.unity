@@ -9844,7 +9844,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lives: 100
-  startHoney: 100
+  startHoney: 2000
   honey: 0
   honeyDrops: 0
   towerSellModifier: 0.3

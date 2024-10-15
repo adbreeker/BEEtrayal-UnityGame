@@ -27,9 +27,10 @@ public class HoneyFactory : TowerController
         _canAttack = false;
         if (Random.Range(0.0f, 1.0f) >= dropChance)
         {
-            Vector3 honeyDestination = Random.insideUnitCircle * range;
+            Vector3 honeyDestination = (Vector2)transform.position + (Random.insideUnitCircle * range);
+            Debug.Log("jar distance: " + Vector3.Distance(honeyDestination, transform.position));
             GameObject droppedHoney = Instantiate(missilePrefab, transform.position, Quaternion.identity);
-            droppedHoney.GetComponent<MissileController>().SetUpMissile(missileSpeed, 0, honeyDestination, _attackSpecialEffects);
+            droppedHoney.GetComponent<MissileController>().SetUpMissile(missileSpeed, 0, honeyDestination, 0f, _attackSpecialEffects);
             droppedHoney.GetComponent<HoneyDropController>().honeyValue = dropValue;
         }
     }

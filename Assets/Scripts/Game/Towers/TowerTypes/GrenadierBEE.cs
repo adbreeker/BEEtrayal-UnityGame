@@ -48,7 +48,7 @@ public class GrenadierBEE : TowerController
             {
                 transform.rotation = GameParams.LookAt2D(transform.position, randomInsect.transform.position);
                 GameObject missile = Instantiate(missilePrefab, _missileSpawnPoint[i].position, Quaternion.identity);
-                missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, randomInsect.transform.position, _attackSpecialEffects);
+                missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, randomInsect.transform.position, 0f, _attackSpecialEffects);
                 missile.GetComponent<GrenadeController>().explosionSize = explosionSize;
             }
             yield return new WaitForSeconds(0.1f / speed);
