@@ -7,14 +7,16 @@ public class HoneyFactory : TowerController
     public float dropChance;
     public int dropValue;
 
-    [Header("Honey prefab")]
+    [Header("Missile prefab")]
     public GameObject missilePrefab;
+    [SerializeField] GameObject _explosionPrefab;
 
     static int _instancesCount = 0;
 
     protected override void Start()
     {
         base.Start();
+        if (isUpgradeActive[3]) { StartCoroutine(ExplosiveCollecting()); }
     }
 
     protected override void Update()
@@ -35,6 +37,41 @@ public class HoneyFactory : TowerController
         }
     }
 
+    IEnumerator ExplosiveCollecting()
+    {
+        while(true)
+        {
+            yield return new WaitForSeconds(10f);
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, range, LayerMask.GetMask("Weapon"));
+            List<GameObject> dropsToCollect = new List<GameObject>();
+            foreach(Collider2D drop in colliders)
+            {
+                if(drop.tag == "HoneyDrop")
+                {
+                    dropsToCollect.Add(drop.gameObject);
+                    Instantiate(_explosionPrefab, drop.transform.position, Quaternion.Euler(0f, 0f, Random.Range(0f, 360f))).GetComponent<ExplosionEffect>().explosionSize = 3f;
+
+                    Collider2D[] insectsInArea = Physics2D.OverlapCircleAll(drop.transform.position, 3f, LayerMask.GetMask("Insect"));
+
+                    foreach (Collider2D otherCollider in insectsInArea)
+                    {
+                        InsectController insect = otherCollider.GetComponent<InsectController>();
+                        insect.DealDamage(100f);
+                        foreach (SpecialEffect specialEffect in _attackSpecialEffects)
+                        {
+                            specialEffect.ApplyEffect(insect);
+                        }
+                    }
+                }
+            }
+            
+            foreach(GameObject drop in dropsToCollect)
+            {
+                drop.AddComponent<CollectingEffect>().Initiate(transform.position, 0.3f);
+            }
+        }
+    }
+
     //Tower upgrades --------------------------------------------------------------------------------------------- Tower Upgrades
     public override string GetUpgradeDescription(int upgradeIndex)
     {
@@ -43,11 +80,11 @@ public class HoneyFactory : TowerController
             case 1:
                 return "Increase honey drop value by 10";
             case 2:
-                return "Increase speed and range by 3";
+                return "Increase speed by 0,2 and range by 3";
             case 3:
                 return "Increase honey drop chance to 40%";
             case 4:
-                return "Causes nearby honey drops to explode dealing 100 damage and then collecting them every 10 seconds";
+                return "Every 10 seconds causes nearby honey drops to explode dealing 100 damage and then collecting them";
         }
 
         return "";
@@ -59,12 +96,11 @@ public class HoneyFactory : TowerController
         {
             if (status)
             {
-                range += 1.5f;
-
+                dropValue += 10;
             }
             else
             {
-                range -= 1.5f;
+                dropValue -= 10;
             }
             isUpgradeActive[0] = status;
         }
@@ -73,6 +109,16 @@ public class HoneyFactory : TowerController
     {
         if (status != isUpgradeActive[1])
         {
+            if (status)
+            {
+                speed += 0.2f;
+                range += 3f;
+            }
+            else
+            {
+                speed -= 0.2f;
+                range -= 3f;
+            }
             isUpgradeActive[1] = status;
         }
     }
@@ -80,6 +126,14 @@ public class HoneyFactory : TowerController
     {
         if (status != isUpgradeActive[2])
         {
+            if (status)
+            {
+                dropChance += 0.15f;
+            }
+            else
+            {
+                dropChance -= 0.15f;
+            }
             isUpgradeActive[2] = status;
         }
     }
