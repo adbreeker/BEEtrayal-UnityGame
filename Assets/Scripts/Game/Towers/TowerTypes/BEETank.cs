@@ -17,6 +17,8 @@ public class BEETank : TowerController
     protected override void Start()
     {
         base.Start();
+
+        if(isUpgradeActive[3]) { _attackSpecialEffects.Add(new SpecialEffects.Poison(5)); }
     }
 
     protected override void Update()
@@ -35,13 +37,17 @@ public class BEETank : TowerController
             return;
         }
 
-        GameObject firstInsect = GetFirstInsect();
-        if (firstInsect != null)
+        GameObject targetInsect;
+        if(isUpgradeActive[0]) { targetInsect = GetLastInsect(); }
+        else { targetInsect = GetFirstInsect(); }
+
+        if (targetInsect != null)
         {
-            transform.rotation = GameParams.LookAt2D(transform.position, firstInsect.transform.position);
-            GameObject missile = Instantiate(missilePrefab, _missileSpawnPoint.position, GameParams.LookAt2D(transform.position, firstInsect.transform.position));
-            missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, firstInsect.transform.position, 0f, _attackSpecialEffects);
+            transform.rotation = GameParams.LookAt2D(transform.position, targetInsect.transform.position);
+            GameObject missile = Instantiate(missilePrefab, _missileSpawnPoint.position, GameParams.LookAt2D(transform.position, targetInsect.transform.position));
+            missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, targetInsect.transform.position, 0f, _attackSpecialEffects);
             missile.GetComponent<RocketController>().explosionSize = explosionSize;
+            damage += 0.25f;
         }
     }
 
@@ -54,6 +60,16 @@ public class BEETank : TowerController
         }
         return null;
     }
+    
+    GameObject GetLastInsect()
+    {
+        List<InsectController> insectsOrder = GameParams.insectsManager.GetInsectsOrderInRange(transform.position, range);
+        if (insectsOrder.Count > 0)
+        {
+            return insectsOrder[insectsOrder.Count-1].gameObject;
+        }
+        return null;
+    }
 
     //Tower upgrades --------------------------------------------------------------------------------------------- Tower Upgrades
     public override string GetUpgradeDescription(int upgradeIndex)
@@ -61,13 +77,13 @@ public class BEETank : TowerController
         switch (upgradeIndex)
         {
             case 1:
-                return "Increase range by 4";
+                return "Increase range by 2 and target the farthest insects";
             case 2:
-                return "Increase speed by 2";
+                return "Increase speed by 1";
             case 3:
-                return "Decrease damage by 30 but damage is increased by 1 every shoot";
+                return "Decrease damage by 30 but damage is increased by 0.25 every shoot";
             case 4:
-                return "Attacks poison insects dealing 15 damage per second but decrease damage by 40";
+                return "Decrease damage by 40 but attacks poison insects dealing 5 damage per second";
         }
 
         return "";
@@ -79,12 +95,11 @@ public class BEETank : TowerController
         {
             if (status)
             {
-                range += 1.5f;
-
+                range += 2f;
             }
             else
             {
-                range -= 1.5f;
+                range -= 2f;
             }
             isUpgradeActive[0] = status;
         }
@@ -93,6 +108,14 @@ public class BEETank : TowerController
     {
         if (status != isUpgradeActive[1])
         {
+            if (status)
+            {
+                speed += 1f;
+            }
+            else
+            {
+                speed -= 1f;
+            }
             isUpgradeActive[1] = status;
         }
     }
@@ -100,6 +123,14 @@ public class BEETank : TowerController
     {
         if (status != isUpgradeActive[2])
         {
+            if (status)
+            {
+                damage -= 30f;
+            }
+            else
+            {
+                damage += 30f;
+            }
             isUpgradeActive[2] = status;
         }
     }
@@ -107,6 +138,14 @@ public class BEETank : TowerController
     {
         if (status != isUpgradeActive[3])
         {
+            if (status)
+            {
+                damage -= 40f;
+            }
+            else
+            {
+                damage += 40f;
+            }
             isUpgradeActive[3] = status;
         }
     }

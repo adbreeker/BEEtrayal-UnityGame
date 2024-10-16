@@ -50,10 +50,10 @@ MonoBehaviour:
   towerDescription: Have a {dropChance} chance to drop jar worth {dropValue} honey
   damage: 0
   range: 4
-  speed: 0.2
+  speed: 0.20000003
   missileSpeed: 15
   isUpgradeActive: 00000000
-  upgradePrices: 64000000c80000002c01000090010000
+  upgradePrices: 881300001c250000482600000f270000
   _price: 625
   dropChance: 0.25
   dropValue: 25

@@ -12,7 +12,7 @@ public class DataInitialization : MonoBehaviour
         {
             PlayerPrefs.SetInt("Honey", 0);
             //set honey to 10000
-            PlayerPrefs.SetInt("Honey", 10000);
+            PlayerPrefs.SetInt("Honey", 100000);
         }
 
         //towers
