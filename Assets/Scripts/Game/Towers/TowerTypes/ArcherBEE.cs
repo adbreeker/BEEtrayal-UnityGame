@@ -153,6 +153,13 @@ public class ArcherBEE : TowerController
         info.price = GetCurrentTowerPrice();
 
         info.description = new List<string>() { towerDescription };
+        for (int i = 0; i < 4; i++)
+        {
+            if (isUpgradeActive[i])
+            {
+                info.description.Add(GetUpgradeDescription(i + 1));
+            }
+        }
 
         return info;
     }

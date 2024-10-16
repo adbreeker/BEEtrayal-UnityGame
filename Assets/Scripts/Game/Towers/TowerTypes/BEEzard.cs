@@ -185,6 +185,13 @@ public class BEEzard : TowerController
             towerDescription
             .Replace("{armorReduction}", armorReduction.ToString())
         };
+        for (int i = 0; i < 4; i++)
+        {
+            if (isUpgradeActive[i])
+            {
+                info.description.Add(GetUpgradeDescription(i + 1));
+            }
+        }
 
         return info;
     }

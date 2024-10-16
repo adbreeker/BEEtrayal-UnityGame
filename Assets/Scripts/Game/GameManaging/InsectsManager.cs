@@ -31,6 +31,15 @@ public class InsectsManager : MonoBehaviour
     void Start()
     {
         StartCoroutine(SpawnInsects());
+        int maxInsects = 0;
+        foreach (InsectsWave wave in insectsWaves)
+        {
+            foreach (GameObject insect in wave.insectsInWave)
+            {
+                maxInsects++;
+            }
+        }
+        Debug.Log(maxInsects);
     }
 
     void Update()
@@ -72,25 +81,28 @@ public class InsectsManager : MonoBehaviour
     public void RemoveInsect(GameObject insect, bool killed)
     {
         InsectController iC = insect.GetComponent<InsectController>();
-        _livingInsectsOrder.Remove(iC);
-        if(killed) 
+        if(_livingInsectsOrder.Contains(iC))
         {
-            GameParams.gameManager.honey += iC.value;
-            deadInsects++;
-        }
-        else
-        {
-            GameParams.gameManager.lives -= iC.value;
-        }
+            _livingInsectsOrder.Remove(iC);
+            if (killed)
+            {
+                GameParams.gameManager.honey += iC.value;
+                deadInsects++;
+            }
+            else
+            {
+                GameParams.gameManager.lives -= iC.value;
+            }
 
-        if(GameParams.gameManager.lives <= 0)
-        {
-            Time.timeScale = 0;
-            GameParams.gameManager.OpenFinishPanel(false);
-        }
-        else if(!_isSpawning && _livingInsectsOrder.Count == 0)
-        {
-            GameParams.gameManager.OpenFinishPanel(true);
+            if (GameParams.gameManager.lives <= 0)
+            {
+                Time.timeScale = 0;
+                GameParams.gameManager.OpenFinishPanel(false);
+            }
+            else if (!_isSpawning && _livingInsectsOrder.Count == 0)
+            {
+                GameParams.gameManager.OpenFinishPanel(true);
+            }
         }
     }
 

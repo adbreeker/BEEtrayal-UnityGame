@@ -141,6 +141,13 @@ public class HoneyFactory : TowerController
             .Replace("{dropChance}", ((dropChance*100).ToString() + "%"))
             .Replace("{dropValue}", dropValue.ToString())
         };
+        for (int i = 0; i < 4; i++)
+        {
+            if (isUpgradeActive[i])
+            {
+                info.description.Add(GetUpgradeDescription(i + 1));
+            }
+        }
 
         return info;
     }

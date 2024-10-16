@@ -9,6 +9,9 @@ public class WarriorBEE : TowerController
 
     [Header("Weapon")]
     [SerializeField] GameObject _weapon;
+    [SerializeField] GameObject _weaponAdditional1;
+    [SerializeField] GameObject _weaponAdditional2;
+    [SerializeField] GameObject _weaponAdditional3;
 
     static int _instancesCount = 0;
 
@@ -17,8 +20,22 @@ public class WarriorBEE : TowerController
         base.Start();
 
         _attackSpecialEffects.Add(new SpecialEffects.Slow(slowTime, slowStrength));
+        if(isUpgradeActive[3]) { _attackSpecialEffects.Add(new SpecialEffects.Poison(1)); }
 
         _weapon.GetComponent<MeleeController>().SetUpWeapon(damage, _attackSpecialEffects);
+
+        if(isUpgradeActive[0])
+        {
+            _weaponAdditional1.SetActive(true);
+            _weaponAdditional1.GetComponent<MeleeController>().SetUpWeapon(damage, _attackSpecialEffects);
+        }
+        if (isUpgradeActive[2])
+        {
+            _weaponAdditional2.SetActive(true);
+            _weaponAdditional2.GetComponent<MeleeController>().SetUpWeapon(damage, _attackSpecialEffects);
+            _weaponAdditional3.SetActive(true);
+            _weaponAdditional3.GetComponent<MeleeController>().SetUpWeapon(damage, _attackSpecialEffects);
+        }
     }
 
     protected override void Update()
@@ -48,7 +65,7 @@ public class WarriorBEE : TowerController
             case 3:
                 return "Holds 2 more swords";
             case 4:
-                return "Attacks also poison insects dealing 5 damage per second";
+                return "Attacks also poison insects dealing 1 damage per second";
         }
 
         return "";
@@ -58,15 +75,6 @@ public class WarriorBEE : TowerController
     {
         if (status != isUpgradeActive[0])
         {
-            if (status)
-            {
-                range += 1.5f;
-
-            }
-            else
-            {
-                range -= 1.5f;
-            }
             isUpgradeActive[0] = status;
         }
     }
@@ -74,6 +82,14 @@ public class WarriorBEE : TowerController
     {
         if (status != isUpgradeActive[1])
         {
+            if (status)
+            {
+                slowStrength += 0.1f;
+            }
+            else
+            {
+                slowStrength -= 0.1f;
+            }
             isUpgradeActive[1] = status;
         }
     }
@@ -142,6 +158,13 @@ public class WarriorBEE : TowerController
             .Replace("{slowStrength}", ((slowStrength*100).ToString() + "%"))
             .Replace("{slowTime}", slowTime.ToString())
         };
+        for (int i = 0; i < 4; i++)
+        {
+            if (isUpgradeActive[i])
+            {
+                info.description.Add(GetUpgradeDescription(i + 1));
+            }
+        }
 
         return info;
     }
