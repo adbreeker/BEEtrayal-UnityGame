@@ -15,6 +15,8 @@ public class SniperBEE : TowerController
     protected override void Start()
     {
         base.Start();
+
+        if(isUpgradeActive[0]) { _attackSpecialEffects.Add(new SpecialEffects.Slow(0.5f, 0.75f)); }
     }
 
     protected override void Update()
@@ -38,7 +40,9 @@ public class SniperBEE : TowerController
         {
             transform.rotation = GameParams.LookAt2D(transform.position, strongestInsect.transform.position);
             GameObject missile = Instantiate(missilePrefab, _missileSpawnPoint.position, GameParams.LookAt2D(transform.position, strongestInsect.transform.position));
-            missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, strongestInsect, _attackSpecialEffects);
+            
+            if(isUpgradeActive[2] && Random.Range(0,100) < 5) { missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage+500f, strongestInsect, _attackSpecialEffects); }
+            else { missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, strongestInsect, _attackSpecialEffects); }
         }
     }
 
@@ -79,7 +83,7 @@ public class SniperBEE : TowerController
             case 3:
                 return "Attacks have 5% chance to deal 500 more damage but multiple intances cost penalty is increased to 300%";
             case 4:
-                return "Increase speed by 2,5 but decreas damage by 100";
+                return "Increase speed by 1,75 but decreas damage by 100";
         }
 
         return "";
@@ -89,15 +93,6 @@ public class SniperBEE : TowerController
     {
         if (status != isUpgradeActive[0])
         {
-            if (status)
-            {
-                range += 1.5f;
-
-            }
-            else
-            {
-                range -= 1.5f;
-            }
             isUpgradeActive[0] = status;
         }
     }
@@ -105,6 +100,14 @@ public class SniperBEE : TowerController
     {
         if (status != isUpgradeActive[1])
         {
+            if (status)
+            {
+                speed += 0.25f;
+            }
+            else
+            {
+                speed -= 0.25f;
+            }
             isUpgradeActive[1] = status;
         }
     }
@@ -119,6 +122,16 @@ public class SniperBEE : TowerController
     {
         if (status != isUpgradeActive[3])
         {
+            if (status)
+            {
+                speed += 1.75f;
+                damage -= 100f;
+            }
+            else
+            {
+                speed -= 1.75f;
+                damage += 100f;
+            }
             isUpgradeActive[3] = status;
         }
     }
@@ -167,10 +180,14 @@ public class SniperBEE : TowerController
 
         info.price = GetCurrentTowerPrice();
 
-        info.description = new List<string>()
+        info.description = new List<string>() { towerDescription };
+        for (int i = 0; i < 4; i++)
         {
-            towerDescription
-        };
+            if (isUpgradeActive[i])
+            {
+                info.description.Add(GetUpgradeDescription(i + 1));
+            }
+        }
 
         return info;
     }

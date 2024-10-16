@@ -62,8 +62,8 @@ public class TowerFoundationController : MonoBehaviour
         {
             _rangeObject.SetActive(true);
             _rangeObject.transform.localScale = new Vector2(
-                tower.range * 2f / _rangeObject.transform.parent.lossyScale.x,
-                tower.range * 2f / _rangeObject.transform.parent.lossyScale.y);
+                Mathf.Clamp(tower.range, 0, 20) * 2f / _rangeObject.transform.parent.lossyScale.x,
+                Mathf.Clamp(tower.range, 0, 20) * 2f / _rangeObject.transform.parent.lossyScale.y);
         }
         else
         {

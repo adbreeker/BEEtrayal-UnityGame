@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class OBEE_Wan : TowerController
 {
     [Header("Weapon")]
     [SerializeField] GameObject _weapon;
+    [SerializeField] GameObject _weaponAdditional;
+    [SerializeField] GameObject _daggerPrefab;
 
     bool _isJumpAttacking = false;
 
@@ -16,6 +19,11 @@ public class OBEE_Wan : TowerController
         base.Start();
 
         _weapon.GetComponent<MeleeController>().SetUpWeapon(damage, _attackSpecialEffects);
+        if(isUpgradeActive[2])
+        {
+            _weaponAdditional.SetActive(true);
+            _weaponAdditional.GetComponent<MeleeController>().SetUpWeapon(damage, _attackSpecialEffects);
+        }
     }
 
     protected override void Update()
@@ -50,6 +58,19 @@ public class OBEE_Wan : TowerController
             {
                 transform.position = Vector3.MoveTowards(transform.position, jumpPos, 0.4f * speed);
                 yield return new WaitForFixedUpdate();
+            }
+
+            if (isUpgradeActive[3])
+            {
+                List<GameObject> upToThreeStrongestInsects = GetUpToThreeFarthestInsects();
+                List<SpecialEffect> daggerEffects = new List<SpecialEffect> { 
+                    new SpecialEffects.ArmorReduction(50),
+                    new SpecialEffects.Stun(0.5f)};
+                foreach (GameObject insect in upToThreeStrongestInsects)
+                {
+                    GameObject missile = Instantiate(_daggerPrefab, transform.position, GameParams.LookAt2D(transform.position, insect.transform.position));
+                    missile.GetComponent<MissileController>().SetUpMissile(30f, 0f, insect, daggerEffects);
+                }
             }
 
             float rotationStep = 40 * speed;
@@ -95,6 +116,19 @@ public class OBEE_Wan : TowerController
         return closestInsect;
     }
 
+    List<GameObject> GetUpToThreeFarthestInsects()
+    {
+        List<GameObject> upTothree = new List<GameObject>();
+        List<InsectController> insectsOrder = new List<InsectController>(GameParams.insectsManager.GetInsectsOrderInRange(transform.position, range));
+        insectsOrder = insectsOrder.OrderByDescending(insect => Vector3.Distance(transform.position, insect.transform.position)).ToList();
+
+        for(int i = 0; i<Mathf.Min(3, insectsOrder.Count); i++)
+        {
+            upTothree.Add(insectsOrder[i].gameObject);
+        }
+        return upTothree;
+    }
+
     //Tower upgrades --------------------------------------------------------------------------------------------- Tower Upgrades
     public override string GetUpgradeDescription(int upgradeIndex)
     {
@@ -107,7 +141,7 @@ public class OBEE_Wan : TowerController
             case 3:
                 return "Holds 1 more sword";
             case 4:
-                return "While jumping throws up to 3 daggers that reduce armor by 50";
+                return "While jumping throws up to 3 daggers that reduce armor by 50 and stun for 0,5s";
         }
 
         return "";
@@ -119,12 +153,11 @@ public class OBEE_Wan : TowerController
         {
             if (status)
             {
-                range += 1.5f;
-
+                damage += 10;
             }
             else
             {
-                range -= 1.5f;
+                damage -= 10f;
             }
             isUpgradeActive[0] = status;
         }
@@ -133,6 +166,16 @@ public class OBEE_Wan : TowerController
     {
         if (status != isUpgradeActive[1])
         {
+            if (status)
+            {
+                damage += 25;
+                range += 1;
+            }
+            else
+            {
+                damage -= 25f;
+                range -= 1;
+            }
             isUpgradeActive[1] = status;
         }
     }
@@ -195,10 +238,14 @@ public class OBEE_Wan : TowerController
 
         info.price = GetCurrentTowerPrice();
 
-        info.description = new List<string>()
+        info.description = new List<string>() { towerDescription };
+        for (int i = 0; i < 4; i++)
         {
-            towerDescription
-        };
+            if (isUpgradeActive[i])
+            {
+                info.description.Add(GetUpgradeDescription(i + 1));
+            }
+        }
 
         return info;
     }

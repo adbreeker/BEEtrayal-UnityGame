@@ -91,7 +91,7 @@ public class BaBEE : TowerController
             case 3:
                 return "Increase speed by 1";
             case 4:
-                return "Attacks have 15% chance to stop insect for 0.75s";
+                return "Attacks have 15% chance to stun insect for 0.75s";
         }
 
         return "";
