@@ -9,6 +9,7 @@ public class GrenadierBEE : TowerController
 
     [Header("Missile prefab")]
     public GameObject missilePrefab;
+    public GameObject stickyGrenadePrefab;
 
     [Header("Missile spawn point")]
     [SerializeField] Transform[] _missileSpawnPoint = new Transform[3];
@@ -41,17 +42,35 @@ public class GrenadierBEE : TowerController
 
     IEnumerator ThrowThreeGranades()
     {
-        for(int i = 0; i<3; i++)
+        if(isUpgradeActive[2])
         {
-            GameObject randomInsect = GetRandomInsect();
-            if (randomInsect != null)
+            for (int i = 0; i < 3; i++)
             {
-                transform.rotation = GameParams.LookAt2D(transform.position, randomInsect.transform.position);
-                GameObject missile = Instantiate(missilePrefab, _missileSpawnPoint[i].position, Quaternion.identity);
-                missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, randomInsect.transform.position, 0f, _attackSpecialEffects);
-                missile.GetComponent<GrenadeController>().explosionSize = explosionSize;
+                GameObject randomInsect = GetRandomInsect();
+                if (randomInsect != null)
+                {
+                    transform.rotation = GameParams.LookAt2D(transform.position, randomInsect.transform.position);
+                    GameObject missile = Instantiate(stickyGrenadePrefab, _missileSpawnPoint[i].position, Quaternion.identity);
+                    missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, randomInsect, _attackSpecialEffects);
+                    missile.GetComponent<GrenadeController>().explosionSize = explosionSize;
+                }
+                yield return new WaitForSeconds(0.1f / speed);
             }
-            yield return new WaitForSeconds(0.1f / speed);
+        }
+        else
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                GameObject randomInsect = GetRandomInsect();
+                if (randomInsect != null)
+                {
+                    transform.rotation = GameParams.LookAt2D(transform.position, randomInsect.transform.position);
+                    GameObject missile = Instantiate(missilePrefab, _missileSpawnPoint[i].position, Quaternion.identity);
+                    missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, randomInsect.transform.position, 0f, _attackSpecialEffects);
+                    missile.GetComponent<GrenadeController>().explosionSize = explosionSize;
+                }
+                yield return new WaitForSeconds(0.1f / speed);
+            }
         }
     }
 
@@ -89,12 +108,11 @@ public class GrenadierBEE : TowerController
         {
             if (status)
             {
-                range += 1.5f;
-
+                missileSpeed += 30f;
             }
             else
             {
-                range -= 1.5f;
+                missileSpeed -= 30f;
             }
             isUpgradeActive[0] = status;
         }
@@ -103,6 +121,14 @@ public class GrenadierBEE : TowerController
     {
         if (status != isUpgradeActive[1])
         {
+            if (status)
+            {
+                explosionSize += 1f;
+            }
+            else
+            {
+                explosionSize -= 1f;
+            }
             isUpgradeActive[1] = status;
         }
     }
@@ -117,6 +143,14 @@ public class GrenadierBEE : TowerController
     {
         if (status != isUpgradeActive[3])
         {
+            if (status)
+            {
+                damage += 150f;
+            }
+            else
+            {
+                damage -= 150f;
+            }
             isUpgradeActive[3] = status;
         }
     }

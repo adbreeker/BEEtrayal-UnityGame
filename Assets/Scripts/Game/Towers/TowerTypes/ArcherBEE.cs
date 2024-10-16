@@ -15,6 +15,8 @@ public class ArcherBEE : TowerController
     protected override void Start()
     {
         base.Start();
+
+        if(isUpgradeActive[3]) { _attackSpecialEffects.Add(new SpecialEffects.ArmorReduction(100, 0.5f)); }
     }
 
     protected override void Update()
@@ -39,6 +41,22 @@ public class ArcherBEE : TowerController
             transform.rotation = GameParams.LookAt2D(transform.position, firstInsect.transform.position);
             GameObject missile = Instantiate(missilePrefab, _missileSpawnPoint.position, GameParams.LookAt2D(transform.position, firstInsect.transform.position) * Quaternion.Euler(0f, 0f, 180f));
             missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, firstInsect.transform.position, range, _attackSpecialEffects);
+
+            if(isUpgradeActive[2])
+            {
+                Vector3 pos2 = firstInsect.transform.position - transform.position;
+                pos2 = Quaternion.Euler(0, 0, 7.5f) * pos2;
+                pos2 += transform.position;
+
+                Vector3 pos3 = firstInsect.transform.position - transform.position;
+                pos3 = Quaternion.Euler(0, 0, -7.5f) * pos3;
+                pos3 += transform.position;
+
+                GameObject missile2 = Instantiate(missilePrefab, _missileSpawnPoint.position, GameParams.LookAt2D(transform.position, pos2) * Quaternion.Euler(0f, 0f, 180f));
+                missile2.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, pos2, range, _attackSpecialEffects);
+                GameObject missile3 = Instantiate(missilePrefab, _missileSpawnPoint.position, GameParams.LookAt2D(transform.position, pos3) * Quaternion.Euler(0f, 0f, 180f));
+                missile3.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, pos3, range, _attackSpecialEffects);
+            }    
         }
     }
 
@@ -76,12 +94,11 @@ public class ArcherBEE : TowerController
         {
             if (status)
             {
-                range += 1.5f;
-
+                range += 10f;
             }
             else
             {
-                range -= 1.5f;
+                range -= 10f;
             }
             isUpgradeActive[0] = status;
         }
@@ -90,6 +107,14 @@ public class ArcherBEE : TowerController
     {
         if (status != isUpgradeActive[1])
         {
+            if (status)
+            {
+                damage += 20f;
+            }
+            else
+            {
+                damage -= 20f;
+            }
             isUpgradeActive[1] = status;
         }
     }
