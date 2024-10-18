@@ -8,6 +8,27 @@ public class SpecialEffect
     {
 
     }
+
+    public static SpecialEffect GetRandomEffect()
+    {
+        int randomIndex = Random.Range(0, 20) % 10;
+
+        switch(randomIndex)
+        {
+            case 1:
+                return new SpecialEffects.Slow(Random.Range(0.1f, 2f), Random.Range(0.1f, 0.9f));
+            case 2:
+                return new SpecialEffects.Stun(Random.Range(0.1f, 1.5f));
+            case 3:
+                return new SpecialEffects.ArmorReduction(Random.Range(0.1f, 10f));
+            case 4:
+                return new SpecialEffects.ArmorReduction(Random.Range(1f, 25f), Random.Range(0.1f, 1.5f));
+            case 5:
+                return new SpecialEffects.Poison(Random.Range(0.1f, 3f));
+        }
+
+        return null;
+    }
 }
 
 namespace SpecialEffects

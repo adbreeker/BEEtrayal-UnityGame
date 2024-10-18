@@ -8,6 +8,7 @@ public class BEEzard : TowerController
 
     [Header("Missile prefab")]
     public GameObject missilePrefab;
+    public GameObject FireBallPrefab;
 
     [Header("Missile spawn point")]
     [SerializeField] Transform _missileSpawnPoint;
@@ -37,21 +38,46 @@ public class BEEzard : TowerController
             return;
         }
 
-        StartCoroutine(DeleyedAttacks());
+        if (isUpgradeActive[2] && Random.Range(0, 100) < 10)
+        {
+            GameObject strongestInsect = GetStrongestInsect();
+
+            List<SpecialEffect> specialEffects = new List<SpecialEffect>(_attackSpecialEffects);
+            specialEffects.AddRange(_attackSpecialEffects);
+            specialEffects.AddRange(_attackSpecialEffects);
+
+            if (isUpgradeActive[3])
+            {
+                SpecialEffect effect = SpecialEffect.GetRandomEffect();
+                if (effect != null) { specialEffects.Add(effect); }
+            }
+
+            transform.rotation = GameParams.LookAt2D(transform.position, strongestInsect.transform.position);
+            GameObject missile = Instantiate(FireBallPrefab, _missileSpawnPoint.position, Quaternion.identity);
+            missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, 3 * damage + 100f, strongestInsect, specialEffects);
+            missile.GetComponent<MagicFireballController>().explosionSize = 2f;
+        }
+        else { StartCoroutine(DeleyedAttacks()); }
     }
 
     IEnumerator DeleyedAttacks()
     {
-        for(int i = 0; i < 3; i++)
+        for (int i = 0; i < 3; i++)
         {
             GameObject strongestInsect = GetStrongestInsect();
             if (strongestInsect != null)
             {
+                List<SpecialEffect> specialEffects = new List<SpecialEffect>(_attackSpecialEffects);
+                if (isUpgradeActive[3])
+                {
+                    SpecialEffect effect = SpecialEffect.GetRandomEffect();
+                    if (effect != null) { specialEffects.Add(effect); }
+                }
                 transform.rotation = GameParams.LookAt2D(transform.position, strongestInsect.transform.position);
                 GameObject missile = Instantiate(missilePrefab, _missileSpawnPoint.position, Quaternion.identity);
-                missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, strongestInsect, _attackSpecialEffects);
+                missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, strongestInsect, specialEffects);
             }
-            yield return new WaitForSeconds(0.1f / speed);
+            yield return new WaitForSeconds(0.75f/missileSpeed);
         }
     }
 
@@ -86,9 +112,9 @@ public class BEEzard : TowerController
         switch (upgradeIndex)
         {
             case 1:
-                return "Increase speed by 5 but decrease damage by 30";
+                return "Increase missile speed by 10";
             case 2:
-                return "Increase speed by 1";
+                return "Increase speed by 3 but decrease damage by 40";
             case 3:
                 return "Every magic missile have 10% chance of being powerful fireball";
             case 4:
@@ -104,12 +130,11 @@ public class BEEzard : TowerController
         {
             if (status)
             {
-                range += 1.5f;
-
+                missileSpeed += 10f;
             }
             else
             {
-                range -= 1.5f;
+                missileSpeed -= 10f;
             }
             isUpgradeActive[0] = status;
         }
@@ -118,6 +143,16 @@ public class BEEzard : TowerController
     {
         if (status != isUpgradeActive[1])
         {
+            if (status)
+            {
+                speed += 3f;
+                damage -= 40f;
+            }
+            else
+            {
+                speed -= 3f;
+                damage += 40f;
+            }
             isUpgradeActive[1] = status;
         }
     }
