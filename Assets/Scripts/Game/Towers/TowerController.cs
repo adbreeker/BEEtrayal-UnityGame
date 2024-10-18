@@ -34,6 +34,7 @@ public abstract class TowerController : MonoBehaviour
     [Header("Tower price")]
     [SerializeField] protected int _price;
     public int GetPrice() { return _price; }
+    protected float _multipleInstancesCostPenalty = 0.5f;
 
     protected bool _canAttack = true;
     private bool _attackCooldownOngoing = false;
@@ -112,7 +113,16 @@ public abstract class TowerController : MonoBehaviour
     public abstract int GetInstancesCount();
     public abstract void SetInstancesCount(int setValue);
     public abstract void ChangeInstancesCount(int valueToAdd);
-    public abstract int GetCurrentTowerPrice();
+    public virtual int GetCurrentTowerPrice()
+    {
+        int currentPrice = _price;
+        for (int i = 0; i < GetInstancesCount(); i++)
+        {
+            currentPrice += (int)(currentPrice * _multipleInstancesCostPenalty);
+        }
+        return currentPrice;
+    }
+
 
     public abstract TowerInfo GetTowerInfo();
 }

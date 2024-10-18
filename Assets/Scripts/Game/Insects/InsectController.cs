@@ -101,6 +101,12 @@ public class InsectController : MonoBehaviour
         distanceTraveled = _pathPointIndex * 10.0f + Vector3.Distance(_previousPoint, transform.position);
     }
 
+    public void KillInsect()
+    {
+        GameParams.insectsManager.RemoveInsect(gameObject, true);
+        Destroy(gameObject);
+    }
+
     public void DealDamage(float damage)
     {
         float damageReduction;
@@ -116,8 +122,7 @@ public class InsectController : MonoBehaviour
         health -= damage * damageReduction;
         if(health <= 0)
         {
-            GameParams.insectsManager.RemoveInsect(gameObject, true);
-            Destroy(gameObject);
+            KillInsect();
         }
     }
 

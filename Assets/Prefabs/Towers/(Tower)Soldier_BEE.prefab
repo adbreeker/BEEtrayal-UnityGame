@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2767434504285375533
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3127556775819498380}
+  m_Layer: 0
+  m_Name: grenade
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3127556775819498380
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2767434504285375533}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.65, y: 0.35, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3272226429200395996}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5683771304714090171
 GameObject:
   m_ObjectHideFlags: 0
@@ -30,6 +60,7 @@ Transform:
   m_Children:
   - {fileID: 6393625984148538757}
   - {fileID: 3210004039233152286}
+  - {fileID: 3127556775819498380}
   - {fileID: 288527880814284910}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -50,13 +81,17 @@ MonoBehaviour:
   towerImage: {fileID: 1439945337704253863, guid: ebcebcaf599718e4c8a4d572d9e56d36, type: 3}
   towerName: Soldier BEE
   towerDescription: Shoots at breakneck speed
-  damage: 25
+  damage: 20
   range: 7
-  speed: 10
+  speed: 15
   missileSpeed: 40
+  isUpgradeActive: 00000000
+  upgradePrices: b0040000d0070000800c0000f41a0000
   _price: 1100
   missilePrefab: {fileID: 6667915596733058763, guid: 66f3ca3bb67edd94eb1cddd5096a2402, type: 3}
+  flashGrenadePrefab: {fileID: 8508124576648701141, guid: 31475f144e054ae48aeba7918aba03ef, type: 3}
   _missileSpawnPoint: {fileID: 3210004039233152286}
+  _grenadeSpawnPoint: {fileID: 3127556775819498380}
 --- !u!1 &5803413799327048753
 GameObject:
   m_ObjectHideFlags: 0
@@ -250,7 +285,7 @@ Transform:
   m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_Children: []
   m_Father: {fileID: 3272226429200395996}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8165598707855492778
 SpriteRenderer:

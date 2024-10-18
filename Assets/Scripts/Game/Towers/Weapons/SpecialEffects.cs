@@ -25,6 +25,8 @@ public class SpecialEffect
                 return new SpecialEffects.ArmorReduction(Random.Range(1f, 25f), Random.Range(0.1f, 1.5f));
             case 5:
                 return new SpecialEffects.Poison(Random.Range(0.1f, 3f));
+            case 6:
+                return new SpecialEffects.InstaDeath(0.001f);
         }
 
         return null;
@@ -94,6 +96,21 @@ namespace SpecialEffects
         public override void ApplyEffect(InsectController target)
         {
             target.StunInsect(_duration);
+        }
+    }
+
+    public class InstaDeath : SpecialEffect
+    {
+        float _chance;
+
+        public InstaDeath(float chance)
+        {
+            _chance = chance;
+        }
+
+        public override void ApplyEffect(InsectController target)
+        {
+            if (Random.Range(0f, 1f) <= _chance) { target.KillInsect(); Debug.Log("instaKill"); }
         }
     }
 }
