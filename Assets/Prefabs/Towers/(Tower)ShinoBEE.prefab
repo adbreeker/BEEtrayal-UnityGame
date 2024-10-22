@@ -380,7 +380,7 @@ MonoBehaviour:
   towerImage: {fileID: 8087787229704487663, guid: 4060a3e45517e5144977feb1d70e40cd, type: 3}
   towerName: ShinoBEE
   towerDescription: Throws shurikens at random enemies
-  damage: 50
+  damage: 20
   range: 4
   speed: 5
   missileSpeed: 20

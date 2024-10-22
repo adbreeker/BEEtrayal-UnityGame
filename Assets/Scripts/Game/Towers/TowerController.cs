@@ -26,6 +26,7 @@ public abstract class TowerController : MonoBehaviour
     public float speed;
     public float missileSpeed;
     protected List<SpecialEffect> _attackSpecialEffects = new List<SpecialEffect>();
+    [SerializeField,ReadOnly] string _dps; 
 
     [Header("Tower upgrades:")]
     public bool[] isUpgradeActive = { false, false, false, false };
@@ -125,4 +126,14 @@ public abstract class TowerController : MonoBehaviour
 
 
     public abstract TowerInfo GetTowerInfo();
+
+    private void OnValidate() // update dps for inspector view
+    {
+        float dps = damage * speed;
+        float dpsPP = dps / _price;
+
+        string dpsText = "DPS: " + dps.ToString() + " | " + dpsPP.ToString();
+
+        _dps = dpsText;
+    }
 }

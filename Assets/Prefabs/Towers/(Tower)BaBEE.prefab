@@ -49,7 +49,7 @@ MonoBehaviour:
   towerImage: {fileID: 5989000083705846107, guid: cb8be314d1b1d494ea1f9c71d5a8a847, type: 3}
   towerName: BaBEE
   towerDescription: Shoots darts that slow down insects by {slowStrength} for {slowTime}s
-  damage: 75
+  damage: 30
   range: 4
   speed: 1.5
   missileSpeed: 15

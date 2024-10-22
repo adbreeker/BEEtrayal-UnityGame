@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 3
-  health: 50
+  health: 75
   armor: 50
   value: 4
   distanceTraveled: 0
