@@ -2,25 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoldierBEE : TowerController
+public class ChemistBEE : TowerController
 {
+    public float slowTime;
+    public float slowStrength;
+
     [Header("Missile prefab")]
     public GameObject missilePrefab;
-    public GameObject flashGrenadePrefab;
-    int _attacksCount;
 
     [Header("Missile spawn point")]
     [SerializeField] Transform _missileSpawnPoint;
-    [SerializeField] Transform _grenadeSpawnPoint;
 
     static int _instancesCount = 0;
 
     protected override void Start()
     {
         base.Start();
-        _attacksCount = 0;
-        if(isUpgradeActive[2]) { _attackSpecialEffects.Add(new SpecialEffects.InstaDeath(0.001f)); }
-        if(isUpgradeActive[3]) { _grenadeSpawnPoint.gameObject.SetActive(true); }
     }
 
     protected override void Update()
@@ -45,27 +42,13 @@ public class SoldierBEE : TowerController
             transform.rotation = GameParams.LookAt2D(transform.position, firstInsect.transform.position);
             GameObject missile = Instantiate(missilePrefab, _missileSpawnPoint.position, Quaternion.identity);
             missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, firstInsect, _attackSpecialEffects);
-
-            if (isUpgradeActive[3])
-            {
-                _attacksCount++;
-                if (_attacksCount >= 50)
-                {
-                    _attacksCount = 0;
-
-                    List<SpecialEffect> specialEffects = new List<SpecialEffect>() { new SpecialEffects.Stun(1) };
-                    GameObject grenade = Instantiate(flashGrenadePrefab, transform.position, Quaternion.identity);
-                    grenade.GetComponent<MissileController>().SetUpMissile(missileSpeed/2f, 0, firstInsect.transform.position, 0f, specialEffects);
-                    grenade.GetComponent<GrenadeFlashController>().explosionSize = 1.5f;
-                }
-            }
         }
     }
 
     GameObject GetFirstInsect()
     {
         List<InsectController> insectsOrder = GameParams.insectsManager.GetInsectsOrderInRange(transform.position, range);
-        if(insectsOrder.Count > 0)
+        if (insectsOrder.Count > 0)
         {
             return insectsOrder[0].gameObject;
         }
@@ -78,13 +61,13 @@ public class SoldierBEE : TowerController
         switch (upgradeIndex)
         {
             case 1:
-                return "Decrease multiple instances cost penalty to 0%";
+                return "";
             case 2:
-                return "Increase speed by 5 but decrease range by 3";
+                return "";
             case 3:
-                return "Every attack have 0,1% to kill insect instantly";
+                return "";
             case 4:
-                return "Every 50 attacks throws grenade stunning insects for 1s upon explosion";
+                return "";
         }
 
         return "";
@@ -109,16 +92,6 @@ public class SoldierBEE : TowerController
     {
         if (status != isUpgradeActive[1])
         {
-            if (status)
-            {
-                speed += 5f;
-                range -= 3f;
-            }
-            else
-            {
-                speed -= 5f;
-                range += 3f;
-            }
             isUpgradeActive[1] = status;
         }
     }
@@ -171,7 +144,13 @@ public class SoldierBEE : TowerController
 
         info.price = GetCurrentTowerPrice();
 
-        info.description = new List<string>() { towerDescription };
+        info.description = new List<string>()
+        {
+            towerDescription
+            .Replace("{slowStrength}", ((slowStrength*100).ToString() + "%"))
+            .Replace("{slowTime}", slowTime.ToString())
+        };
+
         for (int i = 0; i < 4; i++)
         {
             if (isUpgradeActive[i])
