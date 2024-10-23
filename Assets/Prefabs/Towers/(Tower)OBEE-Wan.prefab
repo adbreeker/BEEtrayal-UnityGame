@@ -133,16 +133,17 @@ MonoBehaviour:
   towerImage: {fileID: 3781643089349612918, guid: 18148812dfcb4534f817d930d1253912, type: 3}
   towerName: OBEE-Wan
   towerDescription: Jumps forwards and then spins dealing damage with his sword
-  damage: 100
-  range: 3
+  damage: 125
+  range: 4
   speed: 0.5
   missileSpeed: 0
-  isUpgradeActive: 00000000
+  _dps: 'DPS: 62,5 | 0,2155172'
+  isUpgradeActive: 00010001
   upgradePrices: fa000000f4010000b004000008200000
   _price: 290
   _weapon: {fileID: 8559819344536744050}
   _weaponAdditional: {fileID: 246280419171410276}
-  _daggerPrefab: {fileID: 2686293118654674446, guid: cf5846e49831a284a8260abd1b7684e7, type: 3}
+  _daggerPrefab: {fileID: 2280834449431021339, guid: b408bc47af60c504c9061340f6faa0e6, type: 3}
 --- !u!1 &9096906043532873537
 GameObject:
   m_ObjectHideFlags: 0
