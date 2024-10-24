@@ -142,7 +142,7 @@ MonoBehaviour:
   _price: 350
   slowTime: 2.5
   slowStrength: 0.75
-  _missilePrefab: {fileID: 5578036312127645809, guid: 96d42080240952746b06824187f1f147, type: 3}
+  _missilePrefab: {fileID: 2785144319849634390, guid: 5b9e857071354db4dbb6089afbacc9b8, type: 3}
   _missileSpawnPoint: {fileID: 6700912145059441915}
 --- !u!1 &5807628748381347936
 GameObject:

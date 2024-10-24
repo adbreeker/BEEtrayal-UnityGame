@@ -7,11 +7,10 @@ public class ExplosionEffect : MonoBehaviour
     public float explosionSize = 1.0f;
     [SerializeField] float _explosionSpeed = 1.0f;
 
-    SpriteRenderer _spriteRenderer;
+    [SerializeField]SpriteRenderer _spriteRenderer;
 
     private void Start()
     {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
         StartCoroutine(ExplosionAnimation());
     }
 

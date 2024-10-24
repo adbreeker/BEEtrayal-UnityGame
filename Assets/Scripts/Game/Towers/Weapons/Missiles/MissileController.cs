@@ -2,15 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MissileController : MonoBehaviour
+public class MissileController : WeaponController
 {
     protected float _speed;
-    protected float _damage;
     protected GameObject _target;
     protected Vector3 _destination;
-
-    protected List<SpecialEffect> _specialEffects = new List<SpecialEffect>();
-
 
     protected FlyMode _flyMode;
     bool _isReady = false;
@@ -103,14 +99,5 @@ public class MissileController : MonoBehaviour
         }
 
         Destroy(gameObject);
-    }
-
-    public virtual void OnInsectPierce(InsectController insect)
-    {
-        insect.DealDamage(_damage);
-        foreach (SpecialEffect specialEffect in _specialEffects)
-        {
-            specialEffect.ApplyEffect(insect);
-        }
     }
 }

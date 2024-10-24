@@ -2,58 +2,41 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HoneyBlobController : MissileController
+public class HoneyBlobEffect : WeaponController
 {
     [SerializeField] Rigidbody2D _rigidbody;
     [SerializeField] Collider2D _collider;
 
-    bool _layOnHit = false;
     int _insectsToAffect = 0;
-    float _sizeOnLayMultiplier = 1f;
 
-    Vector3 _startSize;
-    Vector3 _layMaxSize;
+    Vector2 _startSize;
+    Vector2 _layMaxSize;
     float _washingStep;
 
-    public void BlobInit(bool layOnHit, int insectsToAffect, float sizeOnLayMultiplier)
+    private void Start()
     {
-        _layOnHit = layOnHit;
+        StartCoroutine(LayBlob());
+    }
+
+    public void BlobInit(int insectsToAffect, float blobMaxSize)
+    {
         _insectsToAffect = insectsToAffect;
-        _sizeOnLayMultiplier = sizeOnLayMultiplier;
 
         _startSize = transform.localScale;
-        _layMaxSize = _startSize * _sizeOnLayMultiplier;
+        _layMaxSize = new Vector2(blobMaxSize, blobMaxSize);
         _washingStep = Vector2.Distance(new Vector2(0f,0f), _layMaxSize) / _insectsToAffect;
     }
 
-    protected override void OnHit()
-    {
-        InsectController insect = _target.GetComponent<InsectController>();
-        insect.DealDamage(_damage);
-
-        foreach (SpecialEffect specialEffect in _specialEffects)
-        {
-            specialEffect.ApplyEffect(insect);
-        }
-
-        if(_layOnHit)
-        {
-            StartCoroutine(LayBlob());   
-        }
-        else { Destroy(gameObject); }
-    }
 
     IEnumerator LayBlob()
     {
-        while(transform.localScale != _layMaxSize)
+        while((Vector2)transform.localScale != _layMaxSize)
         {
             yield return new WaitForFixedUpdate();
             transform.localScale = Vector2.MoveTowards(transform.localScale, _layMaxSize, 0.05f);
         }
 
         _collider.enabled = true;
-        _rigidbody = gameObject.AddComponent<Rigidbody2D>();
-        _rigidbody.isKinematic = true;
     }
 
     public override void OnInsectPierce(InsectController insect)

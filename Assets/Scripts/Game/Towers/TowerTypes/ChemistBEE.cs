@@ -49,9 +49,10 @@ public class ChemistBEE : TowerController
         if (firstInsect != null)
         {
             transform.rotation = GameParams.LookAt2D(transform.position, firstInsect.transform.position);
-            GameObject missile = Instantiate(_missilePrefab, _missileSpawnPoint.position, Quaternion.identity);
+            GameObject missile = Instantiate(_missilePrefab, _missileSpawnPoint.position, GameParams.LookAt2D(transform.position, firstInsect.transform.position) * Quaternion.Euler(0f, 0f, 180f));
             missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, firstInsect, _attackSpecialEffects);
-            if(isUpgradeActive[2]) { missile.GetComponent<HoneyBlobController>().BlobInit(true, 5, 3f); }
+            
+            if(isUpgradeActive[2]) { missile.GetComponent<BlobMissileController>().SetUpHoneyBlob(5, 1f); }
         }
     }
 
@@ -71,11 +72,11 @@ public class ChemistBEE : TowerController
         switch (upgradeIndex)
         {
             case 1:
-                return "Slow strength increase to 85%";
+                return "Slow strength increased to 85%";
             case 2:
-                return "Slow time increase by 1s";
+                return "Slow time increased by 1s";
             case 3:
-                return "Attacks leave sticky honey on the ground";
+                return "Reduce speed by 1 but attacks leaves sticky honey on the ground";
             case 4:
                 return "Instead of slow apply poison scaling with slow strength";
         }
@@ -117,6 +118,14 @@ public class ChemistBEE : TowerController
     {
         if (status != isUpgradeActive[2])
         {
+            if (status)
+            {
+                speed -= 1f;
+            }
+            else
+            {
+                speed += 1f;
+            }
             isUpgradeActive[2] = status;
         }
     }
