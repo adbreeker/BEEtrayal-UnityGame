@@ -131,19 +131,19 @@ MonoBehaviour:
   infoPanel: {fileID: 7048296568798938931, guid: cfdcce573ef926f4c8c800f4c7d34cd3, type: 3}
   towerImage: {fileID: 1439945337704253863, guid: 1a9567e1f3c8d1a499cac0566403ea7d, type: 3}
   towerName: Chemist BEE
-  towerDescription: Shooting and slowing
+  towerDescription: Make no harm but slows insects by {slowStrength} for {slowTime}s
   damage: 0
   range: 5
   speed: 2
   missileSpeed: 25
   _dps: 'DPS: 0 | 0'
   isUpgradeActive: 00000000
-  upgradePrices: 64000000c80000002c01000090010000
+  upgradePrices: fc08000060090000ec1300000a1a0000
   _price: 350
   slowTime: 2.5
   slowStrength: 0.75
-  missilePrefab: {fileID: 0}
-  _missileSpawnPoint: {fileID: 0}
+  _missilePrefab: {fileID: 5578036312127645809, guid: 96d42080240952746b06824187f1f147, type: 3}
+  _missileSpawnPoint: {fileID: 6700912145059441915}
 --- !u!1 &5807628748381347936
 GameObject:
   m_ObjectHideFlags: 0

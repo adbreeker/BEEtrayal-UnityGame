@@ -8,7 +8,7 @@ public class ChemistBEE : TowerController
     public float slowStrength;
 
     [Header("Missile prefab")]
-    public GameObject missilePrefab;
+    [SerializeField] GameObject _missilePrefab;
 
     [Header("Missile spawn point")]
     [SerializeField] Transform _missileSpawnPoint;
@@ -18,6 +18,15 @@ public class ChemistBEE : TowerController
     protected override void Start()
     {
         base.Start();
+
+        if(isUpgradeActive[3])
+        {
+            _attackSpecialEffects.Add(new SpecialEffects.Poison(slowStrength * slowTime * 2f));
+        }
+        else
+        {
+            _attackSpecialEffects.Add(new SpecialEffects.Slow(slowTime, slowStrength));
+        }
     }
 
     protected override void Update()
@@ -40,8 +49,9 @@ public class ChemistBEE : TowerController
         if (firstInsect != null)
         {
             transform.rotation = GameParams.LookAt2D(transform.position, firstInsect.transform.position);
-            GameObject missile = Instantiate(missilePrefab, _missileSpawnPoint.position, Quaternion.identity);
+            GameObject missile = Instantiate(_missilePrefab, _missileSpawnPoint.position, Quaternion.identity);
             missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, firstInsect, _attackSpecialEffects);
+            if(isUpgradeActive[2]) { missile.GetComponent<HoneyBlobController>().BlobInit(true, 5, 3f); }
         }
     }
 
@@ -61,13 +71,13 @@ public class ChemistBEE : TowerController
         switch (upgradeIndex)
         {
             case 1:
-                return "";
+                return "Slow strength increase to 85%";
             case 2:
-                return "";
+                return "Slow time increase by 1s";
             case 3:
-                return "";
+                return "Attacks leave sticky honey on the ground";
             case 4:
-                return "";
+                return "Instead of slow apply poison scaling with slow strength";
         }
 
         return "";
@@ -79,11 +89,11 @@ public class ChemistBEE : TowerController
         {
             if (status)
             {
-                _multipleInstancesCostPenalty = 0;
+                slowStrength += 0.1f;
             }
             else
             {
-                _multipleInstancesCostPenalty = 0.5f;
+                slowStrength -= 0.1f;
             }
             isUpgradeActive[0] = status;
         }
@@ -92,6 +102,14 @@ public class ChemistBEE : TowerController
     {
         if (status != isUpgradeActive[1])
         {
+            if (status)
+            {
+                slowTime += 1f;
+            }
+            else
+            {
+                slowTime -= 1f;
+            }
             isUpgradeActive[1] = status;
         }
     }
