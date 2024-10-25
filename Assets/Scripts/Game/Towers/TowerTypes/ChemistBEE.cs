@@ -19,14 +19,7 @@ public class ChemistBEE : TowerController
     {
         base.Start();
 
-        if(isUpgradeActive[3])
-        {
-            _attackSpecialEffects.Add(new SpecialEffects.Poison(slowStrength * slowTime * 2f));
-        }
-        else
-        {
-            _attackSpecialEffects.Add(new SpecialEffects.Slow(slowTime, slowStrength));
-        }
+        _attackSpecialEffects.Add(new SpecialEffects.Slow(slowTime, slowStrength));
     }
 
     protected override void Update()
@@ -45,14 +38,17 @@ public class ChemistBEE : TowerController
             return;
         }
 
-        GameObject firstInsect = GetFirstInsect();
-        if (firstInsect != null)
+        GameObject targetInsect;
+        if(isUpgradeActive[2]) { targetInsect = GetNotSlowedInsect(); }
+        else { targetInsect = GetFirstInsect(); }
+
+        if (targetInsect != null)
         {
-            transform.rotation = GameParams.LookAt2D(transform.position, firstInsect.transform.position);
-            GameObject missile = Instantiate(_missilePrefab, _missileSpawnPoint.position, GameParams.LookAt2D(transform.position, firstInsect.transform.position) * Quaternion.Euler(0f, 0f, 180f));
-            missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, firstInsect, _attackSpecialEffects);
+            transform.rotation = GameParams.LookAt2D(transform.position, targetInsect.transform.position);
+            GameObject missile = Instantiate(_missilePrefab, _missileSpawnPoint.position, GameParams.LookAt2D(transform.position, targetInsect.transform.position) * Quaternion.Euler(0f, 0f, 180f));
+            missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, targetInsect, _attackSpecialEffects);
             
-            if(isUpgradeActive[2]) { missile.GetComponent<BlobMissileController>().SetUpHoneyBlob(5, 1f); }
+            if(isUpgradeActive[3]) { missile.GetComponent<BlobMissileController>().SetUpHoneyBlob(5, 1f); }
         }
     }
 
@@ -61,6 +57,21 @@ public class ChemistBEE : TowerController
         List<InsectController> insectsOrder = GameParams.insectsManager.GetInsectsOrderInRange(transform.position, range);
         if (insectsOrder.Count > 0)
         {
+            return insectsOrder[0].gameObject;
+        }
+        return null;
+    }
+
+    GameObject GetNotSlowedInsect()
+    {
+        List<InsectController> insectsOrder = GameParams.insectsManager.GetInsectsOrderInRange(transform.position, range);
+        if (insectsOrder.Count > 0)
+        {
+            foreach(InsectController insect in insectsOrder)
+            {
+                if(!insect.isSlowed) { return insect.gameObject; }
+            }
+
             return insectsOrder[0].gameObject;
         }
         return null;
@@ -76,9 +87,9 @@ public class ChemistBEE : TowerController
             case 2:
                 return "Slow time increased by 1s";
             case 3:
-                return "Reduce speed by 1 but attacks leaves sticky honey on the ground";
+                return "Targeting currently not slowed insects instead of first ones";
             case 4:
-                return "Instead of slow apply poison scaling with slow strength";
+                return "Reduce speed by 1 but attacks leaves sticky honey on the ground";
         }
 
         return "";
@@ -118,6 +129,13 @@ public class ChemistBEE : TowerController
     {
         if (status != isUpgradeActive[2])
         {
+            isUpgradeActive[2] = status;
+        }
+    }
+    protected override void SetUpgrade4(bool status)
+    {
+        if (status != isUpgradeActive[3])
+        {
             if (status)
             {
                 speed -= 1f;
@@ -126,13 +144,6 @@ public class ChemistBEE : TowerController
             {
                 speed += 1f;
             }
-            isUpgradeActive[2] = status;
-        }
-    }
-    protected override void SetUpgrade4(bool status)
-    {
-        if (status != isUpgradeActive[3])
-        {
             isUpgradeActive[3] = status;
         }
     }

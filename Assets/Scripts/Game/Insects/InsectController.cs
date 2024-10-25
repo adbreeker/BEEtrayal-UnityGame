@@ -16,12 +16,17 @@ public class InsectController : MonoBehaviour
     [Header("Insect value")]
     public int value = 1;
 
-    //movement speed interfere
-    bool _isMsReduced = false;
+    //affecting effects:
+    //slow
+    public bool isSlowed = false;
     float _msReductionTime = 0.0f;
     float _msReductionPercent = 0.0f;
-    bool _isStuned = false;
+    //stun
+    public bool isStuned = false;
     float _stunTime = 0.0f;
+
+
+
 
 
     //path following
@@ -48,7 +53,7 @@ public class InsectController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(!_isStuned)
+        if(!isStuned)
         {
             RotateTowardsPoint(false);
             MoveAlongPath();
@@ -172,9 +177,9 @@ public class InsectController : MonoBehaviour
             movementSpeed = _startingMovementSpeed * (1.0f - percent);
         }
 
-        if(!_isMsReduced)
+        if(!isSlowed)
         {
-            _isMsReduced = true;
+            isSlowed = true;
             StartCoroutine(MovementSpeedReductionTimer());
         }
     }
@@ -188,7 +193,7 @@ public class InsectController : MonoBehaviour
         }
         _msReductionTime = 0.0f;
         _msReductionPercent = 0.0f;
-        _isMsReduced = false;
+        isSlowed = false;
 
         movementSpeed = _startingMovementSpeed;
     }
@@ -233,9 +238,9 @@ public class InsectController : MonoBehaviour
             _stunTime = time;
         }
 
-        if (!_isStuned)
+        if (!isStuned)
         {
-            _isStuned = true;
+            isStuned = true;
             StartCoroutine(StunTimer());
         }
     }
@@ -250,6 +255,6 @@ public class InsectController : MonoBehaviour
         }
         _stunTime = 0.0f;
         Debug.Log(gameObject.name + "unstuned");
-        _isStuned = false;
+        isStuned = false;
     }
 }

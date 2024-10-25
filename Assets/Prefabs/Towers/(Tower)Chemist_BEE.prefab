@@ -138,7 +138,7 @@ MonoBehaviour:
   missileSpeed: 25
   _dps: 'DPS: 0 | 0'
   isUpgradeActive: 00000000
-  upgradePrices: fc08000060090000ec1300000a1a0000
+  upgradePrices: fc08000060090000d80e0000d4170000
   _price: 350
   slowTime: 2.5
   slowStrength: 0.75
