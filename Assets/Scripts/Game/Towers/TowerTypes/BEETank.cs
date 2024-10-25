@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class BEETank : TowerController
 {
+    [Header("------------------------------------------", order = -1)]
+    [Header("Explosion values:")]
     public float explosionSize;
 
     [Header("Missile prefab")]
-    public GameObject missilePrefab;
+    [SerializeField] GameObject _missilePrefab;
 
     [Header("Missile spawn point")]
     [SerializeField] Transform _missileSpawnPoint;
@@ -44,7 +46,7 @@ public class BEETank : TowerController
         if (targetInsect != null)
         {
             transform.rotation = GameParams.LookAt2D(transform.position, targetInsect.transform.position);
-            GameObject missile = Instantiate(missilePrefab, _missileSpawnPoint.position, GameParams.LookAt2D(transform.position, targetInsect.transform.position));
+            GameObject missile = Instantiate(_missilePrefab, _missileSpawnPoint.position, GameParams.LookAt2D(transform.position, targetInsect.transform.position));
             missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, targetInsect.transform.position, 0f, _attackSpecialEffects);
             missile.GetComponent<RocketController>().explosionSize = explosionSize;
             damage += 0.25f;
@@ -164,16 +166,6 @@ public class BEETank : TowerController
     public override void ChangeInstancesCount(int valueToAdd)
     {
         _instancesCount += valueToAdd;
-    }
-
-    public override int GetCurrentTowerPrice()
-    {
-        int currentPrice = _price;
-        for (int i = 0; i < _instancesCount; i++)
-        {
-            currentPrice += (int)(currentPrice * 0.5f);
-        }
-        return currentPrice;
     }
 
     public override TowerInfo GetTowerInfo()

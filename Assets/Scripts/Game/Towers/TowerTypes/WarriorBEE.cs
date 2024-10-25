@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class WarriorBEE : TowerController
 {
+    [Header("------------------------------------------", order = -1)]
+    [Header("Slow values:")]
     public float slowTime;
     public float slowStrength;
 

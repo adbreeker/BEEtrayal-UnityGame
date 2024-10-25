@@ -5,11 +5,13 @@ using UnityEngine;
 
 public class GrenadierBEE : TowerController
 {
+    [Header("------------------------------------------", order = -1)]
+    [Header("Explosion values:")]
     public float explosionSize;
 
     [Header("Missile prefab")]
-    public GameObject missilePrefab;
-    public GameObject stickyGrenadePrefab;
+    [SerializeField] GameObject _missilePrefab;
+    [SerializeField] GameObject _stickyGrenadePrefab;
 
     [Header("Missile spawn point")]
     [SerializeField] Transform[] _missileSpawnPoint = new Transform[3];
@@ -50,7 +52,7 @@ public class GrenadierBEE : TowerController
                 if (randomInsect != null)
                 {
                     transform.rotation = GameParams.LookAt2D(transform.position, randomInsect.transform.position);
-                    GameObject missile = Instantiate(stickyGrenadePrefab, _missileSpawnPoint[i].position, Quaternion.identity);
+                    GameObject missile = Instantiate(_stickyGrenadePrefab, _missileSpawnPoint[i].position, Quaternion.identity);
                     missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, randomInsect, _attackSpecialEffects);
                     missile.GetComponent<GrenadeController>().explosionSize = explosionSize;
                 }
@@ -65,7 +67,7 @@ public class GrenadierBEE : TowerController
                 if (randomInsect != null)
                 {
                     transform.rotation = GameParams.LookAt2D(transform.position, randomInsect.transform.position);
-                    GameObject missile = Instantiate(missilePrefab, _missileSpawnPoint[i].position, Quaternion.identity);
+                    GameObject missile = Instantiate(_missilePrefab, _missileSpawnPoint[i].position, Quaternion.identity);
                     missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, randomInsect.transform.position, 0f, _attackSpecialEffects);
                     missile.GetComponent<GrenadeController>().explosionSize = explosionSize;
                 }
@@ -170,16 +172,6 @@ public class GrenadierBEE : TowerController
     public override void ChangeInstancesCount(int valueToAdd)
     {
         _instancesCount += valueToAdd;
-    }
-
-    public override int GetCurrentTowerPrice()
-    {
-        int currentPrice = _price;
-        for (int i = 0; i < _instancesCount; i++)
-        {
-            currentPrice += (int)(currentPrice * 0.5f);
-        }
-        return currentPrice;
     }
 
     public override TowerInfo GetTowerInfo()

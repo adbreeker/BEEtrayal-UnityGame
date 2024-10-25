@@ -141,8 +141,8 @@ MonoBehaviour:
   isUpgradeActive: 00000000
   upgradePrices: b0040000d0070000800c0000f41a0000
   _price: 1100
-  missilePrefab: {fileID: 6667915596733058763, guid: 66f3ca3bb67edd94eb1cddd5096a2402, type: 3}
-  flashGrenadePrefab: {fileID: 8508124576648701141, guid: 31475f144e054ae48aeba7918aba03ef, type: 3}
+  _missilePrefab: {fileID: 6667915596733058763, guid: 66f3ca3bb67edd94eb1cddd5096a2402, type: 3}
+  _flashGrenadePrefab: {fileID: 8508124576648701141, guid: 31475f144e054ae48aeba7918aba03ef, type: 3}
   _missileSpawnPoint: {fileID: 3210004039233152286}
   _grenadeSpawnPoint: {fileID: 3127556775819498380}
 --- !u!1 &5803413799327048753

@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class OBEE_Wan : TowerController
 {
-    [Header("Weapon")]
+    [Header("------------------------------------------", order = -1)]
+    [Header("Weapons")]
     [SerializeField] GameObject _weapon;
     [SerializeField] GameObject _weaponAdditional;
     [SerializeField] GameObject _daggerPrefab;
@@ -209,16 +210,6 @@ public class OBEE_Wan : TowerController
     public override void ChangeInstancesCount(int valueToAdd)
     {
         _instancesCount += valueToAdd;
-    }
-
-    public override int GetCurrentTowerPrice()
-    {
-        int currentPrice = _price;
-        for (int i = 0; i < _instancesCount; i++)
-        {
-            currentPrice += (int)(currentPrice * 0.5f);
-        }
-        return currentPrice;
     }
 
     public override TowerInfo GetTowerInfo()

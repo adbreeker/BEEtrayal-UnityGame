@@ -384,11 +384,12 @@ MonoBehaviour:
   range: 4
   speed: 5
   missileSpeed: 20
+  _dps: 'DPS: 100 | 0,5'
   isUpgradeActive: 00000000
   upgradePrices: f4010000b0040000a00f000088130000
   _price: 200
-  missilePrefab: {fileID: 8500108494238482904, guid: 0cde67d43b478ef4da5bf54265b08830, type: 3}
-  bigShuriken: {fileID: 1374598961796841367, guid: 79d7a9fa01d1a374db544bc3234fc1ed, type: 3}
+  _missilePrefab: {fileID: 8500108494238482904, guid: 0cde67d43b478ef4da5bf54265b08830, type: 3}
+  _bigShuriken: {fileID: 1374598961796841367, guid: 79d7a9fa01d1a374db544bc3234fc1ed, type: 3}
   _missileSpawnPoint:
   - {fileID: 329186055516574718}
   - {fileID: 959393917847474315}

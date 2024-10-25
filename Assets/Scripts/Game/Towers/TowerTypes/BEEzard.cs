@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class BEEzard : TowerController
 {
+    [Header("------------------------------------------", order = -1)]
+    [Header("Armor reduction values:")]
     public float armorReduction;
 
     [Header("Missile prefab")]
-    public GameObject missilePrefab;
-    public GameObject FireBallPrefab;
+    [SerializeField] GameObject _missilePrefab;
+    [SerializeField] GameObject _fireBallPrefab;
 
     [Header("Missile spawn point")]
     [SerializeField] Transform _missileSpawnPoint;
@@ -53,7 +55,7 @@ public class BEEzard : TowerController
             }
 
             transform.rotation = GameParams.LookAt2D(transform.position, strongestInsect.transform.position);
-            GameObject missile = Instantiate(FireBallPrefab, _missileSpawnPoint.position, Quaternion.identity);
+            GameObject missile = Instantiate(_fireBallPrefab, _missileSpawnPoint.position, Quaternion.identity);
             missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, 3 * damage + 100f, strongestInsect, specialEffects);
             missile.GetComponent<MagicFireballController>().explosionSize = 2f;
         }
@@ -74,7 +76,7 @@ public class BEEzard : TowerController
                     if (effect != null) { specialEffects.Add(effect); }
                 }
                 transform.rotation = GameParams.LookAt2D(transform.position, strongestInsect.transform.position);
-                GameObject missile = Instantiate(missilePrefab, _missileSpawnPoint.position, Quaternion.identity);
+                GameObject missile = Instantiate(_missilePrefab, _missileSpawnPoint.position, Quaternion.identity);
                 missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, strongestInsect, specialEffects);
             }
             yield return new WaitForSeconds(0.75f/missileSpeed);
@@ -186,16 +188,6 @@ public class BEEzard : TowerController
     public override void ChangeInstancesCount(int valueToAdd)
     {
         _instancesCount += valueToAdd;
-    }
-
-    public override int GetCurrentTowerPrice()
-    {
-        int currentPrice = _price;
-        for (int i = 0; i < _instancesCount; i++)
-        {
-            currentPrice += (int)(currentPrice * 0.5f);
-        }
-        return currentPrice;
     }
 
     public override TowerInfo GetTowerInfo()

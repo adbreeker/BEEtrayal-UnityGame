@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class SoldierBEE : TowerController
 {
+    [Header("------------------------------------------", order = -1)]
     [Header("Missile prefab")]
-    public GameObject missilePrefab;
-    public GameObject flashGrenadePrefab;
+    [SerializeField] GameObject _missilePrefab;
+    [SerializeField] GameObject _flashGrenadePrefab;
     int _attacksCount;
 
     [Header("Missile spawn point")]
@@ -43,7 +44,7 @@ public class SoldierBEE : TowerController
         if (firstInsect != null)
         {
             transform.rotation = GameParams.LookAt2D(transform.position, firstInsect.transform.position);
-            GameObject missile = Instantiate(missilePrefab, _missileSpawnPoint.position, Quaternion.identity);
+            GameObject missile = Instantiate(_missilePrefab, _missileSpawnPoint.position, Quaternion.identity);
             missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, firstInsect, _attackSpecialEffects);
 
             if (isUpgradeActive[3])
@@ -54,7 +55,7 @@ public class SoldierBEE : TowerController
                     _attacksCount = 0;
 
                     List<SpecialEffect> specialEffects = new List<SpecialEffect>() { new SpecialEffects.Stun(1) };
-                    GameObject grenade = Instantiate(flashGrenadePrefab, transform.position, Quaternion.identity);
+                    GameObject grenade = Instantiate(_flashGrenadePrefab, transform.position, Quaternion.identity);
                     grenade.GetComponent<MissileController>().SetUpMissile(missileSpeed/2f, 0, firstInsect.transform.position, 0f, specialEffects);
                     grenade.GetComponent<GrenadeFlashController>().explosionSize = 1.5f;
                 }
@@ -96,7 +97,7 @@ public class SoldierBEE : TowerController
         {
             if (status)
             {
-                _multipleInstancesCostPenalty = 0;
+                _multipleInstancesCostPenalty = 0f;
             }
             else
             {

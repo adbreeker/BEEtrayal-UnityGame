@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ChemistBEE : TowerController
 {
+    [Header("------------------------------------------", order = -1)]
+    [Header("Slow values:")]
     public float slowTime;
     public float slowStrength;
 
@@ -39,7 +41,7 @@ public class ChemistBEE : TowerController
         }
 
         GameObject targetInsect;
-        if(isUpgradeActive[2]) { targetInsect = GetNotSlowedInsect(); }
+        if(isUpgradeActive[0]) { targetInsect = GetNotSlowedInsect(); }
         else { targetInsect = GetFirstInsect(); }
 
         if (targetInsect != null)
@@ -83,11 +85,11 @@ public class ChemistBEE : TowerController
         switch (upgradeIndex)
         {
             case 1:
-                return "Slow strength increased to 85%";
-            case 2:
-                return "Slow time increased by 1s";
-            case 3:
                 return "Targeting currently not slowed insects instead of first ones";
+            case 2:
+                return "Slow strength increased to 85%";
+            case 3:
+                return "Slow time increased by 1s";
             case 4:
                 return "Reduce speed by 1 but attacks leaves sticky honey on the ground";
         }
@@ -99,14 +101,6 @@ public class ChemistBEE : TowerController
     {
         if (status != isUpgradeActive[0])
         {
-            if (status)
-            {
-                slowStrength += 0.1f;
-            }
-            else
-            {
-                slowStrength -= 0.1f;
-            }
             isUpgradeActive[0] = status;
         }
     }
@@ -116,11 +110,11 @@ public class ChemistBEE : TowerController
         {
             if (status)
             {
-                slowTime += 1f;
+                slowStrength += 0.1f;
             }
             else
             {
-                slowTime -= 1f;
+                slowStrength -= 0.1f;
             }
             isUpgradeActive[1] = status;
         }
@@ -129,6 +123,14 @@ public class ChemistBEE : TowerController
     {
         if (status != isUpgradeActive[2])
         {
+            if (status)
+            {
+                slowTime += 1f;
+            }
+            else
+            {
+                slowTime -= 1f;
+            }
             isUpgradeActive[2] = status;
         }
     }

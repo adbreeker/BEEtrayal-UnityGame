@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class GunBEEnger : TowerController
 {
+    [Header("------------------------------------------", order = -1)]
     [Header("Missile prefab")]
-    public GameObject missilePrefab;
+    [SerializeField] GameObject _missilePrefab;
 
     [Header("Missile spawn point")]
     [SerializeField] Transform[] _missileSpawnPoint = new Transform[2];
@@ -38,7 +39,7 @@ public class GunBEEnger : TowerController
         if (firstInsect != null)
         {
             transform.rotation = GameParams.LookAt2D(transform.position, firstInsect.transform.position);
-            GameObject missile = Instantiate(missilePrefab, _missileSpawnPoint[_spawnPointIndex].position, Quaternion.identity);
+            GameObject missile = Instantiate(_missilePrefab, _missileSpawnPoint[_spawnPointIndex].position, Quaternion.identity);
             missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, firstInsect, _attackSpecialEffects);
             _spawnPointIndex = (_spawnPointIndex + 1) % 2;
         }
@@ -49,7 +50,7 @@ public class GunBEEnger : TowerController
             if (firstInsect != null)
             {
                 transform.rotation = GameParams.LookAt2D(transform.position, firstInsect.transform.position);
-                GameObject missile = Instantiate(missilePrefab, _missileSpawnPoint[_spawnPointIndex].position, Quaternion.identity);
+                GameObject missile = Instantiate(_missilePrefab, _missileSpawnPoint[_spawnPointIndex].position, Quaternion.identity);
                 missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, firstInsect, _attackSpecialEffects);
                 _spawnPointIndex = (_spawnPointIndex + 1) % 2;
             }
@@ -114,6 +115,14 @@ public class GunBEEnger : TowerController
     {
         if (status != isUpgradeActive[1])
         {
+            if (status)
+            {
+                _multipleInstancesCostPenalty = 0.25f;
+            }
+            else
+            {
+                _multipleInstancesCostPenalty = 0.5f;
+            }
             isUpgradeActive[1] = status;
         }
     }
@@ -158,19 +167,6 @@ public class GunBEEnger : TowerController
     public override void ChangeInstancesCount(int valueToAdd)
     {
         _instancesCount += valueToAdd;
-    }
-
-    public override int GetCurrentTowerPrice()
-    {
-        int currentPrice = _price;
-        float costPenalty = 0.5f;
-        if(isUpgradeActive[1]) { costPenalty = 0.25f; }
-
-        for (int i = 0; i < _instancesCount; i++)
-        {
-            currentPrice += (int)(currentPrice * costPenalty);
-        }
-        return currentPrice;
     }
 
     public override TowerInfo GetTowerInfo()

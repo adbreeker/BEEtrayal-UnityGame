@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class BaBEE : TowerController
 {
+    [Header("------------------------------------------", order = -1)]
+    [Header("Slow values:")]
     public float slowTime;
     public float slowStrength;
 
     [Header("Missile prefab")]
-    public GameObject missilePrefab;
+    [SerializeField] GameObject _missilePrefab;
 
     [Header("Missile spawn point")]
     [SerializeField] Transform _missileSpawnPoint;
@@ -49,7 +51,7 @@ public class BaBEE : TowerController
             }
 
             transform.rotation = GameParams.LookAt2D(transform.position, strongestInsect.transform.position);
-            GameObject missile = Instantiate(missilePrefab, _missileSpawnPoint.position, GameParams.LookAt2D(transform.position, strongestInsect.transform.position) * Quaternion.Euler(0f, 0f, 180f));
+            GameObject missile = Instantiate(_missilePrefab, _missileSpawnPoint.position, GameParams.LookAt2D(transform.position, strongestInsect.transform.position) * Quaternion.Euler(0f, 0f, 180f));
             missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, strongestInsect, specialEffects);
         }
     }
@@ -101,6 +103,14 @@ public class BaBEE : TowerController
     {
         if (status != isUpgradeActive[0])
         {
+            if (status)
+            {
+                _multipleInstancesCostPenalty = 0.75f;
+            }
+            else
+            {
+                _multipleInstancesCostPenalty = 0.5f;
+            }
             isUpgradeActive[0] = status;
         }
     }
@@ -154,18 +164,12 @@ public class BaBEE : TowerController
 
     public override int GetCurrentTowerPrice()
     {
+        if(isUpgradeActive[0] && _instancesCount == 0) { return 0; }
+
         int currentPrice = _price;
-        float costPenalty = 0.5f;
-
-        if (isUpgradeActive[0]) 
+        for (int i = 0; i < GetInstancesCount(); i++)
         {
-            if (_instancesCount == 0){ return 0; }
-            costPenalty = 0.75f; 
-        }
-
-        for (int i = 0; i < _instancesCount; i++)
-        {
-            currentPrice += (int)(currentPrice * costPenalty);
+            currentPrice += (int)(currentPrice * _multipleInstancesCostPenalty);
         }
         return currentPrice;
     }

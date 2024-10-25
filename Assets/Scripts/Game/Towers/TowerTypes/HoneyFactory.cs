@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class HoneyFactory : TowerController
 {
+    [Header("------------------------------------------", order = -1)]
+    [Header("Drop values:")]
     public float dropChance;
     public int dropValue;
 
     [Header("Missile prefab")]
-    public GameObject missilePrefab;
+    [SerializeField] GameObject _missilePrefab;
     [SerializeField] GameObject _explosionPrefab;
 
     static int _instancesCount = 0;
@@ -31,7 +33,7 @@ public class HoneyFactory : TowerController
         {
             Vector3 honeyDestination = (Vector2)transform.position + (Random.insideUnitCircle * range);
             Debug.Log("jar distance: " + Vector3.Distance(honeyDestination, transform.position));
-            GameObject droppedHoney = Instantiate(missilePrefab, transform.position, Quaternion.identity);
+            GameObject droppedHoney = Instantiate(_missilePrefab, transform.position, Quaternion.identity);
             droppedHoney.GetComponent<MissileController>().SetUpMissile(missileSpeed, 0, honeyDestination, 0f, _attackSpecialEffects);
             droppedHoney.GetComponent<HoneyDropController>().honeyValue = dropValue;
         }
@@ -160,16 +162,6 @@ public class HoneyFactory : TowerController
     public override void ChangeInstancesCount(int valueToAdd)
     {
         _instancesCount += valueToAdd;
-    }
-
-    public override int GetCurrentTowerPrice()
-    {
-        int currentPrice = _price;
-        for (int i = 0; i < _instancesCount; i++)
-        {
-            currentPrice += (int)(currentPrice * 0.5f);
-        }
-        return currentPrice;
     }
 
     public override TowerInfo GetTowerInfo()

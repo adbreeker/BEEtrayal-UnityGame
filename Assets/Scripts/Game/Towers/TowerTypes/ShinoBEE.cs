@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class ShinoBEE : TowerController
 {
-    [Header("Weapon prefab")]
-    public GameObject missilePrefab;
-    public GameObject bigShuriken;
+    [Header("------------------------------------------", order = -1)]
+    [Header("Missile prefab")]
+    [SerializeField] GameObject _missilePrefab;
+    [SerializeField] GameObject _bigShuriken;
 
     [Header("Missile spawn point")]
     [SerializeField] Transform[] _missileSpawnPoint = new Transform[4];
@@ -18,7 +19,7 @@ public class ShinoBEE : TowerController
         base.Start();
 
         if(isUpgradeActive[0]) { _attackSpecialEffects.Add(new SpecialEffects.ArmorReduction(1)); }
-        if(isUpgradeActive[1]) { Instantiate(bigShuriken, transform.parent).GetComponent<MeleeController>().SetUpWeapon(50f, _attackSpecialEffects); }
+        if(isUpgradeActive[1]) { Instantiate(_bigShuriken, transform.parent).GetComponent<MeleeController>().SetUpWeapon(50f, _attackSpecialEffects); }
     }
 
     protected override void Update()
@@ -41,7 +42,7 @@ public class ShinoBEE : TowerController
         if (randomInsect != null)
         {
             transform.rotation = GameParams.LookAt2D(transform.position, randomInsect.transform.position);
-            GameObject missile = Instantiate(missilePrefab, _missileSpawnPoint[Random.Range(0,_missileSpawnPoint.Length)].position, Quaternion.identity);
+            GameObject missile = Instantiate(_missilePrefab, _missileSpawnPoint[Random.Range(0,_missileSpawnPoint.Length)].position, Quaternion.identity);
             if(isUpgradeActive[2]) { missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, randomInsect.transform.position, range, _attackSpecialEffects); }
             else { missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, randomInsect, _attackSpecialEffects); }
         }
@@ -129,16 +130,6 @@ public class ShinoBEE : TowerController
     public override void ChangeInstancesCount(int valueToAdd)
     {
         _instancesCount += valueToAdd;
-    }
-
-    public override int GetCurrentTowerPrice()
-    {
-        int currentPrice = _price;
-        for (int i = 0; i < _instancesCount; i++)
-        {
-            currentPrice += (int)(currentPrice * 0.5f);
-        }
-        return currentPrice;
     }
 
     public override TowerInfo GetTowerInfo()

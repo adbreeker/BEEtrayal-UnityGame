@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class ArcherBEE : TowerController
 {
+    [Header("------------------------------------------", order = -1)]
     [Header("Missile prefab")]
-    public GameObject missilePrefab;
+    [SerializeField] GameObject _missilePrefab;
 
     [Header("Missile spawn point")]
     [SerializeField] Transform _missileSpawnPoint;
@@ -39,7 +40,7 @@ public class ArcherBEE : TowerController
         if (firstInsect != null)
         {
             transform.rotation = GameParams.LookAt2D(transform.position, firstInsect.transform.position);
-            GameObject missile = Instantiate(missilePrefab, _missileSpawnPoint.position, GameParams.LookAt2D(transform.position, firstInsect.transform.position) * Quaternion.Euler(0f, 0f, 180f));
+            GameObject missile = Instantiate(_missilePrefab, _missileSpawnPoint.position, GameParams.LookAt2D(transform.position, firstInsect.transform.position) * Quaternion.Euler(0f, 0f, 180f));
             missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, firstInsect.transform.position, range, _attackSpecialEffects);
 
             if(isUpgradeActive[2])
@@ -52,9 +53,9 @@ public class ArcherBEE : TowerController
                 pos3 = Quaternion.Euler(0, 0, -7.5f) * pos3;
                 pos3 += transform.position;
 
-                GameObject missile2 = Instantiate(missilePrefab, _missileSpawnPoint.position, GameParams.LookAt2D(transform.position, pos2) * Quaternion.Euler(0f, 0f, 180f));
+                GameObject missile2 = Instantiate(_missilePrefab, _missileSpawnPoint.position, GameParams.LookAt2D(transform.position, pos2) * Quaternion.Euler(0f, 0f, 180f));
                 missile2.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, pos2, range, _attackSpecialEffects);
-                GameObject missile3 = Instantiate(missilePrefab, _missileSpawnPoint.position, GameParams.LookAt2D(transform.position, pos3) * Quaternion.Euler(0f, 0f, 180f));
+                GameObject missile3 = Instantiate(_missilePrefab, _missileSpawnPoint.position, GameParams.LookAt2D(transform.position, pos3) * Quaternion.Euler(0f, 0f, 180f));
                 missile3.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, pos3, range, _attackSpecialEffects);
             }    
         }
@@ -148,16 +149,6 @@ public class ArcherBEE : TowerController
     public override void ChangeInstancesCount(int valueToAdd)
     {
         _instancesCount += valueToAdd;
-    }
-
-    public override int GetCurrentTowerPrice()
-    {
-        int currentPrice = _price;
-        for(int i = 0; i < _instancesCount; i++) 
-        {
-            currentPrice +=(int)(currentPrice * 0.5f);
-        }
-        return currentPrice;
     }
 
     public override TowerInfo GetTowerInfo()

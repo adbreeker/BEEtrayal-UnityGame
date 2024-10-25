@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class SniperBEE : TowerController
 {
+    [Header("------------------------------------------", order = -1)]
     [Header("Missile prefab")]
-    public GameObject missilePrefab;
+    [SerializeField] GameObject _missilePrefab;
 
     [Header("Missile spawn point")]
     [SerializeField] Transform _missileSpawnPoint;
@@ -39,7 +40,7 @@ public class SniperBEE : TowerController
         if (strongestInsect != null)
         {
             transform.rotation = GameParams.LookAt2D(transform.position, strongestInsect.transform.position);
-            GameObject missile = Instantiate(missilePrefab, _missileSpawnPoint.position, GameParams.LookAt2D(transform.position, strongestInsect.transform.position));
+            GameObject missile = Instantiate(_missilePrefab, _missileSpawnPoint.position, GameParams.LookAt2D(transform.position, strongestInsect.transform.position));
             
             if(isUpgradeActive[2] && Random.Range(0,100) < 5) { missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage+500f, strongestInsect, _attackSpecialEffects); }
             else { missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, strongestInsect, _attackSpecialEffects); }
@@ -151,16 +152,6 @@ public class SniperBEE : TowerController
     public override void ChangeInstancesCount(int valueToAdd)
     {
         _instancesCount += valueToAdd;
-    }
-
-    public override int GetCurrentTowerPrice()
-    {
-        int currentPrice = _price;
-        for (int i = 0; i < _instancesCount; i++)
-        {
-            currentPrice += (int)(currentPrice * 0.5f);
-        }
-        return currentPrice;
     }
 
     public override TowerInfo GetTowerInfo()

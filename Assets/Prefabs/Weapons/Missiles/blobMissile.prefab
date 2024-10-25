@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9086481376661374996}
   - component: {fileID: 7037424773854298504}
   m_Layer: 8
-  m_Name: blobMissile
+  m_Name: BlobMissile
   m_TagString: Missile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
