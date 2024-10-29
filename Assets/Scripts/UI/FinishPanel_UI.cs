@@ -65,7 +65,7 @@ public class FinishPanel_UI : MonoBehaviour
         int honey = GameParams.gameManager.honey;
         honey -= GameParams.gameManager.startHoney;
         honey = (int)((float)honey * GameParams.gameManager.harvestModifier);
-        honey += (int)((float)GameParams.gameManager.honeyDrops * GameParams.gameManager.harvestModifier);
+        honey += GameParams.gameManager.honeyDrops;
         if (_isGameWon) { honey += GameParams.gameManager.winBonus; }
         if (honey < 0) { honey = 0; }
         return honey;
@@ -103,7 +103,7 @@ public class FinishPanel_UI : MonoBehaviour
         } while (currentHoney != newHoney);
 
         yield return new WaitForSecondsRealtime(pauseTime);
-        int bonuses = (int)((float)GameParams.gameManager.honeyDrops * GameParams.gameManager.harvestModifier);
+        int bonuses = GameParams.gameManager.honeyDrops;
         if (_isGameWon) { bonuses += GameParams.gameManager.winBonus; }
         _harvestedHoneyCounter.text = currentHoney.ToString() + " + " + bonuses.ToString();
         newHoney = currentHoney + bonuses;

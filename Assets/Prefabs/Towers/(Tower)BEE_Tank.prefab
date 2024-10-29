@@ -56,10 +56,10 @@ MonoBehaviour:
   range: 8
   speed: 1
   missileSpeed: 30
-  _dps: 'DPS: 75 | 0,1027397'
+  _dps: 'DPS: 75 | 0,06818182'
   isUpgradeActive: 00000000
   upgradePrices: 08070000e40c00008c2300008c230000
-  _price: 730
+  _price: 1100
   explosionSize: 1.5
   _missilePrefab: {fileID: 3107379393988431453, guid: ba39d73f6ac3be44db8be8c8a19bbf7b, type: 3}
   _missileSpawnPoint: {fileID: 326328975192058517}

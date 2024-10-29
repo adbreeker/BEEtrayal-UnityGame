@@ -50,7 +50,7 @@ public class SoldierBEE : TowerController
             if (isUpgradeActive[3])
             {
                 _attacksCount++;
-                if (_attacksCount >= 50)
+                if (_attacksCount >= 30)
                 {
                     _attacksCount = 0;
 
@@ -81,11 +81,11 @@ public class SoldierBEE : TowerController
             case 1:
                 return "Decrease multiple instances cost penalty to 0%";
             case 2:
-                return "Increase speed by 5 but decrease range by 3";
+                return "Increase speed by 5 but decrease range by 2";
             case 3:
                 return "Every attack have 0,1% to kill insect instantly";
             case 4:
-                return "Every 50 attacks throws grenade stunning insects for 1s upon explosion";
+                return "Every 30 attacks throws grenade stunning insects for 1s upon explosion";
         }
 
         return "";
@@ -113,12 +113,12 @@ public class SoldierBEE : TowerController
             if (status)
             {
                 speed += 5f;
-                range -= 3f;
+                range -= 2f;
             }
             else
             {
                 speed -= 5f;
-                range += 3f;
+                range += 2f;
             }
             isUpgradeActive[1] = status;
         }

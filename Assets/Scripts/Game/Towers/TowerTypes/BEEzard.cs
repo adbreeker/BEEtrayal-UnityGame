@@ -40,7 +40,7 @@ public class BEEzard : TowerController
             return;
         }
 
-        if (isUpgradeActive[2] && Random.Range(0, 100) < 10)
+        if (isUpgradeActive[2] && Random.Range(0, 100) < 15)
         {
             GameObject strongestInsect = GetStrongestInsect();
 
@@ -118,7 +118,7 @@ public class BEEzard : TowerController
             case 2:
                 return "Increase speed by 3 but decrease damage by 40";
             case 3:
-                return "Every magic missile have 10% chance of being powerful fireball";
+                return "Every magic missile have 15% chance of being powerful fireball";
             case 4:
                 return "Attacks apply additional random effects";
         }

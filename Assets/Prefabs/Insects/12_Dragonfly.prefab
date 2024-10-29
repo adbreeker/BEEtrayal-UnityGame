@@ -100,6 +100,9 @@ MonoBehaviour:
   health: 120
   armor: 0
   value: 3
+  _honeyDrop: {fileID: 766999501600105451, guid: cec59ef884c83df4fab3941f09b0ff8e, type: 3}
+  isSlowed: 0
+  isStuned: 0
   distanceTraveled: 0
 --- !u!70 &1697467315241135620
 CapsuleCollider2D:

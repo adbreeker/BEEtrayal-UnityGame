@@ -15,14 +15,15 @@ public class InsectController : MonoBehaviour
 
     [Header("Insect value")]
     public int value = 1;
+    [SerializeField] GameObject _honeyDrop;
 
-    //affecting effects:
+    [Header("Effects:")]
     //slow
-    public bool isSlowed = false;
+    [ReadOnly]public bool isSlowed = false;
     float _msReductionTime = 0.0f;
     float _msReductionPercent = 0.0f;
     //stun
-    public bool isStuned = false;
+    [ReadOnly]public bool isStuned = false;
     float _stunTime = 0.0f;
 
 
@@ -108,6 +109,14 @@ public class InsectController : MonoBehaviour
 
     public void KillInsect()
     {
+        if(Random.Range(0, 100) < 10)
+        {
+            Vector3 honeyDestination = (Vector2)transform.position + (Random.insideUnitCircle * 2f);
+            GameObject droppedHoney = Instantiate(_honeyDrop, transform.position, Quaternion.identity);
+            droppedHoney.GetComponent<MissileController>().SetUpMissile(8, 0, honeyDestination, 0f, new List<SpecialEffect>());
+            droppedHoney.GetComponent<HoneyDropController>().honeyValue = value;
+        }
+
         GameParams.insectsManager.RemoveInsect(gameObject, true);
         Destroy(gameObject);
     }
@@ -249,12 +258,10 @@ public class InsectController : MonoBehaviour
     {
         while (_stunTime > 0.0f)
         {
-            Debug.Log(gameObject.name + "stuned for: " + _stunTime);
             yield return new WaitForFixedUpdate();
             _stunTime -= Time.fixedDeltaTime;
         }
         _stunTime = 0.0f;
-        Debug.Log(gameObject.name + "unstuned");
         isStuned = false;
     }
 }

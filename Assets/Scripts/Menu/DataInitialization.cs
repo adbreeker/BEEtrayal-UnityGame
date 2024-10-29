@@ -5,14 +5,14 @@ using UnityEngine;
 public class DataInitialization : MonoBehaviour
 {
     [SerializeField] List<TowerController> _availableTowers;
+    [SerializeField] int _startHoney;
+
     private void Awake()
     {
         //honey
         if(!PlayerPrefs.HasKey("Honey"))
         {
-            PlayerPrefs.SetInt("Honey", 0);
-            //set honey to 10000
-            PlayerPrefs.SetInt("Honey", 100000);
+            PlayerPrefs.SetInt("Honey", _startHoney);
         }
 
         //towers

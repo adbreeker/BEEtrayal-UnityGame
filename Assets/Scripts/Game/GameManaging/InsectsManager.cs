@@ -31,6 +31,7 @@ public class InsectsManager : MonoBehaviour
     void Start()
     {
         StartCoroutine(SpawnInsects());
+
         int maxInsects = 0;
         foreach (InsectsWave wave in insectsWaves)
         {
@@ -39,7 +40,7 @@ public class InsectsManager : MonoBehaviour
                 maxInsects++;
             }
         }
-        Debug.Log(maxInsects);
+        Debug.Log("Max insects: " + maxInsects);
     }
 
     void Update()

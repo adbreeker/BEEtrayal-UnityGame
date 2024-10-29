@@ -54,10 +54,10 @@ MonoBehaviour:
   range: 5
   speed: 1
   missileSpeed: 10
-  _dps: 'DPS: 40 | 0,04705882'
+  _dps: 'DPS: 40 | 0,05479452'
   isUpgradeActive: 00000000
-  upgradePrices: 2c010000b41400001c25000048260000
-  _price: 850
+  upgradePrices: 2c0100007805000024130000fb1c0000
+  _price: 730
   armorReduction: 7.5
   _missilePrefab: {fileID: 4706714175347289679, guid: 8b6555a7ee0e0e342ab4e1e0e380e018, type: 3}
   _fireBallPrefab: {fileID: 2630540294866672630, guid: 05cf3f86916569b44b89f33dcb7d5278, type: 3}

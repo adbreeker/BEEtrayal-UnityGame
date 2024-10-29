@@ -97,3 +97,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionSize: 1
   _explosionSpeed: 2
+  _spriteRenderer: {fileID: 2689182322356329846}
