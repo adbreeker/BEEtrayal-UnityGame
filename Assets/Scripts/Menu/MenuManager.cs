@@ -25,7 +25,8 @@ public class MenuManager : MonoBehaviour
 
     public void Button_Start()
     {
-        SceneManager.LoadScene("Map1");
+        string randomMap = "Map" + Random.Range(1, 3).ToString();
+        SceneManager.LoadScene(randomMap);
     }
 
     public void Button_Workshop()
