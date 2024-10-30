@@ -57,7 +57,7 @@ public class BEEzard : TowerController
             transform.rotation = GameParams.LookAt2D(transform.position, strongestInsect.transform.position);
             GameObject missile = Instantiate(_fireBallPrefab, _missileSpawnPoint.position, Quaternion.identity);
             missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, 3 * damage + 100f, strongestInsect, specialEffects);
-            missile.GetComponent<MagicFireballController>().explosionSize = 2f;
+            missile.GetComponent<RocketController>().explosionSize = 2f;
         }
         else { StartCoroutine(DeleyedAttacks()); }
     }

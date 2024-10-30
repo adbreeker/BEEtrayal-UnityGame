@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8177700046702776389}
   - component: {fileID: 3939200488381212149}
-  - component: {fileID: -5208286351558651530}
+  - component: {fileID: 1395913424535820093}
   m_Layer: 8
   m_Name: MagicBolt2
   m_TagString: Missile
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-5208286351558651530
+--- !u!114 &1395913424535820093
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,6 +92,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 4706714175347289679}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ade364fddb4e93b4583b043ec13ea087, type: 3}
+  m_Script: {fileID: 11500000, guid: 86c35e136a0c4be409f50311a503f5b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotateWhileFly: 1
+  rotationAngle: 180

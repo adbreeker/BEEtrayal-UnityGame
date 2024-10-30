@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class MissileController : WeaponController
 {
+    [Header("Missile fly rotation adjustment")]
+    public bool rotateWhileFly = false;
+    public float rotationAngle = 0f;
+
     protected float _speed;
     protected GameObject _target;
     protected Vector3 _destination;
 
     protected FlyMode _flyMode;
     bool _isReady = false;
-
 
     //aditional variable types to set up missile
     protected enum FlyMode
@@ -83,6 +86,27 @@ public class MissileController : WeaponController
                 {
                     OnHit();
                     _isReady = false;
+                }
+            }
+        }
+    }
+
+    protected virtual void Update()
+    {
+        if(rotateWhileFly)
+        {
+            if (_flyMode == FlyMode.Destination)
+            {
+                if (_destination != null)
+                {
+                    transform.rotation = GameParams.LookAt2D(transform.position, _destination) * Quaternion.Euler(0f, 0f, rotationAngle);
+                }
+            }
+            if (_flyMode == FlyMode.Target)
+            {
+                if (_target != null)
+                {
+                    transform.rotation = GameParams.LookAt2D(transform.position, _target.transform.position) * Quaternion.Euler(0f, 0f, rotationAngle);
                 }
             }
         }

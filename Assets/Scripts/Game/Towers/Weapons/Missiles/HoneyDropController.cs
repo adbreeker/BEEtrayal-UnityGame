@@ -4,14 +4,8 @@ using UnityEngine;
 
 public class HoneyDropController : MissileController
 {
+    [Header("Additional controller elements:")]
     public int honeyValue = 1;
-    private void Update()
-    {
-        if (_destination != null)
-        {
-            transform.rotation = GameParams.LookAt2D(transform.position, _destination);
-        }
-    }
 
     protected override void OnHit()
     {

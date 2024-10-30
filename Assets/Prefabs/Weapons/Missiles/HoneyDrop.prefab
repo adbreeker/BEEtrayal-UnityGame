@@ -97,6 +97,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b571e96bf488c034cab1cd382300deee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotateWhileFly: 1
+  rotationAngle: 0
   honeyValue: 1
 --- !u!70 &6046479091059132627
 CapsuleCollider2D:

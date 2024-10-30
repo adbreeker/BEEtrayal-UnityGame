@@ -134,3 +134,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ae4ebcaabe8d5047bdcfd9a1ff42398, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotateWhileFly: 1
+  rotationAngle: 180

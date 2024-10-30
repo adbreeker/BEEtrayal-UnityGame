@@ -95,5 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d981587a8bc2d4b429fc9abc4c2ba3a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotateWhileFly: 1
+  rotationAngle: 0
   explosionSize: 1
   _explosionPrefab: {fileID: 2506853797126702572, guid: 71ea6bca1cbdb644a8473aedbc242971, type: 3}

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ShurikenController : MissileController
 {
+    [Header("Additional controller elements:")]
     [SerializeField] Collider2D _collider;
     [SerializeField] Rigidbody2D _rigidbody;
 

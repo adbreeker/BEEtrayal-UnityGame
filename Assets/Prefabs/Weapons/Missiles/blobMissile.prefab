@@ -95,4 +95,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05b848806614cc34499e0a78c0637475, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotateWhileFly: 1
+  rotationAngle: 180
   _blobPrefab: {fileID: 5578036312127645809, guid: 96d42080240952746b06824187f1f147, type: 3}

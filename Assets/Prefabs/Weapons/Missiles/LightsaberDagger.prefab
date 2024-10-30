@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4427066962329462481}
   - component: {fileID: 8121286724683099565}
-  - component: {fileID: 3383269178710734667}
+  - component: {fileID: 1913019561693454718}
   m_Layer: 8
   m_Name: LightsaberDagger
   m_TagString: Missile
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3383269178710734667
+--- !u!114 &1913019561693454718
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,6 +92,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 2280834449431021339}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4789590d28cc2d546bad52984a409ac8, type: 3}
+  m_Script: {fileID: 11500000, guid: 86c35e136a0c4be409f50311a503f5b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotateWhileFly: 1
+  rotationAngle: 0

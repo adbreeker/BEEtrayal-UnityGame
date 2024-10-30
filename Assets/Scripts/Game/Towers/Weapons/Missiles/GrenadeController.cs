@@ -4,15 +4,9 @@ using UnityEngine;
 
 public class GrenadeController : MissileController
 {
+    [Header("Additional controller elements:")]
     public float explosionSize = 1.0f;
-    [SerializeField] GameObject _explosionPrefab;
-    private void Update()
-    {
-        if (_destination != null)
-        {
-            transform.rotation = GameParams.LookAt2D(transform.position, _destination);
-        }
-    }
+    [SerializeField] protected GameObject _explosionPrefab;
 
     protected override void OnHit()
     {
