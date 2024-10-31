@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using TMPro;
 
 public class MenuManager : MonoBehaviour
@@ -26,12 +25,12 @@ public class MenuManager : MonoBehaviour
     public void Button_Start()
     {
         string randomMap = "Map" + Random.Range(1, 3).ToString();
-        SceneManager.LoadScene(randomMap);
+        ScenesManager.currentScenesManager.ChangeScene(randomMap);
     }
 
     public void Button_Workshop()
     {
-        SceneManager.LoadScene("Workshop");
+        ScenesManager.currentScenesManager.ChangeScene("Workshop");
     }
 
     public void Button_Exit()
