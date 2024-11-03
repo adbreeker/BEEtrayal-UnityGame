@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class WorkshopManager : MonoBehaviour
 {
@@ -42,7 +41,7 @@ public class WorkshopManager : MonoBehaviour
 
     public void Button_Exit()
     {
-        SceneManager.LoadScene("Menu");
+        ScenesManager.currentScenesManager.ChangeScene("Menu");
     }
 
     public void Button_NextPanel()

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class FinishPanel_UI : MonoBehaviour
 {
@@ -57,7 +56,7 @@ public class FinishPanel_UI : MonoBehaviour
         _menuButton.interactable = false;
         GameParams.gameManager.ResetTowerInstancesCounts();
         _harvestedHoneyCounter.text = CountHarvestedHoney().ToString();
-        SceneManager.LoadScene("Menu");
+        ScenesManager.currentScenesManager.ChangeScene("Menu");
     }
 
     int CountHarvestedHoney()
