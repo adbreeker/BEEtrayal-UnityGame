@@ -8,8 +8,9 @@ public class ScenesManager : MonoBehaviour
 {
     public static ScenesManager currentScenesManager;
 
-    [SerializeField] RawImage _fadeImage;
-    [SerializeField] RawImage _fadeLogo;
+    [SerializeField] GameObject _fadeBorder;
+    [SerializeField] RectTransform _fadeUp;
+    [SerializeField] RectTransform _fadeDown;
     [SerializeField] GraphicRaycaster _raycaster;
 
     private void Awake()
@@ -29,41 +30,49 @@ public class ScenesManager : MonoBehaviour
 
     IEnumerator ChangeSceneCoroutine(string scene)
     {
+        float height = ((RectTransform)transform).rect.height;
+
+        _fadeUp.sizeDelta = new Vector2(_fadeUp.sizeDelta.x, height / 2f);
+        _fadeDown.sizeDelta = new Vector2(_fadeDown.sizeDelta.x, height / 2f);
+
+        _fadeUp.anchoredPosition = new Vector2(_fadeUp.anchoredPosition.x, (height / 4f + 5f));
+        _fadeDown.anchoredPosition = new Vector2(_fadeDown.anchoredPosition.x, -(height / 4f + 5f));
+
         _raycaster.enabled = true;
-        while (_fadeImage.color.a != 1f)
+
+        _fadeBorder.SetActive(true);
+        _fadeUp.gameObject.SetActive(true);
+        _fadeDown.gameObject.SetActive(true);
+
+        Vector2 destinedUp = _fadeUp.anchoredPosition;
+        destinedUp.y = -(height / 4f + 5f);
+        Vector2 destinedDown = _fadeDown.anchoredPosition;
+        destinedDown.y = (height / 4f + 5f);
+
+        while(_fadeUp.anchoredPosition != destinedUp || _fadeDown.anchoredPosition != destinedDown)
         {
-            Color updateColor = _fadeImage.color;
-            updateColor.a = Mathf.MoveTowards(updateColor.a, 1f, 0.05f);
-            _fadeImage.color = updateColor;
-
-            if(_fadeImage.color.a >= 0.75f)
-            {
-                updateColor = _fadeLogo.color;
-                updateColor.a = Mathf.MoveTowards(updateColor.a, 1f, 0.15f);
-                _fadeLogo.color = updateColor;
-            }
-
+            _fadeUp.anchoredPosition = Vector2.MoveTowards(_fadeUp.anchoredPosition, destinedUp, 50f);
+            _fadeDown.anchoredPosition = Vector2.MoveTowards(_fadeDown.anchoredPosition, destinedDown, 50f);
             yield return null;
         }
 
         SceneManager.LoadScene(scene);
         yield return new WaitForSecondsRealtime(0.5f);
 
-        while (_fadeImage.color.a != 0f)
+        destinedUp.y = (height / 4f + 5f);
+        destinedDown.y = -(height / 4f + 5f);
+
+        while (_fadeUp.anchoredPosition != destinedUp || _fadeDown.anchoredPosition != destinedDown)
         {
-            Color updateColor = _fadeImage.color;
-            updateColor.a = Mathf.MoveTowards(updateColor.a, 0f, 0.02f);
-            _fadeImage.color = updateColor;
-
-            if (_fadeLogo.color.a > 0f)
-            {
-                updateColor = _fadeLogo.color;
-                updateColor.a = Mathf.MoveTowards(updateColor.a, 0f, 0.1f);
-                _fadeLogo.color = updateColor;
-            }
-
+            _fadeUp.anchoredPosition = Vector2.MoveTowards(_fadeUp.anchoredPosition, destinedUp, 50f);
+            _fadeDown.anchoredPosition = Vector2.MoveTowards(_fadeDown.anchoredPosition, destinedDown, 50f);
             yield return null;
         }
+
+        _fadeUp.gameObject.SetActive(true);
+        _fadeDown.gameObject.SetActive(true);
+        _fadeBorder.SetActive(false);
+
         _raycaster.enabled = false;
     }
 }
