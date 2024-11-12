@@ -5,7 +5,6 @@ using TMPro;
 
 public class MenuManager : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI _honeyCounter;
 
     private void Awake()
     {
@@ -14,7 +13,7 @@ public class MenuManager : MonoBehaviour
 
     void Start()
     {
-        _honeyCounter.text = PlayerPrefs.GetInt("Honey").ToString();
+
     }
 
     void Update()
