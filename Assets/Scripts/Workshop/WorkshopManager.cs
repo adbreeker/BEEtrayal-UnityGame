@@ -36,7 +36,15 @@ public class WorkshopManager : MonoBehaviour
 
     public void UpdateHoney()
     {
-        _honeyCounter.text = PlayerPrefs.GetInt("Honey").ToString();
+        int honey = PlayerPrefs.GetInt("Honey");
+        if (honey >= 10000)
+        {
+            _honeyCounter.text = (honey / 1000).ToString() + "K";
+        }
+        else
+        {
+            _honeyCounter.text = honey.ToString();
+        }
     }
 
     public void Button_Exit()
