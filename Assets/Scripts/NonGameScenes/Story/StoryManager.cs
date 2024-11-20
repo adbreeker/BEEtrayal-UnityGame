@@ -100,6 +100,7 @@ public class StoryManager : MonoBehaviour
         }
         else
         {
+            PlayerPrefs.SetInt("Story", 1);
             ScenesManager.currentScenesManager.ChangeScene("Menu");
         }
     }
@@ -113,7 +114,8 @@ public class StoryManager : MonoBehaviour
     void SkipStory()
     {
         if(_globalStoryIndex >= _storyImages.Count) 
-        { 
+        {
+            PlayerPrefs.SetInt("Story", 1);
             ScenesManager.currentScenesManager.ChangeScene("Menu");
             if (_storytelling != null) { StopCoroutine(_storytelling); }
             return;

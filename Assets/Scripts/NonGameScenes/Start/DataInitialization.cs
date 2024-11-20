@@ -49,5 +49,11 @@ public class DataInitialization : MonoBehaviour
                 }
             }
         }
+
+        //starting story
+        if(!PlayerPrefs.HasKey("Story"))
+        {
+            PlayerPrefs.SetInt("Story", 0);
+        }
     }
 }
