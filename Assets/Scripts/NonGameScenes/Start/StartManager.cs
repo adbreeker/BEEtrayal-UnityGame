@@ -23,7 +23,7 @@ public class StartManager : MonoBehaviour
             yield return null;
         }
 
-        if(PlayerPrefs.GetInt("Story") == 0)
+        if(!PlayerPrefs.HasKey("Honey"))
         {
             ScenesManager.currentScenesManager.ChangeScene("Story");
         }

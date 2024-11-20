@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DataInitialization : MonoBehaviour
 {
-    [SerializeField] List<TowerController> _availableTowers;
+    [SerializeField] TowersListSO _availableTowers;
     [SerializeField] int _startHoney;
 
     private void Awake()
@@ -16,7 +16,7 @@ public class DataInitialization : MonoBehaviour
         }
 
         //towers
-        foreach(TowerController tc in _availableTowers)
+        foreach(TowerController tc in _availableTowers.allTowers)
         {
             string towerName = tc.GetTowerInfo().name;
 
@@ -48,12 +48,6 @@ public class DataInitialization : MonoBehaviour
                     }
                 }
             }
-        }
-
-        //starting story
-        if(!PlayerPrefs.HasKey("Story"))
-        {
-            PlayerPrefs.SetInt("Story", 0);
         }
     }
 }

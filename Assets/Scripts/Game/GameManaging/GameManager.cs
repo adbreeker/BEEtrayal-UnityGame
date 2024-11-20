@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
     public float towerSellModifier = 0.3f;
     public GameObject tfPrefab;
     public Transform towersHolder;
-    public List<TowerController> towerTypes = new List<TowerController>();
+    public TowersListSO towerTypes;
 
     [Header("Game finish:")]
     public int winBonus = 500;
@@ -97,7 +97,7 @@ public class GameManager : MonoBehaviour
 
     public void ResetTowerInstancesCounts()
     {
-        foreach (TowerController controller in towerTypes)
+        foreach (TowerController controller in towerTypes.allTowers)
         {
             controller.SetInstancesCount(0);
         }

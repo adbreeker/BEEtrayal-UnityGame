@@ -10083,20 +10083,7 @@ MonoBehaviour:
   towerSellModifier: 0.3
   tfPrefab: {fileID: 8408532792568524852, guid: 9ea353a276b06ea4a834dd93e26929c2, type: 3}
   towersHolder: {fileID: 877518102}
-  towerTypes:
-  - {fileID: -7120240522317241418, guid: 74e967f357b12bf48b72426cf1cae14d, type: 3}
-  - {fileID: 5947415406573630212, guid: ca4d5e1f337cff6478d4fe03c05bb9eb, type: 3}
-  - {fileID: 6332572517274579113, guid: 227ee7f513d085c4ba954823e72d8a8a, type: 3}
-  - {fileID: 8903802887232060675, guid: 0ab426dad09eee04792202e16994ca21, type: 3}
-  - {fileID: -8505368465711207708, guid: 943e2e245b9735e43ac06057bb5a9b81, type: 3}
-  - {fileID: 5579380014903491677, guid: dea0696451d2a75439d9deb06f1404fc, type: 3}
-  - {fileID: -6475266474490195148, guid: ae9d4262690194f419837da619d3939b, type: 3}
-  - {fileID: -4657834111443040741, guid: d97f2ea8cc1fc1847a302ebf5b406625, type: 3}
-  - {fileID: 8924697378884652659, guid: 70ceea98a54d21b4e8a22d4d2b7fb1ef, type: 3}
-  - {fileID: -7811948359647836585, guid: 56af1f7eb770eae46b2b49a8287a2249, type: 3}
-  - {fileID: -3193271492069151571, guid: d9bb4522484ae5b459037d6e792cd78b, type: 3}
-  - {fileID: -3015530203976270874, guid: 36fee8b35c857304cb1adfe49b954286, type: 3}
-  - {fileID: 116688192865897235, guid: be2ab09852eb74740978f21013aafc8a, type: 3}
+  towerTypes: {fileID: 11400000, guid: 0565f7ee2a0512949949baf9e857f6e1, type: 2}
   winBonus: 300
   harvestModifier: 0.1
   _gamePanel: {fileID: 589464375}
