@@ -135,7 +135,17 @@ public class StoryManager : MonoBehaviour
 
         if( _globalStoryIndex < _storyImages.Count)
         {
-            _storytelling = StartCoroutine(StorytellingCoroutine(_globalStoryIndex, 3.0f));
+            _storytelling = StartCoroutine(StorytellingCoroutine(_globalStoryIndex, 2.0f));
         }
+        else if(_globalStoryIndex ==  _storyImages.Count) 
+        {
+            _storytelling = StartCoroutine(DeleyedSceneChange(2.0f));
+        }
+    }
+
+    IEnumerator DeleyedSceneChange(float deley)
+    {
+        yield return new WaitForSecondsRealtime(deley);
+        ScenesManager.currentScenesManager.ChangeScene("Menu");
     }
 }
