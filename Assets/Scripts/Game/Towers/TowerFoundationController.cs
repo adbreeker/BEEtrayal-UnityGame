@@ -1,20 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class TowerFoundationController : MonoBehaviour
 {
     [Header("Tower:")]
     public TowerController tower = null;
 
-    [Header("Buttons")]
+    [Header("Foundation elements:")]
+    [SerializeField] PolygonCollider2D _collider;
     [SerializeField] GameObject _buttonTowerInfo;
-
-    [Header("Tower foundation sprite")]
     [SerializeField] SpriteRenderer _spriteRenderer;
-
-    [Header("Tower range object")]
     [SerializeField] GameObject _rangeObject;
 
     //tower info
@@ -101,11 +97,11 @@ public class TowerFoundationController : MonoBehaviour
         contactFillter.useTriggers = true;
 
         Collider2D[] colliders = new Collider2D[1];
+        Physics2D.SyncTransforms();
+        _collider.OverlapCollider(contactFillter, colliders);
 
-        GetComponent<PolygonCollider2D>().OverlapCollider(contactFillter, colliders);
-
-        if(colliders[0] == null) { return null; }
-        else { return colliders[0].gameObject; }
+        if (colliders[0] != null) { return colliders[0].gameObject; }
+        else { return null; }
     }
 
     public void ChangeColor(Color color)

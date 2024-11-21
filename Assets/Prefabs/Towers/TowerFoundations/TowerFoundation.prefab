@@ -399,6 +399,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tower: {fileID: 0}
+  _collider: {fileID: 231568943712664639}
   _buttonTowerInfo: {fileID: 1260705341932824369}
   _spriteRenderer: {fileID: 3423697550518458480}
   _rangeObject: {fileID: 6082124085631592869}
