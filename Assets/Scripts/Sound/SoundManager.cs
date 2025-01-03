@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Text;
+using static UnityEngine.GraphicsBuffer;
+using UnityEditor;
 
 [RequireComponent(typeof(AudioSource))]
 public class SoundManager : MonoBehaviour
@@ -17,7 +19,7 @@ public class SoundManager : MonoBehaviour
     }
 
     [SerializeField] GameObject _audioPrefab;
-    [SerializeField] List<Sound> _sounds = new List<Sound>();
+    [SerializeField, HideInInspector] List<Sound> _sounds = new List<Sound>();
 
     List<AudioSource> _activeAudios = new List<AudioSource>();
 
@@ -114,3 +116,33 @@ public class SoundManager : MonoBehaviour
     }
 #endif
 }
+
+#if UNITY_EDITOR
+[CustomEditor(typeof(SoundManager))]
+public class SoundManagerEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        serializedObject.Update();
+
+        // Draw all properties except _sounds
+        DrawPropertiesExcluding(serializedObject, "_sounds");
+
+        // Reference to target SoundManager
+        SoundManager soundManager = (SoundManager)target;
+
+        // Allow _sounds editing only in prefab asset mode
+        if (PrefabUtility.IsPartOfPrefabAsset(soundManager.gameObject))
+        {
+            SerializedProperty soundsProperty = serializedObject.FindProperty("_sounds");
+            EditorGUILayout.PropertyField(soundsProperty, true);
+        }
+        else
+        {
+            EditorGUILayout.HelpBox("Sounds editing is allowed only in the prefab editor.", MessageType.Info);
+        }
+
+        serializedObject.ApplyModifiedProperties();
+    }
+}
+#endif
