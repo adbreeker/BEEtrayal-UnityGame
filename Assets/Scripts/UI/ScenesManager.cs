@@ -8,6 +8,10 @@ public class ScenesManager : MonoBehaviour
 {
     public static ScenesManager currentScenesManager;
 
+    [Header("Doors speed")]
+    public float doorSpeed;
+
+    [Header("Fade elements:")]
     [SerializeField] GameObject _fadeBorder;
     [SerializeField] RectTransform _fadeUp;
     [SerializeField] RectTransform _fadeDown;
@@ -51,8 +55,8 @@ public class ScenesManager : MonoBehaviour
 
         while(_fadeUp.anchoredPosition != destinedUp || _fadeDown.anchoredPosition != destinedDown)
         {
-            _fadeUp.anchoredPosition = Vector2.MoveTowards(_fadeUp.anchoredPosition, destinedUp, 50f);
-            _fadeDown.anchoredPosition = Vector2.MoveTowards(_fadeDown.anchoredPosition, destinedDown, 50f);
+            _fadeUp.anchoredPosition = Vector2.MoveTowards(_fadeUp.anchoredPosition, destinedUp, doorSpeed * Time.unscaledDeltaTime);
+            _fadeDown.anchoredPosition = Vector2.MoveTowards(_fadeDown.anchoredPosition, destinedDown, doorSpeed * Time.unscaledDeltaTime);
             yield return null;
         }
 
@@ -64,8 +68,8 @@ public class ScenesManager : MonoBehaviour
 
         while (_fadeUp.anchoredPosition != destinedUp || _fadeDown.anchoredPosition != destinedDown)
         {
-            _fadeUp.anchoredPosition = Vector2.MoveTowards(_fadeUp.anchoredPosition, destinedUp, 50f);
-            _fadeDown.anchoredPosition = Vector2.MoveTowards(_fadeDown.anchoredPosition, destinedDown, 50f);
+            _fadeUp.anchoredPosition = Vector2.MoveTowards(_fadeUp.anchoredPosition, destinedUp, doorSpeed * Time.unscaledDeltaTime);
+            _fadeDown.anchoredPosition = Vector2.MoveTowards(_fadeDown.anchoredPosition, destinedDown, doorSpeed * Time.unscaledDeltaTime);
             yield return null;
         }
 

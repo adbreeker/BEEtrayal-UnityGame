@@ -223,6 +223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ad969a4e15b4f43828dbf72684dc10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doorSpeed: 5000
   _fadeBorder: {fileID: 4015170982196752569}
   _fadeUp: {fileID: 4015170982922294363}
   _fadeDown: {fileID: 4015170982610728295}
