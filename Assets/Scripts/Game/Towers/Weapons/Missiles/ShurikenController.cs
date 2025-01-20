@@ -16,7 +16,7 @@ public class ShurikenController : MissileController
         {
             _collider.enabled = true;
             _rigidbody = gameObject.AddComponent<Rigidbody2D>();
-            _rigidbody.isKinematic = true;
+            _rigidbody.bodyType = RigidbodyType2D.Kinematic;
         }
     }
 

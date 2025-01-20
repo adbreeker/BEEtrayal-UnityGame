@@ -98,7 +98,7 @@ public class TowerFoundationController : MonoBehaviour
 
         Collider2D[] colliders = new Collider2D[1];
         Physics2D.SyncTransforms();
-        _collider.OverlapCollider(contactFillter, colliders);
+        _collider.Overlap(contactFillter, colliders);
 
         if (colliders[0] != null) { return colliders[0].gameObject; }
         else { return null; }
