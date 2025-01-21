@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
 
 static class GameParams
 {
@@ -87,7 +86,7 @@ public class GameManager : MonoBehaviour
         ResetTowerInstancesCounts();
     }
 
-    void Update()
+    protected virtual void Update()
     {
         if (buildingTowerCoroutine == null && Input.GetKeyDown(KeyCode.Mouse0) && !GameParams.isChooseTowerPanelOpen && !GameParams.IsPointerOverUIObject())
         {
@@ -113,7 +112,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0.0f;
     }
 
-    IEnumerator BuildTower()
+    protected IEnumerator BuildTower()
     {
         float timeElapsed = 0;
         while(true)
