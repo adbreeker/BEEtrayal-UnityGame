@@ -62,7 +62,7 @@ public class TutorialGameManager : GameManager
             yield return new WaitForSecondsRealtime(0.05f);
         }
 
-        yield return new WaitForSecondsRealtime(1f);
+        yield return new WaitForSecondsRealtime(0.5f);
 
         _tutorialText.text = "";
         _livesArrow.SetActive(true);
@@ -77,7 +77,7 @@ public class TutorialGameManager : GameManager
             _tutorialText.text += _tutorialMonologues[1][i];
             yield return new WaitForSecondsRealtime(0.05f);
         }
-        yield return new WaitForSecondsRealtime(1f);
+        yield return new WaitForSecondsRealtime(0.5f);
         _livesArrow.SetActive(false);
 
         _tutorialText.text = "";
@@ -93,7 +93,7 @@ public class TutorialGameManager : GameManager
             _tutorialText.text += _tutorialMonologues[2][i];
             yield return new WaitForSecondsRealtime(0.05f);
         }
-        yield return new WaitForSecondsRealtime(1f);
+        yield return new WaitForSecondsRealtime(0.5f);
         _honeyArrow.SetActive(false);
 
         _tutorialText.text = "";
@@ -109,7 +109,7 @@ public class TutorialGameManager : GameManager
             _tutorialText.text += _tutorialMonologues[3][i];
             yield return new WaitForSecondsRealtime(0.05f);
         }
-        yield return new WaitForSecondsRealtime(1f);
+        yield return new WaitForSecondsRealtime(0.5f);
         _pathArrow.SetActive(false);
 
         _tutorialText.text = "";
@@ -125,7 +125,7 @@ public class TutorialGameManager : GameManager
             _tutorialText.text += _tutorialMonologues[4][i];
             yield return new WaitForSecondsRealtime(0.05f);
         }
-        yield return new WaitForSecondsRealtime(1f);
+        yield return new WaitForSecondsRealtime(0.5f);
         _tapIcon.SetActive(false);
 
         _allowBuilding = true;
