@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Text;
-using static UnityEngine.GraphicsBuffer;
 using UnityEditor;
 
 [RequireComponent(typeof(AudioSource))]
