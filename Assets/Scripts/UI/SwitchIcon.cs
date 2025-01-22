@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class SwitchIcon : MonoBehaviour
 {
     [Header("Icons to switch between:")]
-    [SerializeField] List<RawImage> icons = new List<RawImage>();
+    [SerializeField] List<Graphic> icons = new List<Graphic>();
     int _iconIndex = 0;
 
     public void Switch()
