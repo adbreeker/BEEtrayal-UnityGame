@@ -66,8 +66,6 @@ public class GamePanel_UI : MonoBehaviour
 
     public void Button_ShowHide()
     {
-        _showHideButton.transform.GetChild(0).transform.rotation *= Quaternion.Euler(0f, 0f, 180f);
-
         if(_isPanelShown) 
         {
             _isPanelShown = false;

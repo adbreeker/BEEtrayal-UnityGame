@@ -1372,17 +1372,6 @@ EdgeCollider2D:
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
   m_UseAdjacentEndPoint: 0
---- !u!114 &828575979 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6631520442032829199, guid: bf373674422efaf478aa0e24b1576a42, type: 3}
-  m_PrefabInstance: {fileID: 6631520440279904637}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &877518101
 GameObject:
   m_ObjectHideFlags: 0
@@ -2268,6 +2257,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1791666594}
   m_CullTransparentMesh: 1
+--- !u!114 &1857720552 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2779086517237002884, guid: bf373674422efaf478aa0e24b1576a42, type: 3}
+  m_PrefabInstance: {fileID: 6631520440279904637}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c870818dbb7607145a9583ae69d7be99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1859334721
 GameObject:
   m_ObjectHideFlags: 0
@@ -2421,7 +2421,7 @@ MonoBehaviour:
   _mainCanvas: {fileID: 1645429158}
   _tutorialPanel: {fileID: 365824343}
   _tutorialText: {fileID: 1396842916}
-  _infoPanelButton: {fileID: 828575979}
+  _infoPanelButton: {fileID: 1857720552}
   _livesArrow: {fileID: 1051256766}
   _honeyArrow: {fileID: 698636281}
   _pathArrow: {fileID: 1791666594}

@@ -23,8 +23,16 @@ public class MenuManager : MonoBehaviour
 
     public void Button_Start()
     {
-        string randomMap = "Map" + Random.Range(1, 3).ToString();
-        ScenesManager.currentScenesManager.ChangeScene(randomMap);
+        if(PlayerPrefs.GetInt("TutorialPlayed") == 0)
+        {
+            PlayerPrefs.SetInt("TutorialPlayed", 1);
+            ScenesManager.currentScenesManager.ChangeScene("MapTutorial");
+        }
+        else
+        {
+            string randomMap = "Map" + Random.Range(1, 3).ToString();
+            ScenesManager.currentScenesManager.ChangeScene(randomMap);
+        }
     }
 
     public void Button_Workshop()

@@ -10,7 +10,7 @@ using UnityEditor;
 public class ButtonExtended : Button
 {
     [Header("Other graphic elements:")]
-    public List<Graphic> otherGraphicElements;
+    public List<Graphic> otherGraphicElements = new List<Graphic>();
 
     //button hold
     [SerializeField] float _holdTime = 0.5f;

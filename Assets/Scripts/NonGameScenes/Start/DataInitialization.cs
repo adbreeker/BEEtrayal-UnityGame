@@ -15,6 +15,12 @@ public class DataInitialization : MonoBehaviour
             PlayerPrefs.SetInt("Honey", _startHoney);
         }
 
+        //tutorial
+        if(!PlayerPrefs.HasKey("TutorialPlayed"))
+        {
+            PlayerPrefs.SetInt("TutorialPlayed", 0);
+        }
+
         //towers
         foreach(TowerController tc in _availableTowers.allTowers)
         {

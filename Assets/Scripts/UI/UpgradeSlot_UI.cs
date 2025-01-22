@@ -59,17 +59,11 @@ public class UpgradeSlot_UI : MonoBehaviour
         {
             if (PlayerPrefs.GetInt("Honey") >= _upgradeCost)
             {
-                foreach(Selectable s in _buyButton.GetComponentsInChildren<Selectable>())
-                {
-                    s.interactable = true;
-                }
+                _buyButton.GetComponent<Button>().interactable = true;
             }
             else
             {
-                foreach (Selectable s in _buyButton.GetComponentsInChildren<Selectable>())
-                {
-                    s.interactable = false;
-                }
+                _buyButton.GetComponent<Button>().interactable = false;
             }
         }
     }
