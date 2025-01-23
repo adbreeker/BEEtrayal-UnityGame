@@ -2184,7 +2184,7 @@ MonoBehaviour:
   beehivePosition: {fileID: 1056972312}
   _pathHolder: {fileID: 807797563}
   insectsPath: []
-  insectsWaves: []
+  wavesEasy: {fileID: 11400000, guid: c5fa2d1680b15574d86a02108385cbc2, type: 2}
 --- !u!1 &1791666594
 GameObject:
   m_ObjectHideFlags: 0

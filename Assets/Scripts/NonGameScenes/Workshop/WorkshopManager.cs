@@ -49,11 +49,13 @@ public class WorkshopManager : MonoBehaviour
 
     public void Button_Exit()
     {
+        SoundManager.soundManager.PlaySound(SoundEnum.BUTTON_CLICK);
         ScenesManager.currentScenesManager.ChangeScene("Menu");
     }
 
     public void Button_NextPanel()
     {
+        SoundManager.soundManager.PlaySound(SoundEnum.BUTTON_CLICK);
         _buttonLeft.SetActive(true);
 
         _currentPanelIndex++;
@@ -67,6 +69,7 @@ public class WorkshopManager : MonoBehaviour
 
     public void Button_PreviousPanel()
     {
+        SoundManager.soundManager.PlaySound(SoundEnum.BUTTON_CLICK);
         _buttonRight.SetActive(true);
 
         _currentPanelIndex--;

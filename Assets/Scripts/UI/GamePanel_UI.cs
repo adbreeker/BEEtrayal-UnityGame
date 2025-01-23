@@ -66,7 +66,9 @@ public class GamePanel_UI : MonoBehaviour
 
     public void Button_ShowHide()
     {
-        if(_isPanelShown) 
+        SoundManager.soundManager.PlaySound(SoundEnum.BUTTON_CLICK);
+
+        if (_isPanelShown) 
         {
             _isPanelShown = false;
             if(_movePanelCoroutine != null)
@@ -97,13 +99,16 @@ public class GamePanel_UI : MonoBehaviour
 
     public void Button_Menu()
     {
+        SoundManager.soundManager.PlaySound(SoundEnum.BUTTON_CLICK);
         Time.timeScale = 0;
         GameParams.gameManager.OpenFinishPanel(false);
     }
 
     public void Button_Pause()
     {
-        if(GameParams.isGamePaused)
+        SoundManager.soundManager.PlaySound(SoundEnum.BUTTON_CLICK);
+
+        if (GameParams.isGamePaused)
         {
             GameParams.isGamePaused = false;
             Time.timeScale = GameParams.currentGameSpeed;
@@ -117,6 +122,8 @@ public class GamePanel_UI : MonoBehaviour
 
     public void Button_Speed()
     {
+        SoundManager.soundManager.PlaySound(SoundEnum.BUTTON_CLICK);
+
         if (GameParams.currentGameSpeed == 1.0f) { GameParams.currentGameSpeed = 2.0f; }
         else if (GameParams.currentGameSpeed == 2.0f) { GameParams.currentGameSpeed = 4.0f; }
         else if (GameParams.currentGameSpeed == 4.0f) { GameParams.currentGameSpeed = 1.0f; }
@@ -129,13 +136,17 @@ public class GamePanel_UI : MonoBehaviour
 
     public void Button_Sound()
     {
-        if(_isSoundOn)
+        if (_isSoundOn)
         {
+            SoundManager.soundManager.ChangeSoundsMute(true);
             _isSoundOn = false;
         }
         else
         {
+            SoundManager.soundManager.ChangeSoundsMute(false);
             _isSoundOn = true;
         }
+
+        SoundManager.soundManager.PlaySound(SoundEnum.BUTTON_CLICK);
     }
 }

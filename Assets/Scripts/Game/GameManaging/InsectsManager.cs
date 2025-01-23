@@ -15,7 +15,7 @@ public class InsectsManager : MonoBehaviour
     public List<Vector3> insectsPath = new List<Vector3>();
 
     [Header("Insects Waves")]
-    public List<InsectsWave> insectsWaves = new List<InsectsWave>();
+    public InsectsWavesSO wavesEasy;
 
     List<InsectController> _livingInsectsOrder = new List<InsectController>();
 
@@ -31,16 +31,6 @@ public class InsectsManager : MonoBehaviour
     void Start()
     {
         StartCoroutine(SpawnInsects());
-
-        int maxInsects = 0;
-        foreach (InsectsWave wave in insectsWaves)
-        {
-            foreach (GameObject insect in wave.insectsInWave)
-            {
-                maxInsects++;
-            }
-        }
-        Debug.Log("Max insects: " + maxInsects);
     }
 
     void Update()
@@ -63,7 +53,7 @@ public class InsectsManager : MonoBehaviour
     {
         _isSpawning = true;
 
-        foreach(InsectsWave wave in insectsWaves)
+        foreach(var wave in wavesEasy.insectsWaves)
         {
             yield return new WaitForSeconds(5.0f);
             foreach (GameObject insect in wave.insectsInWave)

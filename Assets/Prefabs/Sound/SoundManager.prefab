@@ -25,12 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2005327661291374422}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &5398736500038741038
 AudioSource:
@@ -43,6 +44,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -141,4 +143,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _audioPrefab: {fileID: 2793116545925446914, guid: 36b7471f5ea03394db84442f3f6e9592, type: 3}
-  _sounds: []
+  _sounds:
+  - soundClip: {fileID: 8300000, guid: 9e09835836413aa4ca90a9f522ecf753, type: 3}
+    soundName: BEE_BUZZ
+    soundEnum: 0
+  - soundClip: {fileID: 8300000, guid: efa8a29606232a3499be7d7551710d4f, type: 3}
+    soundName: BUTTON_CLICK
+    soundEnum: 0
+  - soundClip: {fileID: 8300000, guid: ee51c5e82b079e44eb0053ad7538cd68, type: 3}
+    soundName: FINISH_LOSE
+    soundEnum: 0
+  - soundClip: {fileID: 8300000, guid: 39dc561ae2a8ba04caf6f58f34b80f99, type: 3}
+    soundName: FINISH_WIN
+    soundEnum: 0

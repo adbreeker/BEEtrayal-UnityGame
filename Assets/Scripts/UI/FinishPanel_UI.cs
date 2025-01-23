@@ -53,6 +53,8 @@ public class FinishPanel_UI : MonoBehaviour
 
     public void Button_Menu()
     {
+        SoundManager.soundManager.PlaySound(SoundEnum.BUTTON_CLICK);
+
         _menuButton.interactable = false;
         GameParams.gameManager.ResetTowerInstancesCounts();
         _harvestedHoneyCounter.text = CountHarvestedHoney().ToString();

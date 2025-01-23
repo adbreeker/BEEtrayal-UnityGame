@@ -14,7 +14,7 @@ public class ChooseTowerPanel_UI : MonoBehaviour
     }
     public void ClosePanel()
     {
-        if(GameParams.isGamePaused)
+        if (GameParams.isGamePaused)
         {
             Time.timeScale = 0;
         }
@@ -53,5 +53,11 @@ public class ChooseTowerPanel_UI : MonoBehaviour
         {
             buttons[i].SetSiblingIndex(i);
         }
+    }
+
+    public void Button_Close()
+    {
+        SoundManager.soundManager.PlaySound(SoundEnum.BUTTON_CLICK);
+        ClosePanel();
     }
 }

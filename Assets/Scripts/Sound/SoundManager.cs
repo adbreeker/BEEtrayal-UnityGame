@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Text;
 using UnityEditor;
+using System;
 
 [RequireComponent(typeof(AudioSource))]
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager soundManager;
 
-    [System.Serializable]
+    [Serializable]
     public class Sound
     {
         public AudioClip soundClip;
@@ -18,9 +19,10 @@ public class SoundManager : MonoBehaviour
     }
 
     [SerializeField] GameObject _audioPrefab;
-    [SerializeField, HideInInspector] List<Sound> _sounds = new List<Sound>();
+    [SerializeField] List<Sound> _sounds = new List<Sound>();
 
-    List<AudioSource> _activeAudios = new List<AudioSource>();
+    List<AudioSourceController> _activeAudios = new List<AudioSourceController>();
+    bool _isMuted = false;
 
     void Awake()
     {
@@ -37,30 +39,29 @@ public class SoundManager : MonoBehaviour
 
     public void PlaySound(SoundEnum soundToPlay)
     {
-        AudioSource audioSource = Instantiate(_audioPrefab).GetComponent<AudioSource>();
-        audioSource.clip = _sounds[(int)soundToPlay].soundClip;
-        audioSource.Play();
-        Destroy(audioSource.gameObject, audioSource.clip.length);
+        AudioSourceController acc = Instantiate(_audioPrefab).GetComponent<AudioSourceController>();
+        _activeAudios.Add(acc);
+        acc.SetMute(_isMuted);
+        acc.PlayAndDestroy(_sounds[(int)soundToPlay].soundClip);
     }
 
     public void ChangeSoundsMute(bool mute)
     {
+        _isMuted = mute;
         GetComponent<AudioSource>().mute = mute;
-        foreach(AudioSource audioSource in _activeAudios)
+        foreach(AudioSourceController acc in _activeAudios)
         {
-            audioSource.mute = mute;
+            if(acc != null)
+            {
+                acc.SetMute(mute);
+            }
         }
     }
 
-    //Dynamic updates of sounds enums --------------------------------------------------------------------------------------------------
-#if UNITY_EDITOR
-    private void OnValidate()
+    public void DestroyAudioSource(AudioSourceController audioSourceController)
     {
-        if(!Application.isPlaying)
-        {
-            UnityEditor.EditorApplication.delayCall -= UpdateEnum;
-            UnityEditor.EditorApplication.delayCall += UpdateEnum;
-        }
+        _activeAudios.Remove(audioSourceController);
+        Destroy(audioSourceController.gameObject);
     }
 
     private void UpdateEnum()
@@ -113,7 +114,6 @@ public class SoundManager : MonoBehaviour
             _sounds[i].soundEnum = (SoundEnum)i;
         }
     }
-#endif
 }
 
 #if UNITY_EDITOR
@@ -135,6 +135,14 @@ public class SoundManagerEditor : Editor
         {
             SerializedProperty soundsProperty = serializedObject.FindProperty("_sounds");
             EditorGUILayout.PropertyField(soundsProperty, true);
+
+            EditorGUILayout.Space(10f);
+            
+            if(GUILayout.Button("Update sounds"))
+            {
+                var method = typeof(SoundManager).GetMethod("UpdateEnum", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+                method?.Invoke(soundManager, null);
+            }
         }
         else
         {

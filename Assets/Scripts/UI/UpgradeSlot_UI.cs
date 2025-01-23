@@ -70,7 +70,8 @@ public class UpgradeSlot_UI : MonoBehaviour
 
     public void Button_BuyUpgrade()
     {
-        //get money
+        SoundManager.soundManager.PlaySound(SoundEnum.BUTTON_CLICK);
+
         PlayerPrefs.SetInt("Honey", PlayerPrefs.GetInt("Honey") - _upgradeCost);
         WorkshopManager.workshopManager.UpdateHoney();
         WorkshopManager.workshopManager.UpdateUpgradeSlotsCosts();
@@ -87,7 +88,9 @@ public class UpgradeSlot_UI : MonoBehaviour
 
     public void Button_UpgradeState()
     {
-        if(_workshopPanel.linkedTower.isUpgradeActive[upgradeIndex-1])
+        SoundManager.soundManager.PlaySound(SoundEnum.BUTTON_CLICK);
+
+        if (_workshopPanel.linkedTower.isUpgradeActive[upgradeIndex-1])
         {
             PlayerPrefs.SetInt(_upgradeKey, 1);
             _workshopPanel.linkedTower.SetTowerUpgrade(upgradeIndex, false);

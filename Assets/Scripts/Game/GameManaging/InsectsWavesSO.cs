@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
@@ -14,7 +15,17 @@ public class InsectsWavesSO : ScriptableObject
 
     public List<InsectsWave> insectsWaves = new List<InsectsWave>();
 
-    public int InsectsInWavesCount()
+    [HideInInspector] public int insectsInWavesCount = 0;
+    [HideInInspector] public int insectsInWavesValueNetto = 0;
+
+    private void OnValidate()
+    {
+        ValidateInsects();
+        insectsInWavesCount = InsectsInWavesCount();
+        insectsInWavesValueNetto = InsectsInWavesValueNetto();
+    }
+
+    int InsectsInWavesCount()
     {
         int count = 0;
         foreach(InsectsWave wave in insectsWaves) 
@@ -30,7 +41,7 @@ public class InsectsWavesSO : ScriptableObject
         return count;
     }
 
-    public int InsectsInWavesValueNetto()
+    int InsectsInWavesValueNetto()
     {
         int value = 0;
         foreach (InsectsWave wave in insectsWaves)
@@ -44,6 +55,23 @@ public class InsectsWavesSO : ScriptableObject
             }
         }
         return value;
+    }
+
+    private void ValidateInsects()
+    {
+        for (int i = 0; i < insectsWaves.Count; i++)
+        {
+            var wave = insectsWaves[i];
+            for (int j = 0; j < wave.insectsInWave.Count; j++)
+            {
+                var insect = wave.insectsInWave[j];
+                if (insect != null && insect.GetComponent<InsectController>() == null)
+                {
+
+                    wave.insectsInWave[j] = null;
+                }
+            }
+        }
     }
 }
 
@@ -65,21 +93,17 @@ public class InsectsWavesSOEditor : Editor
 
     public override void OnInspectorGUI()
     {
-        serializedObject.Update();
-
-        // Calculate counts
-        int insectCount = _script.InsectsInWavesCount();
-        int insectsValue = _script.InsectsInWavesValueNetto();
+        serializedObject.UpdateIfRequiredOrScript();
 
         // Draw insect count and total value
         EditorGUILayout.Space(10f);
         EditorGUILayout.LabelField("Current Waves Summary", EditorStyles.boldLabel);
-        EditorGUILayout.LabelField("Total Insects in Waves:", insectCount.ToString());
-        EditorGUILayout.LabelField("Total Value (Netto):", insectsValue.ToString());
+        EditorGUILayout.LabelField("Total Insects in Waves:", _script.insectsInWavesCount.ToString());
+        EditorGUILayout.LabelField("Total Value (Netto):", _script.insectsInWavesValueNetto.ToString());
 
         EditorGUILayout.Space(20f);
         EditorGUILayout.LabelField("Waves:", EditorStyles.boldLabel);
-        EditorGUILayout.PropertyField(_insectsWavesProperty);
+        EditorGUILayout.PropertyField(_insectsWavesProperty, true);
 
         serializedObject.ApplyModifiedProperties();
     }
