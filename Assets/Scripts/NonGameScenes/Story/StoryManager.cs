@@ -11,7 +11,7 @@ public class StoryManager : MonoBehaviour
 
     [Header("TextField")]
     [SerializeField] TextMeshProUGUI _storyTextField;
-    [SerializeField, TextArea] List<string> _stories;
+    [SerializeField, TextArea(0, 6)] List<string> _stories;
 
     [Header("Fade")]
     [SerializeField] RawImage _fade;
@@ -24,7 +24,7 @@ public class StoryManager : MonoBehaviour
     {
         _fade.color = Color.black;
         _storyTextField.text = "";
-        _storytelling = StartCoroutine(StorytellingCoroutine(_globalStoryIndex, 1f));
+        _storytelling = StartCoroutine(StorytellingCoroutine(_globalStoryIndex, 0.3f));
     }
 
     private void Update()
@@ -87,7 +87,7 @@ public class StoryManager : MonoBehaviour
         for(int i = 0; i < _stories[storyIndex].Length; i++)
         {
             _storyTextField.text += _stories[storyIndex][i];
-            yield return new WaitForSecondsRealtime(0.1f);
+            yield return new WaitForSecondsRealtime(0.05f);
         }
 
         yield return new WaitForSecondsRealtime(2f);
