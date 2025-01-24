@@ -215,6 +215,7 @@ public class ButtonExtended : Button
     }
 }
 
+#if UNITY_EDITOR
 [CustomEditor(typeof(ButtonExtended), true)]
 [CanEditMultipleObjects]
 public class ButtonExtendedEditor : UnityEditor.UI.SelectableEditor
@@ -269,3 +270,4 @@ public class ButtonExtendedEditor : UnityEditor.UI.SelectableEditor
         serializedObject.ApplyModifiedProperties();
     }
 }
+#endif

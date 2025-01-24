@@ -74,6 +74,7 @@ public class SoundManager : MonoBehaviour
         Destroy(audioSourceController.gameObject);
     }
 
+#if UNITY_EDITOR
     private void UpdateSoundsCollection()
     {
         //ordering collection alphabetically
@@ -129,6 +130,7 @@ public class SoundManager : MonoBehaviour
             _sounds[i].soundEnum = (SoundEnum)i;
         }
     }
+#endif
 }
 
 #if UNITY_EDITOR
