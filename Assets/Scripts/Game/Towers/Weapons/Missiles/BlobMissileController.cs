@@ -30,6 +30,7 @@ public class BlobMissileController : MissileController
 
         if(_layBlobOnHit)
         {
+            SoundManager.soundManager.PlaySound(SoundEnum.EFFECT_BLOB);
             Instantiate(_blobPrefab, transform.position, Quaternion.Euler(0f, 0f, Random.Range(0f, 360f)))
                 .GetComponent<HoneyBlobEffect>().BlobInit(_insectsToAffect, _blobMaxSize, _damage, _specialEffects);
         }

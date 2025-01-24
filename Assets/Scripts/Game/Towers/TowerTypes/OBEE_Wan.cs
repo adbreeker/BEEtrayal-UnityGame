@@ -69,6 +69,7 @@ public class OBEE_Wan : TowerController
                     new SpecialEffects.Stun(0.5f)};
                 foreach (GameObject insect in upToThreeStrongestInsects)
                 {
+                    SoundManager.soundManager.PlaySound(SoundEnum.ATTACK_THROW_BLADE);
                     GameObject missile = Instantiate(_daggerPrefab, transform.position, GameParams.LookAt2D(transform.position, insect.transform.position));
                     missile.GetComponent<MissileController>().SetUpMissile(30f, 0f, insect, daggerEffects);
                 }

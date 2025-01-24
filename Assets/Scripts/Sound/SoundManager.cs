@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Text;
 using UnityEditor;
 using System;
+using System.Linq;
 
 [RequireComponent(typeof(AudioSource))]
 public class SoundManager : MonoBehaviour
@@ -45,6 +46,15 @@ public class SoundManager : MonoBehaviour
         acc.PlayAndDestroy(_sounds[(int)soundToPlay].soundClip);
     }
 
+    public void PlaySound(SoundEnum soundToPlay, float pitch)
+    {
+        AudioSourceController acc = Instantiate(_audioPrefab).GetComponent<AudioSourceController>();
+        _activeAudios.Add(acc);
+        acc.SetMute(_isMuted);
+        acc.SetPitch(pitch);
+        acc.PlayAndDestroy(_sounds[(int)soundToPlay].soundClip);
+    }
+
     public void ChangeSoundsMute(bool mute)
     {
         _isMuted = mute;
@@ -64,8 +74,12 @@ public class SoundManager : MonoBehaviour
         Destroy(audioSourceController.gameObject);
     }
 
-    private void UpdateEnum()
+    private void UpdateSoundsCollection()
     {
+        //ordering collection alphabetically
+        _sounds = _sounds.OrderBy(sound => sound.soundName).ToList();
+
+        //updating enums list
         Debug.Log("Updating sound enums");
 
         StringBuilder sb = new StringBuilder();
@@ -109,6 +123,7 @@ public class SoundManager : MonoBehaviour
             UnityEditor.AssetDatabase.Refresh();
         }
 
+        //applying right enum to every sound in collection
         for(int i = 0; i < _sounds.Count; i++)
         {
             _sounds[i].soundEnum = (SoundEnum)i;
@@ -140,7 +155,7 @@ public class SoundManagerEditor : Editor
             
             if(GUILayout.Button("Update sounds"))
             {
-                var method = typeof(SoundManager).GetMethod("UpdateEnum", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+                var method = typeof(SoundManager).GetMethod("UpdateSoundsCollection", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
                 method?.Invoke(soundManager, null);
             }
         }

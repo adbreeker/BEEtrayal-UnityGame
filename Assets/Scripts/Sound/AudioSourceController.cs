@@ -22,6 +22,11 @@ public class AudioSourceController : MonoBehaviour
         _audioSource.volume = volume;
     }
 
+    public void SetPitch(float pitch)
+    {
+        _audioSource.pitch = pitch;
+    }
+
     IEnumerator DestroyAfterPlaying()
     {
         while(_audioSource.isPlaying)

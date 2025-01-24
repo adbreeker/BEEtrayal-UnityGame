@@ -42,6 +42,7 @@ public class ShinoBEE : TowerController
         if (randomInsect != null)
         {
             transform.rotation = GameParams.LookAt2D(transform.position, randomInsect.transform.position);
+            SoundManager.soundManager.PlaySound(SoundEnum.ATTACK_THROW_BLADE);
             GameObject missile = Instantiate(_missilePrefab, _missileSpawnPoint[Random.Range(0,_missileSpawnPoint.Length)].position, Quaternion.identity);
             if(isUpgradeActive[2]) { missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, randomInsect.transform.position, range, _attackSpecialEffects); }
             else { missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, randomInsect, _attackSpecialEffects); }

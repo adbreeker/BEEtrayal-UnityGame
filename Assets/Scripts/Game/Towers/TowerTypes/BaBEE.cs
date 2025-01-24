@@ -51,6 +51,7 @@ public class BaBEE : TowerController
             }
 
             transform.rotation = GameParams.LookAt2D(transform.position, strongestInsect.transform.position);
+            SoundManager.soundManager.PlaySound(SoundEnum.ATTACK_BLOWPIPE);
             GameObject missile = Instantiate(_missilePrefab, _missileSpawnPoint.position, GameParams.LookAt2D(transform.position, strongestInsect.transform.position) * Quaternion.Euler(0f, 0f, 180f));
             missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, strongestInsect, specialEffects);
         }

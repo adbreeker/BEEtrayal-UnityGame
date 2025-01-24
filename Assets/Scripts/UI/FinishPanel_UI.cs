@@ -30,11 +30,13 @@ public class FinishPanel_UI : MonoBehaviour
 
         if(_isGameWon)
         {
+            SoundManager.soundManager.PlaySound(SoundEnum.FINISH_WIN);
             _finishStatusText.text = "YOU WON";
             _finishStatusText.color = Color.green;
         }
         else
         {
+            SoundManager.soundManager.PlaySound(SoundEnum.FINISH_LOSE);
             _finishStatusText.text = "YOU LOST";
             _finishStatusText.color = Color.red;
         }
