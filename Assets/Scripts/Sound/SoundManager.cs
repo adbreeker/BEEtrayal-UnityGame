@@ -55,6 +55,23 @@ public class SoundManager : MonoBehaviour
         acc.PlayAndDestroy(_sounds[(int)soundToPlay].soundClip);
     }
 
+    public void PlaySound3D(SoundEnum soundToPlay, Vector3 position)
+    {
+        AudioSourceController acc = Instantiate(_audioPrefab, position, Quaternion.identity).GetComponent<AudioSourceController>();
+        _activeAudios.Add(acc);
+        acc.SetMute(_isMuted);
+        acc.PlayAndDestroy(_sounds[(int)soundToPlay].soundClip);
+    }
+
+    public void PlaySound3D(SoundEnum soundToPlay, float pitch, Vector3 position)
+    {
+        AudioSourceController acc = Instantiate(_audioPrefab, position, Quaternion.identity).GetComponent<AudioSourceController>();
+        _activeAudios.Add(acc);
+        acc.SetMute(_isMuted);
+        acc.SetPitch(pitch);
+        acc.PlayAndDestroy(_sounds[(int)soundToPlay].soundClip);
+    }
+
     public void ChangeSoundsMute(bool mute)
     {
         _isMuted = mute;

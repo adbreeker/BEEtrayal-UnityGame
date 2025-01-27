@@ -149,49 +149,64 @@ MonoBehaviour:
     soundEnum: 0
   - soundClip: {fileID: 8300000, guid: ae4d81b941f88a94dbe6dbeaff888ade, type: 3}
     soundName: ATTACK_BOW
-    soundEnum: 0
+    soundEnum: 1
   - soundClip: {fileID: 8300000, guid: eaa8f009722dbd346b55438b9150a24b, type: 3}
     soundName: ATTACK_CANNON
-    soundEnum: 0
+    soundEnum: 2
+  - soundClip: {fileID: 8300000, guid: a2de2220c0096134e832dcc41fb4bace, type: 3}
+    soundName: ATTACK_LIGHTSABER
+    soundEnum: 3
   - soundClip: {fileID: 8300000, guid: 757dac7b244e986408c60aad853969c5, type: 3}
     soundName: ATTACK_MAGIC1
-    soundEnum: 0
+    soundEnum: 4
   - soundClip: {fileID: 8300000, guid: 54b25508ad19d214f978dc7d97413547, type: 3}
     soundName: ATTACK_MAGIC2
-    soundEnum: 0
+    soundEnum: 5
+  - soundClip: {fileID: 8300000, guid: 2ae56310839d7e2478c932a0049dacec, type: 3}
+    soundName: ATTACK_MAGIC3
+    soundEnum: 6
   - soundClip: {fileID: 8300000, guid: c9845c52c7c495a46848d2a9d33f9826, type: 3}
     soundName: ATTACK_PISTOL
-    soundEnum: 0
+    soundEnum: 7
   - soundClip: {fileID: 8300000, guid: a3b8a9823ca371e46bd791432bd501d8, type: 3}
     soundName: ATTACK_RIFLE
-    soundEnum: 0
+    soundEnum: 8
+  - soundClip: {fileID: 8300000, guid: a9d351e2a4557de4696d8b4a2ca9b058, type: 3}
+    soundName: ATTACK_SPIN
+    soundEnum: 9
+  - soundClip: {fileID: 8300000, guid: 5283fe357a1435e49bc805b054201fba, type: 3}
+    soundName: ATTACK_SWORD
+    soundEnum: 10
   - soundClip: {fileID: 8300000, guid: c95b980df4baffd4fbb3fd53bc247fa6, type: 3}
     soundName: ATTACK_THROW_BLADE
-    soundEnum: 0
+    soundEnum: 11
   - soundClip: {fileID: 8300000, guid: 95db2d19f8a5b044ab5671f6bdbe4337, type: 3}
     soundName: ATTACK_THROW_GRENADE
-    soundEnum: 0
+    soundEnum: 12
   - soundClip: {fileID: 8300000, guid: efa8a29606232a3499be7d7551710d4f, type: 3}
     soundName: BUTTON_CLICK
-    soundEnum: 0
+    soundEnum: 13
   - soundClip: {fileID: 8300000, guid: 9e09835836413aa4ca90a9f522ecf753, type: 3}
     soundName: EFFECT_BEEBUZZ
-    soundEnum: 0
+    soundEnum: 14
   - soundClip: {fileID: 8300000, guid: 3b5b41b56db6cb14a8c868f4eb1ed267, type: 3}
     soundName: EFFECT_BLOB
-    soundEnum: 0
+    soundEnum: 15
   - soundClip: {fileID: 8300000, guid: 048e5264b424cb64797d570b07c93fe4, type: 3}
     soundName: EFFECT_EXPLOSION
-    soundEnum: 0
+    soundEnum: 16
+  - soundClip: {fileID: 8300000, guid: 6fa5561f31758cd468102a2ee27ff48b, type: 3}
+    soundName: EFFECT_RELOAD
+    soundEnum: 17
   - soundClip: {fileID: 8300000, guid: 8b1c6f0c7262b75438cc127c9b618e41, type: 3}
     soundName: EFFECT_SLIDE_CLOSE
-    soundEnum: 0
+    soundEnum: 18
   - soundClip: {fileID: 8300000, guid: d68e3943cc1614641b5eca3c40ecc506, type: 3}
     soundName: EFFECT_SLIDE_OPEN
-    soundEnum: 0
+    soundEnum: 19
   - soundClip: {fileID: 8300000, guid: ee51c5e82b079e44eb0053ad7538cd68, type: 3}
     soundName: FINISH_LOSE
-    soundEnum: 0
+    soundEnum: 20
   - soundClip: {fileID: 8300000, guid: 39dc561ae2a8ba04caf6f58f34b80f99, type: 3}
     soundName: FINISH_WIN
-    soundEnum: 0
+    soundEnum: 21
