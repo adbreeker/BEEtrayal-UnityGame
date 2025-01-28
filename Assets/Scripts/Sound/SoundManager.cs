@@ -42,16 +42,8 @@ public class SoundManager : MonoBehaviour
     {
         AudioSourceController acc = Instantiate(_audioPrefab).GetComponent<AudioSourceController>();
         _activeAudios.Add(acc);
+        acc.SetSpatial(0f);
         acc.SetMute(_isMuted);
-        acc.PlayAndDestroy(_sounds[(int)soundToPlay].soundClip);
-    }
-
-    public void PlaySound(SoundEnum soundToPlay, float pitch)
-    {
-        AudioSourceController acc = Instantiate(_audioPrefab).GetComponent<AudioSourceController>();
-        _activeAudios.Add(acc);
-        acc.SetMute(_isMuted);
-        acc.SetPitch(pitch);
         acc.PlayAndDestroy(_sounds[(int)soundToPlay].soundClip);
     }
 
@@ -59,16 +51,8 @@ public class SoundManager : MonoBehaviour
     {
         AudioSourceController acc = Instantiate(_audioPrefab, position, Quaternion.identity).GetComponent<AudioSourceController>();
         _activeAudios.Add(acc);
+        acc.SetSpatial(1f);
         acc.SetMute(_isMuted);
-        acc.PlayAndDestroy(_sounds[(int)soundToPlay].soundClip);
-    }
-
-    public void PlaySound3D(SoundEnum soundToPlay, float pitch, Vector3 position)
-    {
-        AudioSourceController acc = Instantiate(_audioPrefab, position, Quaternion.identity).GetComponent<AudioSourceController>();
-        _activeAudios.Add(acc);
-        acc.SetMute(_isMuted);
-        acc.SetPitch(pitch);
         acc.PlayAndDestroy(_sounds[(int)soundToPlay].soundClip);
     }
 
@@ -132,13 +116,13 @@ public class SoundManager : MonoBehaviour
 
         sb.AppendLine("}");
 
-        string[] guids = UnityEditor.AssetDatabase.FindAssets("t:Script SoundManager");
+        string[] guids = AssetDatabase.FindAssets("t:Script SoundManager");
         if (guids.Length > 0)
         {
-            string path = UnityEditor.AssetDatabase.GUIDToAssetPath(guids[0]);
+            string path = AssetDatabase.GUIDToAssetPath(guids[0]);
             path = System.IO.Path.GetDirectoryName(path) + "/SoundEnum.cs";
             System.IO.File.WriteAllText(path, sb.ToString());
-            UnityEditor.AssetDatabase.Refresh();
+            AssetDatabase.Refresh();
         }
 
         //applying right enum to every sound in collection
@@ -146,6 +130,10 @@ public class SoundManager : MonoBehaviour
         {
             _sounds[i].soundEnum = (SoundEnum)i;
         }
+
+        EditorUtility.SetDirty(gameObject);
+        AssetDatabase.SaveAssetIfDirty(gameObject);
+        AssetDatabase.Refresh();
     }
 #endif
 }

@@ -27,6 +27,11 @@ public class AudioSourceController : MonoBehaviour
         _audioSource.pitch = pitch;
     }
 
+    public void SetSpatial(float spatial)
+    {
+        _audioSource.spatialBlend = spatial;
+    }
+
     IEnumerator DestroyAfterPlaying()
     {
         while(_audioSource.isPlaying)

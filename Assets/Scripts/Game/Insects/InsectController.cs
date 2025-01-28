@@ -16,8 +16,10 @@ public class InsectController : MonoBehaviour
     [Header("Insect value")]
     public int value = 1;
     [SerializeField] GameObject _honeyDrop;
+    [Range(0, 100)] public int honeyDropPercent = 10;
 
     [Header("Effects:")]
+    [SerializeField] SoundEnum _dyingSound = SoundEnum.EFFECT_KILL1;
     //slow
     [ReadOnly]public bool isSlowed = false;
     float _msReductionTime = 0.0f;
@@ -109,7 +111,9 @@ public class InsectController : MonoBehaviour
 
     public void KillInsect()
     {
-        if(Random.Range(0, 100) < 10)
+        SoundManager.soundManager.PlaySound3D(_dyingSound, transform.position);
+
+        if(Random.Range(0, 100) < honeyDropPercent)
         {
             Vector3 honeyDestination = (Vector2)transform.position + (Random.insideUnitCircle * 2f);
             GameObject droppedHoney = Instantiate(_honeyDrop, transform.position, Quaternion.identity);

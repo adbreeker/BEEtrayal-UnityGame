@@ -204,27 +204,27 @@ MonoBehaviour:
   - soundClip: {fileID: 8300000, guid: 048e5264b424cb64797d570b07c93fe4, type: 3}
     soundName: EFFECT_EXPLOSION
     soundEnum: 19
-  - soundClip: {fileID: 8300000, guid: 6fa5561f31758cd468102a2ee27ff48b, type: 3}
-    soundName: EFFECT_RELOAD
-    soundEnum: 20
-  - soundClip: {fileID: 8300000, guid: 8b1c6f0c7262b75438cc127c9b618e41, type: 3}
-    soundName: EFFECT_SLIDE_CLOSE
-    soundEnum: 21
-  - soundClip: {fileID: 8300000, guid: d68e3943cc1614641b5eca3c40ecc506, type: 3}
-    soundName: EFFECT_SLIDE_OPEN
-    soundEnum: 22
-  - soundClip: {fileID: 8300000, guid: ee51c5e82b079e44eb0053ad7538cd68, type: 3}
-    soundName: FINISH_LOSE
-    soundEnum: 23
-  - soundClip: {fileID: 8300000, guid: 39dc561ae2a8ba04caf6f58f34b80f99, type: 3}
-    soundName: FINISH_WIN
-    soundEnum: 24
   - soundClip: {fileID: 8300000, guid: 6445970bdb0a962409a069aba4c7c0ce, type: 3}
     soundName: EFFECT_KILL1
-    soundEnum: 24
+    soundEnum: 20
   - soundClip: {fileID: 8300000, guid: e24b6fb83bd737b4aa5a1916d878acda, type: 3}
     soundName: EFFECT_KILL2
-    soundEnum: 24
+    soundEnum: 21
   - soundClip: {fileID: 8300000, guid: afb1cdc01c899aa4983aa808317fe2c2, type: 3}
     soundName: EFFECT_KILL3
+    soundEnum: 22
+  - soundClip: {fileID: 8300000, guid: 6fa5561f31758cd468102a2ee27ff48b, type: 3}
+    soundName: EFFECT_RELOAD
+    soundEnum: 23
+  - soundClip: {fileID: 8300000, guid: 8b1c6f0c7262b75438cc127c9b618e41, type: 3}
+    soundName: EFFECT_SLIDE_CLOSE
     soundEnum: 24
+  - soundClip: {fileID: 8300000, guid: d68e3943cc1614641b5eca3c40ecc506, type: 3}
+    soundName: EFFECT_SLIDE_OPEN
+    soundEnum: 25
+  - soundClip: {fileID: 8300000, guid: ee51c5e82b079e44eb0053ad7538cd68, type: 3}
+    soundName: FINISH_LOSE
+    soundEnum: 26
+  - soundClip: {fileID: 8300000, guid: 39dc561ae2a8ba04caf6f58f34b80f99, type: 3}
+    soundName: FINISH_WIN
+    soundEnum: 27
