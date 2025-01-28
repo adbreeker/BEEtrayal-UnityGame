@@ -44,6 +44,7 @@ public class HoneyFactory : TowerController
         while(true)
         {
             yield return new WaitForSeconds(10f);
+            SoundManager.soundManager.PlaySound3D(SoundEnum.EFFECT_VACUUM, transform.position);
             Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, range, LayerMask.GetMask("Weapon"));
             List<GameObject> dropsToCollect = new List<GameObject>();
             foreach(Collider2D drop in colliders)
@@ -51,6 +52,7 @@ public class HoneyFactory : TowerController
                 if(drop.tag == "HoneyDrop")
                 {
                     dropsToCollect.Add(drop.gameObject);
+                    SoundManager.soundManager.PlaySound3D(SoundEnum.EFFECT_EXPLOSION, transform.position, true);
                     Instantiate(_explosionPrefab, drop.transform.position, Quaternion.Euler(0f, 0f, Random.Range(0f, 360f))).GetComponent<ExplosionEffect>().explosionSize = 3f;
 
                     Collider2D[] insectsInArea = Physics2D.OverlapCircleAll(drop.transform.position, 3f, LayerMask.GetMask("Insect"));

@@ -19,7 +19,6 @@ public class InsectController : MonoBehaviour
     [Range(0, 100)] public int honeyDropChance = 10;
 
     [Header("Effects:")]
-    [SerializeField] SoundEnum _dyingSound = SoundEnum.EFFECT_KILL1;
     //slow
     [ReadOnly]public bool isSlowed = false;
     float _msReductionTime = 0.0f;
@@ -27,8 +26,6 @@ public class InsectController : MonoBehaviour
     //stun
     [ReadOnly]public bool isStuned = false;
     float _stunTime = 0.0f;
-
-
 
 
 
@@ -111,7 +108,7 @@ public class InsectController : MonoBehaviour
 
     public void KillInsect()
     {
-        SoundManager.soundManager.PlaySound3D(_dyingSound, transform.position);
+        SoundManager.soundManager.PlaySound3D(tag == "Boss"? SoundEnum.EFFECT_KILL3 : SoundEnum.EFFECT_KILL2, transform.position, true);
 
         if(Random.Range(0, 100) < honeyDropChance)
         {

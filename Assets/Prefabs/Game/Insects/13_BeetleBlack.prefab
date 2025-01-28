@@ -106,8 +106,8 @@ MonoBehaviour:
   armor: 200
   value: 9
   _honeyDrop: {fileID: 766999501600105451, guid: cec59ef884c83df4fab3941f09b0ff8e, type: 3}
-  honeyDropPercent: 10
-  _dyingSound: 21
+  honeyDropChance: 10
+  _dyingSound: 22
   isSlowed: 0
   isStuned: 0
   distanceTraveled: 0

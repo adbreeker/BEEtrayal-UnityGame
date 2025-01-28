@@ -17,9 +17,12 @@ public class WarriorBEE : TowerController
 
     static int _instancesCount = 0;
 
+    float _cumulativeRotation = 0;
+
     protected override void Start()
     {
         base.Start();
+        SoundManager.soundManager.PlaySound3D(SoundEnum.ATTACK_SWORD, transform.position, true);
 
         _attackSpecialEffects.Add(new SpecialEffects.Slow(slowTime, slowStrength));
         if(isUpgradeActive[3]) { _attackSpecialEffects.Add(new SpecialEffects.Poison(1)); }
@@ -47,7 +50,15 @@ public class WarriorBEE : TowerController
 
     private void FixedUpdate()
     {
-        transform.rotation *= Quaternion.Euler(0, 0, speed*(360*Time.deltaTime));
+        float rotationStep = speed * (360 * Time.deltaTime);
+        transform.rotation *= Quaternion.Euler(0, 0, rotationStep);
+
+        _cumulativeRotation += rotationStep;
+        if(_cumulativeRotation >= 200f)
+        {
+            _cumulativeRotation = 0;
+            SoundManager.soundManager.PlaySound3D(SoundEnum.ATTACK_SWORD, transform.position, true);
+        }
     }
 
     protected override void AttackExecution()
