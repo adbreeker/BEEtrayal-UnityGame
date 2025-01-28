@@ -53,6 +53,7 @@ public class OBEE_Wan : TowerController
         if(closestInsect != null) 
         {
             transform.rotation = GameParams.LookAt2D(transform.position, closestInsect.transform.position);
+            SoundManager.soundManager.PlaySound3D(SoundEnum.ATTACK_LIGHTSABER, transform.position, true);
 
             Vector3 jumpPos = closestInsect.transform.position;
             while(transform.position != jumpPos)
@@ -69,7 +70,7 @@ public class OBEE_Wan : TowerController
                     new SpecialEffects.Stun(0.5f)};
                 foreach (GameObject insect in upToThreeStrongestInsects)
                 {
-                    SoundManager.soundManager.PlaySound(SoundEnum.ATTACK_THROW_BLADE);
+                    SoundManager.soundManager.PlaySound3D(SoundEnum.ATTACK_THROW_BLADE, transform.position, true);
                     GameObject missile = Instantiate(_daggerPrefab, transform.position, GameParams.LookAt2D(transform.position, insect.transform.position));
                     missile.GetComponent<MissileController>().SetUpMissile(30f, 0f, insect, daggerEffects);
                 }

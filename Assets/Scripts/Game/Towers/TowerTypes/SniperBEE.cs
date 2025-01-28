@@ -40,11 +40,12 @@ public class SniperBEE : TowerController
         if (strongestInsect != null)
         {
             transform.rotation = GameParams.LookAt2D(transform.position, strongestInsect.transform.position);
-            SoundManager.soundManager.PlaySound(SoundEnum.ATTACK_RIFLE);
+            SoundManager.soundManager.PlaySound3D(SoundEnum.ATTACK_RIFLE, transform.position, true);
             GameObject missile = Instantiate(_missilePrefab, _missileSpawnPoint.position, GameParams.LookAt2D(transform.position, strongestInsect.transform.position));
             
             if(isUpgradeActive[2] && Random.Range(0,100) < 5) { missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage+500f, strongestInsect, _attackSpecialEffects); }
             else { missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, strongestInsect, _attackSpecialEffects); }
+            SoundManager.soundManager.PlaySound3D(SoundEnum.EFFECT_RELOAD, transform.position, true);
         }
     }
 

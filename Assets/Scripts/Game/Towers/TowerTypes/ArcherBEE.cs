@@ -40,7 +40,7 @@ public class ArcherBEE : TowerController
         if (firstInsect != null)
         {
             transform.rotation = GameParams.LookAt2D(transform.position, firstInsect.transform.position);
-            SoundManager.soundManager.PlaySound(SoundEnum.ATTACK_BOW);
+            SoundManager.soundManager.PlaySound3D(SoundEnum.ATTACK_BOW, transform.position, true);
             GameObject missile = Instantiate(_missilePrefab, _missileSpawnPoint.position, GameParams.LookAt2D(transform.position, firstInsect.transform.position) * Quaternion.Euler(0f, 0f, 180f));
             missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, firstInsect.transform.position, range, _attackSpecialEffects);
 

@@ -55,7 +55,7 @@ public class BEEzard : TowerController
             }
 
             transform.rotation = GameParams.LookAt2D(transform.position, strongestInsect.transform.position);
-            SoundManager.soundManager.PlaySound(SoundEnum.ATTACK_MAGIC1);
+            SoundManager.soundManager.PlaySound3D(SoundEnum.ATTACK_MAGIC3, transform.position, true);
             GameObject missile = Instantiate(_fireBallPrefab, _missileSpawnPoint.position, Quaternion.identity);
             missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, 3 * damage + 100f, strongestInsect, specialEffects);
             missile.GetComponent<RocketController>().explosionSize = 2f;
@@ -77,7 +77,7 @@ public class BEEzard : TowerController
                     if (effect != null) { specialEffects.Add(effect); }
                 }
                 transform.rotation = GameParams.LookAt2D(transform.position, strongestInsect.transform.position);
-                SoundManager.soundManager.PlaySound(SoundEnum.ATTACK_MAGIC2);
+                SoundManager.soundManager.PlaySound3D(SoundEnum.ATTACK_MAGIC1, transform.position, true);
                 GameObject missile = Instantiate(_missilePrefab, _missileSpawnPoint.position, Quaternion.identity);
                 missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, strongestInsect, specialEffects);
             }

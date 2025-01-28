@@ -47,7 +47,7 @@ public class ChemistBEE : TowerController
         if (targetInsect != null)
         {
             transform.rotation = GameParams.LookAt2D(transform.position, targetInsect.transform.position);
-            SoundManager.soundManager.PlaySound(SoundEnum.EFFECT_BLOB);
+            SoundManager.soundManager.PlaySound3D(SoundEnum.EFFECT_BLOB, transform.position, true);
             GameObject missile = Instantiate(_missilePrefab, _missileSpawnPoint.position, GameParams.LookAt2D(transform.position, targetInsect.transform.position) * Quaternion.Euler(0f, 0f, 180f));
             missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, targetInsect, _attackSpecialEffects);
             

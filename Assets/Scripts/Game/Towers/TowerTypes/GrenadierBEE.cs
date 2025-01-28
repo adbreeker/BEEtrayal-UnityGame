@@ -52,7 +52,7 @@ public class GrenadierBEE : TowerController
                 if (randomInsect != null)
                 {
                     transform.rotation = GameParams.LookAt2D(transform.position, randomInsect.transform.position);
-                    SoundManager.soundManager.PlaySound(SoundEnum.ATTACK_THROW_GRENADE);
+                    SoundManager.soundManager.PlaySound3D(SoundEnum.ATTACK_THROW_GRENADE, transform.position, true);
                     GameObject missile = Instantiate(_stickyGrenadePrefab, _missileSpawnPoint[i].position, Quaternion.identity);
                     missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, randomInsect, _attackSpecialEffects);
                     missile.GetComponent<GrenadeController>().explosionSize = explosionSize;
@@ -68,7 +68,7 @@ public class GrenadierBEE : TowerController
                 if (randomInsect != null)
                 {
                     transform.rotation = GameParams.LookAt2D(transform.position, randomInsect.transform.position);
-                    SoundManager.soundManager.PlaySound(SoundEnum.ATTACK_THROW_GRENADE);
+                    SoundManager.soundManager.PlaySound3D(SoundEnum.ATTACK_THROW_GRENADE, transform.position, true);
                     GameObject missile = Instantiate(_missilePrefab, _missileSpawnPoint[i].position, Quaternion.identity);
                     missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, randomInsect.transform.position, 0f, _attackSpecialEffects);
                     missile.GetComponent<GrenadeController>().explosionSize = explosionSize;

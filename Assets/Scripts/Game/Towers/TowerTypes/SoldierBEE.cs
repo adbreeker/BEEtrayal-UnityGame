@@ -44,7 +44,7 @@ public class SoldierBEE : TowerController
         if (firstInsect != null)
         {
             transform.rotation = GameParams.LookAt2D(transform.position, firstInsect.transform.position);
-            SoundManager.soundManager.PlaySound(SoundEnum.ATTACK_RIFLE);
+            SoundManager.soundManager.PlaySound3D(SoundEnum.ATTACK_RIFLE, transform.position, true);
             GameObject missile = Instantiate(_missilePrefab, _missileSpawnPoint.position, Quaternion.identity);
             missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, firstInsect, _attackSpecialEffects);
 
@@ -55,7 +55,7 @@ public class SoldierBEE : TowerController
                 {
                     _attacksCount = 0;
 
-                    SoundManager.soundManager.PlaySound(SoundEnum.ATTACK_THROW_GRENADE);
+                    SoundManager.soundManager.PlaySound3D(SoundEnum.ATTACK_THROW_GRENADE, transform.position, true);
                     List<SpecialEffect> specialEffects = new List<SpecialEffect>() { new SpecialEffects.Stun(1) };
                     GameObject grenade = Instantiate(_flashGrenadePrefab, transform.position, Quaternion.identity);
                     grenade.GetComponent<MissileController>().SetUpMissile(missileSpeed/2f, 0, firstInsect.transform.position, 0f, specialEffects);

@@ -38,19 +38,25 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    public void PlaySound(SoundEnum soundToPlay)
+    public void PlaySound(SoundEnum soundToPlay, bool randomize = false)
     {
         AudioSourceController acc = Instantiate(_audioPrefab).GetComponent<AudioSourceController>();
         _activeAudios.Add(acc);
+
+        if (randomize) { acc.SetPitch(UnityEngine.Random.Range(0.9f, 1.1f)); }
+
         acc.SetSpatial(0f);
         acc.SetMute(_isMuted);
         acc.PlayAndDestroy(_sounds[(int)soundToPlay].soundClip);
     }
 
-    public void PlaySound3D(SoundEnum soundToPlay, Vector3 position)
+    public void PlaySound3D(SoundEnum soundToPlay, Vector3 position, bool randomize = false)
     {
         AudioSourceController acc = Instantiate(_audioPrefab, position, Quaternion.identity).GetComponent<AudioSourceController>();
         _activeAudios.Add(acc);
+
+        if (randomize) { acc.SetPitch(UnityEngine.Random.Range(0.9f, 1.1f)); }
+
         acc.SetSpatial(1f);
         acc.SetMute(_isMuted);
         acc.PlayAndDestroy(_sounds[(int)soundToPlay].soundClip);
