@@ -235,7 +235,7 @@ MonoBehaviour:
   - soundClip: {fileID: 8300000, guid: 8b1c6f0c7262b75438cc127c9b618e41, type: 3}
     soundName: EFFECT_SLIDE_CLOSE
     soundEnum: 29
-  - soundClip: {fileID: 8300000, guid: d68e3943cc1614641b5eca3c40ecc506, type: 3}
+  - soundClip: {fileID: 8300000, guid: 16b4470332b230b419bff61e917167da, type: 3}
     soundName: EFFECT_SLIDE_OPEN
     soundEnum: 30
   - soundClip: {fileID: 8300000, guid: b37113ea1812e1646bf340b24a28d977, type: 3}
