@@ -20,9 +20,9 @@ public class SniperBEE : TowerController
         if(isUpgradeActive[0]) { _attackSpecialEffects.Add(new SpecialEffects.Slow(0.5f, 0.75f)); }
     }
 
-    protected override void Update()
+    protected override void FixedUpdate()
     {
-        base.Update();
+        base.FixedUpdate();
     }
 
     protected override void AttackExecution()

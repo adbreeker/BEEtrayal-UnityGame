@@ -25,9 +25,9 @@ public class BaBEE : TowerController
         if(isUpgradeActive[1]) { _attackSpecialEffects.Add(new SpecialEffects.Poison(1)); }
     }
 
-    protected override void Update()
+    protected override void FixedUpdate()
     {
-        base.Update();
+        base.FixedUpdate();
     }
 
     protected override void AttackExecution()

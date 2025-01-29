@@ -8,16 +8,7 @@ public class MenuManager : MonoBehaviour
     private void Awake()
     {
         Time.timeScale = 1.0f;
-    }
-
-    void Start()
-    {
-
-    }
-
-    void Update()
-    {
-
+        Debug.Log(Time.timeScale);
     }
 
     public void Button_Start()

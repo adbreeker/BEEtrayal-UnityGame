@@ -27,9 +27,9 @@ public class OBEE_Wan : TowerController
         }
     }
 
-    protected override void Update()
+    protected override void FixedUpdate()
     {
-        base.Update();
+        base.FixedUpdate();
     }
 
     protected override void AttackExecution()

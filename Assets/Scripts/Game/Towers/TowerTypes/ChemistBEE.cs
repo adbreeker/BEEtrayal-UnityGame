@@ -24,9 +24,9 @@ public class ChemistBEE : TowerController
         _attackSpecialEffects.Add(new SpecialEffects.Slow(slowTime, slowStrength));
     }
 
-    protected override void Update()
+    protected override void FixedUpdate()
     {
-        base.Update();
+        base.FixedUpdate();
     }
 
     protected override void AttackExecution()

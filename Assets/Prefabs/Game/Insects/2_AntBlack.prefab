@@ -107,7 +107,7 @@ MonoBehaviour:
   value: 2
   _honeyDrop: {fileID: 766999501600105451, guid: cec59ef884c83df4fab3941f09b0ff8e, type: 3}
   honeyDropChance: 10
-  _dyingSound: 22
+  _bloodPrefab: {fileID: 6008200650587112474, guid: 9dc81f77eeb86164cb4eb72f69fe506d, type: 3}
   isSlowed: 0
   isStuned: 0
   distanceTraveled: 0

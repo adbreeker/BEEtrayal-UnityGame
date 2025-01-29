@@ -45,7 +45,7 @@ public abstract class TowerController : MonoBehaviour
         
     }
 
-    protected virtual void Update()
+    protected virtual void FixedUpdate()
     {
         if(_canAttack)
         {

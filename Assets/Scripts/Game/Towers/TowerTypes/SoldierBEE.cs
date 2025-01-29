@@ -24,9 +24,9 @@ public class SoldierBEE : TowerController
         if(isUpgradeActive[3]) { _grenadeSpawnPoint.gameObject.SetActive(true); }
     }
 
-    protected override void Update()
+    protected override void FixedUpdate()
     {
-        base.Update();
+        base.FixedUpdate();
     }
 
     protected override void AttackExecution()

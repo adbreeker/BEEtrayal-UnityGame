@@ -20,9 +20,9 @@ public class ArcherBEE : TowerController
         if(isUpgradeActive[3]) { _attackSpecialEffects.Add(new SpecialEffects.ArmorReduction(100, 0.5f)); }
     }
 
-    protected override void Update()
+    protected override void FixedUpdate()
     {
-        base.Update();
+        base.FixedUpdate();
     }
 
     protected override void AttackExecution()

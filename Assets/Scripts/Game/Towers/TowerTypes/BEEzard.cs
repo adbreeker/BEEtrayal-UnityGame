@@ -24,9 +24,9 @@ public class BEEzard : TowerController
         _attackSpecialEffects.Add(new SpecialEffects.ArmorReduction(armorReduction));
     }
 
-    protected override void Update()
+    protected override void FixedUpdate()
     {
-        base.Update();
+        base.FixedUpdate();
     }
 
     protected override void AttackExecution()

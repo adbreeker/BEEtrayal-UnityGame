@@ -23,9 +23,9 @@ public class BEETank : TowerController
         if(isUpgradeActive[3]) { _attackSpecialEffects.Add(new SpecialEffects.Poison(5)); }
     }
 
-    protected override void Update()
+    protected override void FixedUpdate()
     {
-        base.Update();
+        base.FixedUpdate();
     }
 
     protected override void AttackExecution()

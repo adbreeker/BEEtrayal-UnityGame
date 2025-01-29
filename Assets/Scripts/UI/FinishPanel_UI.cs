@@ -25,6 +25,8 @@ public class FinishPanel_UI : MonoBehaviour
  
     public void InitializePanel(bool win)
     {
+        Time.timeScale = 0f;
+
         _isGameWon = win;
         PlayerPrefs.SetInt("Honey", PlayerPrefs.GetInt("Honey") + CountHarvestedHoney());
 

@@ -23,9 +23,9 @@ public class GrenadierBEE : TowerController
         base.Start();
     }
 
-    protected override void Update()
+    protected override void FixedUpdate()
     {
-        base.Update();
+        base.FixedUpdate();
     }
 
     protected override void AttackExecution()

@@ -22,9 +22,9 @@ public class ShinoBEE : TowerController
         if(isUpgradeActive[1]) { Instantiate(_bigShuriken, transform.parent).GetComponent<MeleeController>().SetUpWeapon(50f, _attackSpecialEffects); }
     }
 
-    protected override void Update()
+    protected override void FixedUpdate()
     {
-        base.Update();
+        base.FixedUpdate();
     }
 
     protected override void AttackExecution()
