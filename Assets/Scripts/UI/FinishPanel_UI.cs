@@ -55,7 +55,7 @@ public class FinishPanel_UI : MonoBehaviour
 
     public void Button_Menu()
     {
-        SoundManager.soundManager.PlaySound(SoundEnum.BUTTON_CLICK);
+        SoundManager.soundManager.PlaySound(SoundEnum.EFFECT_BUTTON);
 
         _menuButton.interactable = false;
         GameParams.gameManager.ResetTowerInstancesCounts();

@@ -57,7 +57,7 @@ public class ChooseTowerPanel_UI : MonoBehaviour
 
     public void Button_Close()
     {
-        SoundManager.soundManager.PlaySound(SoundEnum.BUTTON_CLICK);
+        SoundManager.soundManager.PlaySound(SoundEnum.EFFECT_BUTTON);
         ClosePanel();
     }
 }

@@ -43,8 +43,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 120c0f03dd466bc4e87c44841c234e16, type: 3}
-  m_Resource: {fileID: 8300000, guid: 120c0f03dd466bc4e87c44841c234e16, type: 3}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -142,6 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86193ca1a300ee24eb6e263aa98446f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  managerPriority: 0
   _audioPrefab: {fileID: 2793116545925446914, guid: 36b7471f5ea03394db84442f3f6e9592, type: 3}
   _sounds:
   - soundClip: {fileID: 8300000, guid: febfddffd8ca9804cbe7da7cd67ba8e2, type: 3}
@@ -189,48 +190,60 @@ MonoBehaviour:
   - soundClip: {fileID: 8300000, guid: 95db2d19f8a5b044ab5671f6bdbe4337, type: 3}
     soundName: ATTACK_THROW_GRENADE
     soundEnum: 14
-  - soundClip: {fileID: 8300000, guid: efa8a29606232a3499be7d7551710d4f, type: 3}
-    soundName: BUTTON_CLICK
-    soundEnum: 15
   - soundClip: {fileID: 8300000, guid: 6c8f96f9cb9d21143abb57237d7eaaa6, type: 3}
     soundName: EFFECT_BANG
-    soundEnum: 16
+    soundEnum: 15
   - soundClip: {fileID: 8300000, guid: 9e09835836413aa4ca90a9f522ecf753, type: 3}
-    soundName: EFFECT_BEEBUZZ
+    soundName: EFFECT_BEEBUZZ1
+    soundEnum: 16
+  - soundClip: {fileID: 8300000, guid: 46a316977a4b19f4db6980dfe3cfd880, type: 3}
+    soundName: EFFECT_BEEBUZZ2
     soundEnum: 17
   - soundClip: {fileID: 8300000, guid: 3b5b41b56db6cb14a8c868f4eb1ed267, type: 3}
     soundName: EFFECT_BLOB
     soundEnum: 18
+  - soundClip: {fileID: 8300000, guid: efa8a29606232a3499be7d7551710d4f, type: 3}
+    soundName: EFFECT_BUTTON
+    soundEnum: 19
   - soundClip: {fileID: 8300000, guid: a192da2843955a744a98d367a085bf27, type: 3}
     soundName: EFFECT_COLLECT
-    soundEnum: 19
+    soundEnum: 20
   - soundClip: {fileID: 8300000, guid: 048e5264b424cb64797d570b07c93fe4, type: 3}
     soundName: EFFECT_EXPLOSION
-    soundEnum: 20
+    soundEnum: 21
   - soundClip: {fileID: 8300000, guid: 6445970bdb0a962409a069aba4c7c0ce, type: 3}
     soundName: EFFECT_KILL1
-    soundEnum: 21
+    soundEnum: 22
   - soundClip: {fileID: 8300000, guid: e24b6fb83bd737b4aa5a1916d878acda, type: 3}
     soundName: EFFECT_KILL2
-    soundEnum: 22
+    soundEnum: 23
   - soundClip: {fileID: 8300000, guid: afb1cdc01c899aa4983aa808317fe2c2, type: 3}
     soundName: EFFECT_KILL3
-    soundEnum: 23
+    soundEnum: 24
+  - soundClip: {fileID: 8300000, guid: b9529b6258c79284caad8548f0e45b2a, type: 3}
+    soundName: EFFECT_POPUP1
+    soundEnum: 25
+  - soundClip: {fileID: 8300000, guid: 100fddcdf2351bd47a1e9ab9084e4e81, type: 3}
+    soundName: EFFECT_POPUP2
+    soundEnum: 26
+  - soundClip: {fileID: 8300000, guid: 5bb442db81b67344c89f42fcf2123e93, type: 3}
+    soundName: EFFECT_POPUP3
+    soundEnum: 27
   - soundClip: {fileID: 8300000, guid: 6fa5561f31758cd468102a2ee27ff48b, type: 3}
     soundName: EFFECT_RELOAD
-    soundEnum: 24
+    soundEnum: 28
   - soundClip: {fileID: 8300000, guid: 8b1c6f0c7262b75438cc127c9b618e41, type: 3}
     soundName: EFFECT_SLIDE_CLOSE
-    soundEnum: 25
+    soundEnum: 29
   - soundClip: {fileID: 8300000, guid: d68e3943cc1614641b5eca3c40ecc506, type: 3}
     soundName: EFFECT_SLIDE_OPEN
-    soundEnum: 26
+    soundEnum: 30
   - soundClip: {fileID: 8300000, guid: b37113ea1812e1646bf340b24a28d977, type: 3}
     soundName: EFFECT_VACUUM
-    soundEnum: 27
+    soundEnum: 31
   - soundClip: {fileID: 8300000, guid: ee51c5e82b079e44eb0053ad7538cd68, type: 3}
     soundName: FINISH_LOSE
-    soundEnum: 28
+    soundEnum: 32
   - soundClip: {fileID: 8300000, guid: 39dc561ae2a8ba04caf6f58f34b80f99, type: 3}
     soundName: FINISH_WIN
-    soundEnum: 29
+    soundEnum: 33

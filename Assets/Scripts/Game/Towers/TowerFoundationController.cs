@@ -78,7 +78,7 @@ public class TowerFoundationController : MonoBehaviour
 
     public void DestroyTower()
     {
-        SoundManager.soundManager.PlaySound(SoundEnum.EFFECT_BEEBUZZ);
+        SoundManager.soundManager.PlaySound(SoundEnum.EFFECT_BEEBUZZ1);
         GameParams.gameManager.honey += (int)(tower.GetCurrentTowerPrice() * 0.3f);
         tower.ChangeInstancesCount(-1);
         Destroy(gameObject);
@@ -87,7 +87,7 @@ public class TowerFoundationController : MonoBehaviour
     public void BuildTowerOnFoundation(GameObject towerPrefab)
     {
         _buttonTowerInfo.SetActive(true);
-        SoundManager.soundManager.PlaySound(SoundEnum.EFFECT_BEEBUZZ);
+        SoundManager.soundManager.PlaySound(SoundEnum.EFFECT_BEEBUZZ1);
         tower = Instantiate(towerPrefab, gameObject.transform).GetComponent<TowerController>();
         tower.ChangeInstancesCount(1);
     }

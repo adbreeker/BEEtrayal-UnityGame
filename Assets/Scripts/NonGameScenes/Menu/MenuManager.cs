@@ -22,7 +22,7 @@ public class MenuManager : MonoBehaviour
 
     public void Button_Start()
     {
-        SoundManager.soundManager.PlaySound(SoundEnum.BUTTON_CLICK);
+        SoundManager.soundManager.PlaySound(SoundEnum.EFFECT_BUTTON);
 
         if(PlayerPrefs.GetInt("TutorialPlayed") == 0)
         {
@@ -38,13 +38,13 @@ public class MenuManager : MonoBehaviour
 
     public void Button_Workshop()
     {
-        SoundManager.soundManager.PlaySound(SoundEnum.BUTTON_CLICK);
+        SoundManager.soundManager.PlaySound(SoundEnum.EFFECT_BUTTON);
         ScenesManager.currentScenesManager.ChangeScene("Workshop");
     }
 
     public void Button_Exit()
     {
-        SoundManager.soundManager.PlaySound(SoundEnum.BUTTON_CLICK);
+        SoundManager.soundManager.PlaySound(SoundEnum.EFFECT_BUTTON);
         Application.Quit();
     }
 }

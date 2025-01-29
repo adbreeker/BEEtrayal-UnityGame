@@ -57,7 +57,7 @@ public class ChooseTowerButton_UI : MonoBehaviour
 
     public void BuildTower()
     {
-        SoundManager.soundManager.PlaySound(SoundEnum.BUTTON_CLICK);
+        SoundManager.soundManager.PlaySound(SoundEnum.EFFECT_BUTTON);
 
         GameParams.gameManager.honey -= linkedTower.GetCurrentTowerPrice();
         _panel.linkedTowerFoundation.BuildTowerOnFoundation(_towerPrefab);

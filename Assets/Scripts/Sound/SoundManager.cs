@@ -19,6 +19,7 @@ public class SoundManager : MonoBehaviour
         public SoundEnum soundEnum;
     }
 
+    public int managerPriority = 0;
     [SerializeField] GameObject _audioPrefab;
     [SerializeField] List<Sound> _sounds = new List<Sound>();
 
@@ -34,7 +35,16 @@ public class SoundManager : MonoBehaviour
         }
         else if (soundManager != this)
         {
-            Destroy(gameObject);
+            if(soundManager.managerPriority >= this.managerPriority) 
+            {
+                Destroy(gameObject); 
+            }
+            else
+            {
+                DestroyImmediate(soundManager.gameObject);
+                soundManager = this;
+                DontDestroyOnLoad(gameObject);
+            }
         }
     }
 

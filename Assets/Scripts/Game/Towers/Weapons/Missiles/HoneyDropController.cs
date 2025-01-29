@@ -20,7 +20,7 @@ public class HoneyDropController : MissileController
 
     public void Button_CollectHoney()
     {
-        SoundManager.soundManager.PlaySound3D(SoundEnum.EFFECT_COLLECT, transform.position, true);
+        SoundManager.soundManager.PlaySound3D(SoundEnum.EFFECT_POPUP1, transform.position);
         GameParams.gameManager.honey += honeyValue;
         GameParams.gameManager.honeyDrops += honeyValue;
         Destroy(gameObject);

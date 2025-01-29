@@ -161,6 +161,7 @@ public class GameManager : MonoBehaviour
 
         if(ableToBuild)
         {
+            SoundManager.soundManager.PlaySound(SoundEnum.EFFECT_BUTTON);
             OpenChooseTowerPanel(tfc);
         }
         else

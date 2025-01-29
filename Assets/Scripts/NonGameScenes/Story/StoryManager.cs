@@ -84,10 +84,11 @@ public class StoryManager : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(1f);
 
-        for(int i = 0; i < _stories[storyIndex].Length; i++)
+        foreach(string word in _stories[storyIndex].Split(" "))
         {
-            _storyTextField.text += _stories[storyIndex][i];
-            yield return new WaitForSecondsRealtime(0.05f);
+            SoundManager.soundManager.PlaySound(SoundEnum.EFFECT_BEEBUZZ1, true);
+            _storyTextField.text += word + " ";
+            yield return new WaitForSecondsRealtime(Mathf.Min(word.Length * 0.07f, 0.5f));
         }
 
         yield return new WaitForSecondsRealtime(2f);

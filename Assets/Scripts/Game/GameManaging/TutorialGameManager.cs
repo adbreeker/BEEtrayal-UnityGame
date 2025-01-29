@@ -50,7 +50,7 @@ public class TutorialGameManager : GameManager
 
         yield return new WaitForSecondsRealtime(1f);
 
-        for (int i = 0; i < _tutorialMonologues[0].Length; i++) // tutorial 1
+        foreach (string word in _tutorialMonologues[0].Split(" ")) // tutorial 1
         {
             if (Input.GetKey(KeyCode.Mouse0))
             {
@@ -58,15 +58,15 @@ public class TutorialGameManager : GameManager
                 break;
             }
 
-            _tutorialText.text += _tutorialMonologues[0][i];
-            yield return new WaitForSecondsRealtime(0.05f);
+            SoundManager.soundManager.PlaySound(SoundEnum.EFFECT_BEEBUZZ1, true);
+            _tutorialText.text += word + " ";
+            yield return new WaitForSecondsRealtime(Mathf.Min(word.Length * 0.07f, 0.5f));
         }
-
         yield return new WaitForSecondsRealtime(0.5f);
 
         _tutorialText.text = "";
         _livesArrow.SetActive(true);
-        for (int i = 0; i < _tutorialMonologues[1].Length; i++) // tutorial 2
+        foreach (string word in _tutorialMonologues[1].Split(" ")) // tutorial 2
         {
             if (Input.GetKey(KeyCode.Mouse0))
             {
@@ -74,15 +74,16 @@ public class TutorialGameManager : GameManager
                 break;
             }
 
-            _tutorialText.text += _tutorialMonologues[1][i];
-            yield return new WaitForSecondsRealtime(0.05f);
+            SoundManager.soundManager.PlaySound(SoundEnum.EFFECT_BEEBUZZ1, true);
+            _tutorialText.text += word + " ";
+            yield return new WaitForSecondsRealtime(Mathf.Min(word.Length * 0.07f, 0.5f));
         }
         yield return new WaitForSecondsRealtime(0.5f);
         _livesArrow.SetActive(false);
 
         _tutorialText.text = "";
         _honeyArrow.SetActive(true);
-        for (int i = 0; i < _tutorialMonologues[2].Length; i++) // tutorial 3
+        foreach (string word in _tutorialMonologues[2].Split(" ")) // tutorial 3
         {
             if (Input.GetKey(KeyCode.Mouse0))
             {
@@ -90,15 +91,16 @@ public class TutorialGameManager : GameManager
                 break;
             }
 
-            _tutorialText.text += _tutorialMonologues[2][i];
-            yield return new WaitForSecondsRealtime(0.05f);
+            SoundManager.soundManager.PlaySound(SoundEnum.EFFECT_BEEBUZZ1, true);
+            _tutorialText.text += word + " ";
+            yield return new WaitForSecondsRealtime(Mathf.Min(word.Length * 0.07f, 0.5f));
         }
         yield return new WaitForSecondsRealtime(0.5f);
         _honeyArrow.SetActive(false);
 
         _tutorialText.text = "";
         _pathArrow.SetActive(true);
-        for (int i = 0; i < _tutorialMonologues[3].Length; i++) // tutorial 4
+        foreach (string word in _tutorialMonologues[3].Split(" ")) // tutorial 4
         {
             if (Input.GetKey(KeyCode.Mouse0))
             {
@@ -106,15 +108,16 @@ public class TutorialGameManager : GameManager
                 break;
             }
 
-            _tutorialText.text += _tutorialMonologues[3][i];
-            yield return new WaitForSecondsRealtime(0.05f);
+            SoundManager.soundManager.PlaySound(SoundEnum.EFFECT_BEEBUZZ1, true);
+            _tutorialText.text += word + " ";
+            yield return new WaitForSecondsRealtime(Mathf.Min(word.Length * 0.07f, 0.5f));
         }
         yield return new WaitForSecondsRealtime(0.5f);
         _pathArrow.SetActive(false);
 
         _tutorialText.text = "";
         _tapIcon.SetActive(true);
-        for (int i = 0; i < _tutorialMonologues[4].Length; i++) // tutorial 5
+        foreach (string word in _tutorialMonologues[4].Split(" ")) // tutorial 5
         {
             if (Input.GetKey(KeyCode.Mouse0))
             {
@@ -122,8 +125,9 @@ public class TutorialGameManager : GameManager
                 break;
             }
 
-            _tutorialText.text += _tutorialMonologues[4][i];
-            yield return new WaitForSecondsRealtime(0.05f);
+            SoundManager.soundManager.PlaySound(SoundEnum.EFFECT_BEEBUZZ1, true);
+            _tutorialText.text += word + " ";
+            yield return new WaitForSecondsRealtime(Mathf.Min(word.Length * 0.07f, 0.5f));
         }
         yield return new WaitForSecondsRealtime(0.5f);
         _tapIcon.SetActive(false);

@@ -53,6 +53,7 @@ public class ScenesManager : MonoBehaviour
         Vector2 destinedDown = _fadeDown.anchoredPosition;
         destinedDown.y = (height / 4f + 5f);
 
+        SoundManager.soundManager.PlaySound(SoundEnum.EFFECT_SLIDE_CLOSE);
         while(_fadeUp.anchoredPosition != destinedUp || _fadeDown.anchoredPosition != destinedDown)
         {
             _fadeUp.anchoredPosition = Vector2.MoveTowards(_fadeUp.anchoredPosition, destinedUp, doorSpeed * Time.unscaledDeltaTime);
@@ -66,6 +67,7 @@ public class ScenesManager : MonoBehaviour
         destinedUp.y = (height / 4f + 5f);
         destinedDown.y = -(height / 4f + 5f);
 
+        SoundManager.soundManager.PlaySound(SoundEnum.EFFECT_SLIDE_OPEN);
         while (_fadeUp.anchoredPosition != destinedUp || _fadeDown.anchoredPosition != destinedDown)
         {
             _fadeUp.anchoredPosition = Vector2.MoveTowards(_fadeUp.anchoredPosition, destinedUp, doorSpeed * Time.unscaledDeltaTime);
