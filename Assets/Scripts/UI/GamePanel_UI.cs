@@ -21,8 +21,6 @@ public class GamePanel_UI : MonoBehaviour
     [SerializeField] Button _speedButton;
     [SerializeField] Button _soundButton;
 
-    long _time = 0;
-
     //show/hide button
     bool _isPanelShown = false;
     Coroutine _movePanelCoroutine = null;
@@ -33,33 +31,25 @@ public class GamePanel_UI : MonoBehaviour
     bool _isSoundOn = true;
     
 
-
-    // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(CountTime());
         _panelStartingPosition = transform.localPosition;
         _panelDestination = _panelStartingPosition;
         _panelDestination.y -= (GetComponent<RectTransform>().rect.height/2 + 20);
     }
 
-    // Update is called once per frame
     void Update()
     {
         _livesCounter.text = GameParams.gameManager.lives.ToString();
         _honeyCounter.text = GameParams.gameManager.honey.ToString();
         _deadInsectsCounter.text = GameParams.insectsManager.deadInsects.ToString();
+        CountTime();
     }
 
-    IEnumerator CountTime()
+    void CountTime()
     {
-        while(true)
-        {
-            yield return new WaitForSeconds(1.0f);
-            _time++;
-            TimeSpan timeSpan = TimeSpan.FromSeconds(_time);
-            _timeCounter.text = $"{timeSpan.Minutes:D2}:{timeSpan.Seconds:D2}";
-        }
+        TimeSpan timeSpan = TimeSpan.FromSeconds(Time.timeSinceLevelLoadAsDouble);
+        _timeCounter.text = $"{timeSpan.Minutes:D2}:{timeSpan.Seconds:D2}";
     }
 
     //Buttons ------------------------------------------------------------------------------------------------------------------------------- Buttons
