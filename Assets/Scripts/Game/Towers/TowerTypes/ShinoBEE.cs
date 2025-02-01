@@ -19,7 +19,7 @@ public class ShinoBEE : TowerController
         base.Start();
 
         if(isUpgradeActive[0]) { _attackSpecialEffects.Add(new SpecialEffects.ArmorReduction(1)); }
-        if(isUpgradeActive[1]) { Instantiate(_bigShuriken, transform.parent).GetComponent<MeleeController>().SetUpWeapon(50f, _attackSpecialEffects); }
+        if(isUpgradeActive[1]) { Instantiate(_bigShuriken, transform.parent).GetComponent<MeleeController>().SetUpWeapon(30f, _attackSpecialEffects); }
     }
 
     protected override void FixedUpdate()
@@ -67,7 +67,7 @@ public class ShinoBEE : TowerController
             case 1:
                 return "Attacks decrease struck insects armor by 1";
             case 2:
-                return "Big shuriken orbit around dealing 50 damage and applying effects";
+                return "Big shuriken orbit around dealing 30 damage and applying effects";
             case 3:
                 return "Thrown shurikens pierces through insects";
             case 4:

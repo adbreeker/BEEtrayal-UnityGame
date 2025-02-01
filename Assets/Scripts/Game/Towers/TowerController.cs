@@ -56,14 +56,13 @@ public abstract class TowerController : MonoBehaviour
             if(!_attackCooldownOngoing) 
             {
                 _attackCooldownOngoing = true;
-                Invoke("AttackCooldown", 1 / speed);
+                Invoke(nameof(AttackCooldown), 1 / speed);
             }
         }
     }
 
     void AttackCooldown()
     {
-        //yield return new WaitForSeconds(1 / speed);
         _canAttack = true;
         _attackCooldownOngoing = false;
     }

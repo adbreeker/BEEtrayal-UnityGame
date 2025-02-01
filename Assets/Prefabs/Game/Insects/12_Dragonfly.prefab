@@ -106,7 +106,7 @@ MonoBehaviour:
   armor: 0
   value: 3
   _honeyDrop: {fileID: 766999501600105451, guid: cec59ef884c83df4fab3941f09b0ff8e, type: 3}
-  honeyDropChance: 10
+  honeyDropChance: 25
   _bloodPrefab: {fileID: 6008200650587112474, guid: 9dc81f77eeb86164cb4eb72f69fe506d, type: 3}
   isSlowed: 0
   isStuned: 0

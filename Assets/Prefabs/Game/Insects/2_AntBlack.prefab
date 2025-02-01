@@ -102,7 +102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 3
-  health: 20
+  health: 25
   armor: 0
   value: 2
   _honeyDrop: {fileID: 766999501600105451, guid: cec59ef884c83df4fab3941f09b0ff8e, type: 3}
