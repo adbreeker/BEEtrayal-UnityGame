@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: b77aef94acf1e2f48979f1b18b594416
+guid: a3fd18bc3f4276c4e9148373a63511f2
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6786716569773762430
-    second: towerFoundation2_0
+      213: -781175857721856527
+    second: ninjaCape_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: towerFoundation2_0
+      name: ninjaCape_0
       rect:
         serializedVersion: 2
-        x: 63
-        y: 7
-        width: 474
-        height: 546
+        x: 34
+        y: 8
+        width: 182
+        height: 255
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2889063cc3db0d1a0800000000000000
-      internalID: -6786716569773762430
+      spriteID: 1fda06d32b4b825f0800000000000000
+      internalID: -781175857721856527
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      towerFoundation2_0: -6786716569773762430
+      ninjaCape_0: -781175857721856527
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

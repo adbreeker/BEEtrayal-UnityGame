@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: b77aef94acf1e2f48979f1b18b594416
+guid: e4f5bd64ee2359e4cbbe8127cb20cddc
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6786716569773762430
-    second: towerFoundation2_0
+      213: 8355534932255826566
+    second: diaper_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: towerFoundation2_0
+      name: diaper_0
       rect:
         serializedVersion: 2
-        x: 63
-        y: 7
-        width: 474
-        height: 546
+        x: 0
+        y: 0
+        width: 273
+        height: 269
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2889063cc3db0d1a0800000000000000
-      internalID: -6786716569773762430
+      spriteID: 682e97950c2d4f370800000000000000
+      internalID: 8355534932255826566
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      towerFoundation2_0: -6786716569773762430
+      diaper_0: 8355534932255826566
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
