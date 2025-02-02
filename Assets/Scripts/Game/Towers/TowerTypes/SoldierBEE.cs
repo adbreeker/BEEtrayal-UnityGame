@@ -45,7 +45,7 @@ public class SoldierBEE : TowerController
         {
             transform.rotation = GameParams.LookAt2D(transform.position, firstInsect.transform.position);
             SoundManager.soundManager.PlaySound3D(SoundEnum.ATTACK_RIFLE, transform.position, true);
-            GameObject missile = Instantiate(_missilePrefab, _missileSpawnPoint.position, Quaternion.identity);
+            GameObject missile = Instantiate(_missilePrefab, _missileSpawnPoint.position, GameParams.LookAt2D(transform.position, firstInsect.transform.position));
             missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, firstInsect, _attackSpecialEffects);
 
             if (isUpgradeActive[3])
@@ -57,7 +57,7 @@ public class SoldierBEE : TowerController
 
                     SoundManager.soundManager.PlaySound3D(SoundEnum.ATTACK_THROW_GRENADE, transform.position, true);
                     List<SpecialEffect> specialEffects = new List<SpecialEffect>() { new SpecialEffects.Stun(1) };
-                    GameObject grenade = Instantiate(_flashGrenadePrefab, transform.position, Quaternion.identity);
+                    GameObject grenade = Instantiate(_flashGrenadePrefab, transform.position, GameParams.LookAt2D(transform.position, firstInsect.transform.position));
                     grenade.GetComponent<MissileController>().SetUpMissile(missileSpeed/2f, 0, firstInsect.transform.position, 0f, specialEffects);
                     grenade.GetComponent<GrenadeFlashController>().explosionSize = 1.5f;
                 }

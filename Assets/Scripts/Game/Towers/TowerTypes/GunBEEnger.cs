@@ -40,7 +40,7 @@ public class GunBEEnger : TowerController
         {
             transform.rotation = GameParams.LookAt2D(transform.position, firstInsect.transform.position);
             SoundManager.soundManager.PlaySound3D(SoundEnum.ATTACK_REVOLVER, transform.position, true);
-            GameObject missile = Instantiate(_missilePrefab, _missileSpawnPoint[_spawnPointIndex].position, Quaternion.identity);
+            GameObject missile = Instantiate(_missilePrefab, _missileSpawnPoint[_spawnPointIndex].position, GameParams.LookAt2D(transform.position, firstInsect.transform.position));
             missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, firstInsect, _attackSpecialEffects);
             _spawnPointIndex = (_spawnPointIndex + 1) % 2;
         }
@@ -52,7 +52,7 @@ public class GunBEEnger : TowerController
             {
                 transform.rotation = GameParams.LookAt2D(transform.position, firstInsect.transform.position);
                 SoundManager.soundManager.PlaySound3D(SoundEnum.ATTACK_REVOLVER, transform.position, true);
-                GameObject missile = Instantiate(_missilePrefab, _missileSpawnPoint[_spawnPointIndex].position, Quaternion.identity);
+                GameObject missile = Instantiate(_missilePrefab, _missileSpawnPoint[_spawnPointIndex].position, GameParams.LookAt2D(transform.position, firstInsect.transform.position));
                 missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, firstInsect, _attackSpecialEffects);
                 _spawnPointIndex = (_spawnPointIndex + 1) % 2;
             }

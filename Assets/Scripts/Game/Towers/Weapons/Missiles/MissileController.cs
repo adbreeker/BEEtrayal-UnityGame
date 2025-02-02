@@ -97,14 +97,14 @@ public class MissileController : WeaponController
         {
             if (_flyMode == FlyMode.Destination)
             {
-                if (_destination != null)
+                if (_destination != null && Vector2.Distance(transform.position, _destination) > 0)
                 {
                     transform.rotation = GameParams.LookAt2D(transform.position, _destination) * Quaternion.Euler(0f, 0f, rotationAngle);
                 }
             }
             if (_flyMode == FlyMode.Target)
             {
-                if (_target != null)
+                if (_target != null && Vector2.Distance(transform.position, _target.transform.position) > 0)
                 {
                     transform.rotation = GameParams.LookAt2D(transform.position, _target.transform.position) * Quaternion.Euler(0f, 0f, rotationAngle);
                 }

@@ -33,7 +33,7 @@ public class HoneyFactory : TowerController
         {
             Vector3 honeyDestination = (Vector2)transform.position + (Random.insideUnitCircle * range);
             SoundManager.soundManager.PlaySound3D(SoundEnum.ATTACK_THROW_GRENADE, transform.position, true);
-            GameObject droppedHoney = Instantiate(_missilePrefab, transform.position, Quaternion.identity);
+            GameObject droppedHoney = Instantiate(_missilePrefab, transform.position, GameParams.LookAt2D(transform.position, honeyDestination));
             droppedHoney.GetComponent<MissileController>().SetUpMissile(missileSpeed, 0, honeyDestination, 0f, _attackSpecialEffects);
             droppedHoney.GetComponent<HoneyDropController>().honeyValue = dropValue;
         }
