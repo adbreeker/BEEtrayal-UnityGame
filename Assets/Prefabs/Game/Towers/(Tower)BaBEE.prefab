@@ -62,7 +62,7 @@ MonoBehaviour:
   slowTime: 2
   slowStrength: 0.5
   _missilePrefab: {fileID: 2686293118654674446, guid: cf5846e49831a284a8260abd1b7684e7, type: 3}
-  _missileSpawnPoint: {fileID: 0}
+  _missileSpawnPoint: {fileID: 4181168725788313881}
 --- !u!1 &1900564164957582835
 GameObject:
   m_ObjectHideFlags: 0

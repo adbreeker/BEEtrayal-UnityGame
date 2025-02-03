@@ -9,13 +9,8 @@ public class HoneyDropController : MissileController
 
     protected override void OnHit()
     {
-        StartCoroutine(HoneyVanish());
-    }
-
-    IEnumerator HoneyVanish()
-    {
-        yield return new WaitForSeconds(10.0f);
-        Destroy(gameObject);
+        transform.rotation = Quaternion.identity;
+        Destroy(gameObject, 10f);
     }
 
     public void Button_CollectHoney()
