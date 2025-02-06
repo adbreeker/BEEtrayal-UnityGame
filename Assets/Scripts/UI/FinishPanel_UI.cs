@@ -83,6 +83,7 @@ public class FinishPanel_UI : MonoBehaviour
         float pauseTime = 0.3f;
         float modifyDeltaTime = 0.01f;
 
+        //subtract starting honey
         yield return new WaitForSecondsRealtime(pauseTime);
         _harvestedHoneyCounter.text = currentHoney.ToString() + " - " + GameParams.gameManager.startHoney.ToString();
         newHoney = currentHoney - GameParams.gameManager.startHoney;
@@ -91,10 +92,11 @@ public class FinishPanel_UI : MonoBehaviour
         do
         {
             yield return new WaitForSecondsRealtime(modifyDeltaTime);
-            LerpInt(ref currentHoney, newHoney, step);
+            MoveIntByStep(ref currentHoney, newHoney, step);
             _harvestedHoneyCounter.text = currentHoney.ToString();
         } while (currentHoney != newHoney);
 
+        //multiplie by harvest modifier
         yield return new WaitForSecondsRealtime(pauseTime); 
         _harvestedHoneyCounter.text = currentHoney.ToString() + " * " + ((int)(GameParams.gameManager.harvestModifier * 100)).ToString() + "%";
         newHoney = (int)((float)currentHoney * GameParams.gameManager.harvestModifier);
@@ -103,10 +105,11 @@ public class FinishPanel_UI : MonoBehaviour
         do
         {
             yield return new WaitForSecondsRealtime(modifyDeltaTime);
-            LerpInt(ref currentHoney, newHoney, step);
+            MoveIntByStep(ref currentHoney, newHoney, step);
             _harvestedHoneyCounter.text = currentHoney.ToString();
         } while (currentHoney != newHoney);
 
+        //add bonuses
         yield return new WaitForSecondsRealtime(pauseTime);
         int bonuses = GameParams.gameManager.honeyDrops;
         if (_isGameWon) { bonuses += GameParams.gameManager.winBonus; }
@@ -117,7 +120,7 @@ public class FinishPanel_UI : MonoBehaviour
         do
         {
             yield return new WaitForSecondsRealtime(modifyDeltaTime);
-            LerpInt(ref currentHoney, newHoney, step);
+            MoveIntByStep(ref currentHoney, newHoney, step);
             _harvestedHoneyCounter.text = currentHoney.ToString();
         } while (currentHoney != newHoney);
         yield return new WaitForSecondsRealtime(pauseTime);
@@ -133,7 +136,7 @@ public class FinishPanel_UI : MonoBehaviour
         return step;
     }
 
-    void LerpInt(ref int value, int destinedValue, int step)
+    void MoveIntByStep(ref int value, int destinedValue, int step)
     {
         if(value < destinedValue)
         {

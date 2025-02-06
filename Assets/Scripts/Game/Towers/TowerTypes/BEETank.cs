@@ -50,7 +50,8 @@ public class BEETank : TowerController
             GameObject missile = Instantiate(_missilePrefab, _missileSpawnPoint.position, GameParams.LookAt2D(transform.position, targetInsect.transform.position));
             missile.GetComponent<MissileController>().SetUpMissile(missileSpeed, damage, targetInsect.transform.position, 0f, _attackSpecialEffects);
             missile.GetComponent<RocketController>().explosionSize = explosionSize;
-            damage += 0.25f;
+            
+            if (isUpgradeActive[2]) { damage += 0.25f; }
         }
     }
 
