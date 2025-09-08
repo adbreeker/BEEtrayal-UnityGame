@@ -57,7 +57,7 @@ MonoBehaviour:
   isUpgradeActive: 00000000
   upgradePrices: 881300001c250000482600000f270000
   _price: 625
-  dropChance: 0.099999994
+  dropChance: 0.1
   dropValue: 15
   _missilePrefab: {fileID: 766999501600105451, guid: cec59ef884c83df4fab3941f09b0ff8e, type: 3}
   _explosionPrefab: {fileID: 2506853797126702572, guid: 71ea6bca1cbdb644a8473aedbc242971, type: 3}
