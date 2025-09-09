@@ -51,7 +51,7 @@ MonoBehaviour:
   infoPanel: {fileID: 7048296568798938931, guid: cfdcce573ef926f4c8c800f4c7d34cd3, type: 3}
   towerImage: {fileID: 1404465738590952019, guid: e2099efbf610fdd45b3785bf3a3450ae, type: 3}
   towerName: GunBEEnger
-  towerDescription: The most common unit in the army of the bees kingdom
+  towerDescription: The most common unit in the army of the Beehive Kingdom
   damage: 25
   range: 3
   speed: 2
