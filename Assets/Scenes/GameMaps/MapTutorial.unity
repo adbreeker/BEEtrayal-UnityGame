@@ -448,7 +448,7 @@ GameObject:
   m_Component:
   - component: {fileID: 365824344}
   m_Layer: 5
-  m_Name: TutorialPanel
+  m_Name: StoryPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2476,13 +2476,42 @@ MonoBehaviour:
   _chooseTowerPanel: {fileID: 740812707}
   _finishPanel: {fileID: 470504565}
   _mainCanvas: {fileID: 1645429158}
-  _tutorialPanel: {fileID: 365824343}
-  _tutorialText: {fileID: 1396842916}
+  _storyPanel: {fileID: 365824343}
+  _storyText: {fileID: 1396842916}
   _infoPanelButton: {fileID: 1857720552}
-  _livesArrow: {fileID: 1051256766}
-  _honeyArrow: {fileID: 698636281}
-  _pathArrow: {fileID: 1791666594}
-  _tapIcon: {fileID: 1171880402}
+  _storySegments:
+  - segmentName: Tutorial 1
+    monologue: Your achievements in this war have already become well-known throughout
+      the kingdom, but before we promote you to general, I need to personally assess
+      your potential.
+    linkedObject: {fileID: 0}
+  - segmentName: Tutorial 2
+    monologue: Pay close attention. This is the number of hive defenders. If it drops
+      to zero, those cursed insects will plunder another stockpile of precious honey,
+      and the sacrifices of our people will have been in vain.
+    linkedObject: {fileID: 1051256766}
+  - segmentName: Tutorial 3
+    monologue: 'These are the honey resources available to you, allowing you to set
+      up additional fortifications along the path to the hive as needed. You can
+      acquire more honey by killing insects, and there''s a chance that some of them
+      will drop previously stolen supplies, tap them to reclaim these resources. '
+    linkedObject: {fileID: 698636281}
+  - segmentName: Tutorial 4
+    monologue: "If you manage to repel the attack, you can keep some of the honey
+      you\u2019ve earned for future needs. Our craftsmen should be able to utilize
+      additional resources for units upgrades."
+    linkedObject: {fileID: 0}
+  - segmentName: Tutorial 5
+    monologue: This is the path through which waves of attackers will come. If any
+      of them manage to reach the hive, some of its defenders will perish in the
+      effort to repel the attack.
+    linkedObject: {fileID: 1791666594}
+  - segmentName: Tutorial 6
+    monologue: Now, quickly double-tap the spot where you'd like to build fortifications.
+      If you want to demolish them later and recover some of the resources, just
+      double-tap the fortification, just as you did when building it.\nPrepare for
+      battle. Good luck!
+    linkedObject: {fileID: 1171880402}
 --- !u!1 &2040284634
 GameObject:
   m_ObjectHideFlags: 0
