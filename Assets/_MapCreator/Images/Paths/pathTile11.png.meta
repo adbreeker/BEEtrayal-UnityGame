@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 1691227e40fb0f74f90bf5b9733dd93b
+guid: c0eae7a67f9bb014f8572273d7a7d782
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7131104608768668616
-    second: propFlower1_0
+      213: -5436873648323951636
+    second: pathTile11_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -40,13 +40,13 @@ TextureImporter:
     filterMode: 1
     aniso: 1
     mipBias: 0
-    wrapU: 1
-    wrapV: 1
-    wrapW: 1
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -139,13 +139,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: propFlower1_0
+      name: pathTile11_0
       rect:
         serializedVersion: 2
-        x: 7
-        y: 10
-        width: 42
-        height: 58
+        x: 0
+        y: 0
+        width: 154
+        height: 170
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,8 +154,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 83c413af32a390d90800000000000000
-      internalID: -7131104608768668616
+      spriteID: ce308fef8385c84b0800000000000000
+      internalID: -5436873648323951636
       vertices: []
       indices: 
       edges: []
@@ -164,7 +164,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -174,7 +174,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      propFlower1_0: -7131104608768668616
+      pathTile11_0: -5436873648323951636
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
