@@ -282,8 +282,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2070277098}
-  - component: {fileID: 2070277097}
-  - component: {fileID: 2070277096}
+  - component: {fileID: 2070277100}
+  - component: {fileID: 2070277099}
   m_Layer: 0
   m_Name: MapCreatorManager
   m_TagString: Untagged
@@ -291,35 +291,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2070277096
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2070277095}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e0c1482988e29c428f4657e0ea6ce43, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_camera: {fileID: 1457001882}
-  pathsHolder: {fileID: 1217520453}
-  brushPrefab: {fileID: 7747030569949159765, guid: 53dcb6c18cb1ca746bcfa7223cd9bb6c, type: 3}
-  brushWidth: 1.5
-  pathsCount: 0
---- !u!114 &2070277097
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2070277095}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7477ee53f3c790443882ec2eca3c75ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &2070277098
 Transform:
   m_ObjectHideFlags: 0
@@ -335,6 +306,35 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2070277099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2070277095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6dc71d8ce4c8e946beaf3d3f4efa813, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_camera: {fileID: 1457001882}
+  pathsHolder: {fileID: 1217520453}
+  brushPrefab: {fileID: 7747030569949159765, guid: 53dcb6c18cb1ca746bcfa7223cd9bb6c, type: 3}
+  brushWidth: 1.3
+  pathsCount: 0
+--- !u!114 &2070277100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2070277095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb096387a560b9b4e811159c5c48e0bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2087341206
 GameObject:
   m_ObjectHideFlags: 0

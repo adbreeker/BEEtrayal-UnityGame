@@ -1,0 +1,12 @@
+{
+  "name": "com.adbreeker.tdmapcreator",
+  "displayName": "TD Map Creator",
+  "version": "0.1.0",
+  "unity": "6000.0",
+  "description": "A test plugin",
+  "author": {
+    "name": "adbreeker",
+    "email": "adbreeker@gmail.com"
+  },
+  "dependencies": {}
+}
