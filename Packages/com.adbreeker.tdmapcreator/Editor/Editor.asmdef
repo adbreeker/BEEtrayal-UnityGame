@@ -1,0 +1,7 @@
+{
+    "name": "com.adbreeker.tdmapcreator.editor",
+    "references": ["com.adbreeker.tdmapcreator.runtime"], 
+    "includePlatforms": ["Editor"],
+    "allowUnsafeCode": false,
+    "autoReferenced": true
+}
