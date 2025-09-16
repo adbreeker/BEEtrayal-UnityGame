@@ -18,34 +18,60 @@ public class MapCreator_EditorWindow : EditorWindow
         GUILayout.Label("Map Creator", new GUIStyle("BoldLabel") { fontSize = 24, padding = new RectOffset(0, 0, 10, 10), alignment = TextAnchor.MiddleCenter });
         GUILayout.Space(10f);
 
-        CreateOrLoadMap();
+        CreateOrLoadMapSection();
+        EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
+        GUILayout.Space(10f);
+
+        GUILayout.Label("Settings:", new GUIStyle("BoldLabel") { fontSize = 16, padding = new RectOffset(0, 0, 10, 10), alignment = TextAnchor.MiddleCenter });
+        SettingsSection();
     }
 
-    private void CreateOrLoadMap()
+    private void CreateOrLoadMapSection()
     {
-        if (GUILayout.Button("Create New Map"))
+        if(!EditorApplication.isPlaying)
         {
-            // Build the Assets-relative path to the scene and load as SceneAsset
-            string scenePath = Path.Combine(MapCreator_Setup.GetPackageRelativePath(), "Resources", "Scenes", "_MapCreator.unity");
-            var sceneAsset = AssetDatabase.LoadAssetAtPath<SceneAsset>(scenePath);
-
-            if (sceneAsset == null)
+            GUILayout.BeginHorizontal();
+            if (GUILayout.Button("NEW MAP", new GUIStyle(GUI.skin.button) { fontSize = 16 }, GUILayout.Height(24f)))
             {
-                EditorUtility.DisplayDialog("Map Creator", $"Cannot find scene at:\n{scenePath}", "OK");
-                return;
+                // Build the Assets-relative path to the scene and load as SceneAsset
+                string scenePath = Path.Combine(MapCreator_Setup.GetPackageRelativePath(), "Resources", "Scenes", "_MapCreator.unity");
+                var sceneAsset = AssetDatabase.LoadAssetAtPath<SceneAsset>(scenePath);
+
+                if (sceneAsset == null)
+                {
+                    EditorUtility.DisplayDialog("Map Creator", $"Cannot find scene at:\n{scenePath}", "OK");
+                    return;
+                }
+
+                // Use Play Mode Start Scene so Unity restores the previous scene automatically afterward
+                EditorSceneManager.playModeStartScene = sceneAsset;
+
+                // Ensure we clear the start scene when exiting play mode
+                EditorApplication.playModeStateChanged -= OnPlayModeStateChanged;
+                EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
+                _launchedFromWindow = true;
+
+                // Enter play mode without opening/saving the _MapCreator scene in the editor
+                EditorApplication.isPlaying = true;
             }
+            if (GUILayout.Button("LOAD MAP", new GUIStyle(GUI.skin.button) { fontSize = 16 }, GUILayout.Height(24f)))
+            {
 
-            // Use Play Mode Start Scene so Unity restores the previous scene automatically afterward
-            EditorSceneManager.playModeStartScene = sceneAsset;
-
-            // Ensure we clear the start scene when exiting play mode
-            EditorApplication.playModeStateChanged -= OnPlayModeStateChanged;
-            EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
-            _launchedFromWindow = true;
-
-            // Enter play mode without opening/saving the _MapCreator scene in the editor
-            EditorApplication.isPlaying = true;
+            }
+            GUILayout.EndHorizontal();
         }
+        else
+        {
+            if(GUILayout.Button("SAVE MAP", new GUIStyle(GUI.skin.button) { fontSize = 16 }, GUILayout.Height(24f)))
+            {
+
+            }
+        }
+    }
+
+    private void SettingsSection()
+    {
+
     }
 
     private static void OnPlayModeStateChanged(PlayModeStateChange state)
