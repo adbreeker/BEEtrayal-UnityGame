@@ -2396,6 +2396,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb096387a560b9b4e811159c5c48e0bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _mapRoot: {fileID: 2087341208}
   _background: {fileID: 1808384480}
   _panelNewMapSettup: {fileID: 364532222}
   _inputResWidth: {fileID: 2038807227}

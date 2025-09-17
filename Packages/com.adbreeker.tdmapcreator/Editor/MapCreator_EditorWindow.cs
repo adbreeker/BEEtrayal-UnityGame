@@ -64,7 +64,7 @@ public class MapCreator_EditorWindow : EditorWindow
         {
             if(GUILayout.Button("SAVE MAP", new GUIStyle(GUI.skin.button) { fontSize = 16 }, GUILayout.Height(24f)))
             {
-
+                MapCreatorManager.Instance?.ExportMapImage(Path.Combine(Application.dataPath, "map_export.png"));
             }
         }
     }

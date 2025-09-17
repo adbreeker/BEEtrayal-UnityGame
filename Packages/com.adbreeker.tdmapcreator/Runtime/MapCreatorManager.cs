@@ -5,14 +5,29 @@ using UnityEngine.UI;
 
 public class MapCreatorManager : MonoBehaviour
 {
+    public static MapCreatorManager Instance;
+
     [Header("Map Elements:")]
+    [SerializeField] Transform _mapRoot;
     [SerializeField] SpriteRenderer _background;
 
     [Header("New Map Settup UI:")]
     [SerializeField] GameObject _panelNewMapSettup;
     [SerializeField] InputField _inputResWidth;
+    int _currentResWidth = 1920;
     [SerializeField] InputField _inputResHeight;
+    int _currentResHeight = 1080;
     [SerializeField] RawImage _backgroundPreview;
+
+    void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+        Instance = this;
+    }
 
     public void Button_ChangeBackgroundPreview()
     {
@@ -22,17 +37,15 @@ public class MapCreatorManager : MonoBehaviour
     public void Button_StartCreating()
     {
         // Parse resolution
-        int resWidth = 1920;
-        int resHeight = 1080;
         if (!string.IsNullOrWhiteSpace(_inputResWidth.text) && int.TryParse(_inputResWidth.text, out var w) && w > 0)
-            resWidth = w;
+            _currentResWidth = w;
         if (!string.IsNullOrWhiteSpace(_inputResHeight.text) && int.TryParse(_inputResHeight.text, out var h) && h > 0)
-            resHeight = h;
+            _currentResHeight = h;
 
-        Debug.Log($"Starting new map with resolution {resWidth}x{resHeight}");
+        Debug.Log($"Starting new map with resolution {_currentResWidth}x{_currentResHeight}");
 
         // Assign background sprite
-        var sprite = GetSpritesFromTextureAsset(_backgroundPreview.texture).FirstOrDefault();
+        var sprite = MapCreatorUtilis.GetSpritesFromTextureAsset(_backgroundPreview.texture).FirstOrDefault();
         _background.sprite = sprite;
 
         // Scale sprite to match desired resolution (in pixels)
@@ -44,12 +57,12 @@ public class MapCreatorManager : MonoBehaviour
 
             if (spritePxWidth > 0f && spritePxHeight > 0f)
             {
-                float scaleX = resWidth / spritePxWidth;
-                float scaleY = resHeight / spritePxHeight;
+                float scaleX = _currentResWidth / spritePxWidth;
+                float scaleY = _currentResHeight / spritePxHeight;
                 _background.transform.localScale = new Vector3(scaleX, scaleY, 1f);
             }
 
-            Debug.Log($"Background sprite size: {spritePxWidth}x{spritePxHeight} px; applied scale to fit {resWidth}x{resHeight}");
+            Debug.Log($"Background sprite size: {spritePxWidth}x{spritePxHeight} px; applied scale to fit {_currentResWidth}x{_currentResHeight}");
         }
         else
         {
@@ -59,17 +72,29 @@ public class MapCreatorManager : MonoBehaviour
         _panelNewMapSettup.SetActive(false);
     }
 
-    public static Sprite[] GetSpritesFromTextureAsset(Object textureAsset)
+    public void ExportMapImage(string absolutePath)
     {
-        if (textureAsset == null) return new Sprite[0];
-        string path = AssetDatabase.GetAssetPath(textureAsset);
-        if (string.IsNullOrEmpty(path)) return new Sprite[0];
+        if (_mapRoot == null || _background == null || _background.sprite == null)
+        {
+            Debug.LogWarning("ExportMapImage: Map root or background sprite is not set.");
+            return;
+        }
 
-        // For Multiple sprites, this returns each Sprite sub-asset; for Single, it returns one.
-        return AssetDatabase.LoadAllAssetRepresentationsAtPath(path)
-            .OfType<Sprite>()
-            .DefaultIfEmpty(AssetDatabase.LoadAssetAtPath<Sprite>(path))
-            .Where(s => s != null)
-            .ToArray();
+        var tex = MapCreatorUtilis.CaptureMapAlignedToBackground(
+            _mapRoot,
+            _background,
+            _currentResWidth,
+            _currentResHeight
+        );
+
+        if (tex == null)
+        {
+            Debug.LogWarning("ExportMapImage: capture failed.");
+            return;
+        }
+
+        MapCreatorUtilis.SaveAsPng(tex, absolutePath);
+
+        Debug.Log($"Map exported to {absolutePath} ({tex.width}x{tex.height})");
     }
 }
