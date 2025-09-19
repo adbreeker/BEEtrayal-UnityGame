@@ -5,9 +5,21 @@ using UnityEditor.PackageManager;
 using UnityEngine;
 
 #if UNITY_EDITOR
+[InitializeOnLoad]
 public class MapCreator_Setup
 {
-    const string PACKAGE_NAME = "com.adbreeker.tdmapcreator";
+    public const string PACKAGE_NAME = "com.adbreeker.tdmapcreator";
+
+    static MapCreator_Setup()
+    {
+        if(SessionState.GetBool("MapCreator_Initialized", false))
+            return;
+
+        SessionState.SetBool("MapCreator_Initialized", true);
+
+
+        Debug.Log("[Map Creator] Initialized");
+    }
 
     /// <summary>
     /// Returns the full folder path of a package given its name, e.g. "com.myplugin"

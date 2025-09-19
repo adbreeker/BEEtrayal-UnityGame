@@ -1,8 +1,11 @@
+using System.IO;
 using System.Linq;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 
+#if UNITY_EDITOR
 public class MapCreatorManager : MonoBehaviour
 {
     public static MapCreatorManager Instance;
@@ -21,6 +24,7 @@ public class MapCreatorManager : MonoBehaviour
 
     void Awake()
     {
+        EditorSceneManager.playModeStartScene = null;
         if (Instance != null && Instance != this)
         {
             Destroy(this.gameObject);
@@ -93,8 +97,29 @@ public class MapCreatorManager : MonoBehaviour
             return;
         }
 
-        MapCreatorUtilis.SaveAsPng(tex, absolutePath);
+        string targetPath = absolutePath += ".png";
+        var data = tex.EncodeToPNG();
+        Directory.CreateDirectory(Path.GetDirectoryName(targetPath));
+        File.WriteAllBytes(targetPath, data);
+    }
 
-        Debug.Log($"Map exported to {absolutePath} ({tex.width}x{tex.height})");
+    public void ExportMapPrefab(string absolutePath)
+    {
+        if (_mapRoot == null)
+        {
+            Debug.LogWarning("ExportMapPrefab: Map root is not set.");
+            return;
+        }
+
+        var targetPath = absolutePath += ".tdmap.prefab";
+
+        // If _mapRoot is a prefab instance, unpack it completely IN-PLACE so there are no prefab links.
+        if (PrefabUtility.IsPartOfPrefabInstance(_mapRoot.gameObject))
+        {
+            PrefabUtility.UnpackPrefabInstance(_mapRoot.gameObject, PrefabUnpackMode.Completely, InteractionMode.AutomatedAction);
+        }
+
+        PrefabUtility.SaveAsPrefabAsset(_mapRoot.gameObject, targetPath);
     }
 }
+#endif

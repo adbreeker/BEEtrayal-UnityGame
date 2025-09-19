@@ -1,11 +1,26 @@
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
+#if UNITY_EDITOR
 public class MapCreatorUtilis : MonoBehaviour
 {
+    public static void LaunchTemporalScene(string scenePath)
+    {
+        var sceneAsset = AssetDatabase.LoadAssetAtPath<SceneAsset>(scenePath);
+
+        if (sceneAsset == null)
+        {
+            EditorUtility.DisplayDialog("Map Creator", $"Cannot find scene at:\n{scenePath}", "OK");
+            return;
+        }
+
+        EditorSceneManager.playModeStartScene = sceneAsset;
+        EditorApplication.isPlaying = true;
+    }
+
     public static Sprite[] GetSpritesFromTextureAsset(Object textureAsset)
     {
         if (textureAsset == null) return new Sprite[0];
@@ -124,12 +139,5 @@ public class MapCreatorUtilis : MonoBehaviour
 
         return tex;
     }
-
-    public static void SaveAsPng(Texture2D tex, string absolutePath)
-    {
-        if (tex == null || string.IsNullOrEmpty(absolutePath)) return;
-        var data = tex.EncodeToPNG();
-        Directory.CreateDirectory(Path.GetDirectoryName(absolutePath));
-        File.WriteAllBytes(absolutePath, data);
-    }
 }
+#endif
