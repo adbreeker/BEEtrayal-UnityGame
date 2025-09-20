@@ -42,6 +42,14 @@ namespace adbreeker.TDMapCreator
                 var data = mapTexture.EncodeToPNG();
                 Directory.CreateDirectory(Path.GetDirectoryName(texturePath));
                 File.WriteAllBytes(texturePath, data);
+
+                AssetDatabase.Refresh();
+                TextureImporter importer = AssetImporter.GetAtPath(texturePath) as TextureImporter;
+                if (importer != null)
+                {
+                    importer.spriteImportMode = SpriteImportMode.Single;
+                    importer.SaveAndReimport();
+                }
             }
             catch (Exception e)
             {
