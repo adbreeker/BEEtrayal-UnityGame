@@ -76,12 +76,12 @@ public class MapCreatorManager : MonoBehaviour
         _panelNewMapSettup.SetActive(false);
     }
 
-    public void ExportMapImage(string absolutePath)
+    public Texture2D ExportMapImage(string absolutePath)
     {
         if (_mapRoot == null || _background == null || _background.sprite == null)
         {
             Debug.LogWarning("ExportMapImage: Map root or background sprite is not set.");
-            return;
+            return null;
         }
 
         var tex = MapCreatorUtilis.CaptureMapAlignedToBackground(
@@ -94,13 +94,15 @@ public class MapCreatorManager : MonoBehaviour
         if (tex == null)
         {
             Debug.LogWarning("ExportMapImage: capture failed.");
-            return;
+            return null;
         }
 
-        string targetPath = absolutePath += ".png";
+        string targetPath = absolutePath + ".png";
         var data = tex.EncodeToPNG();
         Directory.CreateDirectory(Path.GetDirectoryName(targetPath));
         File.WriteAllBytes(targetPath, data);
+
+        return tex;
     }
 
     public void ExportMapPrefab(string absolutePath)
@@ -111,7 +113,7 @@ public class MapCreatorManager : MonoBehaviour
             return;
         }
 
-        var targetPath = absolutePath += ".tdmap.prefab";
+        var targetPath = absolutePath + ".tdmap.prefab";
 
         // If _mapRoot is a prefab instance, unpack it completely IN-PLACE so there are no prefab links.
         if (PrefabUtility.IsPartOfPrefabInstance(_mapRoot.gameObject))

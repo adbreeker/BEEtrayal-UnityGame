@@ -68,8 +68,13 @@ public class MapCreator_EditorWindow : EditorWindow
                 if (!string.IsNullOrWhiteSpace(savePath)) 
                 { 
                     Directory.CreateDirectory(savePath);
-                    MapCreatorManager.Instance?.ExportMapImage(Path.Combine(savePath, "MapImage"));
+                    var mapImage = MapCreatorManager.Instance?.ExportMapImage(Path.Combine(savePath, "MapImage"));
                     MapCreatorManager.Instance?.ExportMapPrefab(Path.Combine(savePath, "MapPrefab"));
+
+                    var saveSO = ScriptableObject.CreateInstance<TDMapSaveSO>();
+                    saveSO.Init(null, mapImage);
+                    saveSO.SaveAsAsset(Path.Combine(savePath, "MapSave.tdmap"));
+
                     AssetDatabase.Refresh();
                     Debug.Log($"Map saved to: {savePath}");
                 }
