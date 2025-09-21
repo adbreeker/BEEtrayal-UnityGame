@@ -2,6 +2,7 @@ using System.IO;
 using UnityEngine;
 using System;
 using System.Linq;
+using System.Collections.Generic;
 
 
 #if UNITY_EDITOR
@@ -36,6 +37,8 @@ namespace adbreeker.TDMapCreator
             string prefabPath = Path.Combine(relativePath, "MapPrefab.prefab");
             string texturePath = Path.Combine(relativePath, "MapImage.png");
 
+            List<string> errors = new List<string>();
+
             // Save Map Image as PNG
             try
             {
@@ -53,7 +56,9 @@ namespace adbreeker.TDMapCreator
             }
             catch (Exception e)
             {
-                Debug.LogError("[TDMapCreator] Error saving map image: " + e);
+                string message = "[TDMapCreator] Error saving map image: " + e;
+                errors.Add(message);
+                Debug.LogError(message);
             }
 
             //Save Map Object as Prefab
@@ -69,7 +74,9 @@ namespace adbreeker.TDMapCreator
             }
             catch (Exception e)
             {
-                Debug.LogError("[TDMapCreator] Error saving map prefab: " + e);
+                string message = "[TDMapCreator] Error saving map prefab: " + e;
+                errors.Add(message);
+                Debug.LogError(message);
             }
 
 
@@ -85,8 +92,23 @@ namespace adbreeker.TDMapCreator
             }
             catch (Exception e)
             {
-                Debug.LogError("[TDMapCreator] Error saving map save file: " + e);
-                return;
+                string message = "[TDMapCreator] Error creating map save asset: " + e;
+                errors.Add(message);
+                Debug.LogError(message);
+            }
+
+            AssetDatabase.Refresh();
+            if (errors.Count == 0)
+            {
+                EditorUtility.DisplayDialog("TDMapCreator", $"Map saved successfully to {absolutePath}", "OK");
+            }
+            else
+            {
+                string errorsList = string.Join("\n", errors.Select(err => "- " + err));
+                EditorUtility.DisplayDialog(
+                    "TDMapCreator", 
+                    $"Errors listed below appeared during saving:\n{errorsList}\nPart or whole save might be corupted on {absolutePath}", 
+                    "OK");
             }
         }
 #endif

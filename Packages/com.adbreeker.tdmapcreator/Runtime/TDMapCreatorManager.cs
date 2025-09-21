@@ -50,7 +50,7 @@ namespace adbreeker.TDMapCreator
             if (!string.IsNullOrWhiteSpace(_inputResHeight.text) && int.TryParse(_inputResHeight.text, out var h) && h > 0)
                 _currentResHeight = h;
 
-            Debug.Log($"Starting new map with resolution {_currentResWidth}x{_currentResHeight}");
+            Debug.Log($"[TDMapCreator] Starting new map with resolution {_currentResWidth}x{_currentResHeight}");
 
             // Assign background sprite
             var sprite = TDMapCreatorUtilis.GetSpritesFromTextureAsset(_backgroundPreview.texture).FirstOrDefault();
@@ -69,12 +69,10 @@ namespace adbreeker.TDMapCreator
                     float scaleY = _currentResHeight / spritePxHeight;
                     _background.transform.localScale = new Vector3(scaleX, scaleY, 1f);
                 }
-
-                Debug.Log($"Background sprite size: {spritePxWidth}x{spritePxHeight} px; applied scale to fit {_currentResWidth}x{_currentResHeight}");
             }
             else
             {
-                Debug.LogWarning("No sprite found for background preview texture.");
+                Debug.LogWarning("[TDMapCreator] No sprite found for background preview texture.");
             }
 
             _panelNewMapSettup.SetActive(false);

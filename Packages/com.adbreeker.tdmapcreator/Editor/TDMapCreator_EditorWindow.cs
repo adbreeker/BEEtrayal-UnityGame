@@ -18,10 +18,10 @@ namespace adbreeker.TDMapCreator
         //editor prefs keys
         const string _prefDefaultSavePath = TDMapCreator_Setup.PACKAGE_NAME + ".DEFAULT_SAVE_PATH";
 
-        [MenuItem("Tools/Map Creator/Map Creator Window")]
+        [MenuItem("Tools/TDMapCreator/Map Creator Window")]
         public static void ShowWindow()
         {
-            GetWindow<TDMapCreator_EditorWindow>("Map Creator");
+            GetWindow<TDMapCreator_EditorWindow>("TDMapCreator");
         }
 
         private void OnEnable()
@@ -36,7 +36,7 @@ namespace adbreeker.TDMapCreator
 
         private void OnGUI()
         {
-            GUILayout.Label("Map Creator", new GUIStyle("BoldLabel") { fontSize = 24, padding = new RectOffset(0, 0, 10, 10), alignment = TextAnchor.MiddleCenter });
+            GUILayout.Label("TDMapCreator", new GUIStyle("BoldLabel") { fontSize = 24, padding = new RectOffset(0, 0, 10, 10), alignment = TextAnchor.MiddleCenter });
             GUILayout.Space(10f);
 
             CreateOrLoadMapSection();
@@ -69,7 +69,16 @@ namespace adbreeker.TDMapCreator
             {
                 if (GUILayout.Button("SAVE MAP", new GUIStyle(GUI.skin.button) { fontSize = 16 }, GUILayout.Height(24f)))
                 {
-                    string savePath = EditorUtility.SaveFilePanel("Save Map Asset", _defaultSavePath, "Map" + System.DateTime.Now.ToString("yyyyMMdd_HHmmss"), "");
+                    string savePath;
+                    if (Directory.Exists(_defaultSavePath))
+                    {
+                        savePath = EditorUtility.SaveFilePanel("Save Map Asset", _defaultSavePath, "Map" + System.DateTime.Now.ToString("yyyyMMdd_HHmmss"), "");
+                    }
+                    else
+                    {
+                        savePath = EditorUtility.SaveFilePanel("Save Map Asset (default save directory could not be found)", Application.dataPath, "Map" + System.DateTime.Now.ToString("yyyyMMdd_HHmmss"), "");
+                    }
+
                     if (!string.IsNullOrWhiteSpace(savePath))
                     {
                         Directory.CreateDirectory(savePath);
@@ -99,17 +108,21 @@ namespace adbreeker.TDMapCreator
             if (GUILayout.Button("Browse...", GUILayout.Width(90)))
             {
                 string startDir = Directory.Exists(_defaultSavePath) ? _defaultSavePath : Application.dataPath;
-                string selected = EditorUtility.SaveFolderPanel("Select Default Save Folder", startDir, "");
-                if (!string.IsNullOrEmpty(selected))
+                string selectedPath = EditorUtility.SaveFolderPanel("Select Default Save Folder", startDir, "");
+                if (TDMapCreatorUtilis.IsPathPartOfAssets(selectedPath))
                 {
-                    _defaultSavePath = selected;
+                    _defaultSavePath = selectedPath;
                     EditorPrefs.SetString(_prefDefaultSavePath, _defaultSavePath);
+                }
+                else
+                {
+                    EditorUtility.DisplayDialog("TD Map Creator", "Please select a folder inside the Assets directory of this project.", "OK");
                 }
             }
             if (GUILayout.Button("Open", GUILayout.Width(60)))
             {
-                if (Directory.Exists(_defaultSavePath))
-                    EditorUtility.RevealInFinder(_defaultSavePath + "/");
+                if (Directory.Exists(_defaultSavePath)) { EditorUtility.RevealInFinder(_defaultSavePath + "/"); }
+                else { EditorUtility.DisplayDialog("TD Map Creator", $"Directory {_defaultSavePath} no longer exists in this project.", "OK"); }
             }
             EditorGUILayout.EndHorizontal();
 

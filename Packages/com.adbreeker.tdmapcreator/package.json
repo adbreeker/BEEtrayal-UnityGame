@@ -1,9 +1,9 @@
 {
   "name": "com.adbreeker.tdmapcreator",
-  "displayName": "TD Map Creator",
+  "displayName": "TDMapCreator",
   "version": "0.1.0",
   "unity": "6000.0",
-  "description": "A test plugin",
+  "description": "Local test version of TDMapCreator for use in BEEtrayal project.",
   "author": {
     "name": "adbreeker",
     "email": "adbreeker@gmail.com"

@@ -10,13 +10,25 @@ namespace adbreeker.TDMapCreator
 {
     public class TDMapCreatorUtilis : MonoBehaviour
     {
+
+        public static bool IsPathPartOfAssets(string path)
+        {
+            if (string.IsNullOrEmpty(path)) { return false; }
+
+            string normalizedPath = path.Replace("\\", "/");
+            if(normalizedPath.StartsWith("Assets/")) { return true; }
+            if(normalizedPath.StartsWith(Application.dataPath.Replace("\\", "/") + "/")) { return true; }
+
+            return false;
+        }
+
         public static void LaunchTemporalScene(string scenePath)
         {
             var sceneAsset = AssetDatabase.LoadAssetAtPath<SceneAsset>(scenePath);
 
             if (sceneAsset == null)
             {
-                EditorUtility.DisplayDialog("Map Creator", $"Cannot find scene at:\n{scenePath}", "OK");
+                EditorUtility.DisplayDialog("TDMapCreator", $"Cannot find scene at:\n{scenePath}", "OK");
                 return;
             }
 

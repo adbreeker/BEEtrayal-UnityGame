@@ -44,7 +44,7 @@ namespace adbreeker.TDMapCreator
                 return package.resolvedPath; // absolute path on disk
             }
 
-            Debug.LogError($"Package \"TD Map Creator\" not found");
+            Debug.LogError($"Package \"TDMapCreator\" not found");
             return null;
         }
 
