@@ -88,7 +88,7 @@ namespace adbreeker.TDMapCreator
                         TDMapSaveSO.SaveTDMap(savePath, mapObject, mapImage);
 
                         AssetDatabase.Refresh();
-                        Debug.Log($"Map saved to: {savePath}");
+                        TDMapCreatorUtilis.PrintDebug(LogType.Log, $"Map saved to: {savePath}");
                     }
                 }
             }

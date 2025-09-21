@@ -21,7 +21,7 @@ namespace adbreeker.TDMapCreator
             SessionState.SetBool("TDMapCreator_Initialized", true);
 
 
-            Debug.Log("[TDMapCreator] Initialized");
+            TDMapCreatorUtilis.PrintDebug(LogType.Log, "Initialized");
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace adbreeker.TDMapCreator
 
             if (listRequest.Status == StatusCode.Failure)
             {
-                Debug.LogError("Failed to list packages: " + listRequest.Error.message);
+                TDMapCreatorUtilis.PrintDebug(LogType.Error, "Failed to list packages: " + listRequest.Error.message);
                 return null;
             }
 
@@ -44,7 +44,7 @@ namespace adbreeker.TDMapCreator
                 return package.resolvedPath; // absolute path on disk
             }
 
-            Debug.LogError($"Package \"TDMapCreator\" not found");
+            TDMapCreatorUtilis.PrintDebug(LogType.Error, "Package \"TDMapCreator\" not found");
             return null;
         }
 

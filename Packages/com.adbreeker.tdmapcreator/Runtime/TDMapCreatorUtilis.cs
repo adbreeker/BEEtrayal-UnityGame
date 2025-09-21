@@ -11,6 +11,30 @@ namespace adbreeker.TDMapCreator
     public class TDMapCreatorUtilis : MonoBehaviour
     {
 
+        public static void PrintDebug(LogType type, string message)
+        {
+            string prefix = "[TDMapCreator] ";
+
+            switch (type)
+            {
+                case LogType.Log:
+                    Debug.Log(prefix + message);
+                    break;
+                case LogType.Warning:
+                    Debug.LogWarning(prefix + message);
+                    break;
+                case LogType.Error:
+                    Debug.LogError(prefix + message);
+                    break;
+                case LogType.Assert:
+                    Debug.LogAssertion(prefix + message);
+                    break;
+                case LogType.Exception:
+                    Debug.LogError(prefix + "Exception: " + message);
+                    break;
+            }
+        }
+
         public static bool IsPathPartOfAssets(string path)
         {
             if (string.IsNullOrEmpty(path)) { return false; }

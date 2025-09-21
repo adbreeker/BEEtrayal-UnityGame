@@ -50,7 +50,7 @@ namespace adbreeker.TDMapCreator
             if (!string.IsNullOrWhiteSpace(_inputResHeight.text) && int.TryParse(_inputResHeight.text, out var h) && h > 0)
                 _currentResHeight = h;
 
-            Debug.Log($"[TDMapCreator] Starting new map with resolution {_currentResWidth}x{_currentResHeight}");
+            TDMapCreatorUtilis.PrintDebug(LogType.Log, $"Starting new map with resolution {_currentResWidth}x{_currentResHeight}");
 
             // Assign background sprite
             var sprite = TDMapCreatorUtilis.GetSpritesFromTextureAsset(_backgroundPreview.texture).FirstOrDefault();
@@ -72,7 +72,7 @@ namespace adbreeker.TDMapCreator
             }
             else
             {
-                Debug.LogWarning("[TDMapCreator] No sprite found for background preview texture.");
+                TDMapCreatorUtilis.PrintDebug(LogType.Warning, "No sprite found for background preview texture.");
             }
 
             _panelNewMapSettup.SetActive(false);
@@ -82,7 +82,7 @@ namespace adbreeker.TDMapCreator
         {
             if (_mapRoot == null || _background == null || _background.sprite == null)
             {
-                Debug.LogWarning("ExportMapImage: Map root or background sprite is not set.");
+                TDMapCreatorUtilis.PrintDebug(LogType.Warning, "ExportMapImage: Map root or background sprite is not set.");
                 return null;
             }
 
@@ -95,7 +95,7 @@ namespace adbreeker.TDMapCreator
 
             if (tex == null)
             {
-                Debug.LogWarning("ExportMapImage: capture failed.");
+                TDMapCreatorUtilis.PrintDebug(LogType.Warning, "ExportMapImage: capture failed.");
                 return null;
             }
 
@@ -106,7 +106,7 @@ namespace adbreeker.TDMapCreator
         {
             if (_mapRoot == null)
             {
-                Debug.LogWarning("ExportMapPrefab: Map root is not set.");
+                TDMapCreatorUtilis.PrintDebug(LogType.Warning, "ExportMapPrefab: Map root is not set.");
                 return null;
             }
             else

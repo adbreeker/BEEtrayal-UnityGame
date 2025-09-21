@@ -56,9 +56,9 @@ namespace adbreeker.TDMapCreator
             }
             catch (Exception e)
             {
-                string message = "[TDMapCreator] Error saving map image: " + e;
+                string message = "Error saving map image: " + e;
                 errors.Add(message);
-                Debug.LogError(message);
+                TDMapCreatorUtilis.PrintDebug(LogType.Error, message);
             }
 
             //Save Map Object as Prefab
@@ -74,9 +74,9 @@ namespace adbreeker.TDMapCreator
             }
             catch (Exception e)
             {
-                string message = "[TDMapCreator] Error saving map prefab: " + e;
+                string message = "Error saving map prefab: " + e;
                 errors.Add(message);
-                Debug.LogError(message);
+                TDMapCreatorUtilis.PrintDebug(LogType.Error, message);
             }
 
 
@@ -92,12 +92,11 @@ namespace adbreeker.TDMapCreator
             }
             catch (Exception e)
             {
-                string message = "[TDMapCreator] Error creating map save asset: " + e;
+                string message = "Error creating map save asset: " + e;
                 errors.Add(message);
-                Debug.LogError(message);
+                TDMapCreatorUtilis.PrintDebug(LogType.Error, message);
             }
 
-            AssetDatabase.Refresh();
             if (errors.Count == 0)
             {
                 EditorUtility.DisplayDialog("TDMapCreator", $"Map saved successfully to {absolutePath}", "OK");
