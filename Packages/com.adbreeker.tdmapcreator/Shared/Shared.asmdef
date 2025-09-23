@@ -1,0 +1,7 @@
+{
+    "name": "com.adbreeker.tdmapcreator.shared",
+    "references": [], 
+    "includePlatforms": [],
+    "allowUnsafeCode": false,
+    "autoReferenced": true
+}

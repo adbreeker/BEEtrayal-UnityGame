@@ -12,7 +12,7 @@ namespace adbreeker.TDMapCreator
 {
     public class TDMapCreatorManager : MonoBehaviour
     {
-        public static TDMapCreatorManager Instance;
+        public static TDMapCreatorManager Instance { get; private set; }
 
         [Header("Map Elements:")]
         [SerializeField] Transform _mapRoot;
@@ -35,6 +35,11 @@ namespace adbreeker.TDMapCreator
                 return;
             }
             Instance = this;
+
+            if(SessionState.GetString(PackageVariables.SESSIONSTATE_MAP_LOAD_PATH, "") != "")
+            {
+                PackageUtilis.PrintDebug(LogType.Log, "Loading map from ScriptableObject.");
+            }
         }
 
         public void Button_ChangeBackgroundPreview()
@@ -50,10 +55,10 @@ namespace adbreeker.TDMapCreator
             if (!string.IsNullOrWhiteSpace(_inputResHeight.text) && int.TryParse(_inputResHeight.text, out var h) && h > 0)
                 _currentResHeight = h;
 
-            TDMapCreatorUtilis.PrintDebug(LogType.Log, $"Starting new map with resolution {_currentResWidth}x{_currentResHeight}");
+            PackageUtilis.PrintDebug(LogType.Log, $"Starting new map with resolution {_currentResWidth}x{_currentResHeight}");
 
             // Assign background sprite
-            var sprite = TDMapCreatorUtilis.GetSpritesFromTextureAsset(_backgroundPreview.texture).FirstOrDefault();
+            var sprite = PackageUtilis.GetSpritesFromTextureAsset(_backgroundPreview.texture).FirstOrDefault();
             _background.sprite = sprite;
 
             // Scale sprite to match desired resolution (in pixels)
@@ -72,7 +77,7 @@ namespace adbreeker.TDMapCreator
             }
             else
             {
-                TDMapCreatorUtilis.PrintDebug(LogType.Warning, "No sprite found for background preview texture.");
+                PackageUtilis.PrintDebug(LogType.Warning, "No sprite found for background preview texture.");
             }
 
             _panelNewMapSettup.SetActive(false);
@@ -82,11 +87,11 @@ namespace adbreeker.TDMapCreator
         {
             if (_mapRoot == null || _background == null || _background.sprite == null)
             {
-                TDMapCreatorUtilis.PrintDebug(LogType.Warning, "ExportMapImage: Map root or background sprite is not set.");
+                PackageUtilis.PrintDebug(LogType.Warning, "ExportMapImage: Map root or background sprite is not set.");
                 return null;
             }
 
-            Texture2D tex = TDMapCreatorUtilis.CaptureMapAlignedToBackground(
+            Texture2D tex = PackageUtilis.CaptureMapAlignedToBackground(
                 _mapRoot,
                 _background,
                 _currentResWidth,
@@ -95,7 +100,7 @@ namespace adbreeker.TDMapCreator
 
             if (tex == null)
             {
-                TDMapCreatorUtilis.PrintDebug(LogType.Warning, "ExportMapImage: capture failed.");
+                PackageUtilis.PrintDebug(LogType.Warning, "ExportMapImage: capture failed.");
                 return null;
             }
 
@@ -106,7 +111,7 @@ namespace adbreeker.TDMapCreator
         {
             if (_mapRoot == null)
             {
-                TDMapCreatorUtilis.PrintDebug(LogType.Warning, "ExportMapPrefab: Map root is not set.");
+                PackageUtilis.PrintDebug(LogType.Warning, "ExportMapPrefab: Map root is not set.");
                 return null;
             }
             else

@@ -26,13 +26,13 @@ namespace adbreeker.TDMapCreator
         {
             this.MapPrefab = mapPrefab;
             this.MapTexture = mapTexture;
-            this.MapSprite = TDMapCreatorUtilis.GetSpritesFromTextureAsset(mapTexture).FirstOrDefault();
+            this.MapSprite = PackageUtilis.GetSpritesFromTextureAsset(mapTexture).FirstOrDefault();
             return this;
         }
 
         public static void SaveTDMap(string absolutePath, GameObject mapPrefab, Texture2D mapTexture)
         {
-            string relativePath = "Assets" + absolutePath.Replace(Application.dataPath, "");
+            string relativePath = PackageUtilis.AbsoluteToRelativeAssetsPath(absolutePath);
             string soPath =  Path.Combine(relativePath, "TDMapSave.asset");
             string prefabPath = Path.Combine(relativePath, "MapPrefab.prefab");
             string texturePath = Path.Combine(relativePath, "MapImage.png");
@@ -58,7 +58,7 @@ namespace adbreeker.TDMapCreator
             {
                 string message = "Error saving map image: " + e;
                 errors.Add(message);
-                TDMapCreatorUtilis.PrintDebug(LogType.Error, message);
+                PackageUtilis.PrintDebug(LogType.Error, message);
             }
 
             //Save Map Object as Prefab
@@ -76,7 +76,7 @@ namespace adbreeker.TDMapCreator
             {
                 string message = "Error saving map prefab: " + e;
                 errors.Add(message);
-                TDMapCreatorUtilis.PrintDebug(LogType.Error, message);
+                PackageUtilis.PrintDebug(LogType.Error, message);
             }
 
 
@@ -94,7 +94,7 @@ namespace adbreeker.TDMapCreator
             {
                 string message = "Error creating map save asset: " + e;
                 errors.Add(message);
-                TDMapCreatorUtilis.PrintDebug(LogType.Error, message);
+                PackageUtilis.PrintDebug(LogType.Error, message);
             }
 
             if (errors.Count == 0)

@@ -1,6 +1,6 @@
 {
     "name": "com.adbreeker.tdmapcreator.runtime",
-    "references": [],
+    "references": ["com.adbreeker.tdmapcreator.shared"],
     "includePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,

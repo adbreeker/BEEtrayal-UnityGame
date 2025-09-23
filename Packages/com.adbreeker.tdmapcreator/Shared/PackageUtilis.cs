@@ -1,4 +1,3 @@
-#if UNITY_EDITOR
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
@@ -8,7 +7,7 @@ using UnityEngine;
 
 namespace adbreeker.TDMapCreator
 {
-    public class TDMapCreatorUtilis : MonoBehaviour
+    public static class PackageUtilis
     {
 
         public static void PrintDebug(LogType type, string message)
@@ -44,6 +43,17 @@ namespace adbreeker.TDMapCreator
             if(normalizedPath.StartsWith(Application.dataPath.Replace("\\", "/") + "/")) { return true; }
 
             return false;
+        }
+
+        public static string AbsoluteToRelativeAssetsPath(string absolutePath)
+        {
+            if (!IsPathPartOfAssets(absolutePath)) 
+            { 
+                PrintDebug(LogType.Error, $"Path is not part of Assets: {absolutePath}");
+                return null; 
+            }
+            string relativePath = "Assets" + absolutePath.Replace(Application.dataPath, "");
+            return relativePath;
         }
 
         public static void LaunchTemporalScene(string scenePath)
@@ -180,4 +190,3 @@ namespace adbreeker.TDMapCreator
         }
     }
 }
-#endif
