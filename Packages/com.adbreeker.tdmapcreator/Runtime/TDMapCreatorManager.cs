@@ -36,9 +36,11 @@ namespace adbreeker.TDMapCreator
             }
             Instance = this;
 
-            if(SessionState.GetString(PackageVariables.SESSIONSTATE_MAP_LOAD_PATH, "") != "")
+            string loadPath = SessionState.GetString(PackageVariables.SESSIONSTATE_MAP_LOAD_PATH, "");
+            if (loadPath != "")
             {
-                PackageUtilis.PrintDebug(LogType.Log, "Loading map from ScriptableObject.");
+                SessionState.SetString(PackageVariables.SESSIONSTATE_MAP_LOAD_PATH, "");
+                LoadMap(loadPath);
             }
         }
 
@@ -79,6 +81,18 @@ namespace adbreeker.TDMapCreator
             {
                 PackageUtilis.PrintDebug(LogType.Warning, "No sprite found for background preview texture.");
             }
+
+            _panelNewMapSettup.SetActive(false);
+        }
+
+        void LoadMap(string loadPath)
+        {
+            TDMapSaveSO saveSO = AssetDatabase.LoadAssetAtPath<TDMapSaveSO>(loadPath);
+
+            GameObject loadedMapPrefab = Instantiate(saveSO.MapPrefab);
+            loadedMapPrefab.name = _mapRoot.name;
+            Destroy(_mapRoot.gameObject);
+            _mapRoot = loadedMapPrefab.transform;
 
             _panelNewMapSettup.SetActive(false);
         }
