@@ -80,11 +80,12 @@ namespace adbreeker.TDMapCreator
 
             currentLineRenderer.SetPosition(0, mousePos);
             currentLineRenderer.SetPosition(1, mousePos);
+            lastPos = mousePos;
 
-            AddAPoint(mousePos);
+            AddPoint(mousePos, false);
         }
 
-        void AddAPoint(Vector2 pointPos)
+        void AddPoint(Vector2 pointPos, bool addToRenderer = true)
         {
             if (currentLineRenderer != null)
             {
@@ -92,9 +93,11 @@ namespace adbreeker.TDMapCreator
                 point.transform.position = pointPos;
                 point.transform.parent = currentLineRenderer.transform;
 
-                currentLineRenderer.positionCount++;
-                int positionIndex = currentLineRenderer.positionCount - 1;
-                currentLineRenderer.SetPosition(positionIndex, pointPos);
+                if (addToRenderer)
+                {
+                    currentLineRenderer.positionCount++;
+                    currentLineRenderer.SetPosition(currentLineRenderer.positionCount - 1, pointPos);
+                }
             }
         }
 
@@ -103,7 +106,7 @@ namespace adbreeker.TDMapCreator
             Vector2 mousePos = m_camera.ScreenToWorldPoint(Input.mousePosition);
             if (lastPos != mousePos)
             {
-                AddAPoint(mousePos);
+                AddPoint(mousePos);
                 lastPos = mousePos;
             }
         }
