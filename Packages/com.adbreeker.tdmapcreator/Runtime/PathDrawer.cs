@@ -20,6 +20,7 @@ namespace adbreeker.TDMapCreator
 
         LineRenderer currentLineRenderer;
         Vector2 lastPos;
+        EventSystem _eventSystem;
 
         [Header("Current status:")]
         public int pathsCount = 0;
@@ -29,6 +30,7 @@ namespace adbreeker.TDMapCreator
 
         void Start()
         {
+            _eventSystem = FindFirstObjectByType<EventSystem>();
             LineRenderer brushLineRenderer = brushPrefab.GetComponent<LineRenderer>();
             brushLineRenderer.startWidth = brushWidth;
             brushLineRenderer.endWidth = brushWidth;
@@ -39,11 +41,19 @@ namespace adbreeker.TDMapCreator
             Drawing();
         }
 
+        private bool IsPointerOverUIObject()
+        {
+            PointerEventData eventData = new PointerEventData(_eventSystem);
+            eventData.position = Input.mousePosition;
+            List<RaycastResult> results = new List<RaycastResult>();
+            _eventSystem.RaycastAll(eventData, results);
+            return results.Count > 0;
+        }
+
         void Drawing()
         {
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+            if (Input.GetKeyDown(KeyCode.Mouse0) && !IsPointerOverUIObject())
             {
-
                 CreatePathBrush();
             }
             else if (Input.GetKey(KeyCode.Mouse0) && currentLineRenderer != null)

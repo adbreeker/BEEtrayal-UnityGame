@@ -2396,8 +2396,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e09974dd68be9494fa1b95eb4ee4167d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _pathDrawer: {fileID: 2070277099}
   _mapRoot: {fileID: 2087341208}
   _background: {fileID: 1808384480}
+  _decorationsRoot: {fileID: 130841891}
+  _pathsRoot: {fileID: 1217520453}
   _panelNewMapSettup: {fileID: 364532222}
   _inputResWidth: {fileID: 2038807227}
   _inputResHeight: {fileID: 637156898}
@@ -2411,6 +2414,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2087341208}
+  - component: {fileID: 2087341209}
   m_Layer: 0
   m_Name: Map
   m_TagString: Untagged
@@ -2436,6 +2440,21 @@ Transform:
   - {fileID: 1217520453}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2087341209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2087341206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4eea344f702b97247899cf06bcd9aee3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <BackgroundRenderer>k__BackingField: {fileID: 1808384480}
+  <DecorationsHolder>k__BackingField: {fileID: 130841891}
+  <PathsHolder>k__BackingField: {fileID: 1217520453}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

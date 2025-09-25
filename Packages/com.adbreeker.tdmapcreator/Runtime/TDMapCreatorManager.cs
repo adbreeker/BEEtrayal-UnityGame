@@ -14,9 +14,13 @@ namespace adbreeker.TDMapCreator
     {
         public static TDMapCreatorManager Instance { get; private set; }
 
+        [SerializeField] PathDrawer _pathDrawer;
+
         [Header("Map Elements:")]
         [SerializeField] Transform _mapRoot;
         [SerializeField] SpriteRenderer _background;
+        [SerializeField] Transform _decorationsRoot;
+        [SerializeField] Transform _pathsRoot;
 
         [Header("New Map Settup UI:")]
         [SerializeField] GameObject _panelNewMapSettup;
@@ -89,10 +93,18 @@ namespace adbreeker.TDMapCreator
         {
             TDMapSaveSO saveSO = AssetDatabase.LoadAssetAtPath<TDMapSaveSO>(loadPath);
 
-            GameObject loadedMapPrefab = Instantiate(saveSO.MapPrefab);
-            loadedMapPrefab.name = _mapRoot.name;
+            TDMap loadedMapPrefab = Instantiate(saveSO.MapPrefab).GetComponent<TDMap>();
+            loadedMapPrefab.gameObject.name = _mapRoot.name;
             Destroy(_mapRoot.gameObject);
+
+            //setting references - TDMapCreatorManager
             _mapRoot = loadedMapPrefab.transform;
+            _background = loadedMapPrefab.BackgroundRenderer;
+            _decorationsRoot = loadedMapPrefab.DecorationsHolder;
+            _pathsRoot = loadedMapPrefab.PathsHolder;
+
+            //setting references - PathDrawer
+            _pathDrawer.pathsHolder = _pathsRoot;
 
             _panelNewMapSettup.SetActive(false);
         }
