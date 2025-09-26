@@ -14,7 +14,7 @@ namespace adbreeker.TDMapCreator
     public class TDMapCreator_EditorWindow : EditorWindow
     {
         private string _defaultSavePath;
-
+        private int _debugMask;
 
         [MenuItem("Tools/TDMapCreator/Map Creator Window")]
         public static void ShowWindow()
@@ -118,6 +118,7 @@ namespace adbreeker.TDMapCreator
 
         private void DrawSettingsSection()
         {
+            GUILayout.Label("Paths:", new GUIStyle("BoldLabel") { fontSize = 12 }); // Paths section -------------------------
             // Default Save Folder
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("Default Save Folder:", GUILayout.Width(120));
@@ -147,6 +148,12 @@ namespace adbreeker.TDMapCreator
                 else { EditorUtility.DisplayDialog("TD Map Creator", $"Directory {_defaultSavePath} no longer exists in this project.", "OK"); }
             }
             EditorGUILayout.EndHorizontal();
+
+            GUILayout.Space(10f);
+            GUILayout.Label("Other:", new GUIStyle("BoldLabel") { fontSize = 12 }); // Other section -------------------------
+            // Debugs Mask
+            string[] options = new string[] { "Logs", "Warnings", "Errors", "Asserts", "Exceptions" };
+            _debugMask = EditorGUILayout.MaskField("Debug prints:", _debugMask , options);
         }
 
 
