@@ -1,21 +1,65 @@
 using UnityEditor.PackageManager;
 using UnityEngine;
 using System.Linq;
-using adbreeker.TDMapCreator;
+using UnityEditor;
+using System.Runtime.CompilerServices;
 
 namespace adbreeker.TDMapCreator
 {
     public static class PackageVariables
     {
-        //package constants
-        public const string PACKAGE_NAME = "com.adbreeker.tdmapcreator";
+        public static class EnvKeys
+        {
+            //package constants
+            public const string PACKAGE_NAME = "com.adbreeker.tdmapcreator";
 
-        //editor prefs keys
-        public const string EDITORPREFS_DEFAULT_SAVE_PATH = PACKAGE_NAME + ".DEFAULT_SAVE_PATH";
+            //editor prefs keys
+            public const string EDITORPREFS_DEFAULT_SAVE_PATH = PACKAGE_NAME + ".DEFAULT_SAVE_PATH";
+            public const string EDITORPREFS_DEBUGS_MASK = PACKAGE_NAME + ".DEBUGS_MASK";
 
-        //session state keys
-        public const string SESSIONSTATE_INITIALIZED = PACKAGE_NAME + ".INITIALIZED";
-        public const string SESSIONSTATE_MAP_LOAD_PATH = PACKAGE_NAME + ".MAP_LOAD_PATH";
+            //session state keys
+            public const string SESSIONSTATE_INITIALIZED = PACKAGE_NAME + ".INITIALIZED";
+            public const string SESSIONSTATE_MAP_LOAD_PATH = PACKAGE_NAME + ".MAP_LOAD_PATH";
+        }
+
+        // Default Save Path
+        private static string _defaultSavePath;
+        public static string DefaultSavePath
+        {
+            get 
+            {
+                _defaultSavePath ??= EditorPrefs.GetString(EnvKeys.EDITORPREFS_DEFAULT_SAVE_PATH, Application.dataPath);
+                return _defaultSavePath;
+            }
+
+            set 
+            {
+                if (_defaultSavePath != value)
+                {
+                    _defaultSavePath = value;
+                    EditorPrefs.SetString(EnvKeys.EDITORPREFS_DEFAULT_SAVE_PATH, _defaultSavePath);
+                }
+            }
+        }
+
+        // Debug Prints Mask
+        private static int _debugsMask = -1;
+        public static int DebugsMask
+        {
+            get 
+            {
+                if (_debugsMask == -1) { _debugsMask = EditorPrefs.GetInt(EnvKeys.EDITORPREFS_DEBUGS_MASK, ~0); }
+                return _debugsMask;
+            }
+            set 
+            {
+                if (_debugsMask != value)
+                {
+                    _debugsMask = value;
+                    EditorPrefs.SetInt(EnvKeys.EDITORPREFS_DEBUGS_MASK, _debugsMask);
+                }
+            }
+        }
 
         public static string GetPackageAbsolutePath()
         {
@@ -28,7 +72,7 @@ namespace adbreeker.TDMapCreator
                 return null;
             }
 
-            var package = listRequest.Result.FirstOrDefault(p => p.name == PACKAGE_NAME);
+            var package = listRequest.Result.FirstOrDefault(p => p.name == EnvKeys.PACKAGE_NAME);
             if (package != null)
             {
                 return package.resolvedPath; // absolute path on disk
@@ -40,7 +84,7 @@ namespace adbreeker.TDMapCreator
 
         public static string GetPackageRelativePath()
         {
-            return "Packages/" + PACKAGE_NAME;
+            return "Packages/" + EnvKeys.PACKAGE_NAME;
         }
     }
 }

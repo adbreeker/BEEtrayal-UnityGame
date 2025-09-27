@@ -14,12 +14,12 @@ namespace adbreeker.TDMapCreator
     {
         static TDMapCreator_Setup()
         {
-            if (SessionState.GetBool(PackageVariables.SESSIONSTATE_INITIALIZED, false))
-                return;
+            //Every load initialization
 
-            SessionState.SetBool(PackageVariables.SESSIONSTATE_INITIALIZED, true);
+            if (SessionState.GetBool(PackageVariables.EnvKeys.SESSIONSTATE_INITIALIZED, false)) { return; }
+            SessionState.SetBool(PackageVariables.EnvKeys.SESSIONSTATE_INITIALIZED, true);
 
-
+            //Session initialization
             PackageUtilis.PrintDebug(LogType.Log, "Initialized");
         }
     }

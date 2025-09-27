@@ -13,23 +13,10 @@ namespace adbreeker.TDMapCreator
 {
     public class TDMapCreator_EditorWindow : EditorWindow
     {
-        private string _defaultSavePath;
-        private int _debugMask;
-
         [MenuItem("Tools/TDMapCreator/Map Creator Window")]
         public static void ShowWindow()
         {
             GetWindow<TDMapCreator_EditorWindow>("TDMapCreator");
-        }
-
-        private void OnEnable()
-        {
-            _defaultSavePath = EditorPrefs.GetString(PackageVariables.EDITORPREFS_DEFAULT_SAVE_PATH, Application.dataPath);
-        }
-
-        private void OnDisable()
-        {
-            EditorPrefs.SetString(PackageVariables.EDITORPREFS_DEFAULT_SAVE_PATH, _defaultSavePath);
         }
 
         private void OnGUI()
@@ -56,7 +43,7 @@ namespace adbreeker.TDMapCreator
             }
             if (GUILayout.Button("LOAD MAP", new GUIStyle(GUI.skin.button) { fontSize = 16 }, GUILayout.Height(24f)))
             {
-                string loadPath = EditorUtility.OpenFolderPanel("Select Map Folder", _defaultSavePath, "");
+                string loadPath = EditorUtility.OpenFolderPanel("Select Map Folder", PackageVariables.DefaultSavePath, "");
                 if (PackageUtilis.IsPathPartOfAssets(loadPath))
                 {
                     string relativePath = PackageUtilis.AbsoluteToRelativeAssetsPath(loadPath);
@@ -66,7 +53,7 @@ namespace adbreeker.TDMapCreator
                     {
                         string assetPath = AssetDatabase.GUIDToAssetPath(guids[0]);
 
-                        SessionState.SetString(PackageVariables.SESSIONSTATE_MAP_LOAD_PATH, assetPath);
+                        SessionState.SetString(PackageVariables.EnvKeys.SESSIONSTATE_MAP_LOAD_PATH, assetPath);
 
                         string scenePath = Path.Combine(PackageVariables.GetPackageRelativePath(), "Resources", "Scenes", "_MapCreator.unity");
                         PackageUtilis.LaunchTemporalScene(scenePath);
@@ -124,18 +111,17 @@ namespace adbreeker.TDMapCreator
             EditorGUILayout.LabelField("Default Save Folder:", GUILayout.Width(120));
             using (new EditorGUI.DisabledScope(true))
             {
-                EditorGUILayout.TextField(_defaultSavePath);
+                EditorGUILayout.TextField(PackageVariables.DefaultSavePath);
             }
             EditorGUILayout.EndHorizontal();
             EditorGUILayout.BeginHorizontal();
             if (GUILayout.Button("Browse...", GUILayout.Width(90)))
             {
-                string startDir = Directory.Exists(_defaultSavePath) ? _defaultSavePath : Application.dataPath;
+                string startDir = Application.dataPath;
                 string selectedPath = EditorUtility.SaveFolderPanel("Select Default Save Folder", startDir, "");
                 if (PackageUtilis.IsPathPartOfAssets(selectedPath))
                 {
-                    _defaultSavePath = selectedPath;
-                    EditorPrefs.SetString(PackageVariables.EDITORPREFS_DEFAULT_SAVE_PATH, _defaultSavePath);
+                    PackageVariables.DefaultSavePath = selectedPath;
                 }
                 else
                 {
@@ -144,8 +130,8 @@ namespace adbreeker.TDMapCreator
             }
             if (GUILayout.Button("Open", GUILayout.Width(60)))
             {
-                if (Directory.Exists(_defaultSavePath)) { EditorUtility.RevealInFinder(_defaultSavePath + "/"); }
-                else { EditorUtility.DisplayDialog("TD Map Creator", $"Directory {_defaultSavePath} no longer exists in this project.", "OK"); }
+                if (Directory.Exists(PackageVariables.DefaultSavePath)) { EditorUtility.RevealInFinder(PackageVariables.DefaultSavePath + "/"); }
+                else { EditorUtility.DisplayDialog("TD Map Creator", $"Directory {PackageVariables.DefaultSavePath} no longer exists in this project.", "OK"); }
             }
             EditorGUILayout.EndHorizontal();
 
@@ -153,7 +139,7 @@ namespace adbreeker.TDMapCreator
             GUILayout.Label("Other:", new GUIStyle("BoldLabel") { fontSize = 12 }); // Other section -------------------------
             // Debugs Mask
             string[] options = new string[] { "Logs", "Warnings", "Errors", "Asserts", "Exceptions" };
-            _debugMask = EditorGUILayout.MaskField("Debug prints:", _debugMask , options);
+            PackageVariables.DebugsMask = EditorGUILayout.MaskField("Allowed Debugs:", PackageVariables.DebugsMask , options);
         }
 
 
@@ -161,9 +147,9 @@ namespace adbreeker.TDMapCreator
         private void MapSaveDialogue()
         {
             string savePath;
-            if (Directory.Exists(_defaultSavePath))
+            if (Directory.Exists(PackageVariables.DefaultSavePath))
             {
-                savePath = EditorUtility.SaveFilePanel("Save Map Asset", _defaultSavePath, "Map" + System.DateTime.Now.ToString("yyyyMMdd_HHmmss"), "");
+                savePath = EditorUtility.SaveFilePanel("Save Map Asset", PackageVariables.DefaultSavePath, "Map" + System.DateTime.Now.ToString("yyyyMMdd_HHmmss"), "");
             }
             else
             {

@@ -40,10 +40,10 @@ namespace adbreeker.TDMapCreator
             }
             Instance = this;
 
-            string loadPath = SessionState.GetString(PackageVariables.SESSIONSTATE_MAP_LOAD_PATH, "");
+            string loadPath = SessionState.GetString(PackageVariables.EnvKeys.SESSIONSTATE_MAP_LOAD_PATH, "");
             if (loadPath != "")
             {
-                SessionState.SetString(PackageVariables.SESSIONSTATE_MAP_LOAD_PATH, "");
+                SessionState.SetString(PackageVariables.EnvKeys.SESSIONSTATE_MAP_LOAD_PATH, "");
                 LoadMap(loadPath);
             }
         }
