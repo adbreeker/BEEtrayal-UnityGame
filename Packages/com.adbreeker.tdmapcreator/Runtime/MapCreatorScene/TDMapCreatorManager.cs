@@ -22,13 +22,11 @@ namespace adbreeker.TDMapCreator
         [SerializeField] Transform _decorationsRoot;
         [SerializeField] Transform _pathsRoot;
 
-        [Header("New Map Settup UI:")]
-        [SerializeField] GameObject _panelNewMapSettup;
-        [SerializeField] InputField _inputResWidth;
+        [Header("UI Elements:")]
+        [SerializeField] UI_MapSetupPanel _panelNewMapSetup;
         int _currentResWidth = 1920;
-        [SerializeField] InputField _inputResHeight;
         int _currentResHeight = 1080;
-        [SerializeField] RawImage _backgroundPreview;
+
 
         void Awake()
         {
@@ -48,23 +46,15 @@ namespace adbreeker.TDMapCreator
             }
         }
 
-        public void Button_ChangeBackgroundPreview()
+        public void StartCreating(int resolutionWidth, int resolutionHeight, Texture backgroundImage)
         {
-
-        }
-
-        public void Button_StartCreating()
-        {
-            // Parse resolution
-            if (!string.IsNullOrWhiteSpace(_inputResWidth.text) && int.TryParse(_inputResWidth.text, out var w) && w > 0)
-                _currentResWidth = w;
-            if (!string.IsNullOrWhiteSpace(_inputResHeight.text) && int.TryParse(_inputResHeight.text, out var h) && h > 0)
-                _currentResHeight = h;
+            _currentResWidth = resolutionWidth;
+            _currentResHeight = resolutionHeight;
 
             PackageUtilis.PrintDebug(LogType.Log, $"Starting new map with resolution {_currentResWidth}x{_currentResHeight}");
 
             // Assign background sprite
-            var sprite = PackageUtilis.GetSpritesFromTextureAsset(_backgroundPreview.texture).FirstOrDefault();
+            var sprite = PackageUtilis.GetSpritesFromTextureAsset(backgroundImage).FirstOrDefault();
             _background.sprite = sprite;
 
             // Scale sprite to match desired resolution (in pixels)
@@ -86,7 +76,7 @@ namespace adbreeker.TDMapCreator
                 PackageUtilis.PrintDebug(LogType.Warning, "No sprite found for background preview texture.");
             }
 
-            _panelNewMapSettup.SetActive(false);
+            _panelNewMapSetup.gameObject.SetActive(false);
         }
 
         void LoadMap(string loadPath)
@@ -106,7 +96,7 @@ namespace adbreeker.TDMapCreator
             //setting references - PathDrawer
             _pathDrawer.pathsHolder = _pathsRoot;
 
-            _panelNewMapSettup.SetActive(false);
+            _panelNewMapSetup.gameObject.SetActive(false);
         }
 
         public Texture2D GetMapImage()
