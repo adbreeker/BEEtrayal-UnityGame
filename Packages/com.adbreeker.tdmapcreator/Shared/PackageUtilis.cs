@@ -17,19 +17,19 @@ namespace adbreeker.TDMapCreator
             switch (type)
             {
                 case LogType.Log:
-                    Debug.Log(prefix + message);
+                    if ((PackageVariables.DebugsMask & (1 << 0)) != 0) { Debug.Log(prefix + message); }
                     break;
                 case LogType.Warning:
-                    Debug.LogWarning(prefix + message);
+                    if ((PackageVariables.DebugsMask & (1 << 1)) != 0) { Debug.LogWarning(prefix + message); }
                     break;
                 case LogType.Error:
-                    Debug.LogError(prefix + message);
+                    if ((PackageVariables.DebugsMask & (1 << 2)) != 0) { Debug.LogError(prefix + message); }
                     break;
                 case LogType.Assert:
-                    Debug.LogAssertion(prefix + message);
+                    if ((PackageVariables.DebugsMask & (1 << 3)) != 0) { Debug.LogAssertion(prefix + message); }
                     break;
                 case LogType.Exception:
-                    Debug.LogError(prefix + "Exception: " + message);
+                    if ((PackageVariables.DebugsMask & (1 << 4)) != 0) { Debug.LogError(prefix + "Exception: " + message); }
                     break;
             }
         }
