@@ -1,12 +1,14 @@
+#if UNITY_EDITOR
 using UnityEngine;
 using adbreeker.TDMapCreator;
 
 #ROOTNAMESPACEBEGIN#
 namespace adbreeker.TDMapCreator
 {
-    public class #SCRIPTNAME# : MonoBehavior
+    public class #SCRIPTNAME# : MonoBehaviour
     {
        
     }													
 }
 #ROOTNAMESPACEEND#
+#endif
