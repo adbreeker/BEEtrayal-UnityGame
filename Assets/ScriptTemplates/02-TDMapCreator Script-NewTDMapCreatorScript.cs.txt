@@ -1,0 +1,12 @@
+using UnityEngine;
+using adbreeker.TDMapCreator;
+
+#ROOTNAMESPACEBEGIN#
+namespace adbreeker.TDMapCreator
+{
+    public class #SCRIPTNAME#
+    {
+       
+    }													
+}
+#ROOTNAMESPACEEND#
