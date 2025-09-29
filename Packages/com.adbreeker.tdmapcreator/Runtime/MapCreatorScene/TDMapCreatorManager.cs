@@ -16,6 +16,9 @@ namespace adbreeker.TDMapCreator
 
         [SerializeField] PathDrawer _pathDrawer;
 
+        [Header("Creator tools:")]
+        [SerializeField] Camera _mainCamera;
+
         [Header("Map Elements:")]
         [SerializeField] Transform _mapRoot;
         [SerializeField] SpriteRenderer _background;
@@ -26,6 +29,8 @@ namespace adbreeker.TDMapCreator
         [SerializeField] UI_MapSetupPanel _panelNewMapSetup;
         int _currentResWidth = 1920;
         int _currentResHeight = 1080;
+
+        bool _isInCreationMode = false;
 
 
         void Awake()
@@ -43,6 +48,25 @@ namespace adbreeker.TDMapCreator
             {
                 SessionState.SetString(PackageVariables.EnvKeys.SESSIONSTATE_MAP_LOAD_PATH, "");
                 LoadMap(loadPath);
+            }
+        }
+
+        public void Update()
+        {
+            if(_isInCreationMode)
+            {
+                HandleKeyboardInputs();
+            }
+        }
+
+        public void HandleKeyboardInputs()
+        {
+            // zoom in/out camera - scroll wheel
+            float scroll = Input.GetAxis("Mouse ScrollWheel");
+            if(scroll != 0f)
+            {
+                _mainCamera.orthographicSize -= scroll * _mainCamera.orthographicSize;
+                _mainCamera.orthographicSize = Mathf.Clamp(_mainCamera.orthographicSize, 0.00001f, 100f);
             }
         }
 
@@ -77,6 +101,7 @@ namespace adbreeker.TDMapCreator
             }
 
             _panelNewMapSetup.gameObject.SetActive(false);
+            _isInCreationMode = true;
         }
 
         void LoadMap(string loadPath)
@@ -97,6 +122,7 @@ namespace adbreeker.TDMapCreator
             _pathDrawer.pathsHolder = _pathsRoot;
 
             _panelNewMapSetup.gameObject.SetActive(false);
+            _isInCreationMode = true;
         }
 
         public Texture2D GetMapImage()
