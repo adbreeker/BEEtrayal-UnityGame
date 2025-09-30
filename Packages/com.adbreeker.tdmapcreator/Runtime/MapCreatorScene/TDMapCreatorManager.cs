@@ -35,7 +35,6 @@ namespace adbreeker.TDMapCreator
 
         void Awake()
         {
-            EditorSceneManager.playModeStartScene = null;
             if (Instance != null && Instance != this)
             {
                 Destroy(this.gameObject);
@@ -61,7 +60,7 @@ namespace adbreeker.TDMapCreator
 
         public void HandleKeyboardInputs()
         {
-            // zoom in/out camera - scroll wheel
+            //scroll wheel
             float scroll = Input.GetAxis("Mouse ScrollWheel");
             if(scroll != 0f)
             {

@@ -733,7 +733,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &364532223
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2878,6 +2878,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pathDrawer: {fileID: 2070277099}
+  _mainCamera: {fileID: 1457001882}
   _mapRoot: {fileID: 2087341208}
   _background: {fileID: 1808384480}
   _decorationsRoot: {fileID: 130841891}

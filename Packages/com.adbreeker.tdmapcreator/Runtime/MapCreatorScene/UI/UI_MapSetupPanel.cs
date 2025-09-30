@@ -23,7 +23,6 @@ namespace adbreeker.TDMapCreator
             if (!string.IsNullOrWhiteSpace(_inputResWidth.text) && int.TryParse(_inputResWidth.text, out var w) && w > 0) { resWidth = w; }
             if (!string.IsNullOrWhiteSpace(_inputResHeight.text) && int.TryParse(_inputResHeight.text, out var h) && h > 0) { resHeight = h; }
 
-
             TDMapCreatorManager.Instance.StartCreating(resWidth, resHeight, _backgroundPreview.texture);
         }
 
