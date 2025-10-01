@@ -31,6 +31,7 @@ namespace adbreeker.TDMapCreator
         int _currentResHeight = 1080;
 
         bool _isInCreationMode = false;
+        Tuple<Vector3, Vector3> _startDragPositions = null; // camera | mouse
 
 
         void Awake()
@@ -54,11 +55,11 @@ namespace adbreeker.TDMapCreator
         {
             if(_isInCreationMode)
             {
-                HandleKeyboardInputs();
+                HandleCreationModeInputs();
             }
         }
 
-        public void HandleKeyboardInputs()
+        public void HandleCreationModeInputs()
         {
             //scroll wheel
             float scroll = Input.GetAxis("Mouse ScrollWheel");
@@ -67,6 +68,20 @@ namespace adbreeker.TDMapCreator
                 _mainCamera.orthographicSize -= scroll * _mainCamera.orthographicSize;
                 _mainCamera.orthographicSize = Mathf.Clamp(_mainCamera.orthographicSize, 0.00001f, 100f);
             }
+
+            //scroll click
+            if(Input.GetKeyDown(KeyCode.Mouse2)) { _startDragPositions = Tuple.Create(_mainCamera.transform.position, Input.mousePosition); }
+            if(Input.GetKey(KeyCode.Mouse2) && _startDragPositions != null)
+            {
+                Vector3 lastWorldPos = _mainCamera.ScreenToWorldPoint(_startDragPositions.Item2);
+                lastWorldPos.z = _mainCamera.transform.position.z;
+                Vector3 currentWorldPos = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
+                currentWorldPos.z = _mainCamera.transform.position.z;
+
+                Vector3 delta = lastWorldPos - currentWorldPos;
+                _mainCamera.transform.position = _startDragPositions.Item1 + delta;
+            }
+            if(Input.GetKeyUp(KeyCode.Mouse2)) { _startDragPositions = null; }
         }
 
         public void StartCreating(int resolutionWidth, int resolutionHeight, Texture backgroundImage)
