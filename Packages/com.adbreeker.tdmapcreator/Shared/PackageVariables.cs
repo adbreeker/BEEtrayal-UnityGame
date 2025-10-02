@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using UnityEditor.PackageManager;
 using UnityEngine;
 using System.Linq;
@@ -88,3 +89,4 @@ namespace adbreeker.TDMapCreator
         }
     }
 }
+#endif

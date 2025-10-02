@@ -1,8 +1,10 @@
+#if UNITY_EDITOR
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using System.IO;
 
 
 namespace adbreeker.TDMapCreator
@@ -190,3 +192,4 @@ namespace adbreeker.TDMapCreator
         }
     }
 }
+#endif

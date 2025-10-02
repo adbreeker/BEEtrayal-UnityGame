@@ -82,6 +82,15 @@ namespace adbreeker.TDMapCreator
                 _mainCamera.transform.position = _startDragPositions.Item1 + delta;
             }
             if(Input.GetKeyUp(KeyCode.Mouse2)) { _startDragPositions = null; }
+
+            //ctrl combinations
+            if(Input.GetKey(KeyCode.LeftControl))
+            {
+                if(Input.GetKeyDown(KeyCode.S))
+                {
+                    TDMapSaveSO.SaveMapDialogue();
+                }
+            }
         }
 
         public void StartCreating(int resolutionWidth, int resolutionHeight, Texture backgroundImage)

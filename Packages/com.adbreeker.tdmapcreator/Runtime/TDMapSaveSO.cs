@@ -110,6 +110,31 @@ namespace adbreeker.TDMapCreator
                     "OK");
             }
         }
+
+        public static void SaveMapDialogue()
+        {
+            string savePath;
+            if (Directory.Exists(PackageVariables.DefaultSavePath))
+            {
+                savePath = EditorUtility.SaveFilePanel("Save Map Asset", PackageVariables.DefaultSavePath, "Map" + System.DateTime.Now.ToString("yyyyMMdd_HHmmss"), "");
+            }
+            else
+            {
+                savePath = EditorUtility.SaveFilePanel("Save Map Asset (default save directory could not be found)", Application.dataPath, "Map" + System.DateTime.Now.ToString("yyyyMMdd_HHmmss"), "");
+            }
+
+            if (!string.IsNullOrWhiteSpace(savePath))
+            {
+                Directory.CreateDirectory(savePath);
+                var mapImage = TDMapCreatorManager.Instance?.GetMapImage();
+                var mapObject = TDMapCreatorManager.Instance?.GetMapObject();
+
+                TDMapSaveSO.SaveTDMap(savePath, mapObject, mapImage);
+
+                AssetDatabase.Refresh();
+                PackageUtilis.PrintDebug(LogType.Log, $"Map saved to: {savePath}");
+            }
+        }
 #endif
     }
 }
